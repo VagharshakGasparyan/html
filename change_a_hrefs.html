@@ -1,0 +1,40 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Experiment</title>
+    <link href="news/news64.png" rel="icon">
+    <style>
+        a {
+            font-size: 25pt;
+            /*overflow: hidden;*/
+        }
+    </style>
+
+</head>
+
+<body>
+<a href="https://www.google.ru" target="_blank">Google-ի հղումով անցնելու տեքստ</a><br>
+<a href="https://www.facebook.com/" target="_blank">Facebook-ի հղումով անցնելու տեքստ</a><br>
+<a href="https://www.youtube.com/" target="_blank">Youtube-ի հղումով անցնելու տեքստ</a><br>
+<a href="http://resume-robert.000webhostapp.com/cyberduck.zip">Քաշել cyberduck.zip-ը</a>
+<script>
+    var ael = document.getElementsByTagName("a"), el = [], i;
+    for (i = 0; i < ael.length; i++) {
+        el[i] = ael[i].href;
+        //alert(el[i]);
+        ael[i].href = "#";
+        ael[i].onclick = function () {
+            fu();
+        };
+    }
+    function fu() {
+        for (i = 0; i < ael.length; i++) {
+            ael[i].href=el[i];
+            setTimeout('ael['+i+'].href="#"', 1);
+        }
+    }
+</script>
+
+</body>
+</html>

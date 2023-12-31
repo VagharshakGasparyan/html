@@ -1,0 +1,88 @@
+<!DOCTYPE html >
+<html dir="ltr" lang="en">
+<head>
+    <title> ? </title>
+    <meta charset="utf-8">
+    <!--script src="jquery-3.3.1.min.js"></script-->
+</head>
+
+<body style="/*display:none;*/">
+<div style="border: 2px solid red;background-color: yellow;height: 200px">
+    <div style="border: 2px solid #950;border-radius: 50%;width: 100px;height: 100px;display: inline-block;position: relative"></div>
+    <div style="border: 2px solid #950;border-radius: 50%;width: 100px;height: 100px;display: inline-block;position: relative"></div>
+</div>
+
+<a href="https://www.google.com">depi google</a><br>
+<a target="_blank" href="https://www.youtube.com/">depi youtube</a>
+<!--script>
+    $(document).ready(function() {
+        var body = $("body");
+        body.fadeIn(4000);
+        $(document).on("click", "a:not([href^='#']):not([href^='tel']):not([href^='mailto']):not([id='loginbtn'])",function(e){
+            e.preventDefault();
+            $("body").fadeOut(4000);
+            var self = this;
+            setTimeout(function(){
+                window.location.href = 'https://www.youtube.com/';//$(self).attr("href");
+            },4000);
+        });
+    });
+</script-->
+<script>
+    document.body.onload = function () {
+        //============================================
+        let delta_t=350;//msec
+        let start_opacity=0.0;
+        //============================================
+        let d_op=(1-start_opacity)/(delta_t/40);
+        let oip=start_opacity;
+        document.body.style.opacity=start_opacity.toString();
+        let t=setInterval(function () {
+            oip+=d_op;
+            if(oip<=1){
+                document.body.style.opacity=oip.toString();
+            }else{
+                document.body.style.opacity='1';
+                clearInterval(t);
+            }
+        },40);
+        let qs=document.querySelectorAll("a:not([target='_blank']):not([href^='#']):not([href^='tel']):not([href^='mailto']):not([id='loginbtn'])");
+        if(qs){
+            for(let i=0;i<qs.length;i++){
+                qs[i].onclick=function () {
+                    //let attr=qs[i].getAttribute('href');
+                    //qs[i].removeAttribute('href');
+                    oip=1;
+                    let tt=setInterval(function () {
+                        oip-=d_op;
+                        if(oip>=start_opacity){
+                            document.body.style.opacity=oip.toString();
+                        }else{
+                            document.body.style.opacity=start_opacity.toString();
+                            clearInterval(tt);
+                            //window.location.href=attr;
+                        }
+                    },40);
+                }
+            }
+        }
+    };
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

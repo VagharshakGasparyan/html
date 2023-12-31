@@ -1,0 +1,84 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body{
+            background-color: #001;
+        }
+        #ta {
+            border: 2px solid #777;
+            border-radius: 5px;
+            min-height: 15px;
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #333;
+            color: #aaa;
+        }
+
+        #taa {
+            border: 2px solid #057;
+            border-radius: 5px;
+            min-height: 15px;
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #012;
+            color: #789;
+        }
+
+        input[type="button"] {
+            width: 250px;
+            height: 70px;
+            font-size: 30px;
+            padding: 10px;
+        }
+        .mid{
+            margin: 0 auto;
+            max-width: 1024px;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+<div class="mid">
+    <input type="button" value="փոխակերպել" onclick="f()">
+    <div id="ta"></div>
+    <div id="taa"></div>
+</div>
+
+
+</body>
+<script>
+    let mapFrom = {162: "§"};
+    let ansi_text = "²´¶¸º¼¾ÀÂÄÆÈÊÌÎÐÒÔÖØÚÜÞàÞäæèêìîðòôöø¨úü";
+    ansi_text += "³µ·¹»½¿ÁÃÅÇÉËÍÏÑÓÕ×ÙÛÝßáãåçéëíïñóõ÷ù¨ûý";
+    ansi_text += ": •(),ª";
+    let unicode_text = "ԱԲԳԴԵԶԷԸԹԺԻԼԽԾԿՀՁՂՃՄՅՆՇՈՇՊՋՌՍՎՏՐՑՒՓՔևՕՖ";
+    unicode_text += "աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքևօֆ";
+    unicode_text += ": գ(),՝";
+
+    for (let i = 0; i < ansi_text.length; i++) {
+        let num = ansi_text.charCodeAt(i);
+        mapFrom[num] = unicode_text[i];
+    }
+    // console.log(unescape(encodeURIComponent("Ջ")));
+    // console.log(decodeURIComponent(escape("Õ")));
+    function f() {
+        let read = "";
+        navigator.clipboard.readText().then((clipText) => {
+            read = document.getElementById("ta").innerText = clipText;
+            let write = "";
+            for (let i = 0; i < read.length; i++) {
+                let new_num = mapFrom[read.charCodeAt(i)];
+                write += new_num ? new_num : read[i];
+            }
+            // console.log(write);
+            document.getElementById("taa").innerText = write;
+            setTimeout(() => {
+                navigator.clipboard.writeText(write);
+            }, 50);
+        });
+    }
+
+</script>
+</html>

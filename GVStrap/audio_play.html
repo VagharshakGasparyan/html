@@ -1,0 +1,129 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        #message {
+            border: 2px solid #057;
+            border-radius: 10px;
+            min-height: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<input id="player" type="button" onclick="playAudio()" value="Play">
+<input type="button" onclick="stopAudio()" value="Anyway Stop">
+<div id="message"></div>
+<div id="volumes">
+</div>
+
+
+</body>
+
+<script>
+
+
+
+
+
+
+
+
+
+
+    let observer = new MutationObserver(ff);
+    observer.observe(document, {attributes: true, childList: true, subtree: true});
+    function ff(mutationsList, observer){
+        console.log(mutationsList, observer);
+    }
+    // observer.disconnect();
+
+
+
+
+    let it = "";
+    for (let i = 0; i < 70; i++) {
+        it += "<input type='button' onmousedown='pl(" + i + ")' onmouseup='spl()' value='ձայն" + (i + 1) + "'>";
+    }
+
+    document.getElementById('volumes').innerHTML = it;
+    let k = 1.06;
+    let audioContext, oscillator;
+
+
+    // navigator.clipboard.writeText("ABC 123");
+    function pl(value) {
+        let v = 200 * k ** value;
+        console.log(v);
+        audioContext = new AudioContext();
+        oscillator = audioContext.createOscillator();
+        oscillator.frequency.value = v;
+        oscillator.connect(audioContext.destination);
+        oscillator.start(0);
+    }
+
+    function spl() {
+        oscillator.stop();
+    }
+
+    let playing = false;
+    let message = document.getElementById("message");
+    let player = document.getElementById("player");
+    let audio = new Audio();
+    // audio.volume = 0.5;
+    let src = "https://previews.customer.envatousercontent.com/files/318293364/preview.mp3";
+
+
+    audio.oncancel = () => {
+        message.innerHTML += "audio.oncancel<br>";
+    };
+
+    function playAudio() {
+
+
+        audio.src = src;
+        audio.oncanplay = () => {
+            message.innerHTML += "audio.play()<br>";
+            if (!playing) audio.play();
+        };
+        audio.onpause = () => {
+            message.innerHTML += "audio.pause()<br>";
+            // audio.pause();
+        };
+        audio.pause();
+        playing = true;
+        message.innerHTML += "after audio.pause()<br>";
+        return;
+
+        if (!playing) {
+            player.value = "Stop";
+            playing = true;
+            audio.src = src;
+            audio.oncanplay = () => {
+                message.innerHTML += "audio.play()<br>";
+                audio.play();
+            };
+            return false;
+        }
+        audio.onpause = () => {
+            message.innerHTML += "audio.pause()<br>";
+            // audio.pause();
+        };
+        // audio.src = "../Darcho.mp3";
+        // audio.src = null;
+        audio.pause();
+        player.value = "Play";
+        playing = false;
+
+    }
+
+    function stopAudio() {
+        audio.onpause = () => {
+            message.innerHTML += "audio.pause()<br>";
+            audio.pause();
+        };
+        audio.pause();
+    }
+</script>
+</html>

@@ -1,0 +1,599 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GIT</title>
+    <style>
+        :root{
+            --body-background: #123;
+        }
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #123;
+            font-family: "Lucida Console", serif;
+            font-size: 12px;
+        }
+
+        input, select, .inp {
+            font-size: 12px;
+            font-family: "Lucida Console", serif;
+            outline: none;
+            border: 1px solid #09f;
+            border-radius: 5px;
+            padding: 3px 5px;
+            display: inline-block;
+            color: white;
+            margin: 0 3px;
+            background-color: #0000;
+        }
+
+        input:hover, select:hover, .inp:hover {
+            background-color: #246;
+        }
+
+        input:focus, select:focus, .inp:focus {
+            background-color: white;
+            color: var(--body-background);
+        }
+
+        .inp-container {
+            display: flex;
+            align-items: center;
+            padding: 3px 5px;
+            border: 1px solid #0000;
+        }
+
+        .inp-container:hover {
+            border-color: #fff2;
+        }
+
+        .text {
+            color: white;
+            white-space: pre-wrap;
+        }
+
+        .copy {
+            display: inline-block;
+            width: 17px;
+            height: 20px;
+            border: 1px solid white;
+            box-shadow: 3px 3px #bbf;
+            user-select: none;
+            margin: 0 10px;
+        }
+
+        .copy:hover {
+            background-color: #246;
+        }
+
+        .copy:active {
+            background-color: white;
+            border-color: #246;
+        }
+
+        .co-container {
+            width: max-content;
+            margin: 0 auto;
+            padding-left: 50px;
+            padding-bottom: 50vh;
+        }
+
+        .fl1 {
+            display: inline-block;
+            flex: 1;
+        }
+        .help{
+            display: inline-block;
+            padding: 0 5px;
+            font-size: 14px;
+            color: #0c0;
+        }
+        .head{
+            color: #09f;
+            font-size: 22px;
+            text-align: center;
+        }
+        .label-info{
+            display: inline-block;
+            color: yellow;
+        }
+        .tiny-hr{
+            height: 1px;
+            border-top: 1px solid #fff2;
+        }
+        /*-------------------*/
+        .menu{
+            position: fixed;
+            top: 5px;
+            left: 5px;
+            width: max-content;
+        }
+        .label-menu{
+            display: inline-block;
+            width: 50px;
+            border: 1px solid white;
+            border-radius: 7px;
+            padding: 0 5px;
+            cursor: pointer;
+            background-color: var(--body-background);
+        }
+        .label-menu:hover{
+            background-color: #246;
+        }
+        .label-menu:active{
+            background-color: #0099ff;
+        }
+        #inp_label_menu{
+            display: none;
+        }
+        #inp_label_menu ~.label-menu-inner{
+            display: none;
+        }
+        #inp_label_menu:checked ~.label-menu-inner{
+            display: block;
+        }
+        .label-menu-inner{
+            background-color: var(--body-background);
+            color: white;
+            border: 1px solid white;
+            padding: 5px;
+            overflow-y: auto;
+            max-height: calc(100vh - 50px);
+        }
+        #modal_massage{
+            position: fixed;
+            top: -70px;
+            font-size: 25px;
+            color: #f27;
+            font-weight: bold;
+            border: 2px solid #f27;
+            border-radius: 10px;
+            padding: 7px 10px;
+            background-color: yellow;
+            left: 50%;
+            transform: translateX(-50%);
+            /*display: none;*/
+            transition: all 300ms;
+        }
+    </style>
+</head>
+<body>
+<div class="co-container">
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git remote set-url origin https://</span>
+        <span class="inp" ls_name="remote_application">APPLICATION</span>
+        <span class="text">:</span>
+        <span class="inp" ls_name="remote_new_token">NEW_TOKEN</span>
+        <span class="text">@github.com/</span>
+        <span class="inp" ls_name="remote_organisation">ORGANISATION</span>
+        <span class="text">/</span>
+        <span class="inp" ls_name="remote_repo">REPO</span>
+        <span class="text">.git</span>
+        <span class="fl1"></span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git remote add origin </span>
+        <span class="inp" ls_name="remote_application_https">https://github.com/VagharshakGasparyan/sample_nodejs.git</span>
+        <span class="fl1"></span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git remote remove origin</span>
+        <span class="fl1"></span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git remote -v</span>
+        <span class="fl1"></span>
+    </div>
+    <hr>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git init</span>
+        <span class="help">կապ է ստեղծում git-ի տվյալ repository-ի հետ</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git rm --cached </span>
+        <span class="inp" ls_name="git_rm_cached">fileName.js</span>
+        <span class="help">ֆայլի հետապնդումը հանում է</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git rm --f </span>
+        <span class="inp" ls_name="git_rm_f">fileName.js</span>
+        <span class="help">ֆայլը ջնջում է</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git add </span>
+        <span class="inp" ls_name="git_rm_f">newFile.js</span>
+        <span class="help">ավելացնում է ֆայլի հետապնդում</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git add .</span>
+        <span class="help">բոլոր նոր ավելացված, փոփոխված ֆայլերի հետապնդում</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git add *</span>
+        <span class="help"></span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git rm -r -f --cached .</span>
+        <span class="help">ջնջում է git-ի քեշերը</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">touch .gitignore</span>
+        <span class="help">ավելացնում է .gitignore ֆայլը</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git status</span>
+        <span class="help">ցույց է տալիս փոփոխությունները</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git commit -m "message"</span>
+        <span class="help">տվյալ վիճակի նկար</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git commit "message"</span>
+        <span class="help">տվյալ վիճակի նկար</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git log</span>
+        <span class="help">ցույց է տալիս մեկնաբանությունների ինֆորմացիան</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git diff</span>
+        <span class="help">ցույց է տալիս ֆայլերի փոփոխությունները նախորդ commit-ի համեմատ</span>
+    </div>
+    <hr>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git pull</span>
+        <span class="help">local merge from current branch</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git pull origin </span>
+        <span class="inp" ls_name="new_branch">dev</span>
+        <span class="help">local merge from selected branch to current</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git pull origin </span>
+        <span class="inp" ls_name="branch_from">master</span>
+        <select class="inp" ls_name="git_pull_options">
+            <option value=""></option>
+            <option value=" --allow-unrelated-histories">--allow-unrelated-histories</option>
+        </select>
+        <span class="help">---</span>
+    </div>
+    <hr>
+    <div class="head">Make new branch</div>
+    <div class="inp-container">
+        <span class="label-info">Branch from</span>
+        <span class="inp" ls_name="branch_from">master</span>
+        <span class="label-info">, (New) branch</span>
+        <span class="inp" ls_name="new_branch">dev</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git checkout </span>
+        <span class="inp" ls_name="branch_from">master</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git remote update origin</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git reset --hard origin/</span>
+        <span class="inp" ls_name="branch_from">master</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git checkout </span>
+        <select class="inp" ls_name="is_new_branch">
+            <option value=""></option>
+            <option value="-b ">-b</option>
+        </select>
+        <span class="inp" ls_name="new_branch">dev</span>
+        <span class="help"> (-b) նոր ճյուղ</span>
+    </div>
+    <div class="tiny-hr"></div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git commit -a -m "</span>
+        <span class="inp" ls_name="commit_description">message</span>
+        <span class="text">"</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git push -u origin </span>
+        <span class="inp" ls_name="new_branch">dev</span>
+    </div>
+    <hr>
+    <div class="head">Merge git branch</div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git checkout </span>
+        <span class="inp" ls_name="branch_from">master</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git remote update origin</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git reset --hard origin/</span>
+        <span class="inp" ls_name="branch_from">master</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git checkout </span>
+        <span class="inp" ls_name="new_branch">dev</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git rebase origin/</span>
+        <span class="inp" ls_name="branch_from">master</span>
+    </div>
+    <div class="tiny-hr"></div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git add .</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git rebase --continue</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git rebase --skip</span>
+    </div>
+    <div class="tiny-hr"></div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git checkout </span>
+        <span class="inp" ls_name="branch_from">master</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git merge </span>
+        <span class="inp" ls_name="new_branch">dev</span>
+        <span class="text"> --no-ff</span>
+        <span class="help"> shift : q enter</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git push</span>
+    </div>
+</div>
+<div class="menu">
+    <input type="checkbox" id="inp_label_menu" class="inp" ls_name="menu_open_or_close">
+    <label class="label-menu" for="inp_label_menu">
+        <hr><hr><hr>
+    </label>
+    <div class="label-menu-inner">
+        <div class="head">FFA, PL</div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="inp" ls_name="memory_login">MyH-JDPS9?3q9U3</span>
+            <span class="help">login</span>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="inp" ls_name="memory_password">b5&lt;U6#T7RD+4Xqt+</span>
+            <span class="help">password</span>
+        </div>
+        <div class="tiny-hr"></div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="inp" ls_name="admin_login">root@ffa.am</span>
+            <span class="help">admin login</span>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="inp" ls_name="admin_password">Rhcxr7lcPmS0</span>
+            <span class="help">admin password</span>
+        </div>
+        <hr>
+        <div><span class="help">My google map api key</span></div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="inp" ls_name="google_map_api_key">AIzaSyDcPyKpcAAlaHWak2L_zWYWV5RlWww0vag</span>
+        </div>
+        <div class="tiny-hr"></div>
+        <div><span class="help">Another google map api key</span></div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="inp" ls_name="google_map_api_key_1">AIzaSyD9MbMz7FESa79v-nntPfcxJHYTw8Am1S4</span>
+        </div>
+        <div class="tiny-hr"></div>
+        <div><span class="help">Github personal access token</span></div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="inp" ls_name="github_personal_access_token">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</span>
+        </div>
+        <hr>
+        <div class="head">Laravel</div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan config:cache</span>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan route:cache</span>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan view:cache</span>
+        </div>
+        <div class="tiny-hr"></div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan config:clear</span>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan route:clear</span>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan view:clear</span>
+        </div>
+        <div class="tiny-hr"></div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan event:cache</span>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan event:clear</span>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan cache:clear</span>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan route:list</span>
+        </div>
+        <div class="tiny-hr"></div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan make:model </span>
+            <span class="inp" ls_name="model_name" style="text-transform: capitalize">Order</span>
+            <select class="inp" ls_name="with_migration">
+                <option></option>
+                <option value=" -m">-m</option>
+            </select>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan make:migration create_</span>
+            <span class="inp" ls_name="model_name" style="text-transform: lowercase">Order</span>
+            <span class="text">s_table</span>
+        </div>
+        <div class="tiny-hr"></div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan make:command </span>
+            <span class="inp" ls_name="command_class">TmpCommand</span>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan make:seeder </span>
+            <span class="inp" ls_name="seeder_class">UserSeeder</span>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan db:seed --class=</span>
+            <span class="inp" ls_name="seeder_class">UserSeeder</span>
+        </div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan db:seed</span>
+        </div>
+        <div class="tiny-hr"></div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan schedule:</span>
+            <select class="inp" ls_name="schedule_wrl">
+                <option>work</option>
+                <option>run</option>
+                <option>list</option>
+            </select>
+        </div>
+        <div class="tiny-hr"></div>
+        <div class="inp-container">
+            <span class="copy"></span>
+            <span class="text">php artisan make:notification </span>
+            <span class="inp" ls_name="notification_class">InvoicePaid</span>
+        </div>
+    </div>
+
+</div>
+<div id="modal_massage">message</div>
+<!--<input type="checkbox" class="inp" ls_name="menu_open_or_close">-->
+<script>
+    window.addEventListener('load', () => {
+        let modalMessage = document.getElementById('modal_massage');
+        let mmTimeoutId = -1;
+        // modalMessage.addEventListener('mouseover', ()=>{modalMessage.style.display = 'none';});
+        let storagePrefix = 'git_help_';
+        // console.log(localStorage);
+        document.querySelectorAll('.inp').forEach((inp) => {
+            inp.setAttribute('contenteditable', 'true');
+            let ls_name = inp.getAttribute('ls_name');
+            let val = localStorage.getItem(storagePrefix + ls_name);
+            if (ls_name !== null && val !== null) {
+                inp[(inp.nodeName === 'INPUT' || inp.nodeName === 'SELECT') ? 'value' : 'innerText'] = val;
+                if(inp.nodeName === 'INPUT' && inp.hasAttribute('type') && inp.getAttribute('type') === 'checkbox'){
+                    inp.checked = val === 'on';
+                }
+            }
+            inp.addEventListener('input', () => {
+                if (ls_name !== null) {
+                    let val = (inp.nodeName === 'INPUT' || inp.nodeName === 'SELECT') ? inp.value : inp.innerText;
+                    if(inp.nodeName === 'INPUT' && inp.hasAttribute('type') && inp.getAttribute('type') === 'checkbox'){
+                        val = inp.checked ? 'on' : 'off';
+                    }
+                    localStorage.setItem(storagePrefix + ls_name, val);
+                    document.querySelectorAll('[ls_name=\"' + ls_name + '\"]').forEach((el)=>{
+                        if(inp === el){
+                            return;
+                        }
+                        el[(el.nodeName === 'INPUT' || el.nodeName === 'SELECT') ? 'value' : 'innerText'] = val;
+                        if(el.nodeName === 'INPUT' && el.hasAttribute('type') && el.getAttribute('type') === 'checkbox'){
+                            el.checked = val === 'on';
+                        }
+                    });
+                }
+            });
+        });
+        document.querySelectorAll('.copy').forEach((copy) => {
+            copy.addEventListener('click', () => {
+                let t = '';
+                copy.parentElement.querySelectorAll('input, select, .text, .inp').forEach((el) => {
+                    // console.log(el.nodeName);
+                    t += (el.nodeName === 'INPUT' || el.nodeName === 'SELECT') ? el.value : el.innerText;
+                });
+                navigator.clipboard.writeText(t);
+                console.log(t);
+                modalMessage.innerText = t;
+                modalMessage.style.top = '10px';
+                clearTimeout(mmTimeoutId);
+                mmTimeoutId = setTimeout(()=>{
+                    modalMessage.style.top = '-70px';
+                    modalMessage.innerText = '';
+                }, 1000);
+            });
+        });
+    });
+
+    /*
+        localStorage.setItem('key', 'value');
+        value = localStorage.getItem('key');
+        localStorage.removeItem('key');
+        localStorage.clear();
+    */
+</script>
+</body>
+</html>

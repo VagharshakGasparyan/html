@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+
+    <style>
+
+
+    </style>
+</head>
+<body>
+<div>Ամենամեծ ընդհանուր բաժանարար <br>Наибольший общий делитель<br>Greatest common divisor</div>
+<input type="text" oninput="inp(this.value, 1)"><br>
+<input type="text" oninput="inp(this.value, 2)"><br>
+<input type="button" value="hashvel" onmousedown="hashvel()"><br>
+<div id="patasxan"></div>
+
+</body>
+
+<script>
+    let n1, n2;
+
+    function inp(value, n) {
+        if (n === 1) {
+            n1 = parseInt(value);
+        } else if (n === 2) {
+            n2 = parseInt(value);
+        }
+    }
+
+    function nbod(a, b) {
+        while (a > 0 && b > 0) {
+            if (a > b) {
+                a = a % b;
+            } else {
+                b = b % a;
+            }
+        }
+        return Math.max(a, b);
+    }
+
+    function hashvel() {
+        document.getElementById("patasxan").innerHTML = nbod(n1, n2);
+    }
+
+</script>
+</html>

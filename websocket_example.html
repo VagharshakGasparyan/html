@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+
+
+    </style>
+</head>
+<body>
+<input id="socket-send" type="button" value="socket send">
+<input id="socket-close" type="button" value="socket close">
+
+<script>
+    window.addEventListener('load', function () {
+        let socket = new WebSocket("ws://127.0.0.1:3000");//wss:// websocket secure
+        socket.addEventListener('open', (e)=>{
+            //alert('open');
+            console.log('"open"');
+        });
+        socket.addEventListener('message', (event)=>{
+            console.log('"message"', event.data);
+        });
+        socket.addEventListener('close', (event)=>{
+            //alert('close');
+            console.log('"close"', event.code, event.reason, event.wasClean, '*******');
+        });
+        socket.addEventListener('error', (error)=>{
+            //alert('error');
+            console.log(error);
+        });
+        //socket.close(1000, "работа закончена");
+        document.getElementById('socket-send').addEventListener('click', ()=>{
+            socket.send('privet_mrivet');
+            console.log('"socket-send button"');
+        });
+        document.getElementById('socket-close').addEventListener('click', ()=>{
+            socket.close(1000, "работа закончена");
+            console.log('"socket-close button"');
+        });
+    });
+
+</script>
+</body>
+</html>

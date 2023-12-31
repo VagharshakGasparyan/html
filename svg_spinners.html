@@ -1,0 +1,246 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        window.onload = function () {
+
+        };
+    </script>
+    <style>
+
+        #inp:hover ~ * {
+            background-color: darkgray;
+        }
+
+        #inp:checked ~ * {
+            width: 100px;
+            color: red;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div style="background-color: aquamarine; padding: 25px">
+    <div style="background-color: #aaccff; padding: 40px 20px">
+        <label style="padding: 20px; background-color: green" for="inp">hover and click me</label>
+    </div>
+</div>
+
+<div>
+    <input hidden id="inp" type="checkbox">
+    <div style="height: 50px;border: 1px solid red">the DIV TEXT</div>
+    <div style="height: 30px;border: 1px solid red">the DIV TEXT</div>
+</div>
+
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <circle id='my-circle-a' fill='#0000' stroke='#00f' stroke-width='50' stroke-dashoffset='0' stroke-dasharray='26.18'
+            cx='50' cy='50' r='25'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-52.36'
+                 dur='500ms' begin='0s'/>
+    </circle>
+</svg>
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <circle id='my-circle-b' fill='#0000' stroke='#00f' stroke-width='50' stroke-dashoffset='0' stroke-dasharray='19.63'
+            cx='50' cy='50' r='25'/>
+    <animate xlink:href='#my-circle-b' attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-39.27'
+             dur='500ms' begin='0s'/>
+</svg>
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <circle id='my-circle-c' fill='#0000' stroke='#00f' stroke-width='50' stroke-dashoffset='0' stroke-dasharray='15.7'
+            cx='50' cy='50' r='25'/>
+    <animate xlink:href='#my-circle-c' attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-31.4'
+             dur='500ms' begin='0s'/>
+</svg>
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <circle id='my-circle-d' fill='#0000' stroke='#00f' stroke-width='50' stroke-dashoffset='0' stroke-dasharray='13.09'
+            cx='50' cy='50' r='25'/>
+    <animate xlink:href='#my-circle-d' attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-26.18'
+             dur='500ms' begin='0s'/>
+</svg>
+
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <circle id='my-circle-e1' fill='#0000' stroke='#00f' stroke-width='25' stroke-dashoffset='0'
+            stroke-dasharray='19.63' cx='50' cy='50' r='37.5'/>
+    <circle id='my-circle-e2' fill='#0000' stroke='#00f' stroke-width='25' stroke-dashoffset='0'
+            stroke-dasharray='13.09' cx='50' cy='50' r='12.5'/>
+    <animate xlink:href='#my-circle-e1' attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-39.26'
+             dur='500ms' begin='0s'/>
+    <animate xlink:href='#my-circle-e2' attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='26.18'
+             dur='500ms' begin='0s'/>
+</svg>
+<br><br>
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <circle fill='#0000' stroke='#00f' stroke-width='50' stroke-dashoffset='0' stroke-dasharray='13.09 13.09' cx='50'
+            cy='50' r='25'>
+        <animate attributeName='stroke-dasharray' repeatCount='indefinite' values='26.18 0;0 26.18;26.18 0' dur='2s'
+                 begin='0s'/>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' values='0;0;26.18' dur='2s' begin='0s'/>
+    </circle>
+</svg>
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <circle fill='#0000' stroke='#f00' stroke-width='25' stroke-dashoffset='0' stroke-dasharray='78.54 0' cx='50'
+            cy='50' r='37.5'>
+        <animate attributeName='stroke-dasharray' repeatCount='indefinite' values='78.54 0;0 78.54;78.54 0' dur='2s'
+                 begin='0s'/>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' values='0;0;78.54' dur='2s' begin='0s'/>
+    </circle>
+</svg>
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <circle fill='#0000' stroke='#f00' stroke-width='25' stroke-dashoffset='0' stroke-dasharray='78.54 0' cx='50'
+            cy='50' r='37.5'>
+        <animate attributeName='stroke-dasharray' repeatCount='indefinite' values='78.54 0;0 78.54;78.54 0' dur='2s'
+                 begin='0s'/>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' values='0;0;-78.54' dur='2s' begin='0s'/>
+    </circle>
+</svg>
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <circle fill='#0000' stroke='#f00' stroke-width='25' stroke-dashoffset='0' stroke-dasharray='78.54 0' cx='50'
+            cy='50' r='37.5'>
+        <animate attributeName='stroke-dasharray' repeatCount='indefinite' values='78.54 0;0 78.54;78.54 0' dur='2s'
+                 begin='0s'/>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' values='0;-78.54;0' dur='2s' begin='0s'/>
+    </circle>
+</svg>
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <circle fill='#0000' stroke='#f00' stroke-linecap="butt" stroke-width='25' stroke-dashoffset='0'
+            stroke-dasharray='78.54 0' cx='50'
+            cy='50' r='37.5'>
+        <animate attributeName='stroke-dasharray' repeatCount='indefinite' values='78.54 0;0 78.54;78.54 0' dur='2s'
+                 begin='0s'/>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' values='0;-78.54;-78.54' dur='2s'
+                 begin='0s'/>
+    </circle>
+    <circle stroke-linecap="butt" fill='#0000' stroke='#f00' stroke-width='25' stroke-dashoffset='0'
+            stroke-dasharray='26.18 0' cx='50' cy='50' r='12.5'>
+        <animate attributeName='stroke-dasharray' repeatCount='indefinite' values='26.18 0;0 26.18;26.18 0' dur='2s'
+                 begin='0s'/>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' values='0;0;26.18' dur='2s' begin='0s'/>
+    </circle>
+</svg>
+<br><br>
+<svg class='svg-spinner' viewBox='0 0 100 100' width='100'>
+    <circle fill='#0000' stroke='#00f' stroke-width='25' stroke-dashoffset='0' stroke-dasharray='13.09'
+            cx='50' cy='50' r='12.5'>
+        <animate attributeName='r' repeatCount='indefinite' values='12.5;37.5;37.5;12.5;12.5' dur='2s' begin='0s'/>
+        <animate attributeName='stroke-dasharray' repeatCount='indefinite' values='13.09;39.27;39.27;13.09;13.09' dur='2s' begin='0s'/>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' values='0;0;39.27;13.09;0' dur='2s' begin='0s'/>
+    </circle>
+    <circle fill='#0000' stroke='#f00' stroke-width='25' stroke-dashoffset='39.27' stroke-dasharray='39.27'
+            cx='50' cy='50' r='37.5'>
+        <animate attributeName='r' repeatCount='indefinite' values='37.5; 12.5; 12.5; 37.5; 37.5' dur='2s' begin='0s'/>
+        <animate attributeName='stroke-dasharray' repeatCount='indefinite' values='39.27; 13.09; 13.09; 39.27; 39.27' dur='2s' begin='0s'/>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' values='39.27;13.09;0;0;39.27' dur='2s' begin='0s'/>
+    </circle>
+</svg>
+<svg class='svg-spinner' viewBox='0 0 100 100' width='25'>
+    <circle fill='#0000' stroke='#00f' stroke-width='25' stroke-dashoffset='0' stroke-dasharray='13.09'
+            cx='50' cy='50' r='12.5'>
+        <animate attributeName='r' repeatCount='indefinite' values='12.5;37.5;37.5;12.5;12.5' dur='2s' begin='0s'/>
+        <animate attributeName='stroke-dasharray' repeatCount='indefinite' values='13.09;39.27;39.27;13.09;13.09' dur='2s' begin='0s'/>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' values='0;0;39.27;13.09;0' dur='2s' begin='0s'/>
+    </circle>
+    <circle fill='#0000' stroke='#f00' stroke-width='25' stroke-dashoffset='39.27' stroke-dasharray='39.27'
+            cx='50' cy='50' r='37.5'>
+        <animate attributeName='r' repeatCount='indefinite' values='37.5; 12.5; 12.5; 37.5; 37.5' dur='2s' begin='0s'/>
+        <animate attributeName='stroke-dasharray' repeatCount='indefinite' values='39.27; 13.09; 13.09; 39.27; 39.27' dur='2s' begin='0s'/>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' values='39.27;13.09;0;0;39.27' dur='2s' begin='0s'/>
+    </circle>
+</svg>
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <!--    <circle id='my-circle-a' fill='#0000' stroke='#950' stroke-width='4' stroke-dashoffset='0' stroke-dasharray='48.17' cx='50' cy='50' r='46'>-->
+    <!--        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-96.34' dur='1238ms' begin='0s'/>-->
+    <!--    </circle>-->
+    <circle fill='#0000' stroke='#950' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='43.98' cx='50' cy='50' r='42'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-87.96' dur='1032ms' begin='0s'/>
+    </circle>
+    <!--    <circle id='my-circle-a' fill='#0000' stroke='#950' stroke-width='4' stroke-dashoffset='0' stroke-dasharray='39.79' cx='50' cy='50' r='38'>-->
+    <!--        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-79.58' dur='860ms' begin='0s'/>-->
+    <!--    </circle>-->
+    <circle fill='#0000' stroke='#950' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='35.6' cx='50' cy='50' r='34'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-71.2' dur='717ms' begin='0s'/>
+    </circle>
+    <!--    <circle id='my-circle-a' fill='#0000' stroke='#950' stroke-width='4' stroke-dashoffset='0' stroke-dasharray='31.42' cx='50' cy='50' r='30'>-->
+    <!--        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-62.84' dur='597ms' begin='0s'/>-->
+    <!--    </circle>-->
+    <circle fill='#0000' stroke='#950' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='27.23' cx='50' cy='50' r='26'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-54.46' dur='498ms' begin='0s'/>
+    </circle>
+    <!--    <circle id='my-circle-a' fill='#0000' stroke='#950' stroke-width='4' stroke-dashoffset='0' stroke-dasharray='23.04' cx='50' cy='50' r='22'>-->
+    <!--        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-46.08' dur='415ms' begin='0s'/>-->
+    <!--    </circle>-->
+    <circle fill='#0000' stroke='#950' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='18.85' cx='50' cy='50' r='18'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-37.7' dur='346ms' begin='0s'/>
+    </circle>
+    <!--    <circle id='my-circle-a' fill='#0000' stroke='#950' stroke-width='4' stroke-dashoffset='0' stroke-dasharray='14.66' cx='50' cy='50' r='14'>-->
+    <!--        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-29.32' dur='288ms' begin='0s'/>-->
+    <!--    </circle>-->
+    <circle fill='#0000' stroke='#950' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='10.47' cx='50' cy='50' r='10'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-20.94' dur='240ms' begin='0s'/>
+    </circle>
+    <!--    <circle id='my-circle-a' fill='#0000' stroke='#950' stroke-width='4' stroke-dashoffset='0' stroke-dasharray='6.28' cx='50' cy='50' r='6'>-->
+    <!--        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-12.56' dur='200ms' begin='0s'/>-->
+    <!--    </circle>-->
+</svg>
+
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <circle fill='#0000' stroke='#f00' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='131.95' cx='50' cy='50' r='42'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-263.9' dur='500ms' begin='0s'/>
+    </circle>
+    <circle fill='#0000' stroke='#a70' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='106.81' cx='50' cy='50' r='34'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-213.62' dur='550ms' begin='0s'/>
+    </circle>
+    <circle fill='#0000' stroke='#070' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='81.68' cx='50' cy='50' r='26'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-163.36' dur='605ms' begin='0s'/>
+    </circle>
+    <circle fill='#0000' stroke='#00f' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='56.55' cx='50' cy='50' r='18'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-113.1' dur='666ms' begin='0s'/>
+    </circle>
+    <circle fill='#0000' stroke='#909' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='31.42' cx='50' cy='50' r='10'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-62.84' dur='732ms' begin='0s'/>
+    </circle>
+</svg>
+
+<svg class='svg-spinner' viewBox='0 0 100 100' width='100'>
+    <circle id='my-circle-a' fill='#0000' stroke='#950' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='43.98' cx='50' cy='50' r='42'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-87.96' dur='2s' begin='0s'/>
+    </circle>
+    <circle id='my-circle-a' fill='#0000' stroke='#950' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='35.6' cx='50' cy='50' r='34'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='71.2' dur='2s' begin='0s'/>
+    </circle>
+    <circle id='my-circle-a' fill='#0000' stroke='#950' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='27.23' cx='50' cy='50' r='26'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-54.46' dur='2s' begin='0s'/>
+    </circle>
+    <circle id='my-circle-a' fill='#0000' stroke='#950' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='18.85' cx='50' cy='50' r='18'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='37.7' dur='2s' begin='0s'/>
+    </circle>
+    <circle id='my-circle-a' fill='#0000' stroke='#950' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='10.47' cx='50' cy='50' r='10'>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' from='0' to='-20.94' dur='2s' begin='0s'/>
+    </circle>
+</svg>
+
+<svg class='svg-spinner' viewBox='0 0 100 100' width='50'>
+    <circle stroke-linecap="round" fill='#0000' stroke='#950' stroke-width='8' stroke-dashoffset='0' stroke-dasharray='0 263.89' cx='50' cy='50' r='42'>
+        <animate attributeName='stroke-dasharray' repeatCount='indefinite' values='0 263.89; 263.89 0; 0 263.89' dur='2s' begin='0s'/>
+        <animate attributeName='stroke-dashoffset' repeatCount='indefinite' values='0; 0; -263.89' dur='2s' begin='0s'/>
+    </circle>
+</svg>
+
+<svg viewBox='0 0 207 57' width='207'>
+    <path  stroke-width='7' stroke-linecap="round" stroke='black' fill='none' d='M4 29c17,-13 33,-25 50,-25 34,0 66,50 100,50 34,0 66,-50 100,-50 34,0 66,50 100,50 17,0 33,-12 50,-25'>
+        <animate attributeName='d' repeatCount='indefinite' dur='2s' begin='0s'
+                 values='M4 29c17,-13 33,-25 50,-25 34,0 66,50 100,50 34,0 66,-50 100,-50 34,0 66,50 100,50 17,0 33,-12 50,-25;
+                  M-196 29c17,-13 33,-25 50,-25 34,0 66,50 100,50 34,0 66,-50 100,-50 34,0 66,50 100,50 17,0 33,-12 50,-25' />
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 0 0" to="45 45 45" dur="40s" begin="0s"  repeatCount='indefinite' />
+    </path>
+</svg>
+
+<script>
+    // let elem = document.querySelector('div');
+    // let cs = window.getComputedStyle(elem);
+    // console.log(cs);
+</script>
+</body>
+</html>

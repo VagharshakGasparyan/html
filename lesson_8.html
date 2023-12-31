@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!--metadata, մետատվյալներ-->
+    <meta charset="UTF-8">
+    <!--Սահմանում է վեբ էջի նկարագրությունը-->
+    <meta name="description" content="Free Web tutorials">
+    <!--Որոնող համակարգերի համար հիմնաբառեր-->
+    <meta name="keywords" content="HTML, CSS, XML, JavaScript">
+    <!--Նշում է էջի հեղինակին-->
+    <meta name="author" content="Պետրոսյան Պողոս">
+    <!--Թարմացնում է էջը յուրաքանչյուր 5 վայրկյանը մեկ-->
+    <!--meta http-equiv="refresh" content="1"-->
+    <!--Հեռախոսների համար վեբ էջի ցուցադրման չափսերն ու մաշտաբը-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Բոլոր հղումներին տալիս է բազային հղման մաս-->
+    <!--base href="https://www.google.com/" target="_blank"-->
+
+    <link rel="stylesheet" type="text/css" href="">
+    <title>դաս 8</title>
+    <style>
+		#id_name{
+			background-color:#5f5;
+		}
+		
+        div, span, .c1{
+            color:#f0f;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+		table{
+		
+		}
+		.c1{
+		 background-color:#ff7;
+		}
+		.c1 span{
+			color:#00f;
+		}
+		span.c1.c2{
+			color:#00f;
+			
+		}
+		.qwerty{
+			font-weight:bold;
+		}
+    </style>
+</head>
+<body>
+<div class='c1'>div 1<span>sp text</span></div>
+<div class='c1'>div 2</div>
+<div class='c1'>div 3</div>
+<div class='c1'>div 1<div><span>sp text</span></div></div>
+<span  class='c1 c2 qwerty'>***span***</span>
+
+
+<div id='id_name' style="border: 1px solid red;width:20%;margin: 0 auto;">margin</div>
+<div style="height: 200px;border: 1px solid green;position: relative">
+    <div style="border: 1px solid red;height:45px;margin: auto;position: absolute;top: 0;bottom: 0">margin</div>
+</div>
+<div title="title attribute text">text with title</div>
+<!--bi-directional override   երկուղղված վերադրում-->
+<bdo dir="rtl">left to right, right to left 12345 123</bdo><br>
+<bdo dir="ltr">left to right, right to left 12345 123</bdo>
+<div dir="rtl">div text 12345</div>
+
+<pre>
+    Այս տեքստը ինչպես
+
+         գրված է, այդպես         ել                           ցուց է
+    տրվում։
+</pre>
+<table border="1" cellpadding="5" cellspacing="0">
+    <caption>Վեռնագիր</caption>
+    <colgroup>
+        <col span="1" style="background-color:#faa">
+        <col span="2" style="background-color:#aff">
+        <col style="background-color:#ffa">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Mark</th><th>Model</th><th>Year</th><th>Price</th>
+        </tr>
+    </thead>
+    <tbody style="color: red">
+        <tr>
+            <td>Mercedes</td> <td>A300</td><td>2007</td><td>$5300</td>
+        </tr>
+    </tbody>
+    <tfoot style="color: green">
+        <tr>
+            <td>BMW</td><td>GTI-25</td> <td>2015</td><td>$4900</td>
+        </tr>
+        <tr>
+            <td>Toyota</td><td>T-15</td> <td>2019</td><td>$7450</td>
+        </tr>
+    </tfoot>
+</table>
+<iframe src="lesson_5.html"></iframe>
+<span style="border: 1px solid black;width: 150px;display: block">text</span>
+<input type="text">
+</body>
+</html>

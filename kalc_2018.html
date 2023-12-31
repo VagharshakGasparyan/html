@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<!--html lang="en"-->
+<html>
+<head>
+    <!--meta charset="<?php bloginfo( 'charset' ); ?>"-->
+    <meta charset="UTF-8">
+    <!--meta http-equiv="refresh" content="5"-->
+    <!--meta name="viewport" content="width=device-width, initial-scale=1.0"-->
+    <title>Հաշվիչ</title>
+    <style>
+        #kalc {
+            /*border-collapse: collapse;*/
+            margin: 0 auto;
+            border-spacing: 1px 1px;
+            border: 2px solid green;
+            /*transform: rotate(45deg);*/
+        }
+
+        #kalc td {
+            font-size: 30px;
+            background: linear-gradient(to bottom right, #99f, white, white, #9f9);
+            transition: border-radius 80ms linear;
+        }
+
+        #kalc td:hover {
+            background: #abc;
+        }
+
+        #kalc td:active {
+            font-weight: bold;
+            color: white;
+            border-radius: 50%;
+            /*background: linear-gradient(to bottom right, #99f,white,white,#9f9);*/
+            background: #0e0;
+        }
+
+        #kalc tr:first-of-type td {
+            font-size: 38px;
+            text-shadow: 2px 3px 7px green;
+            color: #000077;
+        }
+
+        #kalc tr:first-of-type td:active {
+            font-weight: normal;
+            color: #007;
+            border-radius: 0;
+
+        }
+
+        #kalc tr:first-of-type td:hover {
+            background-color: white;
+            text-shadow: -2px -3px 7px green;
+        }
+    </style>
+</head>
+<body>
+<div id="kalci_het_kap_chuni" style="font-size: 25px;color: brown">0</div>
+<table id="kalc"></table>
+
+<script>
+    //degrees, radians
+    var num, num0, ev = true, s = "";
+    var sumbol = ["0",
+        "sin", "lg", "x<sup>n</sup>", "7", "8", "9", "&larr;", "C",
+        "cos", "ln", "&radic;", "4", "5", "6", "/", "-",
+        "tg", "e", "%", "1", "2", "3", "*", "+",
+        "ctg", "&pi;", "!", "0", ".", "&plusmn;", "="];
+    var kalc = document.getElementById("kalc");
+    var khkc = document.getElementById("kalci_het_kap_chuni");
+    var td = document.createElement("TD");
+    var tr = document.createElement("TR");
+    var tr_ = [], td_ = [];
+    td.style.cssText = "border:1px solid green;height:50px;width:50px;" +
+        "text-align:center;user-select: none;";
+    td.setAttribute("onclick", "ok(this)");
+    for (i = 0; i < sumbol.length; i++) {
+        td_[i] = td.cloneNode(false);
+        td_[i].innerHTML = sumbol[i];
+    }
+    td_[0].removeAttribute("onclick");
+    for (i = 0; i < 5; i++) {
+        tr_[i] = tr.cloneNode(false);
+        kalc.appendChild(tr_[i]);
+    }
+    td_[0].setAttribute("colspan", "8");
+    td_[31].setAttribute("colspan", "2");
+    tr_[0].appendChild(td_[0]);
+    for (j = 1; j < 4; j++) {
+        for (i = 0; i < 8; i++) {
+            tr_[j].appendChild(td_[j * 8 + i - 7]);
+        }
+    }
+    for (i = 25; i < sumbol.length; i++) {
+        tr_[j].appendChild(td_[i]);
+    }
+
+
+    function ok(obj) {
+        let str = obj.innerHTML;
+        num = parseFloat(td_[0].innerHTML);
+        if (isFinite(str)) {
+            khkc.innerHTML = str;
+            td_[0].innerHTML = tvi_dzevavorum(td_[0].innerHTML, str, ev);
+
+        } else {
+            switch (str) {
+                case "+":
+                    khkc.innerHTML = "պլյուս";
+                    mij("+");
+                    break;
+                case "-":
+                    khkc.innerHTML = "մինուս";
+                    mij("-");
+                    break;
+                case "*":
+                    khkc.innerHTML = "բազմապատկած";
+                    mij("*");
+                    break;
+                case "/":
+                    khkc.innerHTML = "բաժանած";
+                    mij("/");
+                    break;
+                case "±":
+                    khkc.innerHTML = "պլյուս մինուս";
+                    td_[0].innerHTML = tvi_dzevavorum(td_[0].innerHTML, "-", ev);
+                    break;
+                case "√":
+                    khkc.innerHTML = "արմատ";
+                    if (num >= 0) {
+                        td_[0].innerHTML = Math.sqrt(num);
+                        ev = false;
+                    } else {
+                        khkc.innerHTML = "դե լավ էլի, բացասական թվից արմատ մի հանի";
+                    }
+                    break;
+                case "←":
+                    khkc.innerHTML = "backspace";
+                    if ((td_[0].innerHTML.length === 2 && td_[0].innerHTML[0] === "-") || td_[0].innerHTML.length === 1) {
+                        td_[0].innerHTML = "0";
+                    } else {
+                        td_[0].innerHTML = td_[0].innerHTML.substr(0, td_[0].innerHTML.length - 1);
+                    }
+                    break;
+                case "="://======================================
+                    khkc.innerHTML = "հավասար է";
+                    if (s !== "") {
+                        td_[0].innerHTML = hashvel(s, num0, num);
+                        ev = false;
+                    }
+                    break;
+                case "C":
+                    khkc.innerHTML = "ջնջել";
+                    td_[0].innerHTML = "0";
+                    ev = false;
+                    s = "";
+                    break;
+                case "π":
+                    khkc.innerHTML = "պի թիվը";
+                    td_[0].innerHTML = Math.PI;
+                    ev = false;
+                    break;
+                case "x<sup>n</sup>":
+                    khkc.innerHTML = "x-ի n աստիճան";
+                    mij("n");
+                    break;
+                case ".":
+                    khkc.innerHTML = "կետ";
+                    td_[0].innerHTML = tvi_dzevavorum(td_[0].innerHTML, ".", ev);
+                    break;
+                case "%":
+                    khkc.innerHTML = "տոկոս";
+                    mij("%");
+                    break;
+                case "!":
+                    khkc.innerHTML = "ֆակտորիալ";
+                    if (num > 0 && Number.isInteger(num) && num < 171) {
+                        for (i = 1, j = 1; i < num; i++, j *= i) ;
+                        ev = false;
+                        td_[0].innerHTML = j.toString();
+                    } else if (num === 0) {
+                        td_[0].innerHTML = "1";
+                    } else {
+                        khkc.innerHTML = "ոչ բացասական ամբողջ թվի ֆակտորիալ կարող եմ հաշվել մինչև 170-ը";
+                    }
+                    break;
+                case "e":
+                    khkc.innerHTML = "e թիվը";
+                    td_[0].innerHTML = Math.exp(1);
+                    ev = false;
+                    break;
+                case "ln":
+                    khkc.innerHTML = "բնական լոգարիթմ";
+                    if (num > 0) {
+                        td_[0].innerHTML = Math.log(num);
+                        ev = false;
+                    } else {
+                        khkc.innerHTML = "դրական թվի լոգարիթմ եմ հաշվում";
+                    }
+                    break;
+                case "lg":
+                    khkc.innerHTML = "տասնորդական լոգարիթմ";
+                    if (num > 0) {
+                        td_[0].innerHTML = Math.log10(num);
+                        ev = false;
+                    } else {
+                        khkc.innerHTML = "դրական թվի լոգարիթմ եմ հաշվում";
+                    }
+                    break;
+                case "sin":
+                    khkc.innerHTML = "սինուսը աստիճաններով";
+                    td_[0].innerHTML = Math.sin(num * Math.PI / 180);
+                    ev = false;
+                    break;
+                case "cos":
+                    khkc.innerHTML = "կոսինուսը աստիճաններով";
+                    td_[0].innerHTML = Math.cos(num * Math.PI / 180);
+                    ev = false;
+                    break;
+                case "tg":
+                    khkc.innerHTML = "տանգենս";
+                    if (!Number.isInteger((num + 90) / 180)) {
+                        td_[0].innerHTML = Math.tan(num * Math.PI / 180);
+                        ev = false;
+                    } else {
+                        khkc.innerHTML = "անորոշություն";
+                    }
+                    break;
+                case "ctg":
+                    khkc.innerHTML = "կոտանգենս";
+                    if (!Number.isInteger(num / 180)) {
+                        td_[0].innerHTML = Math.cos(num * Math.PI / 180) / Math.sin(num * Math.PI / 180);
+                        ev = false;
+                    } else {
+                        khkc.innerHTML = "անորոշություն";
+                    }
+                    break;
+            }
+        }
+
+        //alert(obj.innerHTML);
+    }
+
+    function mij(gorcoghutyun) {
+        num0 = parseFloat(td_[0].innerHTML);
+        ev = false;
+        s = gorcoghutyun;
+    }
+
+    function tvi_dzevavorum(n1, n2, ev1) {
+        if (!ev1) {
+            n1 = "0";
+            ev = true;
+        }
+        if ((n2 === "0" && !(n1 === "0" || n1 === "-0")) || (n2 === "." && !n1.includes("."))) {
+            return n1 + n2;
+        } else if (n2 === "-") {
+            if (n1[0] === "-") {
+                return n1.slice(1);
+            } else {
+                return "-" + n1;
+            }
+        } else if (n2 !== "0" && n2 !== "." && n2 !== "-") {
+            if (n1 === "0") {
+                return n2;
+            } else if (n1 === "-0") {
+                return "-" + n2;
+            } else {
+                return n1 + n2;
+            }
+        }
+        return n1;
+    }
+
+    function hashvel(s1, numb1, numb2) {
+        let numb3;
+        switch (s1) {
+            case "n":
+                numb3 = Math.pow(numb1, numb2);
+                break;
+            case "%":
+                numb3 = numb1 * numb2 / 100;
+                break;
+            case "*":
+                numb3 = numb1 * numb2;
+                break;
+            case "/":
+                numb3 = numb1 / numb2;
+                break;
+            case "+":
+                numb3 = numb1 + numb2;
+                break;
+            case "-":
+                numb3 = numb1 - numb2;
+                break;
+        }
+        if (isFinite(numb3)) {
+            return numb3;
+        } else {
+            khkc.innerHTML = "что-то ни то";
+            return numb2;
+        }
+    }
+
+    document.body.onkeydown = () => {
+        //alert(window.event.keyCode);
+        //khkc.innerHTML =window.event.keyCode;
+        switch (window.event.keyCode) {
+            //case
+            case 96://0
+                td_[28].click();
+                break;
+            case 97://1
+                td_[20].click();
+                break;
+            case 98://2
+                td_[21].click();
+                break;
+            case 99://3
+                td_[22].click();
+                break;
+            case 100://4
+                td_[12].click();
+                break;
+            case 101://5
+                td_[13].click();
+                break;
+            case 102://6
+                td_[14].click();
+                break;
+            case 103://7
+                td_[4].click();
+                break;
+            case 104://8
+                td_[5].click();
+                break;
+            case 105://9
+                td_[6].click();
+                break;
+            case 13://enter, =
+                td_[31].click();
+                break;
+            case 107://+
+                td_[24].click();
+                break;
+            case 109://-
+                td_[16].click();
+                break;
+            case 106://*
+                td_[23].click();
+                break;
+            case 111://*
+                td_[15].click();
+                break;
+            case 8://<--
+                td_[7].click();
+                break;
+            case 67://<--
+                td_[8].click();
+                break;
+        }
+    };
+
+    td_[0].onmousemove = () => {
+        let x = event.pageX, y = event.pageY,//, dx = event.clientX, dy = event.clientY;
+            x1 = td_[0].getBoundingClientRect().left, y1 = td_[0].getBoundingClientRect().top,
+            x2 = td_[0].getBoundingClientRect().width / 2, y2 = td_[0].getBoundingClientRect().height / 2,
+            dx = x2 + x1 - x, dy = y2 + y1 - y;
+
+        td_[0].style.textShadow = dx / 3 + "px " + dy / 3 + "px " + (Math.sqrt(dx * dx + dy * dy) / 15 + 1) + "px green";
+    };
+    td_[0].onmouseout = () => {
+        td_[0].style.textShadow = "2px 3px 7px green";
+    };
+
+</script>
+
+
+</body>
+</html>

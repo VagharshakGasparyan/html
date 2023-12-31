@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+
+        };
+    </script>
+    <style>
+        body {
+            background-color: darkslategray;
+
+        }
+
+        .chap {
+            height: 200px;
+            vertical-align: top;
+            border: 1px solid coral;
+        }
+
+        #imago {
+            height: 100px;
+            width: 250px;
+            /*border: 2px solid green;
+            outline: none;
+            color: #0000;
+            border-radius: 5px;*/
+            /*display: none;*/
+            opacity: 0;
+        }
+
+        #imagd {
+			position:relative;
+            border: 2px solid white;
+            border-radius: 5px;
+            display: inline-block;
+            vertical-align: top;
+        }
+		#imagd label{
+			position: absolute;
+			color:white;
+			width:100%;
+		}
+    </style>
+</head>
+<body>
+
+<div id="imagd">
+    <label for="imago">Ընտրեք նկարը կամ նկարները, կամ քաշեք մեջը</label>
+    <input id="imago" type="file" oninput="f(this)" accept=".jpg, .jpeg, .png" multiple>
+</div>
+
+<script>
+    function f(obj) {
+        //console.log(obj.getAttributeNames());
+        console.log(obj.value, obj.files);
+        for (let i = 0; i < obj.files.length; i++) {
+            let image = document.createElement('img');
+            image.setAttribute("class", "chap");
+            image.onmousedown = function () {
+                return false;
+            };
+            image.src = window.URL.createObjectURL(obj.files[i]);
+            document.body.appendChild(image);
+        }
+    }
+</script>
+
+
+</body>
+</html>

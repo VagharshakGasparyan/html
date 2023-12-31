@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="dist/json-formatter.umd.js"></script>
+    <style>
+        .grid-container {
+            display: inline-grid;
+            /*display: grid;*/
+            grid-template-columns: auto auto auto;
+            /*grid-template-rows: 20% 20% 20% 20% ;*/
+            background-color: #2196F3;
+            padding: 5px 10px;
+            /*column-gap: 5px;*/
+            /*row-gap: 10px;*/
+            gap: 5px 10px;
+            /*height: 500px;*/
+            box-sizing: border-box;
+            /*justify-content: space-evenly;*/
+            /*justify-content: space-around;*/
+            /*justify-content: space-between;*/
+            /*justify-content: center;*/
+            /*justify-content: start;*/
+            /*justify-content: end;*/
+            /*align-content: center;*/
+            /*align-content: space-evenly;*/
+            /*align-content: space-around;*/
+            /*align-content: space-between;*/
+            /*align-content: start;*/
+            /*align-content: end;*/
+
+        }
+
+        .item {
+            /*grid-row-start: 2;*/
+            /*grid-row-end: 4;*/
+            /*grid-row: 2 / 4;*/
+            /*grid-row: 2 / span 2;*/
+
+            /*grid-column-start: 3;*/
+            /*grid-column-end: 6;*/
+            /*grid-column: 3 / 6;*/
+            /*grid-column: 3 / span 3;*/
+
+        }
+
+        .grid-item-1 {
+            grid-column: span 2;
+        }
+
+        .grid-item-2 {
+            grid-row: span 2;
+        }
+
+        .grid-item-3 {
+            grid-row: span 2;
+        }
+
+        .grid-item-4 {
+            grid-row: span 2;
+        }
+
+        .grid-item-5 {
+            /*grid-column: span 2;*/
+        }
+
+        .grid-item {
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            font-size: 27px;
+            text-align: center;
+        }
+
+        .table-1 {
+            border-collapse: collapse;
+        }
+
+        .table-1 td {
+            border: 1px solid black;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            vertical-align: center;
+        }
+
+        .json-container {
+            display: inline-grid;
+            grid-template-columns: max-content max-content;
+            gap: 10px 1px;
+            /*background-color: #1ed36f11;*/
+        }
+
+        .json-key {
+            border: 1px solid #5aa;
+            background-color: #eff;
+            padding: 1px 5px;
+        }
+
+        .json-value {
+            border: 1px solid #cb0;
+            background-color: #ffa;
+            padding: 1px 5px;
+        }
+        .is-key{
+            display: inline-block;
+            color: #950;
+        }
+        .is-key:hover{
+            background-color: #9503;
+        }
+        .is-value{
+            display: inline-block;
+            color: #00f;
+        }
+        .is-value:hover{
+            background-color: #00f3;
+        }
+        .is-margined{
+            padding-left: 20px;
+            border-left: 1px solid #eee;
+        }
+        .is-line:hover{
+            /*background-color: #0001;*/
+        }
+    </style>
+</head>
+<body>
+<div class="grid-container">
+    <div class="grid-item grid-item-1">1</div>
+    <div class="grid-item grid-item-2">2</div>
+    <div class="grid-item grid-item-3">3</div>
+    <div class="grid-item grid-item-4">4</div>
+    <div class="grid-item grid-item-5">5</div>
+</div>
+<table class="table-1">
+    <tr>
+        <td colspan="2">1</td>
+        <td rowspan="2">2</td>
+    </tr>
+    <tr>
+        <td rowspan="2">3</td>
+        <td rowspan="2">4</td>
+    </tr>
+    <tr>
+        <!--        <td colspan="2">5</td>-->
+        <td>5</td>
+    </tr>
+</table>
+<hr>
+<div id="json-main-1"></div>
+<hr>
+<div id="json-main-2"></div>
+
+<script>
+    let je = {
+        "data": [
+            {
+                "type": "articles[\"best\"]",
+                "id": "1",
+                "attributes": {
+                    "title": "JSON:API paints<div style='color: red'>red</div>",
+                    "body": "The shortest article. Ever.",
+                    "created": "2015-05",
+                    "updated": "2015-06"
+                },
+                "relationships": {
+                    "author": {
+                        "data": {"id": "42", "type": "people"}
+                    },
+                    "we": [
+                        "Mikro",
+                        "Nano",
+                        "Pico"
+                    ]
+                }
+            },
+            {
+                "hopolongi": null,
+                "hopolongi-2": "null",
+                "aobolong": true,
+                "aobolong-2": "true",
+                "pingpong": false,
+            }
+        ],
+        "included": [
+            {
+                "type": "people",
+                "id": "42",
+                "attributes": {
+                    "name": "John",
+                    "age": 80,
+                    "gender": "male"
+                }
+            }
+        ],
+        579: 128
+    };
+
+    document.getElementById('json-main-1').innerHTML = toJsonView(je);
+    document.getElementById('json-main-2').innerHTML = toJsonView1(je);
+
+    function toJsonView(je) {
+        let ht = '<div class="json-container">';
+        if (typeof je === 'object' && je) {
+            for (let key in je) {
+                ht += '<div class="json-key">' + key + '</div>' + toJsonView(je[key]);
+            }
+        } else {
+            ht += '<div class="json-value">' + String(je) + '</div>';
+        }
+        ht += '</div>';
+        return ht;
+    }
+
+    function toJsonView1(je) {
+        let ht = '';
+        if (typeof je === 'object' && je) {
+            if(Array.isArray(je)){
+                ht += '[<div class="is-margined">';
+                for (let key = 0; key < je.length; key++) {
+                    ht += '<div class="is-line">' + toJsonView1(je[key]);
+                    if(key < je.length - 1){
+                        ht += ',';
+                    }
+                    ht += '</div>';
+                }
+                ht += '</div>]';
+            }else{
+                ht += '{<div class="is-margined">';
+                let keys = Object.keys(je);
+                for (let key = 0; key < keys.length; key++) {
+                    ht += '<div class="is-line"><div class="is-key">' + keys[key] + '</div>: ' + toJsonView1(je[keys[key]]);
+                    if(key < keys.length - 1){
+                        ht += ',';
+                    }
+                    ht += '</div>';
+                }
+                ht += '</div>}';
+            }
+        } else {
+            let el = document.createElement('div');
+            let ch = typeof je === 'string' ? '"' : '';
+            el.innerText = ch + String(je) + ch;
+            ht += '<div class="is-value">' + el.innerHTML + '</div>';
+        }
+        ht += '';
+        return ht;
+    }
+
+</script>
+</body>
+</html>

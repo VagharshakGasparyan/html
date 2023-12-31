@@ -1,0 +1,41 @@
+﻿<!doctype html>
+<html>
+<head>
+    <style>
+        .bgc{
+            background-color: #005577;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div id="idid">text</div>
+</div>
+<input type="button" value="stugum" onclick="f()">
+
+<script>
+    let elem = document.getElementById('idid');
+    // elem.style.backgroundColor = "#f00";
+    // elem.parentNode.removeChild(elem);
+    elem.onclick = function(){
+        elem.classList.toggle('bgc');
+        console.log("elem clicked");
+    };
+
+    let scripts = document.querySelectorAll('script');
+    scripts.forEach((script) => {
+        console.log(script);
+        script.parentNode.removeChild(script);
+        // if (script.src.startsWith("extension")) {
+        //     script.parentNode.removeChild(script);
+        // }
+    });
+    // setTimeout(()=>{
+    //     document.body.style.backgroundColor="#123";
+    // },2000);
+    function f() {
+        console.log("abcdefgh");
+    }
+</script>
+</body>
+</html>

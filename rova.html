@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>rova</title>
+
+    <style>
+        html {
+            /*overflow: hidden;*/
+        }
+
+        #rova {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        #rova:hover {
+            /*width: 683px;
+            height: 240px;*/
+        }
+
+        #rova:active {
+            /*width: 910px;
+            height: 320px;
+            background-color: aqua;*/
+            /*left:clientX;*/
+        }
+
+
+    </style>
+</head>
+<body bgcolor="#fff" onload="onl()" onmouseup="mup()">
+<h1 id="p">bra</h1>
+<script>
+    document.getElementById("p").innerHTML = "bravo";
+    var x1, y1, x, y, dx, dy;
+    var t = false;
+    //x1 = 0;// parseInt(document.getElementById("rova").style.left);
+    //y1 = 0;//parseInt(document.getElementById("rova").style.top);
+    document.getElementById("rova").style.left = "500px";
+    function oncl() {
+        t = false;
+        document.getElementById("rova").style.left="0px";
+        document.getElementById("rova").style.top = "0px";
+    }
+    function onl() {
+        x1 =0;// parseInt(document.getElementById("rova").style.left);
+        y1 =0;// parseInt(document.getElementById("rova").style.top);
+	//document.getElementById("rova").style.left = "500px";
+    }
+    function mdown() {
+        document.getElementById("p").innerHTML = "down";
+        x = window.event.pageX;
+        y = window.event.pageY;
+        t = true;
+        //document.getElementById("p").innerHTML = "bravooooooooooooooooooooou"+window.event.clientX;
+        //document.getElementById("rova").style.left = window.event.clientX + "px";
+    }
+    function mmove() {
+        //==true
+        if (t) {
+            document.getElementById("p").innerHTML = "move";
+            document.getElementById("rova").style.left = window.event.pageX - x + x1 + "px";
+            document.getElementById("rova").style.top = window.event.pageY - y + y1 + "px";
+        }
+
+    }
+    function mup() {
+        document.getElementById("p").innerHTML = "up";
+        t = false;
+        //document.getElementById("p").innerHTML =parseInt(document.getElementById("rova").style.left);
+        x1 = parseInt(document.getElementById("rova").style.left);
+        y1 = parseInt(document.getElementById("rova").style.top);
+    }
+</script>
+
+<svg onmousedown="mdown()" onmousemove="mmove()" onmouseup="mup()" id="rova" width="455" height="160"
+     viewBox="0 0 4093 1620">
+    <path id="r3" fill="none" stroke-dashoffset="100" stroke-dasharray="0 8000" stroke="blue" stroke-width="269.816"
+          stroke-linecap="round" stroke-linejoin="round"
+          d="M135 1484l497 -1349c404,0 674,0 549,339 -124,337 -394,337 -790,335l418 675c2,2 402,0 675,0 135,0 337,0 586,-675 50,-135 128,-349 149,-404"/>
+    <path id="r4" fill="none" stroke-dashoffset="100" stroke-dasharray="0 8000" stroke="blue" stroke-width="269.816"
+          stroke-linecap="round" stroke-linejoin="round"
+          d="M3081 810l877 0m-2712 405l149 -405c248,-674 451,-674 585,-674l675 0 178 1349c165,-450 331,-900 496,-1349 675,0 675,0 178,1349"/>
+    <path id="r1" fill="none" stroke-dashoffset="100" stroke-dasharray="0 8000" stroke="#f70" stroke-width="134.908"
+          stroke-linecap="round" stroke-linejoin="round"
+          d="M135 1484l497 -1349c404,0 674,0 549,339 -124,337 -394,337 -790,335l418 675c2,2 402,0 675,0 135,0 337,0 586,-675 50,-135 128,-349 149,-404"/>
+    <path id="r2" fill="none" stroke-dashoffset="100" stroke-dasharray="0 8000" stroke="#f70" stroke-width="134.908"
+          stroke-linecap="round" stroke-linejoin="round"
+          d="M3081 810l877 0m-2712 405l149 -405c248,-674 451,-674 585,-674l675 0 178 1349c165,-450 331,-900 496,-1349 675,0 675,0 178,1349"/>
+    <animate
+            xlink:href="#r1"
+            attributeName="stroke-dasharray"
+            from="0 7000"
+            to="7000 0"
+            begin="0.5s"
+            dur="2s"
+            fill="freeze"
+    />
+    <animate
+            xlink:href="#r2"
+            attributeName="stroke-dasharray"
+            from="0 7000"
+            to="7000 0"
+            begin="0.5s"
+            dur="2s"
+            fill="freeze"
+    />
+    <animate
+            xlink:href="#r3"
+            attributeName="stroke-dasharray"
+            from="0 7010"
+            to="7010 0"
+            begin="0.5s"
+            dur="2s"
+            fill="freeze"
+    />
+    <animate
+            xlink:href="#r3"
+            attributeName="stroke-dashoffset"
+            from="-7000"
+            to="0"
+            begin="0.5s"
+            dur="2s"
+            fill="freeze"
+    />
+    <animate
+            xlink:href="#r4"
+            attributeName="stroke-dasharray"
+            from="0 7010"
+            to="7010 0"
+            begin="0.5s"
+            dur="2s"
+            fill="freeze"
+    />
+    <animate
+            xlink:href="#r4"
+            attributeName="stroke-dashoffset"
+            from="-7000"
+            to="0"
+            begin="0.5s"
+            dur="2s"
+            fill="freeze"
+    />
+</svg>
+
+
+</body>
+</html>

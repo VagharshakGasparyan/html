@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+
+    <style>
+        div{
+            border: 1px solid black;
+        }
+        .tp{
+            background-color: #00aaaa;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+<div>A</div>
+<div dz="tz">B</div>
+<div abc="def">
+    <section class="tp">
+        <div>c1_1</div>
+        <div>c1_2</div>
+    </section>
+    <section class="tp">C2</section>
+</div>
+
+<div>D</div>
+<div>E</div>
+<div>F</div>
+<div>G</div>
+
+<script>
+    (function () {
+        let q_exceptions = ['div[dz="tz"]', 'section.tp', 'section.tp *'];//bacarutyunner, aysinqn sranc vra popoxutyunner@ hashvi chi arnum;
+        let redirect_url = 'http://www.google.com';
+        //========================================================================
+        let exc_elems = [];
+        q_exceptions.forEach((q_exception)=>{
+            document.querySelectorAll(q_exception).forEach((elem)=>{
+                exc_elems.push(elem);
+            });
+        });
+        let observer_first = true;
+        let observer = new MutationObserver((mutationsList) => {
+            if(observer_first) return observer_first = false;
+            mutationsList.forEach((mutation)=>{
+                //console.log(mutation.target, mutation.type);
+                let have = false;
+                for(let i = 0; i < exc_elems.length; i++){
+                    if(mutation.target === exc_elems[i]){
+                        have = true;
+                        break;
+                    }
+                }
+                if(!have){
+                    //console.log('chka bacarutyunneri mej');
+                    window.location.replace(redirect_url);
+                }
+                //if(mutation.type === 'childList'){}//'attributes'
+            })
+        });
+        observer.observe(document, {attributes: true, childList: true, subtree: true});
+    })()
+
+</script>
+</body>
+</html>

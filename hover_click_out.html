@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+
+        #inp:hover ~ * {
+            background-color: darkgray;
+        }
+
+        #inp:checked ~ * {
+            width: 100px;
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+<div style="background-color: aquamarine; padding: 25px">
+    <div style="background-color: #aaccff; padding: 40px 20px">
+        <label style="padding: 20px; background-color: green" for="inp">hover and click me</label>
+    </div>
+</div>
+<div>
+    <input hidden id="inp" type="checkbox">
+    <div style="height: 50px;border: 2px solid blue">the DIV TEXT</div>
+    <div style="height: 30px;border: 1px solid red">the DIV TEXT</div>
+</div>
+</body>
+</html>

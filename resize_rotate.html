@@ -1,0 +1,436 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>resize_rotate</title>
+
+    <style>
+        html {
+            overflow: hidden;
+        }
+
+        #d1 {
+            position: absolute;
+            border: 1px solid brown;
+            top: 400px;
+            left: 20px;
+            width: 200px;
+            height: 150px;
+            background-color: transparent;
+            cursor: move;
+            user-select: none;
+            /*transform-origin: 100% 0;*/
+        }
+
+        #d2 {
+            position: absolute;
+            border: 1px solid blue;
+            top: 100px;
+            left: 100px;
+            width: 200px;
+            height: 150px;
+            background-color: transparent;
+            user-select: none;
+            /*cursor: move;*/
+        }
+
+        #d3 {
+            position: absolute;
+            border: 1px solid orange;
+            top: 100px;
+            left: 500px;
+            width: 200px;
+            height: 150px;
+            background-color: transparent;
+            user-select: none;
+            /*cursor: move;*/
+        }
+
+        #d4 {
+            position: absolute;
+            border: 1px solid green;
+            top: 400px;
+            left: 500px;
+            width: 200px;
+            height: 150px;
+            background-color: transparent;
+            cursor: move;
+            user-select: none;
+            transform-origin: 0 100%;
+        }
+
+        .md1 {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            cursor: crosshair;
+            /*border: 1px solid green;*/
+        }
+    </style>
+</head>
+<body bgcolor="#eef" onmousemove="mmove()" onmouseup="mup()">
+<h1 id="h"></h1>
+<div style="position: absolute; width: 100%;height: 100%;left: 0;top: 0">
+    <div id="d1" onmousedown="mdown()" onmousemove="mmove()" onmouseup="mup()">
+        <div onmousedown="rot1()" class="md1" style="left: 0;top:0"></div>
+        <div onmousedown="rot1()" class="md1" style="left: 190px;top:0"></div>
+        <div onmousedown="rot1()" class="md1" style="left: 0;top:140px"></div>
+        <div onmousedown="rot1()" class="md1" style="left: 190px;top:140px"></div>
+    </div>
+    <div id="d2" onmousemove="mmove()" onmousedown="md2()" onmouseup="mup()"></div>
+    <div id="d3" onmousemove="mmove()" onmousedown="md3()" onmouseup="mup()"></div>
+    <div id="d4" onmousedown="mdown4()" onmousemove="mmove()" onmouseup="mup()">
+        <div onmousedown="rot4()" class="md1" style="left: 0;top:0"></div>
+        <div onmousedown="rot4()" class="md1" style="left: 190px;top:0"></div>
+        <div onmousedown="rot4()" class="md1" style="left: 0;top:140px"></div>
+        <div onmousedown="rot4()" class="md1" style="left: 190px;top:140px"></div>
+    </div>
+</div>
+<script>
+    //==========================div1================================
+    var b1 = false;
+    var r1 = false;
+    var delta_alfa = 0;
+    var left1 = 20, top1 = 400, alfa1 = 0, x1 = 0, y1 = 0;
+    var div1 = document.getElementById("d1");
+    div1.style.left = left1 + "px";
+    div1.style.top = top1 + "px";
+    div1.style.transform = "rotate(" + alfa1 + "deg)";
+    //==========================div4================================
+    var b4 = false;
+    var r4 = false;
+    var delta_alfa4 = 0;
+    var left4 = 500, top4 = 400, alfa4 = 0, x4 = 0, y4 = 0;
+    var div4 = document.getElementById("d4");
+    div4.style.left = left4 + "px";
+    div4.style.top = top4 + "px";
+    div4.style.transform = "rotate(" + alfa4 + "deg)";
+    //==========================div2================================
+    var b2 = false, r2 = 0;
+    var left2 = 100, top2 = 100, x2 = 0, y2 = 0, w2 = 200, h2 = 150;
+    var x21 = 0;
+    y21 = 0;
+    var div2 = document.getElementById("d2");
+    div2.style.left = left2 + "px";
+    div2.style.top = top2 + "px";
+    div2.style.width = w2 + "px";
+    div2.style.height = h2 + "px";
+    div2.style.cursor = "move";
+    //==========================div3================================
+    var b3 = false, r3 = 0;
+    var left3 = 500, top3 = 100, x3 = 0, y3 = 0, w3 = 200, h3 = 150;
+    var x31 = 0;
+    y31 = 0;
+    var div3 = document.getElementById("d3");
+    div3.style.left = left3 + "px";
+    div3.style.top = top3 + "px";
+    div3.style.width = w3 + "px";
+    div3.style.height = h3 + "px";
+    div3.style.cursor = "move";//================================
+    function md3() {
+        b3 = true;
+        x31 = window.event.clientX;
+        y31 = window.event.clientY;
+        if (x31 >= left3 && x31 <= left3 + 5) {
+            if (y31 >= top3 && y31 <= top3 + 5) {
+                div3.style.cursor = "nw-resize";
+                r3 = 1;
+            } else if (y31 >= top3 + h3 - 5 && y31 <= top3 + h3) {
+                div3.style.cursor = "ne-resize";
+                r3 = 4;
+            } else {
+                div3.style.cursor = "e-resize";
+                r3 = 8;
+            }
+        } else if (x31 >= left3 + w3 - 5 && x31 <= left3 + w3) {
+            if (y31 >= top3 && y31 <= top3 + 5) {
+                div3.style.cursor = "ne-resize";
+                r3 = 2;
+            } else if (y31 >= top3 + h3 - 5 && y31 <= top3 + h3) {
+                div3.style.cursor = "nw-resize";
+                r3 = 3;
+            } else {
+                div3.style.cursor = "e-resize";
+                r3 = 6;
+            }
+        } else if (y31 >= top3 && y31 <= top3 + 5) {
+            div3.style.cursor = "n-resize";
+            r3 = 5;
+        } else if (y31 >= top3 + h3 - 5 && y31 <= top3 + h3) {
+            div3.style.cursor = "n-resize";
+            r3 = 7;
+        } else {
+            div3.style.cursor = "move";
+            r3 = 9;
+        }
+    }
+    function md2() {
+        b2 = true;
+        x21 = window.event.clientX;
+        y21 = window.event.clientY;
+        if (x21 >= left2 && x21 <= left2 + 5) {
+            if (y21 >= top2 && y21 <= top2 + 5) {
+                div2.style.cursor = "nw-resize";
+                r2 = 1;
+            } else if (y21 >= top2 + h2 - 5 && y21 <= top2 + h2) {
+                div2.style.cursor = "ne-resize";
+                r2 = 4;
+            } else {
+                div2.style.cursor = "e-resize";
+                r2 = 8;
+            }
+        } else if (x21 >= left2 + w2 - 5 && x21 <= left2 + w2) {
+            if (y2 >= top2 && y2 <= top2 + 5) {
+                div2.style.cursor = "ne-resize";
+                r2 = 2;
+            } else if (y21 >= top2 + h2 - 5 && y21 <= top2 + h2) {
+                div2.style.cursor = "nw-resize";
+                r2 = 3;
+            } else {
+                div2.style.cursor = "e-resize";
+                r2 = 6;
+            }
+        } else if (y21 >= top2 && y2 <= top2 + 5) {
+            div2.style.cursor = "n-resize";
+            r2 = 5;
+        } else if (y21 >= top2 + h2 - 5 && y21 <= top2 + h2) {
+            div2.style.cursor = "n-resize";
+            r2 = 7;
+        } else {
+            div2.style.cursor = "move";
+            r2 = 9;
+        }
+    }
+    function rot1() {
+        r1 = true;
+        b1 = false;
+    }
+    function rot4() {
+        r4 = true;
+        b4 = false;
+    }
+    function mdown() {
+        if (r1) {
+            b1 = false;
+        } else {
+            b1 = true;
+        }
+        x1 = window.event.clientX;
+        y1 = window.event.clientY;
+        div1.style.backgroundColor = "aqua";
+    }
+    function mdown4() {
+        if (r4) {
+            b4 = false;
+        } else {
+            b4 = true;
+        }
+        x4 = window.event.clientX;
+        y4 = window.event.clientY;
+        div4.style.backgroundColor = "aqua";
+    }
+    function mmove() {
+        x2 = window.event.clientX;
+        y2 = window.event.clientY;
+        if (b3) {
+            switch (r3) {
+                case 1:
+                    div3.style.left = (left3 + x2 - x31) + "px";
+                    div3.style.top = (top3 + y2 - y31) + "px";
+                    div3.style.width = (w3 - x2 + x31) + "px";
+                    div3.style.height = (h3 - y2 + y31) + "px";
+                    break;
+                case 2:
+                    div3.style.top = (top3 + y2 - y31) + "px";
+                    div3.style.width = (w3 + x2 - x31) + "px";
+                    div3.style.height = (h3 - y2 + y31) + "px";
+                    break;
+                case 3:
+                    div3.style.width = (w3 + x2 - x31) + "px";
+                    div3.style.height = (h3 + y2 - y31) + "px";
+                    break;
+                case 4:
+                    div3.style.left = (left3 + x2 - x31) + "px";
+                    div3.style.width = (w3 - x2 + x31) + "px";
+                    div3.style.height = (h3 + y2 - y31) + "px";
+                    break;
+                case 5:
+                    div3.style.top = (top3 + y2 - y31) + "px";
+                    div3.style.height = (h3 - y2 + y31) + "px";
+                    break;
+                case 6:
+                    div3.style.width = (w3 + x2 - x31) + "px";
+                    break;
+                case 7:
+                    div3.style.height = (h3 + y2 - y31) + "px";
+                    break;
+                case 8:
+                    div3.style.left = (left3 + x2 - x31) + "px";
+                    div3.style.width = (w3 - x2 + x31) + "px";
+                    break;
+                case 9:
+                    div3.style.left = (left3 + x2 - x31) + "px";
+                    div3.style.top = (top3 + y2 - y31) + "px";
+                    break;
+            }
+        } else {
+            if (x2 >= left3 && x2 <= left3 + 5) {
+                if (y2 >= top3 && y2 <= top3 + 5) {
+                    div3.style.cursor = "nw-resize";
+                } else if (y2 >= top3 + h3 - 5 && y2 <= top3 + h3) {
+                    div3.style.cursor = "ne-resize";
+                } else {
+                    div3.style.cursor = "e-resize";
+                }
+            } else if (x2 >= left3 + w3 - 5 && x2 <= left3 + w3) {
+                if (y2 >= top3 && y2 <= top3 + 5) {
+                    div3.style.cursor = "ne-resize";
+                } else if (y2 >= top3 + h3 - 5 && y2 <= top3 + h3) {
+                    div3.style.cursor = "nw-resize";
+                } else {
+                    div3.style.cursor = "e-resize";
+                }
+            } else if (y2 >= top3 && y2 <= top3 + 5) {
+                div3.style.cursor = "n-resize";
+            } else if (y2 >= top3 + h3 - 5 && y2 <= top3 + h3) {
+                div3.style.cursor = "n-resize";
+            } else {
+                div3.style.cursor = "move";
+            }
+        }//========================================
+        if (b2) {
+            switch (r2) {
+                case 1:
+                    div2.style.left = (left2 + x2 - x21) + "px";
+                    div2.style.top = (top2 + y2 - y21) + "px";
+                    div2.style.width = (w2 - x2 + x21) + "px";
+                    div2.style.height = (h2 - y2 + y21) + "px";
+                    break;
+                case 2:
+                    div2.style.top = (top2 + y2 - y21) + "px";
+                    div2.style.width = (w2 + x2 - x21) + "px";
+                    div2.style.height = (h2 - y2 + y21) + "px";
+                    break;
+                case 3:
+                    div2.style.width = (w2 + x2 - x21) + "px";
+                    div2.style.height = (h2 + y2 - y21) + "px";
+                    break;
+                case 4:
+                    div2.style.left = (left2 + x2 - x21) + "px";
+                    div2.style.width = (w2 - x2 + x21) + "px";
+                    div2.style.height = (h2 + y2 - y21) + "px";
+                    break;
+                case 5:
+                    div2.style.top = (top2 + y2 - y21) + "px";
+                    div2.style.height = (h2 - y2 + y21) + "px";
+                    break;
+                case 6:
+                    div2.style.width = (w2 + x2 - x21) + "px";
+                    break;
+                case 7:
+                    div2.style.height = (h2 + y2 - y21) + "px";
+                    break;
+                case 8:
+                    div2.style.left = (left2 + x2 - x21) + "px";
+                    div2.style.width = (w2 - x2 + x21) + "px";
+                    break;
+                case 9:
+                    div2.style.left = (left2 + x2 - x21) + "px";
+                    div2.style.top = (top2 + y2 - y21) + "px";
+                    break;
+            }
+        } else {
+            if (x2 >= left2 && x2 <= left2 + 5) {
+                if (y2 >= top2 && y2 <= top2 + 5) {
+                    div2.style.cursor = "nw-resize";
+                } else if (y2 >= top2 + h2 - 5 && y2 <= top2 + h2) {
+                    div2.style.cursor = "ne-resize";
+                } else {
+                    div2.style.cursor = "e-resize";
+                }
+            } else if (x2 >= left2 + w2 - 5 && x2 <= left2 + w2) {
+                if (y2 >= top2 && y2 <= top2 + 5) {
+                    div2.style.cursor = "ne-resize";
+                } else if (y2 >= top2 + h2 - 5 && y2 <= top2 + h2) {
+                    div2.style.cursor = "nw-resize";
+                } else {
+                    div2.style.cursor = "e-resize";
+                }
+            } else if (y2 >= top2 && y2 <= top2 + 5) {
+                div2.style.cursor = "n-resize";
+            } else if (y2 >= top2 + h2 - 5 && y2 <= top2 + h2) {
+                div2.style.cursor = "n-resize";
+            } else {
+                div2.style.cursor = "move";
+            }
+        }//========================================
+        var xn = window.event.clientX;
+        var yn = window.event.clientY;
+        //==========================div1==========================================
+        if (b1) {
+            div1.style.left = (xn - x1 + left1) + "px";
+            div1.style.top = (yn - y1 + top1) + "px";
+            div1.style.backgroundColor = "yellow";
+        }
+        if (r1) {
+            delta_alfa = Math.atan((yn - (top1 + 150 / 2)) / (xn - (left1 + 200 / 2))) -
+                    Math.atan((y1 - (top1 + 150 / 2)) / (x1 - (left1 + 200 / 2)));
+            delta_alfa *= 180 / Math.PI;
+            div1.style.transform = "rotate(" + (alfa1 + delta_alfa) + "deg)";
+        }
+        //===========================div4===========================================
+        if (b4) {
+            div4.style.left = (xn - x4 + left4) + "px";
+            div4.style.top = (yn - y4 + top4) + "px";
+            div4.style.backgroundColor = "#ff9";
+        }
+        if (r4) {
+            var dy2 = yn - (top4 + 150);
+            var dx2 = xn - left4;
+            var dy1 = y4 - (top4 + 150);
+            var dx1 = x4 - left4;
+            var alfa42 = Math.atan(dy2 / dx2);
+            if (dx2 < 0)alfa42 -= Math.PI;
+            var alfa41 = Math.atan(dy1 / dx1);
+            if (dx1 < 0)alfa41 -= Math.PI;
+            delta_alfa4 = alfa42 - alfa41;
+            delta_alfa4 *= 180 / Math.PI;
+            //if(mt42<0)delta_alfa4 += 180;
+            div4.style.transform = "rotate(" + (alfa4 + delta_alfa4) + "deg)";
+            //document.getElementById("h").innerHTML = delta_alfa4;
+            //onselectstart="return false;"
+        }
+    }
+    function mup() {
+        if (r1)alfa1 += delta_alfa;//=====div1===============
+        b1 = false;
+        r1 = false;
+        left1 = parseInt(div1.style.left);
+        top1 = parseInt(div1.style.top);
+        div1.style.backgroundColor = "transparent";//========
+        if (r4)alfa4 += delta_alfa4;//====div4===============
+        b4 = false;
+        r4 = false;
+        left4 = parseInt(div4.style.left);
+        top4 = parseInt(div4.style.top);
+        div4.style.backgroundColor = "transparent";//========
+        //document.getElementById("d1").style.transform = "rotate(30deg)";
+        b3 = false;//===========div3==================
+        r3 = 0;
+        left3 = parseInt(div3.style.left);
+        w3 = parseInt(div3.style.width);
+        top3 = parseInt(div3.style.top);
+        h3 = parseInt(div3.style.height);//===========
+        b2 = false;//===========div2==================
+        r2 = 0;
+        left2 = parseInt(div2.style.left);
+        w2 = parseInt(div2.style.width);
+        top2 = parseInt(div2.style.top);
+        h2 = parseInt(div2.style.height);//===========
+    }
+
+</script>
+
+
+</body>
+</html>

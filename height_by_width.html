@@ -1,0 +1,69 @@
+﻿<!doctype html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: #777;
+            min-height: 90vh;
+            position: relative;
+        }
+
+        .main {
+            background-color: cornflowerblue;
+            width: 100%;
+            height: 50%;
+            position: relative;
+        }
+
+        .vv {
+            border: 1px solid red;
+            background-color: #223355;
+            width: 30%;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div id="id1" style="width: 50%;border:1px solid black;height:20px"></div>
+
+<div class="v-vh-25 vv"></div>
+<div class="v-vh-50 vv"></div>
+<div class="v-vh-75 vv"></div>
+<img src="lava.svg" style="width:100px">
+<!--<div class="v-vh-100 vv"></div>-->
+<audio controls>
+    <source src="MP3/London Syphonic Orchestra - Night In White Satin.mp3">
+</audio>
+<audio controls>
+    <source src="MP3/artur-meschyan-aha-ev-verj.mp3">
+</audio><br><br>
+<img src="lavna.svg" style="width:200px">
+
+<script>
+
+    document.getElementById('id1').addEventListener('resize',()=>{
+        console.log('resize');
+    });
+    window.onload = function () {
+        let str_arr=['v-vh-'];
+        document.querySelectorAll('*').forEach(function (item, index) {
+            let j = -1, str = str_arr[0];
+            for (let i = 0; i < item.classList.length; i++) {
+                if (item.classList[i].startsWith(str)) {
+                    j = i;
+                    break;
+                }
+            }
+            if (j === -1) return;
+            let cls = item.classList[j], num = parseFloat(cls.slice(str.length));
+            if (num.toString() === 'NaN') return;
+            //console.log(item, num);
+            item.style.height = item.getBoundingClientRect().width * num / 100 + 'px';
+            window.addEventListener('resize', function () {
+                item.style.height = item.getBoundingClientRect().width * num / 100 + 'px';
+            });
+        });
+    };
+</script>
+</body>
+</html>

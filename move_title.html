@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>move</title>
+    <link rel="stylesheet" href="">
+    <style>
+        .title-element{
+            border: 1px solid gray;
+            position: fixed;
+            background-color: #aaccff;
+            color: brown;
+            padding: 5px;
+            transform: translate(-50%, calc(-100% - 20px));
+            border-radius: 5px;
+            display: none;
+            z-index: 9999;
+            box-shadow: 0 0 5px black;
+        }
+    </style>
+</head>
+<body>
+<div id="d1" style="border:1px solid red">ABCD
+    <div style="border:1px solid blue" id="d2">DEF</div>
+</div>
+<div custom-title="my custom title1" style="border: 2px solid brown; display: inline-block; margin: 25px;padding: 15px;">CUSTOM TITLE1</div>
+<div custom-title="qwerty2" style="margin-left: -50px;border: 2px solid brown; display: inline-block; padding: 15px;">CUSTOM TITLE2</div>
+
+
+<div custom-title="CCCCC" style="background-color: white;height: 125px;border: 2px solid brown; display: inline-block;padding: 15px;margin-right: -35px;">
+    CCCCC</div>
+
+<div title="AAA" custom-title="<span style='color:white;white-space:nowrap'>AAAAA AAAAA AAAAA</span>" style="height: 125px;border: 2px solid brown; display: inline-block; margin: 25px;padding: 15px;">
+    <div title="BBB" custom-title="BBBBB" style="z-index: 100;background-color: #aaccff;margin-left: -25px;border: 2px solid brown; display: inline-block; padding: 15px;">BBBBB</div>
+    AAAAA
+</div>
+
+
+<script>
+    window.addEventListener('load', (ev) => {
+        let titleDiv = document.createElement('div');
+        titleDiv.classList.add('title-element');
+
+        document.body.appendChild(titleDiv);
+        // titleDiv.setAttribute('title', 'ssss');
+        let isBlock = false;
+        let currentTitle = '';
+        let displayCount = 0;
+        let displayTitles = {};
+        document.querySelectorAll('[custom-title]').forEach((el)=>{
+            // el.addEventListener('mouseenter', (ev)=>{//mouseover
+            //     titleDiv.style.display = 'block';
+            //     displayCount++;
+            //     titleDiv.innerHTML = displayTitles[displayCount] = el.getAttribute('custom-title');
+            //     console.table('mouseenter', el.getAttribute('custom-title'), displayCount);
+            // });
+            let customTitle = el.getAttribute('custom-title');
+            el.addEventListener('mousemove', (ev)=>{
+                ev.stopPropagation();
+                if(!isBlock){
+                    titleDiv.style.display = 'block';
+                    isBlock = true;
+                }
+                //titleDiv.style.display = 'block';
+                if(currentTitle !== customTitle){
+                    currentTitle = titleDiv.innerHTML = customTitle;
+                }
+
+                titleDiv.style.left = ev.clientX + 'px';
+                titleDiv.style.top = ev.clientY + 'px';
+            });
+            el.addEventListener('mouseleave', (ev)=>{//mouseout
+                titleDiv.style.display = 'none';
+                isBlock = false;
+                // displayCount--;
+                // if(displayCount <= 0){
+                //     titleDiv.style.display = 'none';
+                //     displayCount = 0;
+                //     displayTitles = {};
+                // }else{
+                //     titleDiv.innerHTML = displayTitles[displayCount];
+                // }
+                // console.table('mouseleave', el.getAttribute('custom-title'), displayCount);
+            });
+        });
+        // window.addEventListener('mousemove', (ev)=>{
+        //     // console.log(displayTitles);
+        //     if(displayCount > 0){
+        //         titleDiv.style.left = ev.clientX + 'px';
+        //         titleDiv.style.top = ev.clientY + 'px';
+        //     }
+        // });
+    });
+
+    function f() {
+        //console.log("body");
+    }
+
+    let ro = new ResizeObserver(entries => {
+        // console.log(entries);
+        for (let entry of entries) {
+            const cr = entry.contentRect;
+            // console.log('Element:', entry.target);
+            // console.log(`Element size: ${cr.width}px x ${cr.height}px`);
+            // console.log(`Element padding: ${cr.top}px ; ${cr.left}px`);
+        }
+    });
+
+    // Observe one or multiple elements
+    ro.observe(document.getElementById("d1")); // replace someElement with your element var
+    ro.observe(document.getElementById("d2")); // replace someElement with your element var
+</script>
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        window.onload = function () {
+
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .inp {
+            background-color: #0000;
+            font-size: 25px;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+            border: 2px solid #0003;
+        }
+
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            transition: background-color 1s ease-in-out 86400s, color 1s ease-in-out 86400s;
+        }
+
+        body {
+            /*margin: 0;*/
+        }
+        .div-group{
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            margin: 5px;
+            min-width: 384px;
+            width: calc(100% - 20px);
+            position: relative;
+            padding: 5px;
+        }
+        .default-input{
+            outline: none;
+            padding: 5px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            margin:5px 0;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .default-input:focus{
+            border-color: black;
+            background-color: #eee;
+        }
+        .fl-1{
+            display: flex;
+        }
+        .b-1{
+            display: inline-block;
+            /*font-weight: bold;*/
+            color: brown;
+            padding: 0 5px;
+            /*border-right: 3px dotted black;*/
+            margin: -1px 0 0 -1px;
+            border: 1px solid black;
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+        .tbl-1{
+            border-collapse: collapse;
+            font-size: 12px;
+            font-family: sans-serif;
+        }
+        .tbl-1 td, .tbl-1 th{
+            border: 1px solid #aaa;
+            padding: 0 5px;
+        }
+
+    </style>
+</head>
+<body>
+<div style="display: flex">
+    <div style="min-width: 384px">
+        <div>
+            <input onchange="fChangeBaseUrl(this)" id="base-url-1" type="radio" name="base-url" checked radio-base-url="http://relmoma-api.loc/v1/">
+            <label for="base-url-1">http://relmoma-api.loc/v1/ <span style="color: green">(local)</span></label>
+        </div>
+        <div>
+            <input onchange="fChangeBaseUrl(this)" id="base-url-2" type="radio" name="base-url" radio-base-url="https://api.relmoma.com/v1/">
+            <label for="base-url-2">https://api.relmoma.com/v1/</label>
+        </div>
+        <hr>
+        <div>
+            <div>Variables</div>
+            <table class="tbl-1 tbl-vars">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <hr>
+        <div>
+            <input type="button" onclick="axiosTest()" value="Axios test">
+            <div id="test-response" style="border: 1px solid green;padding: 5px;font-size: 12px;font-family: sans-serif;">Ready</div>
+        </div>
+    </div>
+    <div style="flex: 1">
+        <div class="div-group artisan-command">
+            <h2 style="text-align: center;margin: 0">php artisan</h2>
+            <div style="position: relative;">
+                <label>Command</label>
+                <input type="button" onclick="document.querySelector('.artisan-command input[name=\'command\']').value = 'app:init';" value="app:init">
+                <input type="button" onclick="document.querySelector('.artisan-command input[name=\'command\']').value = 'route:cache';" value="route:cache">
+                <input type="button" onclick="document.querySelector('.artisan-command input[name=\'command\']').value = 'config:cache';" value="config:cache">
+                <input type="button" onclick="document.querySelector('.artisan-command input[name=\'command\']').value = 'company:group';" value="company:group">
+                <input type="button" onclick="document.querySelector('.artisan-command input[name=\'command\']').value = 'parse:links';" value="parse:links">
+                <input class="default-input" name="command" type="text" value="app:init">
+            </div>
+
+            <input type="button" onclick="artisanCommand()" value="Submit">
+            <div id="artisan-command-response" style="margin-top: 10px;color: #055;background-color: #cef;padding: 5px;"></div>
+        </div>
+        <div class="div-group registration">
+            <h2 style="text-align: center;margin: 0">Register</h2>
+            <div style="position: relative;">
+                <label>Name</label>
+                <input class="default-input" name="name" type="text" value="Valod">
+                <label>Surname</label>
+                <input class="default-input" name="surname" type="text" value="Valabekyan">
+                <label>Email</label>
+                <input class="default-input" name="email" type="email" value="valod.valabekyan@relmoma.com">
+                <label>Password</label>
+                <input class="default-input" name="password" type="text" value="12345678">
+                <label>Password confirm</label>
+                <input class="default-input" name="password_confirmation" type="text" value="12345678">
+            </div>
+
+            <input type="button" onclick="registration()" value="Register">
+            <div id="register-response" style="margin-top: 10px;color: #055;background-color: #cef;padding: 5px;"></div>
+        </div>
+        <div class="div-group login">
+            <h2 style="text-align: center;margin: 0">Login</h2>
+            <div style="position: relative;">
+                <label>Email</label>
+                <input class="default-input" name="email" type="email" value="valod.valabekyan@relmoma.com">
+                <label>Password</label>
+                <input class="default-input" name="password" type="text" value="12345678">
+            </div>
+
+            <input type="button" onclick="login()" value="Login">
+            <div id="login-response" style="margin-top: 10px;color: #055;background-color: #cef;padding: 5px;"></div>
+        </div>
+        <div class="div-group logout">
+            <h2 style="text-align: center;margin: 0">Logout</h2>
+            <input type="button" onclick="logout()" value="Logout">
+            <div id="logout-response" style="margin-top: 10px;color: #055;background-color: #cef;padding: 5px;"></div>
+        </div>
+        <div class="div-group upload-image">
+            <h2 style="text-align: center;margin: 0">User image upload</h2>
+            <input name="image" type="file">
+            <input type="button" onclick="uploadImage()" value="Upload image">
+            <div id="user-image-upload" style="margin-top: 10px;color: #055;background-color: #cef;padding: 5px;"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    //console.error('sdzrgdfthfdyt');
+    //console.log(navigator.userAgent);
+    let glb = {
+        id: null,
+        token: null,
+        baseUrl: 'http://relmoma-api.loc/v1/'
+    };
+    function fChangeBaseUrl(obj) {
+        glb.baseUrl = obj.getAttribute('radio-base-url');
+        console.log(glb.baseUrl);
+        fAddDataToStorage();
+        fMakeVarsTable();
+    }
+    function fAddVariable(varKey, varVal) {
+        glb[varKey] = varVal;
+        fAddDataToStorage();
+        fMakeVarsTable();
+    }
+    function fMakeVarsTable() {
+        let ih = '';
+        for(let key in glb){
+            ih += '<tr><td style="background-color: #eee">' + key + '</td><td>' + String(glb[key]) + '</td></tr>';
+            document.querySelector('.tbl-vars tbody').innerHTML = ih;
+        }
+    }
+    function fAddDataToStorage() {
+        localStorage.setItem('glb', JSON.stringify(glb));
+    }
+    function fTakeDataFromStorage(){
+        try{
+            const glbStorage = localStorage.getItem('glb');
+            if(glbStorage){
+                glb = JSON.parse(glbStorage);
+                if(!glb.hasOwnProperty('baseUrl')){
+                    glb.baseUrl = 'http://relmoma-api.loc/v1/';
+                }
+                document.querySelector('[radio-base-url=\'' + glb.baseUrl + '\']').checked = true;
+            }
+        }catch (e) {
+
+        }
+    }
+    window.addEventListener('load', ()=>{
+        fTakeDataFromStorage();
+        fMakeVarsTable();
+    });
+    function artisanCommand(){
+        document.getElementById('artisan-command-response').innerHTML = '';
+        let aj = new XMLHttpRequest();
+        aj.open('post', glb.baseUrl + 'php_artisan_command', true);
+        //aj.setRequestHeader('Accept', 'application/json');
+        // aj.setRequestHeader('Content-Type', 'application/json');
+        // aj.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        let fd = new FormData();
+        fd.append('command', document.querySelector('.artisan-command input[name=\'command\']').value);
+        aj.send(fd);
+        aj.onreadystatechange = function () {
+            if(this.readyState === 4){
+                if(this.status === 200){
+                    //let respJson = JSON.parse(this.responseText);
+                }
+                console.log(this.responseText);
+                document.getElementById('artisan-command-response').innerHTML = 'Status = ' + this.status + '<br>';
+                document.getElementById('artisan-command-response').innerHTML += this.responseText;
+            }
+        };
+    }
+    function registration(){
+        let aj = new XMLHttpRequest();
+        aj.open('post', glb.baseUrl + 'auth/register', true);
+        aj.setRequestHeader('Accept', 'application/json');
+        // aj.setRequestHeader('Content-Type', 'application/json');
+        // aj.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        let fd = new FormData();
+        fd.append('name', document.querySelector('.registration input[name=\'name\']').value);
+        fd.append('surname', document.querySelector('.registration input[name=\'surname\']').value);
+        fd.append('email', document.querySelector('.registration input[name=\'email\']').value);
+        fd.append('password', document.querySelector('.registration input[name=\'password\']').value);
+        fd.append('password_confirmation', document.querySelector('.registration input[name=\'password_confirmation\']').value);
+        fd.append('device_name', 'test_device');
+        aj.send(fd);
+        aj.onreadystatechange = function () {
+            if(this.readyState === 4){
+                if(this.status === 200){
+                    let respJson = JSON.parse(this.responseText);
+                    fAddVariable('id', respJson.data.user.id);
+                    fAddVariable('token', respJson.data.token);
+                }
+                console.log(this.responseText);
+                document.getElementById('register-response').innerHTML = 'Status = ' + this.status + '<br>';
+                document.getElementById('register-response').innerHTML += fMakeJsonList(this.responseText, 'register-response');
+                fEquateWidth('register-response');
+            }
+        };
+    }
+    function login(){
+        let aj = new XMLHttpRequest();
+        aj.open('post', glb.baseUrl + 'auth/login', true);
+        aj.setRequestHeader('Accept', 'application/json');
+        // aj.setRequestHeader('Content-Type', 'application/json');
+        // aj.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        let fd = new FormData();
+        fd.append('email', document.querySelector('.login input[name=\'email\']').value);
+        fd.append('password', document.querySelector('.login input[name=\'password\']').value);
+        fd.append('device_name', 'test_device');
+        aj.send(fd);
+        aj.onreadystatechange = function () {
+            //console.log(this.readyState);
+            // console.log(this.responseText);
+            if(this.readyState === 4){
+                if(this.status === 200){
+                    let respJson = JSON.parse(this.responseText);
+                    fAddVariable('id', respJson.data.user.id);
+                    fAddVariable('token', respJson.data.token);
+                }
+                console.log(this.responseText);
+                document.getElementById('login-response').innerHTML = 'Status = ' + this.status + '<br>';
+                document.getElementById('login-response').innerHTML += fMakeJsonList(this.responseText, 'login-response');
+                fEquateWidth('login-response');
+            }
+        };
+    }
+    function logout(){
+        let aj = new XMLHttpRequest();
+        aj.open('post', glb.baseUrl + 'auth/logout', true);
+        aj.setRequestHeader('Accept', 'application/json');
+        aj.setRequestHeader('Authorization', 'Bearer ' + glb.token);
+        aj.send();
+        aj.onreadystatechange = function () {
+            if(this.readyState === 4){
+                if(this.status === 200){
+                    fAddVariable('id', null);
+                    fAddVariable('token', null);
+                }
+                console.log(this.responseText);
+                document.getElementById('logout-response').innerHTML = 'Status = ' + this.status + '<br>';
+                document.getElementById('logout-response').innerHTML += fMakeJsonList(this.responseText, 'logout-response');
+                fEquateWidth('logout-response');
+            }
+        };
+    }
+    function uploadImage(){
+        let aj = new XMLHttpRequest();
+        aj.open('post', glb.baseUrl + 'image/upload', true);
+        aj.setRequestHeader('Accept', 'application/json');
+        aj.setRequestHeader('Authorization', 'Bearer ' + glb.token);
+        //aj.setRequestHeader('Content-Type', 'multipart/form-data');
+        let fd = new FormData();
+        let imageFile = document.querySelector('.upload-image input[name=\'image\']').files[0];
+        console.log(imageFile);
+        fd.append('image', imageFile);
+        aj.send(fd);
+        aj.onreadystatechange = function () {
+            if(this.readyState === 4){
+                console.log(this.responseText);
+                document.getElementById('user-image-upload').innerHTML = 'Status = ' + this.status + '<br>';
+                document.getElementById('user-image-upload').innerHTML += fMakeJsonList(this.responseText, 'user-image-upload');
+                fEquateWidth('user-image-upload');
+                if(this.status === 200){
+                    let data = JSON.parse(this.responseText);
+                    let src = data.data.src;
+                    document.getElementById('user-image-upload').innerHTML += '<br><img style="max-width: 100%" src="'+src+'">';
+                    // fAddVariable('id', null);
+                    // fAddVariable('token', null);
+                }
+            }
+        };
+    }
+    function fMakeJsonList(responseText, id) {
+        let respJson = {}, ih = '';
+        try {
+            respJson = JSON.parse(responseText);
+            console.log(respJson);
+        }catch (e) {
+
+        }
+        ih += fRec(respJson, 0);
+        return ih;
+        function fRec(data, nextI) {
+            let ih = '';
+            if(Array.isArray(data)){
+                for(let i = 0; i < data.length; i++){
+                    // ih += '<div>' + fRec(data[i]) + '</div>';
+                    ih += '<div class="fl-1">' + '<span class="b-1 '+id+nextI+'">' + i + '</span><div style="">' + fRec(data[i], nextI + 1) + '</div></div>';
+                }
+            }else if(typeof data === 'object' && data){
+                for(let key in data){
+                    ih += '<div class="fl-1">' + '<span class="b-1 '+id+nextI+'">' + key + '</span><div style="">' + fRec(data[key], nextI + 1) + '</div></div>';
+                }
+            }else{
+                ih += '<div class="" style="padding: 0 5px; background-color: white">' + String(data) + '</div>';
+            }
+            return ih;
+        }
+    }
+    function fEquateWidth(id) {
+        let i = 0;
+        while (document.querySelectorAll('#'+id+' .'+id+i).length > 0){
+            let maxW = 0;
+            document.querySelectorAll('#'+id+' .'+id+i).forEach((el)=>{
+                let w = el.getBoundingClientRect().width;
+                if(w > maxW){
+                    maxW = w;
+                }
+            });
+            document.querySelectorAll('#'+id+' .'+id+i).forEach((el)=>{
+                el.style.width = maxW + 'px';
+                el.style.minWidth = maxW + 'px';
+            });
+            i++;
+        }
+    }
+    function axiosTest(){
+        let url = 'http://relmoma-api.loc/v1/test/array-test';
+        let ht = document.getElementById('test-response');
+        ht.innerHTML = '';
+        axios({
+            method: 'post',
+            url: url,
+            data: {
+                firstName: 'Fred',
+                lastName: 'Flintstone',
+                abc: ['Flintstone', 'dxth'],
+            }
+        }).then(function (response) {
+            ht.innerHTML = JSON.stringify(response.data);
+            console.log(response);
+        }).catch(function (error) {
+            ht.innerHTML = error;
+        });
+
+
+    }
+
+</script>
+</body>
+</html>

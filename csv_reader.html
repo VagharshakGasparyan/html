@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+
+        };
+    </script>
+    <style>
+        body {
+            background-color: darkslategray;
+        }
+        #imago {
+            height: 100px;
+            width: 250px;
+            opacity: 0;
+        }
+
+        #imagd {
+			position:relative;
+            border: 2px solid white;
+            border-radius: 5px;
+            display: inline-block;
+            vertical-align: top;
+        }
+		#imagd label{
+            left:0;
+            top:0;
+			position: absolute;
+			color:white;
+			width:100%;
+            height: 100%;
+            text-align: center;
+            /*padding: 10px;*/
+            /*border: 1px solid blue;*/
+		}
+        #csv-string{
+            color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+
+<div id="imagd">
+<!--    <label for="imago">Ընտրեք նկարը կամ նկարները, կամ քաշեք մեջը</label>-->
+    <label for="imago">Move or click here<br>to choose a csv file</label>
+<!--    <input id="imago" type="file" oninput="f(this)" accept=".jpg, .jpeg, .png" multiple>-->
+    <input id="imago" type="file" oninput="f1(this)" accept=".csv, .json" >
+</div>
+<div id="csv-string"></div>
+
+<script>
+    function f(obj) {
+        //console.log(obj.getAttributeNames());
+        console.log(obj.value, obj.files);
+        for (let i = 0; i < obj.files.length; i++) {
+            let image = document.createElement('img');
+            image.setAttribute("class", "chap");
+            image.onmousedown = function () {
+                return false;
+            };
+            image.src = window.URL.createObjectURL(obj.files[i]);
+            document.body.appendChild(image);
+        }
+    }
+    function f1(inp){
+        let r = new FileReader();
+        r.readAsText(inp.files[0]);
+        r.onload = function (ev){
+            let res = ev.target.result;
+            document.getElementById('csv-string').innerText = res.toString();
+            csvToJsonParser(res.toString());
+        }
+    }
+    function csvToJsonParser(csvString){
+        let csvRows = csvString.split('\r\n');
+        for(let i = 0; i < csvRows.length; i++){
+            if(!csvRows[i]){
+                csvRows.splice(i, 1);
+                i--;
+            }
+        }
+        csvRows.map(function (csvRow){
+            let csvColumns = [];
+            let val = '';
+            for(let i = 0; i < csvRow.length; i++){
+                let s1 = csvRow[i];
+                let s2 = i < csvRow.length - 1 ? csvRow[i + 1] : '';
+                if(s1 === '"' && s2 === '"'){
+
+                }
+            }
+            return csvColumns;
+        });
+        console.log(csvRows);
+    }
+</script>
+
+
+</body>
+</html>

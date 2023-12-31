@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+
+
+    </style>
+</head>
+<body>
+<div>
+    <input id="for-copy" type="text" value="Նախնական տեքստ">
+    <input onclick="forCopy()" type="button" value="Copy">
+</div>
+<div style="margin-top: 10px">
+    <input id="for-paste" type="text">
+    <input onclick="forPaste(document.getElementById('for-paste'))" type="button" value="Paste">
+</div>
+<div style="margin-top: 10px">
+    <label style="display: block">Url</label>
+    <input style="width: 50%" oninput="forUrl(this)" id="url" type="text">
+    <input onclick="forPaste(document.getElementById('url'), true)" type="button" value="Paste">
+</div>
+<div style="margin-top: 10px">
+    <a href="#">The a tag with #</a><br>
+    <a href="javascript:void(0)">The a tag with javascript:void</a><br>
+    <a target="_blank" href="https://www.google.com">The a tag with url</a><br>
+</div>
+
+<script>
+    document.querySelectorAll('a').forEach(function (aElement) {
+        aElement.outerHTML = '<div style="background-color: red;display: inline-block">qwerty</div>';
+    });
+
+
+    window.addEventListener('load', function () {
+        document.querySelectorAll('a[href="#"], a[href^="javascript:void"]').forEach(function (aElement) {
+            aElement.onmousedown = aElement.onclick = function(){
+                return false;
+            };
+            aElement.removeAttribute('href');
+
+            //console.log(aElement);
+        });
+    });
+    function forCopy() {
+        navigator.clipboard.writeText(document.getElementById("for-copy").value).then(
+            () => {/* clipboard successfully set */},
+            () => {/* clipboard write failed */}
+        );
+    }
+
+    function forPaste(obj, isUrl = false) {
+        navigator.clipboard.readText().then((clipText) => {
+            obj.value = clipText;
+            if(isUrl){
+                forUrl(obj);
+            }
+        });
+    }
+
+    function forUrl(obj) {
+        if(!obj.value.startsWith('http://') && !obj.value.startsWith('https://')){
+            obj.value = 'https://' + obj.value;
+        }
+    }
+
+</script>
+</body>
+</html>

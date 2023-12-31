@@ -1,0 +1,384 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        window.onload = function () {
+
+        };
+    </script>
+    <style>
+        .time {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            min-width: 512px;
+            border: 10px solid #055;
+            border-radius: 25px;
+            padding: 25px;
+            background-color: #123;
+        }
+
+        .svg-number {
+            position: relative;
+            display: inline-block;
+            height: 174px;
+            margin: 10px;
+        }
+
+        .svg-colon {
+            position: relative;
+            display: inline-block;
+            height: 174px;
+            margin: 10px;
+        }
+
+        .my-btn {
+            background-color: #055;
+            font-size: 50px;
+            color: #fff;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            min-width: 190px;
+            box-shadow: 3px 3px 4px #fff;
+        }
+
+        .my-select:hover, .my-btn:hover {
+            background-color: #077;
+        }
+
+        .my-btn:active {
+            background-color: #123;
+            margin: 3px -3px -3px 3px;
+            box-shadow: 0 0 2px #fff;
+        }
+
+        .my-select {
+            background-color: #055;
+            font-size: 15px;
+            color: #fff;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            box-shadow: 0 0 4px #fff;
+            margin: 0 1px;
+        }
+
+        [number='0'] {
+            background: url('data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxMDAgMTc0Ij48cG9seWdvbiBuYW1lPSIyIiBmaWxsPSJub25lIiBwb2ludHM9IjMwLDc0IDEzLDg3IDMwLDEwMCA3MCwxMDAgODcsODcgNzAsNzQgIi8+PHBvbHlnb24gbmFtZT0iNCIgZmlsbD0iIzBmZiIgcG9pbnRzPSIyNiw3MCAyNiwzMCA3LDEyIDAsMTkgMCw3NSA4LDgzICIvPjxwb2x5Z29uIG5hbWU9IjUiIGZpbGw9IiMwZmYiIHBvaW50cz0iNzQsNzAgOTIsODMgMTAwLDc1IDEwMCwxOSA5MywxMiA3NCwzMCAiLz48cG9seWdvbiBuYW1lPSI2IiBmaWxsPSIjMGZmIiBwb2ludHM9IjI2LDEwNSA4LDkxIDAsOTkgMCwxNTUgNywxNjMgMjYsMTQ0ICIvPjxwb2x5Z29uIG5hbWU9IjciIGZpbGw9IiMwZmYiIHBvaW50cz0iNzQsMTA1IDc0LDE0NCA5MywxNjMgMTAwLDE1NSAxMDAsOTkgOTIsOTEgIi8+PHBvbHlnb24gbmFtZT0iMyIgZmlsbD0iIzBmZiIgcG9pbnRzPSIxMiwxNjcgMTksMTc0IDgxLDE3NCA4OCwxNjcgNzAsMTQ5IDMwLDE0OSAiLz48cG9seWdvbiBuYW1lPSIxIiBmaWxsPSIjMGZmIiBwb2ludHM9IjEyLDcgMzAsMjYgNzAsMjYgODgsNyA4MSwwIDE5LDAgIi8+PC9zdmc+') no-repeat center;
+            /*background-size: 80px;*/
+        }
+
+        .start-end-div {
+            display: flex;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <div number="0" style="display: inline-block;height: 150px;width: 150px;"></div>
+    <div number="0" style="display: inline-block;height: 100px;width: 100px;"></div>
+    <div number="0" style="display: inline-block;height: 67px;width: 67px;"></div>
+    <div number="0" style="display: inline-block;height: 44px;width: 44px;"></div>
+    <div style="height: 30px;display: inline-block;">
+        <svg width="100%" height="100%" viewBox="0 0 100 174">
+            <polygon name="2" fill="none" points="30,74 13,87 30,100 70,100 87,87 70,74 "/>
+            <polygon name="4" fill="#0ff" points="26,70 26,30 7,12 0,19 0,75 8,83 "/>
+            <polygon name="5" fill="#0ff" points="74,70 92,83 100,75 100,19 93,12 74,30 "/>
+            <polygon name="6" fill="#0ff" points="26,105 8,91 0,99 0,155 7,163 26,144 "/>
+            <polygon name="7" fill="#0ff" points="74,105 74,144 93,163 100,155 100,99 92,91 "/>
+            <polygon name="3" fill="#0ff" points="12,167 19,174 81,174 88,167 70,149 30,149 "/>
+            <polygon name="1" fill="#0ff" points="12,7 30,26 70,26 88,7 81,0 19,0 "/>
+        </svg>
+    </div>
+    <div style="height: 30px;display: inline-block;">
+        <svg width="100%" height="100%" viewBox="0 0 100 174">
+            <polygon name="2" fill="none" points="30,74 13,87 30,100 70,100 87,87 70,74 "/>
+            <polygon name="4" fill="none" points="26,70 26,30 7,12 0,19 0,75 8,83 "/>
+            <polygon name="5" fill="#0ff" points="74,70 92,83 100,75 100,19 93,12 74,30 "/>
+            <polygon name="6" fill="none" points="26,105 8,91 0,99 0,155 7,163 26,144 "/>
+            <polygon name="7" fill="#0ff" points="74,105 74,144 93,163 100,155 100,99 92,91 "/>
+            <polygon name="3" fill="none" points="12,167 19,174 81,174 88,167 70,149 30,149 "/>
+            <polygon name="1" fill="none" points="12,7 30,26 70,26 88,7 81,0 19,0 "/>
+        </svg>
+    </div>
+</div>
+
+
+<svg style="display: none;" width="100%" height="100%" viewBox="0 0 26 174">
+    <polygon name="dot-top" fill="red" points="0,44 0,70 26,70 26,44 "/>
+    <polygon name="dot-down" fill="green" points="0,104 0,130 26,130 26,104 "/>
+</svg>
+<svg style="display: none;" width="100%" height="100%" viewBox="0 0 100 174">
+    <polygon name="2" fill="red" points="29,74 4,87 29,100 71,100 96,87 71,74 "/>
+    <polygon name="6" fill="green" points="0,92 0,155 7,163 26,144 26,105 "/>
+    <polygon name="4" fill="blue" points="0,82 26,69 26,30 7,12 0,19 "/>
+    <polygon name="7" fill="brown" points="74,105 74,144 93,163 100,155 100,92 "/>
+    <polygon name="5" fill="yellow" points="74,69 100,82 100,19 93,12 74,30 "/>
+    <polygon name="3" fill="#777" points="12,167 19,174 81,174 88,167 70,149 30,149 "/>
+    <polygon name="1" fill="#f0f" points="12,7 30,26 70,26 88,7 81,0 19,0 "/>
+</svg>
+
+<div class="time">
+    <div style="display: flex;justify-content: center;">
+        <div name="min" class="svg-number"></div>
+        <div name="min" class="svg-number"></div>
+        <div name="sec-colon" class="svg-colon"></div>
+        <div name="sec" class="svg-number"></div>
+        <div name="sec" class="svg-number"></div>
+    </div>
+    <div style="margin-top: 25px;display: flex;">
+        <input onclick="fStart()" type="button" value="START" class="my-btn">
+        <div style="display: flex;flex-direction: column;border: 2px solid #0ff;padding: 0 5px 5px 5px;margin-left: 10px;border-radius: 10px;">
+            <div style="color: #0ff;flex: 1;white-space: nowrap;text-align: center;padding-bottom: 3px;">Start time</div>
+            <div style="flex: 1;white-space: nowrap;display: flex;">
+                <select oninput="fSelectTime(this, 'sm10')" class="my-select">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <select oninput="fSelectTime(this, 'sm1')" class="my-select">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+                <svg width="13" height="35" viewBox="0 0 26 174">
+                    <polygon name="dot-top" fill="#0ff" points="0,44 0,70 26,70 26,44 "/>
+                    <polygon name="dot-down" fill="#0ff" points="0,104 0,130 26,130 26,104 "/>
+                </svg>
+                <select oninput="fSelectTime(this, 'ss10')" class="my-select">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <select oninput="fSelectTime(this, 'ss1')" class="my-select">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+            </div>
+        </div>
+        <div style="display: flex;flex-direction: column;border: 2px solid #0ff;padding: 0 5px 5px 5px;margin-left: 5px;border-radius: 10px;">
+            <div style="color: #0ff;flex: 1;white-space: nowrap;text-align: center;padding-bottom: 3px;">End time</div>
+            <div style="flex: 1;white-space: nowrap;display: flex;">
+                <select oninput="fSelectTime(this, 'em10')" class="my-select">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <select oninput="fSelectTime(this, 'em1')" class="my-select">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+                <svg width="13" height="35" viewBox="0 0 26 174">
+                    <polygon name="dot-top" fill="#0ff" points="0,44 0,70 26,70 26,44 "/>
+                    <polygon name="dot-down" fill="#0ff" points="0,104 0,130 26,130 26,104 "/>
+                </svg>
+                <select oninput="fSelectTime(this, 'es10')" class="my-select">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <select oninput="fSelectTime(this, 'es1')" class="my-select">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    let pldmpAudioSrc = 'data:audio/mp3;base64,SUQzBAAAAAAAF1RTU0UAAAANAAAATGF2ZjUyLjU0LjAA//uQZAAP8AAAaQAAAAgAAA0gAAABAAABpAAAACAAADSAAAAETEFNRTMuOTguMlVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuOTguMlVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//uSZL6P8AAAaQAAAAgAAA0gAAABAAABpAAAACAAADSAAAAEVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVdnA3AmwOhmXaBuhWAYDA3gY0HgARI8DToJAkjPwMtjsA5JgYeBH+BgcBgMQkDL4JAysOv/AywFgseAxADA9sIhL/8DEwKAOPQBRgAxSFwLGwDFIr//wUCYTBoBIoAygJgNHAQDCZoA2cdv//wNMHYAhCga5LoGxzGBgUUgZfGYG2//7kmT/j/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0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qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq//uSZL8P8AAAaQAAAAgAAA0gAAABAAABpAAAACAAADSAAAAEqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqv/7kmQAD/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0gAAABExBTUUzLjk4LjKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpMQU1FMy45OC4yqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/+5Jkvw/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAASqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq//uSZAAP8AAAaQAAAAgAAA0gAAABAAABpAAAACAAADSAAAAETEFNRTMuOTguMqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqkxBTUUzLjk4LjKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqv/7kmS/D/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0gAAABKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/+5JkAA/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARMQU1FMy45OC4yqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqTEFNRTMuOTguMqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq//uSZL8P8AAAaQAAAAgAAA0gAAABAAABpAAAACAAADSAAAAEqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqv/7kmQAD/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0gAAABExBTUUzLjk4LjKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpMQU1FMy45OC4yqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/+5Jkvw/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAASqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq//uSZAAP8AAAaQAAAAgAAA0gAAABAAABpAAAACAAADSAAAAETEFNRTMuOTguMqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqkxBTUUzLjk4LjKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqv/7kmS/D/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0gAAABKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr/+5JkAA/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARMQU1FMy45OC4yqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpMQU1FMy45OC4yqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq//uQZL8P8AAAaQAAAAgAAA0gAAABAAABpAAAACAAADSAAAAEqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq';
+    let pldmpAudio = new Audio();
+    pldmpAudio.src = pldmpAudioSrc;
+    let svgColon = '<svg width="100%" height="100%" viewBox="0 0 26 174">' +
+        '<polygon name="dot" fill="#0ff" points="0,44 0,70 26,70 26,44 "/>' +
+        '<polygon name="dot" fill="#0ff" points="0,104 0,130 26,130 26,104 "/>' +
+        '</svg>';
+    let svgNumber = '<svg width="100%" height="100%" viewBox="0 0 100 174">' +
+        '<polygon name="2" fill="red" points="30,74 13,87 30,100 70,100 87,87 70,74 "/>' +
+        '<polygon name="4" fill="green" points="26,70 26,30 7,12 0,19 0,75 8,83 "/>' +
+        '<polygon name="5" fill="blue" points="74,70 92,83 100,75 100,19 93,12 74,30 "/>' +
+        '<polygon name="6" fill="brown" points="26,105 8,91 0,99 0,155 7,163 26,144 "/>' +
+        '<polygon name="7" fill="yellow" points="74,105 74,144 93,163 100,155 100,99 92,91 "/>' +
+        '<polygon name="3" fill="#777" points="12,167 19,174 81,174 88,167 70,149 30,149 "/>' +
+        '<polygon name="1" fill="#f0f" points="12,7 30,26 70,26 88,7 81,0 19,0 "/>' +
+        '</svg>';
+    let sm10 = 0, sm1 = 0, ss10 = 0, ss1 = 0, em10 = 0, em1 = 0, es10 = 0, es1 = 0;
+    let min = 0, sec = 0, dateMS = Date.now(), deltaT = 1000;
+    let sign = "+";
+    let color = "#0ff";
+    window.addEventListener("load",()=>{
+        document.querySelectorAll(".svg-number").forEach((el) => {
+            el.innerHTML = svgNumber;
+        });
+        document.querySelectorAll(".svg-colon").forEach((el) => {
+            el.innerHTML = svgColon;
+        });
+        fShowTime(sm10 * 10 + sm1, ss10 * 10 + ss1);
+    });
+
+    function fStart() {
+        dateMS = Date.now();
+        min = sm10 * 10 + sm1;
+        sec = ss10 * 10 + ss1;
+        fShowTime(sm10 * 10 + sm1, ss10 * 10 + ss1);
+        fTimeout();
+    }
+
+    function fTimeout() {
+        let endTime = (em10 * 10 + em1) * 60 + es10 * 10 + es1;
+        if( (sign === "+" && min * 60 + sec >= endTime) || (sign === "-" && min * 60 + sec <= endTime) ){
+            return fEnd();
+        }
+        setTimeout(()=>{
+            [min, sec] = fTimeAddOrSubtract(sign, min, sec);
+            fShowTime(min, sec);
+            fTimeout();
+        }, deltaT);
+    }
+    function fEnd() {
+        console.log("end time");
+        let count = 5;
+        let sti = setInterval(()=>{
+            pldmpAudio.pause();
+            pldmpAudio.currentTime = 0;
+            pldmpAudio.play();
+            count--;
+            if(count <= 0){
+                clearInterval(sti);
+            }
+            console.log("tik");
+        }, 250);
+
+    }
+    // setInterval(() => {
+    //     [min, sec] = fTimeAddOrSubtract("+", min, sec);
+    //     fShowTime(min, sec);
+    // }, 1000);
+
+    function fTimeAddOrSubtract(sign, min, sec) {//sign="+"|"-"
+        sec += sign === "+" ? 1 : sign === "-" ? -1 : sec;
+        min = sec > 59 ? min + 1 : (sec < 0 ? min - 1 : min);
+        sec = sec > 59 ? 0 : sec < 0 ? 59 : sec;
+        min = min > 59 ? 0 : min < 0 ? 59 : min;
+        return [min, sec];
+    }
+
+    function fShowTime(min, sec) {
+        let minEl = document.querySelectorAll("[name='min']");
+        let secEl = document.querySelectorAll("[name='sec']");
+        fShowNumber(minEl[0], (min - min % 10) / 10, color);
+        fShowNumber(minEl[1], min % 10, color);
+        fShowNumber(secEl[0], (sec - sec % 10) / 10, color);
+        fShowNumber(secEl[1], sec % 10, color);
+    }
+
+    function fShowNumber(element, number, color) {
+        let numberToName = {
+            0: [1, 3, 4, 5, 6, 7],
+            1: [5, 7],
+            2: [1, 2, 3, 5, 6],
+            3: [1, 2, 3, 5, 7],
+            4: [2, 4, 5, 7],
+            5: [1, 2, 3, 4, 7],
+            6: [1, 2, 3, 4, 6, 7],
+            7: [1, 5, 7],
+            8: [1, 2, 3, 4, 5, 6, 7],
+            9: [1, 2, 3, 4, 5, 7]
+        };
+        [1, 2, 3, 4, 5, 6, 7].forEach((name) => {
+            element.querySelector("svg [name='" + name + "']").setAttribute("fill", "#7771");
+        });
+        numberToName[number].forEach((name) => {
+            element.querySelector("svg [name='" + name + "']").setAttribute("fill", color);
+        });
+    }
+
+    function fSelectTime(obj, what) {
+        let value = parseInt(obj.value);
+        switch (what) {
+            case "sm10":
+                sm10 = value;
+                break;
+            case "sm1":
+                sm1 = value;
+                break;
+            case "ss10":
+                ss10 = value;
+                break;
+            case "ss1":
+                ss1 = value;
+                break;
+            case "em10":
+                em10 = value;
+                break;
+            case "em1":
+                em1 = value;
+                break;
+            case "es10":
+                es10 = value;
+                break;
+            case "es1":
+                es1 = value;
+                break;
+        }
+        sign = ((sm10 * 10 + sm1) * 60 + ss10 * 10 + ss1 < (em10 * 10 + em1) * 60 + es10 * 10 + es1) ? "+" : "-";
+        fShowTime(sm10 * 10 + sm1, ss10 * 10 + ss1);
+    }
+
+</script>
+</body>
+</html>

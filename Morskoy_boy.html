@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Морской бой</title>
+<meta charset="UTF-8">
+<style>
+td{
+height: 20px;
+width:20px;
+text-align:center;
+}
+.item{
+cursor:pointer;
+}
+</style>
+</head>
+<body>
+<script>
+var x=10;//syuner
+var y=10;//togher
+var dsim="*";//datark teghi simvol
+var sim="X";//liq@ teghi simvol
+var i,j;
+var z=[],zh=[],zv=[],zmx=[],zmy=[];
+var k=0;
+var hv,sx,sy,sz;
+
+//steghcvuma erkchap zangvac `dsim` arjeqnerov
+for(i=0; i<y;i++){
+	z[i]=[];
+	zh[i]=[];
+	zv[i]=[];
+	for(j=0; j<x;j++){
+			z[i][j]=dsim;
+			zh[i][j]=x-j;
+			zv[i][j]=y-i;
+	}
+}
+teghadr(4);
+teghadr(3);
+teghadr(3);
+teghadr(2);
+teghadr(2);
+teghadr(2);
+teghadr(1);
+teghadr(1);
+teghadr(1);
+teghadr(1);
+
+function teghadr(n){//n hatanoc navaki teghadrman functia
+hv=Math.round(Math.random());//horizonakan=1 kam vertikal=0; Math.random()=[0, 1)
+if(hv==0){//vertikal
+	k=-1;
+	for(i=0; i<y;i++){
+		for(j=0; j<x;j++){
+			if(zv[i][j]>=n){
+				k++;
+				zmx[k]=j;
+				zmy[k]=i;
+			}
+		}
+	}
+	sz=Math.floor(Math.random()*(k+1));
+	sx=zmx[sz];
+	sy=zmy[sz];
+	for(i=sy; i<sy+n;i++){
+		z[i][sx]=sim;
+		norm(i,sx);
+	}
+}else{//horizonakan
+	k=-1;
+	for(i=0; i<y;i++){
+		for(j=0; j<x;j++){
+			if(zh[i][j]>=n){
+				k++;
+				zmx[k]=j;
+				zmy[k]=i;
+			}
+		}
+	}
+	sz=Math.floor(Math.random()*(k+1));
+	sx=zmx[sz];
+	sy=zmy[sz];
+	for(i=sx; i<sx+n;i++){
+		z[sy][i]=sim;
+		norm(sy,i);
+	}
+}
+}//function teghadr(n)
+function norm(y1, x1){//voroshaki argelapakuma myus tegher@
+zh[y1][x1]=0;
+zv[y1][x1]=0;
+if(x1+1<x){//ach
+	zh[y1][x1+1]=0;
+	zv[y1][x1+1]=0;
+	if(y1-1>=0){//ach verev
+		zh[y1-1][x1+1]=0;
+		zv[y1-1][x1+1]=0;
+	}
+	if(y1+1<y){//ach nerqev
+		zh[y1+1][x1+1]=0;
+		zv[y1+1][x1+1]=0;
+	}
+}
+if(x1-1>=0){
+	zh[y1][x1-1]=0;//dzax
+	zv[y1][x1-1]=0;
+	if(y1-1>=0){//dzax verev
+		zh[y1-1][x1-1]=0;
+		zv[y1-1][x1-1]=0;
+	}
+	if(y1+1<y){//dzax nerqev
+		zh[y1+1][x1-1]=0;
+		zv[y1+1][x1-1]=0;
+	}
+}
+if(y1-1>=0){
+	zh[y1-1][x1]=0;//verev
+	zv[y1-1][x1]=0;
+}
+if(y1+1<y){
+	zh[y1+1][x1]=0;//nerqev
+	zv[y1+1][x1]=0;
+}
+for(var j1=y1-1;j1<=y1+1;j1++){//horizonakani hamar
+	if(j1>=0 && j1<y){
+		k=0;
+		for(var i1=x-1;i1>-1;i1--){
+			if(zh[j1][i1]>k){
+				k++;
+				zh[j1][i1]=k;
+			}else{
+				k=0;
+			}
+		}
+	}
+}
+for(var i1=x1-1;i1<=x1+1;i1++){//vertikali hamar
+	if(i1>=0 && i1<y){
+		k=0;
+		for(var j1=y-1;j1>-1;j1--){
+			if(zv[j1][i1]>k){
+				k++;
+				zv[j1][i1]=k;
+			}else{
+				k=0;
+			}
+		}
+	}
+}
+}//function norm(y1, x1)
+
+document.write("<table border='1' cellpadding='0' cellspacing='0'>");
+for(i=0; i<y+1;i++){
+	document.write("<tr>");
+	for(j=0; j<x+1;j++){
+	var i_n=i-1;
+	var j_n=j-1;
+		if(i==0 && j!=0){
+			document.write("<th>"+j_n+"</th>");
+		}else if(j==0 && i!=0){
+			document.write("<th>"+i_n+"</th>");
+		}else if(i==0 && j==0){
+			document.write("<td></td>");
+		}else{
+			document.write("<td class='item' onclick='this.innerHTML=getItem("+i_n+", "+j_n+")'></td>");
+		}
+	}
+document.write("</tr>");
+}
+document.write("</table>");
+document.write("<br>");//==========================================================
+document.write("<table border='1' cellpadding='0' cellspacing='0'>");
+for(i=0; i<y+1;i++){
+	document.write("<tr>");
+	for(j=0; j<x+1;j++){
+	var i_n=i-1;
+	var j_n=j-1;
+		if(i==0 && j!=0){
+			document.write("<th>"+j_n+"</th>");
+		}else if(j==0 && i!=0){
+			document.write("<th>"+i_n+"</th>");
+		}else if(i==0 && j==0){
+			document.write("<td></td>");
+		}else{
+			document.write("<td>"+z[i-1][j-1]+"</td>");
+		}
+	}
+document.write("</tr>");
+}
+document.write("</table>");
+function getItem(i,j){
+return z[i][j];
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!--html lang="en"-->
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!--script src="angular1.6.9.min.js"></script-->
+    <meta charset="UTF-8">
+    <title>Calendar</title>
+    <style>
+        .calendar {
+            display: inline-block;
+            /*border: 1px solid black;*/
+        }
+
+        .calendar table {
+            border-collapse: collapse;
+        }
+
+        .calendar table td {
+            /*background-color: #777;*/
+            text-shadow: 3px 2px 1px #ddd;
+            /*box-shadow:  7px 3px 1px #ddd;*/
+            border: 3px solid #ddd;
+            /*color:white;*/
+            font-size: 2em;
+            padding: 3px;
+            min-width: 50px;
+            text-align: center;
+            user-select: none;
+        }
+
+        .calendar table td:hover {
+            /*background-color: #888;
+            color:black;*/
+
+        }
+
+        .calendar td.m1:hover {
+            /*text-shadow: 3px 2px 1px #fff;*/
+            background-color: #ddd;
+            color: white;
+        }
+
+        .calendar td.m1:active {
+            background-color: #555;
+        }
+
+        .calendar td.m2:hover {
+            background-color: #0f0;
+        }
+
+        .calendar td.m2:active {
+            background-color: #00f;
+        }
+
+        .calendar td.m2 {
+            background-color: #f90;
+        }
+
+        .calendar table tr:nth-last-of-type(1) {
+            color: red;
+        }
+
+        .calendar table tr:nth-last-of-type(2) {
+            color: green;
+        }
+
+        .calendar table tr td:nth-of-type(1) {
+            text-align: right;
+        }
+
+        .calendar table tr:nth-of-type(1) > td {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .calendar .rsp {
+            float: right;
+            color: lime;
+            line-height: 1.5em;
+        }
+
+        .calendar .rsp:hover {
+            color: green;
+        }
+
+        .calendar .lsp {
+            float: left;
+            color: lime;
+            line-height: 1.5em;
+        }
+
+        .calendar .lsp:hover {
+            color: green;
+        }
+    </style>
+</head>
+<body ng-app="myCalendar">
+<div class="calendar"></div>
+<div class="calendar"></div>
+<!--div class="calendar"></div-->
+
+<script>
+    let app = angular.module('myCalendar', []);
+    app.directive('calendar', () => {
+        return {
+            restrict: 'C',//E-name, A-attribute, C-class, M-comment
+            template: '<table><tr><td colspan="7"><span class="lsp" ng-click="myFun1()">&#9668;</span>' +
+            '{{b}}<span class="rsp" ng-click="myFun2()">&#9658;</span></td></tr>' +
+            '<tr ng-click="kty($index)" ng-repeat="x in a"><td ng-click="ktx($index)" ng-repeat="y in x" class="{{y[0]}}">{{y[1]}}</td></tr></table>',
+            transclude: true,
+            scope: true,
+            link: function (scope, elem, attr, ctrl, transclude) {
+                transclude(scope, function (clone, scope) {
+                    elem.append(clone);
+                });
+                scope.tari = new Date().getFullYear();
+                scope.amis = new Date().getMonth();//0-11
+                scope.den = new Date().getDate();//1-31
+                scope.shb = ['Երկ', 'Երեք', 'Չոր', 'Հինգ', 'ՈՒրբ', 'Շաբ', 'Կիր'];
+                scope.amisner = ['Հունվար', 'Փետրվար', 'Մարտ', 'Ապրիլ', 'Մայիս', 'Հունիս', 'Հուլիս', 'Օգոստոս', 'Սեպտեմբեր', 'Հոկտեմբեր', 'Նոյեմբեր', 'Դեկտեմբեր'];
+                scope.amor = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                scope.f28 = [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5];
+                scope.f29 = [0, 3, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6];
+                scope.str = '';
+                scope.a = [];
+                scope.b = '';
+
+                scope.fu = () => {
+                    if (scope.amis > 11) {
+                        scope.amis -= 12;
+                        scope.tari++;
+                    } else if (scope.amis < 0) {
+                        scope.amis += 12;
+                        scope.tari--;
+                    }
+                    if (scope.tari % 4 === 0) {
+                        scope.amor[1] = 29;
+                    } else {
+                        scope.amor[1] = 28;
+                    }
+                    scope.dT = scope.tari % 28 + Math.floor((scope.tari % 28 + 3) / 4) + 4;
+                    scope.dA = (scope.tari % 4 === 0) ? scope.f29[scope.amis] : scope.f28[scope.amis];
+                    scope.dT = (scope.dT + scope.dA) % 7;
+                    scope.b = scope.tari + 'թ․ ' + scope.amisner[scope.amis];
+                    for (let i = 0; i < 7; i++) {
+                        scope.a[i] = [];
+                        scope.a[i][0] = ['', scope.shb[i]];
+                        for (let j = 0; j < 6; j++) {
+                            scope.d = j * 7 + i + 1 - scope.dT;
+                            scope.a[i][j + 1] = [];
+                            scope.a[i][j + 1][1] = ((scope.d > 0 && scope.d <= scope.amor[scope.amis]) ? scope.d.toString() : '');
+                            if (scope.a[i][j + 1][1] === '') {
+                                scope.a[i][j + 1][0] = '';
+                            } else if (scope.d === scope.den) {
+                                scope.x1=j+1;
+                                scope.y1=i;
+                                scope.a[i][j + 1][0] = 'm2';
+                            } else {
+                                scope.a[i][j + 1][0] = 'm1';
+                            }
+                        }
+                        //console.log(scope.a[i]);
+                    }
+                };
+                scope.fu();
+                scope.myFun2 = () => {
+                    scope.amis++;
+                    scope.fu();
+                };
+                scope.myFun1 = () => {
+                    scope.amis--;
+                    scope.fu();
+                };
+                scope.ktx = (index) => {
+                    scope.x = index;
+                    //console.log('x='+index);
+                };
+                scope.kty = (index) => {
+                    scope.y=index;
+                    if(scope.a[scope.y][scope.x][0]==='m1'){
+                        scope.a[scope.y][scope.x][0]='m2';
+                        scope.a[scope.y1][scope.x1][0]='m1';
+                        scope.den=parseInt(scope.a[scope.y][scope.x][1]);
+                        //console.log('den='+scope.den);
+                        scope.x1=scope.x;
+                        scope.y1=scope.y;
+                    }
+                    //console.log('y='+index);
+                };
+            }
+        };
+    })
+    //compile
+</script>
+
+</body>
+</html>

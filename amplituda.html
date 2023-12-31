@@ -1,0 +1,118 @@
+﻿<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Amplify</title>
+	<style>
+
+	</style>
+
+</head>
+<body>
+<input type="button" value="play" onclick="pluy()">
+<script>
+	window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
+	function play( snd ) {
+		let audioCtx = new AudioContext();
+		audioCtx.listener.setPosition( 0, 0, 0 );
+
+		let canvas = document.createElement( "canvas" );
+		canvas.style.display = "block";
+		let canvasW = 512;
+		let canvasH = 64;
+		let canvasHh = Math.floor( canvasH / 2 );
+		canvas.width  = canvasW;
+		canvas.height = canvasH;
+		let ctx = canvas.getContext( "2d" );
+		ctx.strokeStyle = "#000000";
+		ctx.lineWidth = 2;
+		ctx.fillStyle = "#FFFFFF";
+		ctx.fillRect( 0, 0, canvasW, canvasH );
+		document.body.appendChild( canvas );
+
+		function vizualize( sample ) {
+			ctx.fillRect( 0, 0, canvasW, canvasH );
+			ctx.beginPath();
+
+			ctx.moveTo( -1, canvasHh );
+			for ( let x = 0; x < canvasW; x++ ) {
+				let y = canvasHh - Math.floor( sample[x] * canvasHh );
+				ctx.lineTo( x, y );
+			}
+			ctx.stroke();
+		}
+
+		let request = new XMLHttpRequest();
+		request.open( "GET", snd, true );
+		request.responseType = "arraybuffer";
+		request.onload = function () {
+			let audioData = request.response;
+
+			audioCtx.decodeAudioData(
+					audioData,
+					function ( buffer ) {
+						let smp = audioCtx.createBufferSource();
+						smp.buffer = buffer;
+						//создание объекта ScriptProcessor
+						//аргументы: длина буфера, количество входящих каналов, количество исходящих каналов
+						//чем больше буфер - тем меньшее число раз будет вызыван код обработки,
+						//должен быть кратен степени двойки
+						let sp = audioCtx.createScriptProcessor ? audioCtx.createScriptProcessor( 512, 2, 2 ) : audioCtx.createJavaScriptNode( 512, 2, 2 );
+
+						sp.onaudioprocess = function ( ape ) {
+							let inputBuffer = ape.inputBuffer;
+							let outputBuffer = ape.outputBuffer;
+
+							let channel;
+							let channelsLen = outputBuffer.numberOfChannels;
+							let sample;
+							let sampleLen = inputBuffer.length;
+
+							//для визулизации создаем монобуфер
+							let mono = new Array( sampleLen );
+							for ( sample = 0; sample < sampleLen; sample++ ) mono[sample] = 0;
+
+							for ( channel = 0; channel < channelsLen; channel++ ) {
+								let inputData = inputBuffer.getChannelData( channel );
+								let outputData = outputBuffer.getChannelData( channel );
+								//устанавливаем выходные данные = входным
+								//здесь можно изменить в них что-то или наложить эффект
+								outputData.set( inputData );
+
+								//микшируем в монобуфер все каналы
+								for ( sample = 0; sample < sampleLen; sample++ ) mono[sample] = ( mono[sample] + inputData[sample] ) / 2;
+							}
+
+							vizualize( mono );
+						};
+
+						smp.connect( sp );
+						sp.connect( audioCtx.destination );
+						smp.start( 0 );
+						smp.onended = function() {
+							if ( smp ) {
+								smp.disconnect( sp );
+								sp.disconnect( audioCtx.destination );
+							}
+						};
+					},
+					function ( e ) {
+						alert( "Error with decoding audio data" + e.err );
+					}
+			);
+		};
+		request.send();
+	}
+
+
+	//URL до аудио файла (mp3, ogg, wav)
+	// play( "Darcho.mp3" );
+	function pluy(){
+		play( "https://developer.mozilla.org/media/cc0-audio/t-rex-roar.mp3" );
+	}
+
+</script>
+</body>
+</html>
+

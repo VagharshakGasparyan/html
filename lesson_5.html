@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+	
+    <title>դաս 5</title>
+    <style>
+        dd {
+            display: block;
+            margin-left: 40px;
+        }
+        dt {
+            display: block;
+        }
+        dl {
+		border:1px solid black;
+           
+            margin-top: 1em;
+            margin-bottom: 1em;
+            margin-left: 0;
+            margin-right: 0;
+        }
+		label{/*border:1px solid black;*/}
+		#div1{
+		height:50px;
+		border-width:10px;
+		border-style:dotted dashed  ;
+		border:1px solid red;
+		}
+    </style>
+</head>
+<body >
+<!--dotted|dashed|solid|double|
+groove|ridge|
+    inset|outset|none|hidden-->
+<div id='div1' ></div>
+
+
+
+<div style='height:25px;border:1px solid black'></div>
+<!---->
+<!--description list, defines a term, defines a description-->
+<dl>
+    <dt>Coffee</dt>
+    <dd>Black hot drink</dd>
+    <dt>Milk</dt>
+    <dd>White cold drink</dd>
+</dl>
+<!--
+type="button|checkbox|color|date|datetime-local|email|
+    file|hidden|image|month|number|password|radio|range|
+    reset|search|submit|tel|text|time|url|week"
+    -->
+1<input id="tt" type="text"><br>
+2<input type="tel"><br>
+3<input type="color" id='t2'><br>
+4<input type="button"><br>
+5.1<input id="t1" type="checkbox" >
+<label for='t1'>press me</label>
+<br>
+5.2<input checked id="t1" type="checkbox" ><br>
+5.3<input id="t1" type="checkbox" ><br>
+6<input type="date" ><br>
+7<input type="datetime-local"><br>
+8<input type="email"><br>
+9<input type="file"><br>
+10<input type="hidden"><br>
+11<input type="password"><br>
+12.1<input name='n1' type="radio"><br>
+12.2<input name='n1' type="radio"><br>
+12.3<input name='n1' type="radio"><br>
+12.4<input name='n2' type="radio"><br>
+12.5<input name='n2' type="radio"><br>
+12.6<input name='n3' type="radio"><br>
+13<input type="range" step="1" min='0' max='9' value='2'><br>
+<label for="tt">the label text</label>
+<label for="t1">the another label text</label><br>
+<label for="t2">change color</label>
+<!--
+style="հատկություն։արժեք;..."
+width:value;
+height:value;
+
+սահմանագիծ
+border:width style color;
+սահմանագծի տիպը
+border-style:dotted|dashed|solid|double|groove|ridge|
+    inset|outset|none|hidden
+սահմանագծի հաստություն
+border-width:value;
+սահմանագծի գույն
+border-color:color;
+սահմանագծի կորություն
+border-radius: value;
+border-bottom-left-radius: 1px;
+border-bottom: 6px solid red;
+
+background: bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;
+ֆոնի գույն
+background-color:coral|#f0f|rgb(255,0,255);
+ֆոնի նկար
+background-image:url("img_1.jpg"), url("img_2.jpg")|none|
+    linear-gradient(red, yellow, blue)|radial-gradient(red, green, blue)|
+    repeating-linear-gradient(red, yellow 10%, green 20%)|
+    repeating-radial-gradient(red, yellow 10%, green 15%)|initial|inherit;
+ֆոնի նկարի տեղը
+background-position:left top|left center|left bottom|right top|
+    right center|right bottom|center top|center center|center bottom|
+    x% y%|xpos ypos|initial|inherit;
+ֆոնի նկարի չափերը
+background-size:auto|size_x size_y|size|cover|contain|initial|inherit;
+ֆոնի կրկնվելը
+background-repeat:repeat|repeat-x|repeat-y|no-repeat|space|round|initial|inherit;
+ֆոնի հաշվարկի սահմանագիծ
+background-origin:padding-box|border-box|content-box|initial|inherit;
+ֆոնի ցուցադրման սահմանագիծ
+background-clip:border-box|padding-box|content-box|initial|inherit;
+ֆոնի նկարի կապվածություն
+background-attachment:scroll|fixed|local|initial|inherit;
+-->
+<div style="background-color: aqua;height: 25px;
+    background-position: 25% 25%;border:5px solid yellow;
+    background-clip: content-box;padding: 15px">text</div>
+
+</body>
+</html>

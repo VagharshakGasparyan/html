@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+        let div1;
+        /*window.onload= function(){
+            div1=document.getElementById('div1');
+            div1.innerHTML='TEXT';
+        }*/
+        /*setTimeout(()=>{
+            div1=document.getElementById('div1');
+            div1.innerHTML='TEXT';
+        },100);*/
+
+        console.time('t1');
+        const loaded = new Promise(function (resolve) {
+            window.onload = function () {
+                resolve(true);
+            };
+        });
+        (async () => {
+            await loaded;
+            div1 = document.getElementById('div1');
+            div1.innerHTML = 'TEXT';
+            console.log('loaded');
+            console.timeEnd('t1');
+        })();
+        console.log('OK');
+
+
+    </script>
+
+    <title>qwerty</title>
+    <style>
+        #div1 {
+            font-size: 50px;
+        }
+
+    </style>
+</head>
+<body>
+<div id='div1'>t</div>
+
+
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="">
+    <title>դաս 11</title>
+    <style>
+        header, nav, footer{
+            border:1px solid black;
+            margin: 5px;
+            background-color: #eee;
+            text-align: center;
+            height: 70px;
+            /*vertical-align: middle;*/
+            line-height: 70px;
+        }
+        section,article,aside{
+            border:1px solid black;
+            margin: 5px;
+            background-color: #eee;
+            text-align: center;
+        }
+        .b{
+            border:2px solid brown;
+            font-size: 25px;
+            margin: 3px;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+<header>header, վերնագրային մաս</header>
+<nav>nav, հղումների մաս</nav>
+<div style="display: flex">
+    <div style="flex: 3">
+        <section style="height: 150px">section, փաստաթղթի բաժին</section>
+        <article style="height: 70px">article, անկախ հոդվածի մաս</article>
+    </div>
+    <aside style="flex: 1">aside, կողմի մաս</aside>
+</div>
+<footer>footer, փաստաթղթի տակի մաս</footer>
+<!--===============================================-->
+1)display: flex
+<div style="display: flex;" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--=====================defaulr-row===============-->
+2)display: flex;flex-direction: row
+<div style="display: flex;flex-direction: row" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--====================================-->
+3)display: flex;flex-direction: row-reverse
+<div style="display: flex;flex-direction: row-reverse" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--====================================-->
+4)display: flex;flex-direction: column
+<div style="display: flex;flex-direction: column" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--====================================-->
+5)display: flex;flex-direction: column-reverse
+<div style="display: flex;flex-direction: column-reverse" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--====================================-->
+6)display: flex;flex-wrap: wrap    տողադարձով
+<div style="display: flex;flex-wrap: wrap;" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+    <div class="b">4</div>
+    <div class="b">5</div>
+    <div class="b">6</div>
+    <div class="b">7</div>
+    <div class="b">8</div>
+    <div class="b">9</div>
+    <div class="b">10</div>
+    <div class="b">11</div>
+    <div class="b">12</div>
+    <div class="b">13</div>
+    <div class="b">14</div>
+    <div class="b">15</div>
+    <div class="b">16</div>
+    <div class="b">17</div>
+    <div class="b">18</div>
+    <div class="b">19</div>
+    <div class="b">20</div>
+    <div class="b">21</div>
+    <div class="b">22</div>
+    <div class="b">23</div>
+    <div class="b">24</div>
+    <div class="b">25</div>
+    <div class="b">26</div>
+    <div class="b">27</div>
+    <div class="b">28</div>
+    <div class="b" style="flex: 2">29</div>
+    <div class="b" style="flex:1">30</div>
+</div>
+<!--===================default-nowrap=================-->
+7)display: flex;flex-wrap: nowrap  առանց տողադարձի <br>
+<div style="display: flex;flex-wrap: nowrap" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+    <div class="b">4</div>
+    <div class="b">5</div>
+    <div class="b">6</div>
+    <div class="b">7</div>
+    <div class="b">8</div>
+    <div class="b">9</div>
+    <div class="b">10</div>
+    <div class="b">11</div>
+    <div class="b">12</div>
+    <div class="b">13</div>
+    <div class="b">14</div>
+    <div class="b">15</div>
+    <div class="b">16</div>
+    <div class="b">17</div>
+    <div class="b">18</div>
+    <div class="b">19</div>
+    <div class="b">20</div>
+    <div class="b">21</div>
+    <div class="b">22</div>
+    <div class="b">23</div>
+    <div class="b">24</div>
+    <div class="b">25</div>
+    <div class="b">26</div>
+    <div class="b">27</div>
+    <div class="b">28</div>
+    <div class="b" style="flex: 2">29</div>
+    <div class="b" style="flex:1">30</div>
+</div>
+<!--====================================-->
+8)display: flex;flex-direction: row; flex-wrap: wrap-reverse
+<div style="display: flex; flex-wrap: wrap-reverse" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+    <div class="b">4</div>
+    <div class="b">5</div>
+    <div class="b">6</div>
+    <div class="b">7</div>
+    <div class="b">8</div>
+    <div class="b">9</div>
+    <div class="b">10</div>
+    <div class="b">11</div>
+    <div class="b">12</div>
+    <div class="b">13</div>
+    <div class="b">14</div>
+    <div class="b">15</div>
+    <div class="b">16</div>
+    <div class="b">17</div>
+    <div class="b">18</div>
+    <div class="b">19</div>
+    <div class="b">20</div>
+    <div class="b">21</div>
+    <div class="b">22</div>
+    <div class="b">23</div>
+    <div class="b">24</div>
+    <div class="b">25</div>
+    <div class="b">26</div>
+    <div class="b">27</div>
+    <div class="b">28</div>
+    <div class="b" style="flex: 2">29</div>
+    <div class="b" style="flex:1">30</div>
+</div>
+<!--====================================-->
+9)display: flex;flex-direction: row; justify-content: center
+<div style="display: flex;justify-content: center" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--=================default-flex-start===================-->
+10)display: flex;flex-direction: row; justify-content: flex-start
+<div style="display: flex;justify-content: flex-start" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--====================================-->
+11)display: flex;flex-direction: row; justify-content: flex-end
+<div style="display: flex;justify-content: flex-end" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--====================================-->
+12)display: flex;flex-direction: row; justify-content: space-around
+<div style="display: flex;justify-content: space-around" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--====================================-->
+13)display: flex;flex-direction: row; justify-content: space-between
+<div style="display: flex;justify-content: space-between" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--====================================-->
+14)display: flex;align-items: center
+<div style="display: flex;height: 200px;align-items: center" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--====================================-->
+15)display: flex;align-items: flex-start
+<div style="display: flex;height: 200px;align-items: flex-start" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--====================================-->
+16)display: flex;align-items: flex-end
+<div style="display: flex;height: 200px;align-items: flex-end" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--==================default-stretch==================-->
+17)display: flex;align-items: stretch
+<div style="display: flex;height: 200px;align-items: stretch" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+<!--====================================-->
+18)display: flex;align-items: baseline
+<div style="display: flex;height: 200px;align-items: baseline" class="b">
+    <div class="b" style="height: 50px;line-height: 50px">1</div>
+    <div class="b" style="height: 70px;line-height: 70px">2</div>
+    <div class="b" style="font-size: 45px">3</div>
+</div>
+<!--====================================-->
+19)display: flex;height: 200px;flex-wrap: wrap;align-content: space-between
+տողադարձի ժամանակ տողերի միջև տարածության առկայության ձև
+<div style="display: flex;height: 200px;flex-wrap: wrap;align-content: space-between" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+    <div class="b">4</div>
+    <div class="b">5</div>
+    <div class="b">6</div>
+    <div class="b">7</div>
+    <div class="b">8</div>
+    <div class="b">9</div>
+    <div class="b">10</div>
+    <div class="b">11</div>
+    <div class="b">12</div>
+    <div class="b">13</div>
+    <div class="b">14</div>
+    <div class="b">15</div>
+    <div class="b">16</div>
+    <div class="b">17</div>
+    <div class="b">18</div>
+    <div class="b">19</div>
+    <div class="b">20</div>
+    <div class="b">21</div>
+    <div class="b">22</div>
+    <div class="b">23</div>
+    <div class="b">24</div>
+    <div class="b">25</div>
+    <div class="b">26</div>
+    <div class="b">27</div>
+    <div class="b">28</div>
+</div>
+<!--====================================-->
+20)display: flex;height: 200px;flex-wrap: wrap;align-content: space-around
+<div style="display: flex;height: 200px;flex-wrap: wrap;align-content: space-around" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+    <div class="b">4</div>
+    <div class="b">5</div>
+    <div class="b">6</div>
+    <div class="b">7</div>
+    <div class="b">8</div>
+    <div class="b">9</div>
+    <div class="b">10</div>
+    <div class="b">11</div>
+    <div class="b">12</div>
+    <div class="b">13</div>
+    <div class="b">14</div>
+    <div class="b">15</div>
+    <div class="b">16</div>
+    <div class="b">17</div>
+    <div class="b">18</div>
+    <div class="b">19</div>
+    <div class="b">20</div>
+    <div class="b">21</div>
+    <div class="b">22</div>
+    <div class="b">23</div>
+    <div class="b">24</div>
+    <div class="b">25</div>
+    <div class="b">26</div>
+    <div class="b">27</div>
+    <div class="b">28</div>
+</div>
+<!--====================================-->
+21)display: flex;height: 200px;flex-wrap: wrap;align-content: flex-start
+<div style="display: flex;height: 200px;flex-wrap: wrap;align-content: flex-start" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+    <div class="b">4</div>
+    <div class="b">5</div>
+    <div class="b">6</div>
+    <div class="b">7</div>
+    <div class="b">8</div>
+    <div class="b">9</div>
+    <div class="b">10</div>
+    <div class="b">11</div>
+    <div class="b">12</div>
+    <div class="b">13</div>
+    <div class="b">14</div>
+    <div class="b">15</div>
+    <div class="b">16</div>
+    <div class="b">17</div>
+    <div class="b">18</div>
+    <div class="b">19</div>
+    <div class="b">20</div>
+    <div class="b">21</div>
+    <div class="b">22</div>
+    <div class="b">23</div>
+    <div class="b">24</div>
+    <div class="b">25</div>
+    <div class="b">26</div>
+    <div class="b">27</div>
+    <div class="b">28</div>
+</div>
+<!--====================================-->
+22)display: flex;height: 200px;flex-wrap: wrap;align-content: flex-end
+<div style="display: flex;height: 200px;flex-wrap: wrap;align-content: flex-end" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+    <div class="b">4</div>
+    <div class="b">5</div>
+    <div class="b">6</div>
+    <div class="b">7</div>
+    <div class="b">8</div>
+    <div class="b">9</div>
+    <div class="b">10</div>
+    <div class="b">11</div>
+    <div class="b">12</div>
+    <div class="b">13</div>
+    <div class="b">14</div>
+    <div class="b">15</div>
+    <div class="b">16</div>
+    <div class="b">17</div>
+    <div class="b">18</div>
+    <div class="b">19</div>
+    <div class="b">20</div>
+    <div class="b">21</div>
+    <div class="b">22</div>
+    <div class="b">23</div>
+    <div class="b">24</div>
+    <div class="b">25</div>
+    <div class="b">26</div>
+    <div class="b">27</div>
+    <div class="b">28</div>
+</div>
+<!--====================================-->
+23)display: flex;height: 200px;flex-wrap: wrap;align-content: center
+<div style="display: flex;height: 200px;flex-wrap: wrap;align-content: center" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+    <div class="b">4</div>
+    <div class="b">5</div>
+    <div class="b">6</div>
+    <div class="b">7</div>
+    <div class="b">8</div>
+    <div class="b">9</div>
+    <div class="b">10</div>
+    <div class="b">11</div>
+    <div class="b">12</div>
+    <div class="b">13</div>
+    <div class="b">14</div>
+    <div class="b">15</div>
+    <div class="b">16</div>
+    <div class="b">17</div>
+    <div class="b">18</div>
+    <div class="b">19</div>
+    <div class="b">20</div>
+    <div class="b">21</div>
+    <div class="b">22</div>
+    <div class="b">23</div>
+    <div class="b">24</div>
+    <div class="b">25</div>
+    <div class="b">26</div>
+    <div class="b">27</div>
+    <div class="b">28</div>
+</div>
+<!--=================default-stretch===================-->
+24)display: flex;height: 200px;flex-wrap: wrap;align-content: stretch
+<div style="display: flex;height: 200px;flex-wrap: wrap;align-content: stretch" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+    <div class="b">4</div>
+    <div class="b">5</div>
+    <div class="b">6</div>
+    <div class="b">7</div>
+    <div class="b">8</div>
+    <div class="b">9</div>
+    <div class="b">10</div>
+    <div class="b">11</div>
+    <div class="b">12</div>
+    <div class="b">13</div>
+    <div class="b">14</div>
+    <div class="b">15</div>
+    <div class="b">16</div>
+    <div class="b">17</div>
+    <div class="b">18</div>
+    <div class="b">19</div>
+    <div class="b">20</div>
+    <div class="b">21</div>
+    <div class="b">22</div>
+    <div class="b">23</div>
+    <div class="b">24</div>
+    <div class="b">25</div>
+    <div class="b">26</div>
+    <div class="b">27</div>
+    <div class="b">28</div>
+</div>
+
+
+<div style="display: flex;justify-content: center;align-items:center;height:250px;width:350px" class="b">
+    <div class="b">1</div>
+    <div class="b">2</div>
+    <div class="b">3</div>
+</div>
+
+<div style="display: flex;justify-content: center;align-items:center;height:250px;" class="b">
+    <div style="order:6" class="b">1</div>
+    <div style="order:5" class="b">2</div>
+    <div style="order:4" class="b">3</div>
+	<div style="order:3" class="b">4</div>
+    <div style="order:2" class="b">5</div>
+    <div style="order:1" class="b">6</div>
+</div>
+
+<div style="display: flex;justify-content: center;align-items:center;height:250px;" class="b">
+    <div style="flex:1" class="b">1</div>
+    <div style="flex:1" class="b">2</div>
+    <div style="flex:3" class="b">3</div>
+	<div style="flex:1" class="b">4</div>
+    <div style="flex:1" class="b">5</div>
+    <div class="b">6</div>
+</div>
+<!--
+order:number//հերթականություն
+flex:number, flex-grow, flex-shrink, flex-basis
+-->
+<!--
+CSS Flexbox
+display: flex;
+-->
+<!--
+ՏնՅԻՆ
+Ֆլեքսով սարքել շախմատի տախտակի տեսքը
+a, b, c, d, e, f, g, h և 1, 2, 3, 4, 5, 6, 7, 8
+մեկումեջ մուգ ու բաց մեջի վանդակներով
+-->
+
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

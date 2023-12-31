@@ -1,0 +1,73 @@
+﻿<!doctype html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <title>win_open</title>
+    <link rel="stylesheet" href="">
+    <style>
+        input[type='button']{
+            font-size: 25px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="close all windows" onclick="fcl()">
+
+<script>
+    function fcl(){
+        clearInterval(si);
+        for(let i=0;i<arr.length;i++){
+            arr[i].close();
+        }
+    }
+    let arr=[],t=0,px=[],py=[],x=[],y=[],dx=[],dy=[],n=25,si;
+    for(let i=0;i<10;i++){
+        arr[i]=window.open("", "MsgWindow"+i.toString(), "width=300,height=300");
+        px[i]=Math.floor(Math.random()*1621);
+        py[i]=Math.floor(Math.random()*751);
+        x[i]=Math.floor(Math.random()*1621);
+        y[i]=Math.floor(Math.random()*751);
+        dx[i]=(x[i]-px[i])/n;
+        dy[i]=(y[i]-py[i])/n;
+        let r=(Math.floor(Math.random()*16)).toString(16);
+        let g=(Math.floor(Math.random()*16)).toString(16);
+        let b=(Math.floor(Math.random()*16)).toString(16);
+        //console.log(r+g+b);
+        arr[i].document.body.style.backgroundColor='#'+r+g+b;
+        arr[i].moveTo(x[i],y[i]);
+    }
+    setTimeout(function () {
+        si=setInterval(()=>{
+            t++;
+            if(t>=n){
+                t=0;
+                for(let i=0;i<arr.length;i++){
+                    px[i]=x[i];
+                    py[i]=y[i];
+                    x[i]=Math.floor(Math.random()*1621);
+                    y[i]=Math.floor(Math.random()*751);
+                    dx[i]=(x[i]-px[i])/n;
+                    dy[i]=(y[i]-py[i])/n;
+
+                    let r=(Math.floor(Math.random()*16)).toString(16);
+                    let g=(Math.floor(Math.random()*16)).toString(16);
+                    let b=(Math.floor(Math.random()*16)).toString(16);
+                    //console.log(r+g+b);
+                    arr[i].document.body.style.backgroundColor='#'+r+g+b;
+                    //console.log(r+g+b);
+                    //arr[i].document.body.style.backgroundColor='#'+r+g+b;
+                    //arr[i].moveTo(x,y);
+                }
+            }else{
+                for(let i=0;i<arr.length;i++){
+                    arr[i].moveTo(px[i]+dx[i]*t,py[i]+dy[i]*t);
+                }
+            }
+            //myWindow.resizeTo(t?500:700,t?500:700);
+            //console.log(window.screen.availWidth,window.screen.availHeight);
+        },40);
+    },1000);
+</script>
+</body>
+</html>

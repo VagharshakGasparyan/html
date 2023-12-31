@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>enter</title>
+    <link rel="stylesheet" href="">
+    <style>
+        #d{
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+<div id="d"></div>
+
+<script>
+ document.onkeydown=function () {
+     if(window.event.keyCode===13){
+         alert('Դուք սեղմել եք enter-ը');
+         document.getElementById('d').innerHTML+='Enter ';
+     }
+
+ };
+</script>
+</body>
+</html>

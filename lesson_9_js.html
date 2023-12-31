@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="">
+    <title>դաս 9</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<noscript>Ձեր բրաուզերում ջավասկրիպտը չի աշխատում</noscript>
+<script type="text/javascript">
+    //թվեր, թվաբանական գործողություններ
+    console.log('թվեր, թվաբանական գործողություններ');
+    let num;
+    num = 5 + 15;
+    console.log('a',num);
+    num = num - 6;
+    console.log('b',num);
+    num=num*2;
+    console.log('c',num);
+    num=num/7;
+    console.log('d',num);
+    num=num**2;
+    console.log('e',num);
+    num=Math.pow(num,3);
+    console.log('f',num);
+    num=Math.sqrt(num);
+    console.log('g',num);
+    num-=14;//num=num-14
+    console.log('h',num);
+    num/=5;//num=num/5
+    console.log('i',num);
+    num*=2;
+    console.log('j',num);
+    num+=5;
+    console.log('k',num);
+    num**=0.5;//num=num**0.5
+    console.log('l',num);
+    num++;//num+=1 or num=num+1
+    console.log('m',num);
+    num--;//num-=1 or num=num-1
+    console.log('n',num);
+    num=num%2;//num%=2;
+    console.log('o',num);
+    console.log(Number.isInteger(num));//ամբողջ թիվն է ստուգում
+    console.log(Number.MIN_VALUE);
+    console.log(Number.MAX_VALUE);
+    console.log(Number.NEGATIVE_INFINITY);
+    console.log(Number.POSITIVE_INFINITY);
+    //Տրամաբանական
+    console.log('Տրամաբանական');
+    console.log('1.',5>7);
+    console.log('2.',5<7);
+    console.log('3.',5>=7);
+    console.log('4.',5<=5);
+    console.log('5.',5===5);
+    console.log('6.',5=='5');
+    console.log('========&&==========');
+    console.log('7.',true && false);
+    console.log('8.',false && true);
+    console.log('9.',true && true);
+    console.log('10.',false && false);
+    console.log('========||==========');
+    console.log('11.',true || true);
+    console.log('12.',true || false);
+    console.log('13.',false || true);
+    console.log('14.',false || false);
+    console.log('========!==========');
+    console.log('15.',!false);
+	console.log('15a.',!' ');
+    console.log('16.',!true);
+    console.log('========   !=   =========');
+    console.log('17.',5!==7);
+    console.log('18.',5!="5");
+//Պայմանական օպերատոր
+    console.log('Պայմանական օպերատոր');
+    let a=5,b=3,c=7;
+    if(a>b){
+        //console.log('a-ն մեծ է b-ից');
+    }else if(a>c){
+        //console.log('a-ն մեծ է c-ից');
+    }else{
+        //console.log('a-ն ամենափոքր թիվն է b-ի և c-ի համեմատ');
+    }
+    /*Տնային
+    window.prompt-ով ստանալ a, b և c թվերի արժեքները,
+    console.log-ով այդ թվերը տպել ըստ աճման հերթականության։
+if(true){
+	if(true){
+	
+	}else{
+	
+	}
+}else{
+
+}
+
+
+    */
+	/*a=window.prompt('Մուտքագրեք a-ն');
+	a=parseFloat(a);
+	b=window.prompt('Մուտքագրեք b-ն');
+	b=parseFloat(b);
+	c=window.prompt('Մուտքագրեք c-ն');
+	c=parseFloat(c);*/
+	/*if(a<b){
+		if(a<c){
+			console.log(a);
+		}
+	}else{
+		if(b<c){
+			console.log(b);
+		}else{
+			console.log(c);
+		}
+	}*/
+	
+	/*if(a<b && a<c){
+		console.log(a);
+		if(b<c){
+			console.log(b);
+			console.log(c);
+		}else{
+			console.log(c);
+			console.log(b);
+		}
+	}else if(b<c){
+		console.log(b);
+		if(a<c){
+			console.log(a);
+			console.log(c);
+		}else{
+			console.log(c);
+			console.log(a);
+		}
+	}else{
+		console.log(c);
+		if(a<b){
+			console.log(a);
+			console.log(b);
+		}else{
+			console.log(b);
+			console.log(a);
+		}
+	}*/
+	let sw='5';
+	switch(sw){
+		case 7:
+			console.log('case 7');
+			
+		break;
+		case '5':
+			console.log('case 5');
+		break;
+		case 3:
+			console.log('case 3');
+		break;
+		default:console.log('default');
+	}
+	
+	//(payman)?hraman_if_true:hraman_if_false;
+	let num1=85;
+	let num2=(num1<80)?"Այո, փոքր է":"Ոչ, փոքր չէ";
+	console.log(num2);//tenar
+	
+	for(let i=0,j=5,k=15;i<10;i++,j+=2,k--){
+		console.log(i,j,k);
+		//====
+	}
+	let i;
+	for(i=0;i<10;i++){
+		console.log('i=',i);
+	}
+	console.log('verjnakan i=',i);
+	
+	
+
+</script>
+</body>
+</html>

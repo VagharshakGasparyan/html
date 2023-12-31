@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!--html lang="en"-->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Matrix</title>
+    <style>
+        canvas#canvas-matrix {
+            /*border: 1px solid gray;*/
+            background-color: black;
+            /*width: 100%;*/
+        }
+
+    </style>
+
+</head>
+<body style="margin: 0">
+<canvas id="canvas-matrix"></canvas>
+
+
+<script>
+    window.addEventListener('load', function () {
+		//------------------user settings--------------------------
+		//ֆոնտի չափի միջակայք, px
+		let fontSizeInterval = [8, 25];
+		
+		//Իջնելու արագություն, քայլ/վայրկյան
+		let stepSpeed = 7;
+		
+		//բառեր ավելացնելու հաճախականություն, բառ/վայրկյան
+		let wordFrequency = 10;
+		
+		//առաջին տեքստի գույնը
+		let firstTextColor = "#99ff99";
+		
+		//տեքստի հետքի գույնը, պարտադիր # ու վեց նիշ
+		let textTraceColor = "#00ff00";
+		
+		//canvas-ի լայնք, px
+		let canvasWidth = 1024;
+		
+		//canvas-ի բարձրություն, px
+		let canvasHeight = 512;
+		
+		//տեքստի հետքի քանակ
+		let level = 9;
+		
+		//տեքստի հետքի թուլացման գործակից
+		let relaxation = 1.5;
+		
+		let texts = ['HTML', 'CSS', 'PHP', 'Java Script', 'React JS', 'Laravel', 'MySQL', 'NodeJS'];
+		//------------------user settings--------------------------
+		
+		let addedTexts = [];
+		let wordPeriod = Math.round(1000 / wordFrequency);
+		let stepPeriod = Math.round(1000 / stepSpeed);
+		setInterval(function(){
+			addedTexts.push({
+				text: texts[Math.floor(Math.random() * texts.length)],
+				fontSize: fontSizeInterval[0] + Math.floor(Math.random() * (fontSizeInterval[1] - fontSizeInterval[0])),
+				left: Math.floor(Math.random() * (canvasWidth - 20)),
+				top: 0,
+				level: level,
+				i: Date.now()
+			});
+			//console.log(addedTexts.length);
+		}, wordPeriod);
+		let canvas = document.querySelector('canvas#canvas-matrix');
+		canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        let ctx = canvas.getContext('2d');//CanvasRenderingContext2D
+		
+        requestAnimationFrame(draw);
+
+        function fGroupShowTexts() {
+            addedTexts.forEach(function (addedText, index) {
+                fShowTextWithTrace(addedText);
+				if(addedText.top > addedText.fontSize * addedText.level + canvasHeight){
+                    addedTexts.splice(index, 1);
+                }else{
+					if(addedText.i <= Date.now() - stepPeriod){
+						addedText.top += addedText.fontSize;
+						addedText.i += stepPeriod;
+					}
+				}
+                
+            });
+        }
+
+        function fShowTextWithTrace(addedText) {
+            let k = relaxation;
+            for (let i = 0; i < addedText.level; i++) {
+                let a = Math.round(255 / Math.pow(k, i)).toString(16);
+                a = a.length > 1 ? a : '0' + a;
+                ctx.fillStyle = i === 0 ? firstTextColor : textTraceColor + a;
+                ctx.font = "bold " + addedText.fontSize + "px arial";
+                ctx.fillText(addedText.text, addedText.left, addedText.top - i * addedText.fontSize);
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+			
+			fGroupShowTexts();
+
+            requestAnimationFrame(draw);
+        }
+    });
+
+    //ctx.font = "100px Arial";//bold 48px serif
+    //ctx.font = "bold 100px Arial";//bold 48px serif
+    //ctx.font = "bold  italic  100px arial serif";//bold 100px serif
+    //bold 100px serif
+    //ctx.font = "italic 12em \"Fira Sans\", serif";//bold 100px serif
+
+
+    //ctx.strokeText('Hello world', 50, 100);
+
+    //console.log(ctx);
+
+    //ctx.lineWidth;
+    /*
+    direction: "inherit" | "ltr" | "rtl";
+
+    fillStyle: string | CanvasGradient | CanvasPattern;
+
+    filter: "none" | "url("filters.svg#filter-id") blur(5px) brightness(0.4) contrast(200%) drop-shadow(16px 16px 20px blue) grayscale(50%) hue-rotate(90deg) invert(75%) opacity(25%) saturate(30%) sepia(60%)";
+
+    font: "line-height font-weight font-variant font-style font-stretch font-size font-family";
+        font-stretch: ultra-condensed | extra-condensed | condensed | semi-condensed | normal | semi-expanded |
+            expanded | extra-expanded | ultra-expanded | x% | inherit | initial | unset;
+        font-style: normal | italic | oblique | oblique 10deg | inherit | initial | unset;
+        font-variant: small-caps | common-ligatures small-caps | inherit | initial | unset;
+
+    globalAlpha: 0...1;
+
+    globalCompositeOperation: "source-over"(default) | "source-in" | "source-out" | "source-atop" | "destination-over" |
+        "destination-in" | "destination-out" | "destination-atop" | "lighter" | "copy" | "xor" | "multiply" | "screen" |
+         "overlay" | "darken" | "lighten" | "color-dodge" | "color-burn" | "hard-light" | "soft-light" | "difference" |
+         "exclusion" | "hue" | "saturation" | "luminosity";
+
+    imageSmoothingEnabled: true | false;
+
+    imageSmoothingQuality: "high" | "low" | "medium";
+
+    lineCap: "butt" | "round" | "square";
+
+    lineDashOffset: number;
+
+    lineJoin: "bevel" | "miter" | "round";
+
+    lineWidth: 1
+    miterLimit: 10
+    shadowBlur: 0
+    shadowColor: "rgba(0, 0, 0, 0)"
+    shadowOffsetX: 0
+    shadowOffsetY: 0
+    strokeStyle: "#000000"
+    textAlign: "start"
+    textBaseline: "alphabetic"
+    arc: ƒ arc()
+    arcTo: ƒ arcTo()
+    beginPath: ƒ beginPath()
+    bezierCurveTo: ƒ bezierCurveTo()
+    canvas: canvas
+    clearRect: ƒ clearRect()
+    clip: ƒ clip()
+    closePath: ƒ closePath()
+    createImageData: ƒ createImageData()
+    createLinearGradient: ƒ createLinearGradient()
+    createPattern: ƒ createPattern()
+    createRadialGradient: ƒ createRadialGradient()
+    drawFocusIfNeeded: ƒ drawFocusIfNeeded()
+    drawImage: ƒ drawImage()
+    ellipse: ƒ ellipse()
+    fill: ƒ fill()
+    fillRect: ƒ fillRect()
+    fillText: ƒ fillText()
+    getContextAttributes: ƒ getContextAttributes()
+    getImageData: ƒ getImageData()
+    getLineDash: ƒ getLineDash()
+    getTransform: ƒ getTransform()
+    isPointInPath: ƒ isPointInPath()
+    isPointInStroke: ƒ isPointInStroke()
+    lineTo: ƒ lineTo()
+    measureText: ƒ measureText()
+    putImageData: ƒ putImageData()
+    quadraticCurveTo: ƒ quadraticCurveTo()
+    rect: ƒ rect()
+    resetTransform: ƒ resetTransform()
+    restore: ƒ restore()
+    rotate: ƒ rotate()
+    save: ƒ save()
+    scale: ƒ scale()
+    setLineDash: ƒ setLineDash()
+    setTransform: ƒ setTransform()
+    stroke: ƒ stroke()
+    strokeRect: ƒ strokeRect()
+    strokeText: ƒ strokeText()
+    transform: ƒ transform()
+    translate: ƒ translate()
+
+    */
+
+
+</script>
+</body>
+</html>
+

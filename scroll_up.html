@@ -1,0 +1,61 @@
+<html>
+<head>
+    <title>VerevGna</title>
+    <style>
+        .gn {
+            border: 2px solid #5ec8d2;
+            font-size: 45px;
+            font-weight: bolder;
+            color: #5ec8d2;
+            background-color: white;
+            border-radius: 35px;
+            position: fixed;
+            width: 70px;
+            height: 70px;
+            float: right;
+            right: 30px;
+            bottom: 30px;
+            user-select: none;
+            cursor: default;
+            text-align: center;
+            opacity: 0.7;
+            visibility: hidden;
+        }
+
+        .gn:hover {
+            border: 2px solid white;
+            color: white;
+            background-color: #5ec8d2;
+        }
+
+        body {
+            height: 5000px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="gn" class="gn">↑</div>
+<script>
+    var t;
+    document.getElementById("gn").onmousedown = function () {
+        up();
+    };
+    function up() {
+        var top = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+        if (top > 0) {
+            window.scrollBy(0, -70);
+            t = setTimeout('up()', 20);
+        } else clearTimeout(t);
+        return false;
+    }
+    document.body.onscroll = function () {
+        if (document.body.scrollTop >= 0.8 * window.innerHeight) {//document.body.clientHeight
+            document.getElementById("gn").style.visibility = "visible";
+        } else {
+            document.getElementById("gn").style.visibility = "hidden";
+        }
+    };
+</script>
+</body>
+</html>

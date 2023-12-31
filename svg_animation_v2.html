@@ -1,0 +1,67 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>v</title>
+
+    <style>
+        html {
+            overflow: hidden;
+        }
+
+        .v {
+            position: absolute;
+            border: 1px solid brown;
+            top: 0;
+            left: 0;
+            /*border-radius: 10vmin;*/
+            /*width: 100vmin;
+            height: 100vmin;*/
+        }
+
+        @media (max-aspect-ratio: 47/93) {
+            .v {
+                width: 100%;
+                height: auto;
+                left: 0;
+                top: calc(50% - (93 / 47) * 50vw);
+                border-radius: 20vw;
+            }
+        }
+
+        @media (min-aspect-ratio: 47/93) {
+            .v {
+                height: 100%;
+                width: auto;
+                left: calc(50% - (47 / 93) * 50vh);
+                top: 0;
+                border-radius: calc((47 / 93) * 20vh);
+            }
+        }
+
+    </style>
+</head>
+<body bgcolor="#fff">
+
+
+<svg class="v" viewBox="0 0 47 93">
+    <path id="v" fill="none" stroke-dashoffset="10" stroke-dasharray="0 800" stroke="brown" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"
+          d="M7 44c2,-5 5,-12 9,-12 5,0 5,8 4,12 -1,4 -1,12 4,13 4,0 5,-4 8,-12 3,-9 10,-38 8,-38 -2,0 -16,75
+           -17,78 -0.5,3 -2,7 -5,7 -2,0 -2,-2 -2,-4 0,-2 2,-6 4,-9 7,-11 19,-32 23,-49 4,-14 5,-29 -7,-29 -13,0
+            -27,2 -33,29 -6,27 1,33 10,33 9,0 15,-6 19,-7 4,-2 10,1 11,3"/>
+    <animate
+            xlink:href="#v"
+            attributeName="stroke-dasharray"
+            from="0 550"
+            to="550 0"
+            begin="0.1s"
+            dur="3s"
+            repeatCount="1"
+            fill="freeze"
+    />
+</svg>
+
+
+</body>
+</html>

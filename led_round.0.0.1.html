@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>led round</title>
+    <link rel="stylesheet" href="">
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            /*border: 1px solid red;*/
+        }
+
+        @keyframes st_an {
+            from {
+                transform: rotate(0deg)
+            }
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .star {
+            clip-path: polygon(50% 0%, 65.284% 28.964%, 97.566% 34.545%, 74.734% 58.037%, 79.391% 90.454%, 50% 76%, 20.609% 90.454%, 25.266% 58.036%, 2.434% 34.545%, 34.717% 28.964%);
+            /*animation: st_an 10s linear 0ms infinite;*/
+            position: fixed;
+            /*transform: translate(-50%, -50%);*/
+            background-color: white;
+            display: inline-block;
+            color: crimson;
+            text-align: center;
+            line-height: 300%;
+            transition-duration: 700ms;
+            transition-timing-function: linear;
+            transition-property: left, top;
+        }
+
+        .tranz {
+            transition-duration: 700ms;
+            transition-timing-function: linear;
+            transition-property: left, top;
+        }
+
+        .modif {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<!--svg style="margin: 0 auto; width: 50%; height: 50%; border: 1px solid gray" viewBox="-5 -5 60 60">
+    <polygon style="stroke: white; stroke-width: 5px; stroke-linecap: round; stroke-linejoin: arcs; fill: brown"
+             points="17,15 25,1 33,15 49,18 38,30 40,47 25,39 10,47 12,30 1,18 "></polygon>
+</svg-->
+<!--svg width="300" height="200" >
+    <polygon points="100,10 40,198 190,78 10,78 160,198"
+             style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;" />
+</svg-->
+
+<script>
+    let arr_divs = [];
+    let div_dim = 35;
+    let rad_step = 42;
+    let div = document.createElement('div');
+    div.classList.add('star');
+    div.style.width = div_dim + 'px';
+    div.style.height = div_dim + 'px';
+    //div.innerHTML='<div class="in_light"></div>';
+    //div.innerHTML = 'star';
+    for (let i = 0; i < 10; i++) {
+        arr_divs.push([]);
+        let n = Math.floor(2 * Math.PI * i);
+        if (n === 0) n = 1;
+        for (let j = 0; j < n; j++) {
+            let ob = div.cloneNode(true);
+            let alpha = j * 2 * Math.PI / n;
+            let x = i * rad_step * Math.sin(alpha) - 0.5 * div_dim;
+            let y = i * rad_step * Math.cos(alpha) - 0.5 * div_dim;
+            //console.log(x,y);
+            ob.style.top = 'calc(50vh + ' + y + 'px)';
+            ob.style.left = 'calc(50% + ' + x + 'px)';
+            arr_divs[i].push(ob);
+            document.body.appendChild(ob);
+        }
+    }
+    //==========================================================================================
+    start_anim(true);
+
+    async function sleep(msec) {
+        return new Promise(resolve => setTimeout(resolve, msec));
+    }
+
+    async function start_anim(bul) {
+        let ibul = true;
+        while (bul) {
+            await fa_round_random(1000);
+            await fa_round_random(1000);
+            await fa_per_round_random(1000);
+            await fa_per_round_random(1000);
+                await fa_rotation(50, true);
+            await fa_rotation(50, false);
+            for (let i = 1; i < 5; i++) {
+                await fa_out(i * 50, 5 - i);
+            }
+            await fa_all_default(500);
+            await fa_rand(40, 300);
+            await fa_all_default(500);
+            await fa_rounds(20, 500);
+            await fa_all_default(500);
+            for (let i = 0; i < 3; i++) {
+                await fa_to_random(1000);
+            }
+            if (ibul) {
+                await fa_to_square(1400);
+                await fa_to_round(1400);
+                await fa_to_square(1400);
+            } else {
+                await fa_to_round(1400);
+                await fa_to_square(1400);
+                await fa_to_round(1400);
+            }
+            ibul = !ibul;
+        }
+
+    }
+
+    async function fa_round_random(interval = 700) {
+        await sleep(5);
+        for (let i = 0; i < arr_divs.length; i++) {
+            for (let j = 0; j < arr_divs[i].length; j++) {
+                let j1=Math.floor(Math.random()*(arr_divs[i].length-j));
+                //console.log(x,y);
+                let rx=arr_divs[i][arr_divs[i].length-j-1].style.left;
+                let ry=arr_divs[i][arr_divs[i].length-j-1].style.top;
+
+                arr_divs[i][arr_divs[i].length-j-1].style.left=arr_divs[i][j1].style.left;
+                arr_divs[i][arr_divs[i].length-j-1].style.top=arr_divs[i][j1].style.top;
+                arr_divs[i][j1].style.left=rx;
+                arr_divs[i][j1].style.top=ry;
+
+                let r=arr_divs[i][arr_divs[i].length-j-1];
+                arr_divs[i][arr_divs[i].length-j-1]=arr_divs[i][j1];
+                arr_divs[i][j1]=r;
+            }
+        }
+        await sleep(interval);
+        return true;
+    }
+
+    async function fa_per_round_random(interval = 700) {
+        //await sleep(5);
+        for (let i = 0; i < arr_divs.length; i++) {
+
+            for (let j = 0; j < arr_divs[i].length; j++) {
+                let j1=Math.floor(Math.random()*(arr_divs[i].length-j));
+                //console.log(x,y);
+                let rx=arr_divs[i][arr_divs[i].length-j-1].style.left;
+                let ry=arr_divs[i][arr_divs[i].length-j-1].style.top;
+
+                arr_divs[i][arr_divs[i].length-j-1].style.left=arr_divs[i][j1].style.left;
+                arr_divs[i][arr_divs[i].length-j-1].style.top=arr_divs[i][j1].style.top;
+                arr_divs[i][j1].style.left=rx;
+                arr_divs[i][j1].style.top=ry;
+
+                let r=arr_divs[i][arr_divs[i].length-j-1];
+                arr_divs[i][arr_divs[i].length-j-1]=arr_divs[i][j1];
+                arr_divs[i][j1]=r;
+            }
+            await sleep(interval);
+        }
+        //await sleep(interval);
+        return true;
+    }
+
+    async function fa_to_random(interval = 700) {
+        await sleep(5);
+        for (let i = 0; i < arr_divs.length; i++) {
+            for (let j = 0; j < arr_divs[i].length; j++) {
+                let n=arr_divs.length-1;
+                let x = Math.random() * 2 * n*rad_step - n*rad_step - 0.5 * div_dim;
+                let y = Math.random() * 2 *n*rad_step - n*rad_step - 0.5 * div_dim;
+                //console.log(x,y);
+                arr_divs[i][j].style.top = 'calc(50vh + ' + y + 'px)';
+                arr_divs[i][j].style.left = 'calc(50% + ' + x + 'px)';
+            }
+        }
+        await sleep(interval);
+        return true;
+    }
+
+    async function fa_to_round(interval = 700) {
+        await sleep(5);
+        for (let i = 0; i < arr_divs.length; i++) {
+            for (let j = 0; j < arr_divs[i].length; j++) {
+                let alpha = j * 2 * Math.PI / arr_divs[i].length;
+                let x = i * rad_step * Math.sin(alpha) - 0.5 * div_dim;
+                let y = i * rad_step * Math.cos(alpha) - 0.5 * div_dim;
+                //console.log(x,y);
+                arr_divs[i][j].style.top = 'calc(50vh + ' + y + 'px)';
+                arr_divs[i][j].style.left = 'calc(50% + ' + x + 'px)';
+            }
+        }
+        await sleep(interval);
+        return true;
+    }
+
+    async function fa_to_square(interval = 700) {
+        await sleep(5);
+        for (let i = 0; i < arr_divs.length; i++) {
+            let side = rad_step * i * 2;
+            for (let j = 0; j < arr_divs[i].length; j++) {
+                let x, y, l = 4 * j * side / arr_divs[i].length;
+                if (l <= 0.5 * side) {
+                    x = l;
+                    y = 0.5 * side;
+                } else if (l <= 1.5 * side) {
+                    x = 0.5 * side;
+                    y = side - l;
+                } else if (l <= 2.5 * side) {
+                    x = 2 * side - l;
+                    y = -0.5 * side;
+                } else if (l <= 3.5 * side) {
+                    x = -0.5 * side;
+                    y = l - 3 * side;
+                } else {
+                    x = l - 4 * side;
+                    y = 0.5 * side;
+                }
+                //arr_divs[i][j].classList.add('tranz');
+                arr_divs[i][j].style.top = 'calc(50vh + ' + (y - 0.5 * div_dim) + 'px)';
+                arr_divs[i][j].style.left = 'calc(50% + ' + (x - 0.5 * div_dim) + 'px)';
+            }
+        }
+        await sleep(interval);
+        return true;
+    }
+
+    async function fa_rounds(interval = 40, count = 100) {
+        let arr = [];
+        arr.length = arr_divs.length;
+        arr.fill(0);
+        for (let i = 0; i < count; i++) {
+            await sleep(interval);
+            for (let j = 0; j < arr.length; j++) {
+                /*let j1 = arr[j] === 0 ? (arr_divs[j].length - 1) : (arr[j] - 1);
+                arr_divs[j][arr[j]].classList.add('modif');
+                arr_divs[j][j1].classList.remove('modif');*/
+                arr_divs[j][arr[j]].classList.toggle('modif');
+                arr[j]++;
+                if (arr[j] >= arr_divs[j].length) arr[j] = 0;
+            }
+        }
+        await sleep(interval);
+        return true;
+    }
+
+    async function fa_rand(interval = 40, count = 100) {
+        for (let i = 0; i < count; i++) {
+            await sleep(interval);
+            i1 = Math.floor(Math.random() * arr_divs.length);
+            let j1 = Math.floor(Math.random() * arr_divs[i1].length);
+            arr_divs[i1][j1].classList.toggle('modif');
+        }
+        await sleep(interval);
+        return true;
+    }
+
+    async function fa_out(interval = 100, count = 1) {
+        for (let ii = 0; ii < count; ii++) {
+            for (let i = 0; i < arr_divs.length; i++) {
+                await sleep(interval);
+                let i1 = i === 0 ? (arr_divs.length - 1) : (i - 1);
+                for (let j = 0; j < arr_divs[i].length; j++) {
+                    arr_divs[i][j].classList.add('modif');
+                }
+                for (let j = 0; j < arr_divs[i1].length; j++) {
+                    arr_divs[i1][j].classList.remove('modif');
+                }
+            }
+            await sleep(interval);
+        }
+        return true;
+    }
+
+    async function fa_rotation(interval, add = true) {
+        for (let i = 0; i < arr_divs.length; i++) {
+            for (let j = 0; j < arr_divs[i].length; j++) {
+                await sleep(interval);
+                if (add) {
+                    arr_divs[i][j].classList.add('modif');
+                } else {
+                    arr_divs[i][j].classList.remove('modif');
+                }
+            }
+        }
+        await sleep(interval);
+        return true;
+    }
+
+    async function fa_all_default(interval) {
+        for (let i = 0; i < arr_divs.length; i++) {
+            for (let j = 0; j < arr_divs[i].length; j++) {
+                arr_divs[i][j].classList.remove('modif');
+            }
+        }
+        await sleep(interval);
+        return true;
+    }
+
+
+</script>
+</body>
+</html>

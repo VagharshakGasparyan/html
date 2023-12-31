@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        .ch1 {
+            width: 50px;
+            height: 50px;
+        }
+
+        .ch1:before {
+            /*content: url("../svg/sirt.svg");*/
+            /*content: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8IS0tIENyZWF0b3I6IENvcmVsRFJBVyAyMDE3IC0tPg0KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZlcnNpb249IjEuMSIgc3R5bGU9InNoYXBlLXJlbmRlcmluZzpnZW9tZXRyaWNQcmVjaXNpb247IHRleHQtcmVuZGVyaW5nOmdlb21ldHJpY1ByZWNpc2lvbjsgaW1hZ2UtcmVuZGVyaW5nOm9wdGltaXplUXVhbGl0eTsgZmlsbC1ydWxlOmV2ZW5vZGQ7IGNsaXAtcnVsZTpldmVub2RkIg0Kdmlld0JveD0iMCAwIDI4NSAyODUiDQogeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPg0KIDxkZWZzPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KICAgPCFbQ0RBVEFbDQogICAgLmZpbDAge2ZpbGw6cmVkfQ0KICAgXV0+DQogIDwvc3R5bGU+DQogPC9kZWZzPg0KIDxnIGlkPSLQodC70L7QuV94MDAyMF8xIj4NCiAgPG1ldGFkYXRhIGlkPSJDb3JlbENvcnBJRF8wQ29yZWwtTGF5ZXIiLz4NCiAgPHBhdGggY2xhc3M9ImZpbDAiIGQ9Ik0xMjUgMjVjNiw3IDE2LDIyIDE4LDMyIDMsLTEwIDEyLC0yNiAxOCwtMzIgMjgsLTMyIDc2LC0zNCAxMDUsLTEgMjgsMzIgMjYsODIgLTIsMTEyIC00MCw0NCAtOTcsMTAxIC0xMjEsMTQ5IC0yNSwtNDggLTgxLC0xMDQgLTEyMSwtMTQ5IC0zMSwtMzMgLTI5LC05MCA2LC0xMTkgMzAsLTI2IDcyLC0yMSA5Nyw4eiIvPg0KIDwvZz4NCjwvc3ZnPg0K");*/
+        }
+
+        .ch1:checked:before {
+            /*content: url("../svg/check.svg");*/
+            content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTkwIDE5MCIgc3R5bGU9ImJhY2tncm91bmQtY29sb3I6IHdoaXRlOyI+DQogICAgPHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSI0MCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIg0KICAgICAgICAgIHN0cm9rZS1kYXNoYXJyYXk9IjMwMCAwIiBzdHJva2UtZGFzaG9mZnNldD0iMCIgZD0iTTIwIDcwYzIyLDI4IDM4LDYzIDUwLDEwMCAyMCwtNTUgNTEsLTk3IDEwMCwtMTUwIj4NCiAgICAgICAgPGFuaW1hdGUgZnJvbT0iMCAzMDAiIHRvPSIzMDAgMCIgZHVyPSIxcyIgcmVwZWF0Q291bnQ9IjEiIGJlZ2luPSIwcyIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLWRhc2hhcnJheSINCiAgICAgICAgICAgICAgICAgZmlsbD0iZnJlZXplIj48L2FuaW1hdGU+DQogICAgPC9wYXRoPg0KPC9zdmc+DQo=");
+        }
+
+        .gv-checkbox{
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+        }
+        .gv-checkbox input[type='checkbox']{
+            display: none;
+        }
+        .gv-checkbox input[type='checkbox'] ~ svg{
+            stroke: #0000;
+        }
+        .gv-checkbox input[type='checkbox']:checked ~ svg{
+            stroke: black;
+        }
+
+        .gv-checkbox-sm-container{
+            display: flex;
+            align-items: center;
+            /*margin-bottom: 3px;*/
+            border-radius: 20px;
+            padding: 5px 10px;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .gv-checkbox-sm-container:hover{
+            background-color: #ddd;
+        }
+
+        .gv-checkbox-sm{
+            display: inline-block;
+            width: 14px;
+            min-width: 14px;
+            height: 14px;
+            /*border-radius: 5px;*/
+        }
+        .gv-checkbox-sm input[type='checkbox']{
+            display: none;
+        }
+        .gv-checkbox-sm input[type='checkbox'] ~ svg{
+            stroke: #0000;
+        }
+        .gv-checkbox-sm input[type='checkbox']:checked ~ svg{
+            stroke: #555;
+        }
+
+        .gv-dropdown{
+            display: inline-block;
+            position: relative;
+            border: 1px solid #aaa;
+            border-radius: 18px;
+        }
+        .gv-dropdown:hover{
+            background-color: #eee;
+        }
+        .gv-dropdown:hover .gv-dropdown-body{
+            display: block;
+        }
+        .gv-dropdown-head{
+            height: 36px;
+            line-height: 36px;
+            margin: 0 10px;
+            display: block;
+            cursor: pointer;
+            user-select: none;
+        }
+        .gv-dropdown-body{
+            background-color: white;
+            display: none;
+            box-sizing: border-box;
+            padding: 5px;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            min-width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+<!--<input type="checkbox" class="ch1">-->
+
+
+<!--<svg width="24" height="24" viewBox="0 0 190 190">-->
+<!--    <path fill="none" stroke="black" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"-->
+<!--          stroke-dasharray="300 0" stroke-dashoffset="0" d="M20 70c22,28 38,63 50,100 20,-55 51,-97 100,-150">-->
+<!--        <animate from="0 300" to="300 0" dur="500ms" repeatCount="1" begin="0s" attributeName="stroke-dasharray"-->
+<!--                 fill="freeze"></animate>-->
+<!--    </path>-->
+<!--</svg>-->
+
+<div>
+    <label style="display: flex;align-items: center">
+        <label onclick="this.querySelector('svg').outerHTML = this.querySelector('svg').outerHTML;"
+               class="gv-checkbox" style="background-color: #ccc;">
+            <input type="checkbox">
+            <svg width="100%" height="100%" viewBox="0 0 190 190">
+                <path fill="none" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-dasharray="300 0" stroke-dashoffset="0"
+                      d="M20 70c22,28 38,63 50,100 20,-55 51,-97 100,-150">
+                    <animate from="0 300" to="300 0" dur="500ms" repeatCount="1" begin="0s"
+                             attributeName="stroke-dasharray" fill="freeze"></animate>
+                </path>
+            </svg>
+        </label>
+        <span style="font-size: 35px; padding-left: 10px">Any text</span>
+    </label>
+</div>
+
+<label  class="gv-checkbox-sm-container">
+    <label onclick="this.querySelector('svg').outerHTML = this.querySelector('svg').outerHTML;"
+           class="gv-checkbox-sm" >
+        <input type="checkbox">
+        <svg width="100%" height="100%" viewBox="0 0 190 190">
+            <path fill="none" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"
+                  stroke-dasharray="300 0" stroke-dashoffset="0"
+                  d="M20 70c22,28 38,63 50,100 20,-55 51,-97 100,-150">
+                <animate from="0 300" to="300 0" dur="500ms" repeatCount="1" begin="0s"
+                         attributeName="stroke-dasharray" fill="freeze"></animate>
+            </path>
+        </svg>
+    </label>
+    <span style="font-size: 17px; padding-left: 5px">Any text 1</span>
+</label>
+<label  class="gv-checkbox-sm-container">
+    <label onclick="this.querySelector('svg').outerHTML = this.querySelector('svg').outerHTML;"
+           class="gv-checkbox-sm" >
+        <input type="checkbox">
+        <svg width="100%" height="100%" viewBox="0 0 190 190">
+            <path fill="none" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"
+                  stroke-dasharray="300 0" stroke-dashoffset="0"
+                  d="M20 70c22,28 38,63 50,100 20,-55 51,-97 100,-150">
+                <animate from="0 300" to="300 0" dur="500ms" repeatCount="1" begin="0s"
+                         attributeName="stroke-dasharray" fill="freeze"></animate>
+            </path>
+        </svg>
+    </label>
+    <span style="font-size: 17px; padding-left: 5px">Any text 2</span>
+</label>
+
+<div style="display: flex; justify-content: flex-end">
+    <div class="gv-dropdown">
+        <div class="gv-dropdown-head">
+            <span>Choose a category</span>
+        </div>
+        <div class="gv-dropdown-body">
+            <label  class="gv-checkbox-sm-container">
+                <label onclick="this.querySelector('svg').outerHTML = this.querySelector('svg').outerHTML;"
+                       class="gv-checkbox-sm" >
+                    <input type="checkbox">
+                    <svg width="100%" height="100%" viewBox="0 0 190 190">
+                        <path fill="none" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-dasharray="300 0" stroke-dashoffset="0"
+                              d="M20 70c22,28 38,63 50,100 20,-55 51,-97 100,-150">
+                            <animate from="0 300" to="300 0" dur="300ms" repeatCount="1" begin="0s"
+                                     attributeName="stroke-dasharray" fill="freeze"></animate>
+                        </path>
+                    </svg>
+                </label>
+                <span style="font-size: 17px; padding-left: 5px">Category 1</span>
+            </label>
+            <label  class="gv-checkbox-sm-container">
+                <label onclick="this.querySelector('svg').outerHTML = this.querySelector('svg').outerHTML;" class="gv-checkbox-sm" >
+                    <input type="checkbox">
+                    <svg width="100%" height="100%" viewBox="0 0 190 190">
+                        <path fill="none" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-dasharray="300 0" stroke-dashoffset="0"
+                              d="M20 70c22,28 38,63 50,100 20,-55 51,-97 100,-150">
+                            <animate from="0 300" to="300 0" dur="300ms" repeatCount="1" begin="0s"
+                                     attributeName="stroke-dasharray" fill="freeze"></animate>
+                        </path>
+                    </svg>
+                </label>
+                <span style="font-size: 17px; padding-left: 5px">Category 2</span>
+            </label>
+            <label  class="gv-checkbox-sm-container">
+                <label onclick="this.querySelector('svg').outerHTML = this.querySelector('svg').outerHTML;"
+                       class="gv-checkbox-sm" >
+                    <input type="checkbox" checked>
+                    <svg width="100%" height="100%" viewBox="0 0 190 190">
+                        <path fill="none" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-dasharray="300 0" stroke-dashoffset="0"
+                              d="M20 70c22,28 38,63 50,100 20,-55 51,-97 100,-150">
+                            <animate from="0 300" to="300 0" dur="300ms" repeatCount="1" begin="0s"
+                                     attributeName="stroke-dasharray" fill="freeze"></animate>
+                        </path>
+                    </svg>
+                </label>
+                <span style="font-size: 17px; padding-left: 5px;">Category mategory 3</span>
+            </label>
+        </div>
+    </div>
+</div>
+<div style="background-color: #2FA1D6">qwerty</div>
+<input id="qwertgb" type="button" value="click for event">
+
+<script>
+    window.addEventListener('load', ()=>{
+        document.getElementById('qwertgb').addEventListener('click', (e)=>{
+            console.log(e.view.document.body);
+        });
+    });
+    (function () {
+        let a = true;
+        let b = '<svg width="24" height="24" viewBox="0 0 190 190">'
+            + '<path fill="none" stroke="black" stroke-width="40"' +
+            ' stroke-linecap="round" stroke-linejoin="round"' +
+            ' stroke-dasharray="300 0" stroke-dashoffset="0"' +
+            ' d="M20 70c22,28 38,63 50,100 20,-55 51,-97 100,-150">' +
+            ' <animate from="0 300" to="300 0" dur="300ms"' +
+            ' repeatCount="1" begin="0s" attributeName="stroke-dasharray"' +
+            ' fill="freeze"/></path></svg>';
+        let c = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+        // document.getElementById('btn1').addEventListener('click', function () {
+        //     this.innerHTML = a ? b : c;
+        //     a = !a;
+        // });
+    })();
+
+</script>
+</body>
+</html>

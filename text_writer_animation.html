@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+
+
+    </style>
+</head>
+<body>
+<div class="text-writer" style="height:35px;text-align: center; font-size: 25px"
+     text='["Բարև Ձեզ, ոնցեք, ինչ կա չկա", "Հեչ ախպեր, դու ասա, քեֆ հալ", "Նոռմալ էլի"]'
+     sksel="500"
+     grel="70"
+     grel-spasel="500"
+     jnjel="200"
+     jnjel-spasel="300"
+     qanak="anverj"
+     inch-anel="grel-jnjel">
+</div>
+
+<div class="text-writer" style="height:35px;text-align: center; font-size: 25px;color:red"
+     text='["Բարև Ձեզ, ոնցեք, ինչ կա չկա", "Հեչ ախպեր, դու ասա, քեֆ հալ", "Նոռմալ էլի"]'
+     sksel="500"
+     grel="30"
+     grel-spasel="500"
+     jnjel="60"
+     jnjel-spasel="300"
+     qanak="15"
+     inch-anel="grel-jnjel">
+</div>
+<div class="text-writer" style="height:35px;text-align: center; font-size: 25px;color:green"
+     text='["Բարև Ձեզ, ոնցեք, ինչ կա չկա", "Հեչ ախպեր, դու ասա, քեֆ հալ", "Նոռմալ էլի"]'
+     sksel="2500"
+     grel="30"
+     grel-spasel="1500"
+     jnjel="30"
+     jnjel-spasel="2300"
+     qanak="75"
+     inch-anel="grel-jnjel">
+</div>
+<div class="text-writer" style="height:35px;text-align: center; font-size: 25px;color:blue"
+     text='["Hello Word!", "How do you do?", "TDMP!!!"]'
+     sksel="1000"
+     grel="30"
+     grel-spasel="500"
+     jnjel="170"
+     jnjel-spasel="2000"
+     qanak="anverj"
+     inch-anel="jnjel-grel">
+</div>
+<div class="text-writer" style="height:35px;text-align: center; font-size: 25px;color:#950"
+     text='["Grel, grel u grel", "noric sksel grel"]'
+     sksel="1000"
+     grel="30"
+     grel-spasel="500"
+     jnjel="170"
+     jnjel-spasel="2000"
+     qanak="anverj"
+     inch-anel="grel">
+</div>
+<div class="text-writer" style="height:35px;text-align: center; font-size: 25px;color:#909"
+     text='["Jnjel, jnjel u jnje", "noric sksel jnjel"]'
+     sksel="1000"
+     grel="70"
+     grel-spasel="500"
+     jnjel="70"
+     jnjel-spasel="500"
+     qanak="anverj"
+     inch-anel="jnjel">
+</div>
+
+
+<script>
+    //inch-anel="grel-jnjel" | "grel" | "jnjel-grel" | "jnjel"
+    //qanak="anverj" | 1 | 5 | 100 | inchvor tiv
+    window.onload = function () {
+        document.querySelectorAll(".text-writer").forEach((element) => {
+            let qanak = element.getAttribute("qanak") || Infinity;
+            qanak = qanak === "anverj" ? Infinity : parseInt(qanak);
+            let nastroyki = {
+                sksel: parseInt(element.getAttribute("sksel") || 1000),
+                grel: parseInt(element.getAttribute("grel") || 30),
+                grelSpasel: parseInt(element.getAttribute("grel-spasel") || 500),
+                jnjel: parseInt(element.getAttribute("jnjel") || 100),
+                jnjelSpasel: parseInt(element.getAttribute("jnjel-spasel") || 300),
+                qanak: qanak,
+                inchAnel: element.getAttribute("inch-anel") || "grel-jnjel",
+                element: element,
+                text: JSON.parse(element.getAttribute("text"))//()
+            };
+            // console.log(nastroyki);
+            setTimeout(() => {
+                if (nastroyki.inchAnel.startsWith("grel")) {
+                    nastroyki.element.innerHTML = "";
+                    fGrelJnjel(nastroyki, 0, 1, "grel");
+                } else if (nastroyki.inchAnel.startsWith("jnjel")) {
+                    nastroyki.element.innerHTML = nastroyki.text[0];
+                    fGrelJnjel(nastroyki, 0, nastroyki.text[0].length - 1, "jnjel");
+                }
+            }, nastroyki.sksel);
+
+        });
+
+        function fGrelJnjel(nastroyki, textIndex, symbolIndex, type) {
+            if (nastroyki.qanak <= 0) return 0;
+            nastroyki.element.innerHTML = nastroyki.text[textIndex].slice(0, symbolIndex);
+            let num = type === "grel" ? 1 : -1;
+            symbolIndex += num;
+            if (symbolIndex <= nastroyki.text[textIndex].length && symbolIndex > -1) {
+                setTimeout(() => {
+                    fGrelJnjel(nastroyki, textIndex, symbolIndex, type);
+                }, ((type === "grel") ? nastroyki.grel : nastroyki.jnjel));
+                return 0;
+            } else {
+                nastroyki.qanak--;
+                let ia = nastroyki.inchAnel;
+                if ((type === ia) || type === "jnjel") {
+                    textIndex++;
+                }
+                if (textIndex >= nastroyki.text.length) textIndex = 0;
+
+                let nextType = "grel";
+                if ((type === "grel" && (ia === "grel-jnjel" || ia === "jnjel-grel")) || (type === "jnjel" && ia === "jnjel")) {
+                    nextType = "jnjel";
+                    symbolIndex = nastroyki.text[textIndex].length - 1;
+                } else if ((type === "jnjel" && (ia === "grel-jnjel" || ia === "jnjel-grel")) || (type === "grel" && ia === "grel")) {
+                    nextType = "grel";
+                    symbolIndex = 0;
+                }
+                setTimeout(() => {
+                    fGrelJnjel(nastroyki, textIndex, symbolIndex, nextType);
+                }, ((type === "grel") ? nastroyki.grelSpasel : nastroyki.jnjelSpasel));
+                return 0;
+            }
+        }
+    };
+</script>
+</body>
+</html>

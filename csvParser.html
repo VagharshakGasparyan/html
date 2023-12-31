@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>move</title>
+    <link rel="stylesheet" href="">
+    <script src="csv_parse.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<input type="file" oninput="f(this)">
+<div id="result"></div>
+
+<script>
+    function f(inp) {
+        let files = inp.files;
+        let fileName = files[0].name;
+        let reader = new FileReader();
+        reader.readAsText(files[0]);
+        // reader.readAsDataURL(files[0]);
+        reader.onload = function(e){
+            let result = e.target.result;
+            document.getElementById('result').innerHTML = result;
+            console.log(result);
+            var data = Papa.parse(result);
+            console.log(data);
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-color: #000710;
+            font-family: "Lucida Console", serif;
+            font-size: 14px;
+        }
+
+        select {
+            outline: none;
+            margin-left: 3px;
+        }
+
+        select, input {
+            font-family: "Lucida Console", serif;
+            font-size: 14px;
+        }
+
+        .button {
+            display: inline-block;
+            border: 1px solid #77b;
+            border-radius: 10px;
+            padding: 5px;
+            user-select: none;
+            cursor: pointer;
+            background-color: #fff;
+            margin: 5px 0 5px 0;
+        }
+
+        .button:hover {
+            background-color: #ddf;
+        }
+
+        .button:active {
+            background-color: #79f;
+            color: white;
+        }
+
+        label {
+            color: #ff7;
+            display: flex;
+            align-items: center;
+            user-select: none;
+            /*border: 5px solid yellow;*/
+        }
+
+        label input[type="text"] {
+            flex: 1;
+            outline-color: #ff7;
+        }
+
+        .over-all {
+            display: inline-flex;
+            flex-direction: column;
+            border: 1px solid #09f;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #09f;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="over-all">
+    <h2>Make new branch</h2>
+    <label>
+        Branch name:
+        <input id="input1" type="text" oninput="f_inputBranchName(this.value)">
+    </label>
+    <label>
+        New branch:
+        <input id="input2" type="checkbox" onchange="isNewBranch(this.checked)">
+    </label>
+    <div class="button" onclick="ctc('make')" id="make"></div>
+    <label>Description:<input id="input3" type="text" oninput="f_inputDescription(this.value)"></label>
+    <div style="display: flex; align-items: center;">
+        <label> status<input id="input4" type="checkbox" onchange="check(this.checked, 'status')"></label>
+        <label>&nbsp;&nbsp;add .<input id="input5" type="checkbox" onchange="check(this.checked, 'add')"></label>
+        <select onchange="check(this.value, 'pull')" id="pull">
+            <option value="1">commit</option>
+            <option value="2">pull</option>
+        </select>
+    </div>
+    <div class="button" onclick="ctc('push')" id="push"></div>
+    <div style="background-color: #09f; height: 3px"></div>
+
+    <h2>Merge git branch</h2>
+
+    <div class="button" onclick="ctc('rebase')" id="rebase"></div>
+    <input type="button" value="git add ." onclick="navigator.clipboard.writeText('git add .\n')">
+    <input type="button" value="git rebase –-continue"
+           onclick="navigator.clipboard.writeText('git rebase –-continue\n')">
+    <input type="button" value="git rebase --skip" onclick="navigator.clipboard.writeText('git rebase --skip\n')">
+    <div class="button" onclick="ctc('merge')" id="merge"></div>
+    <input type="button" value="git push" onclick="navigator.clipboard.writeText('git push\n')">
+</div>
+
+
+<script>
+    let el = {
+        make: document.getElementById("make"),
+        push: document.getElementById("push"),
+        rebase: document.getElementById("rebase"),
+        merge: document.getElementById("merge"),
+        input1: document.getElementById("input1"),
+        input2: document.getElementById("input2"),
+        input3: document.getElementById("input3"),
+        input4: document.getElementById("input4"),
+        input5: document.getElementById("input5"),
+        pull: document.getElementById("pull"),
+    };
+    let t = {
+        newBranch: {value: true, yes: "-b ", no: ""},
+        branchName: "issue/TTS-",
+        description: "",
+        makeBranch: ["git checkout develop\ngit remote update origin\ngit reset --hard origin/develop\ngit checkout "],
+        makeInner: "",
+        pushBranch: ['git status\n', 'git add .\n', 'git commit -a -m "', '"\ngit push -u origin '],
+        pushInner: "",
+        mergeRebase: ['git checkout develop\ngit remote update origin\ngit reset --hard origin/develop\ngit checkout ',
+            '\ngit rebase origin/develop\n'],
+        rebaseInner: "",
+        mergePush: ['git checkout develop\ngit merge ', ' --no-ff\n'],
+        mergeInner: "",
+        status: true,
+        add: true,
+        pull: "1"
+    };
+
+    function getLocalStorage() {
+        let l_n = ["branchName", "newBranch", "description", "status", "add", "pull"];
+        let ts = [[t, "branchName"], [t.newBranch, "value"], [t, "description"], [t, "status"], [t, "add"], [t, "pull"]];
+        l_n.forEach((name, i) => {
+            let lv = localStorage.getItem(name);
+            if (lv !== null) ts[i][0][ts[i][1]] = lv;
+        });
+        t.newBranch.value = (t.newBranch.value === "true" || t.newBranch.value === true);
+        t.status = (t.status === "true" || t.status === true);
+        t.add = (t.add === "true" || t.add === true);
+    }
+
+    getLocalStorage();
+    updateViews();
+
+    function updateViews() {
+        t.makeInner = t.makeBranch[0] + ((t.newBranch.value) ? t.newBranch.yes : t.newBranch.no) + t.branchName + "\n";
+        el.make.innerText = t.makeInner;
+        el.input1.value = t.branchName;
+        el.input2.checked = t.newBranch.value;
+        el.input3.value = t.description;
+        t.pushInner = ((t.status) ? t.pushBranch[0] : "") + ((t.add) ? t.pushBranch[1] : "") +
+            ((t.pull === "1") ? t.pushBranch[2] + t.description + t.pushBranch[3] + t.branchName + "\n" :
+                "git pull\ngit push\n");
+        el.push.innerText = t.pushInner;
+        t.rebaseInner = t.mergeRebase[0] + t.branchName + t.mergeRebase[1];
+        el.rebase.innerText = t.rebaseInner;
+        t.mergeInner = t.mergePush[0] + t.branchName + t.mergePush[1];
+        el.merge.innerText = t.mergeInner;
+        el.input4.checked = t.status;
+        el.input5.checked = t.add;
+        el.pull.value = t.pull;
+    }
+
+    function check(value, item) {
+        t[item] = value;
+        localStorage.setItem(item, value);
+        updateViews();
+    }
+
+    function isNewBranch(value) {
+        t.newBranch.value = value;
+        localStorage.setItem("newBranch", value);
+        updateViews();
+    }
+
+    function f_inputBranchName(value) {
+        t.branchName = value;
+        localStorage.setItem('branchName', value);
+        updateViews();
+    }
+
+    function f_inputDescription(value) {
+        t.description = value;
+        localStorage.setItem('description', value);
+        updateViews();
+    }
+
+    function ctc(what) {
+        let whats = {make: t.makeInner, push: t.pushInner, rebase: t.rebaseInner, merge: t.mergeInner};
+        navigator.clipboard.writeText(whats[what]);
+    }
+
+    /*
+        localStorage.setItem('key', 'value');
+        value = localStorage.getItem('key');
+        localStorage.removeItem('key');
+        localStorage.clear();
+    */
+</script>
+</body>
+</html>

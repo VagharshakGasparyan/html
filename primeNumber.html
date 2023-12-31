@@ -1,0 +1,115 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>JS quiz</title>
+    <style>
+        body {
+            /*background-color: black;*/
+            margin: 0;
+            padding: 0;
+        }
+
+        .mid {
+            margin: 0 auto;
+            width: 80%;
+            max-width: 768px;
+            min-width: 512px;
+            background-color: #acf;
+            padding: 10px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h3 {
+            text-align: justify;
+            margin-bottom: 0;
+        }
+
+        .c1 {
+            color: darkred;
+        }
+
+        .m1 {
+            color: darkblue;
+            font-size: 18px;
+        }
+
+        .m1:before {
+            content: "* ";
+        }
+		#res{
+			/*color: white;*/
+			font-size: 12px;
+			max-height: 512px;
+			overflow-y: auto;
+			padding-right: 10px;
+		}
+    </style>
+</head>
+<body>
+<!--div class="mid">
+    <h1>JS quiz</h1>
+    <h3>1. Stexcel textayin input, vortegh khavaqvi chkrknvogh simvolneri hertakanutyun,
+        voric heto kartacvi ayd simvolneri bolor hnaravor hertakanutyan tarberakner@:
+        Ashxatanq@ katarel html faylov, funkcionalutyun@` java script lezvov: Kareli e steghcel
+        button, vori seghmeluc heto nor kartaci patasxanner@, kam inputi texti havaqelu @ntacqum
+        (Dzer hayacoghutyan hamadzayn): Inpiti vra dnel simvolneri qanaki sahmanapakum 6 simvol:
+        <br> Orinak` <span class="c1">ABC</span>-i depqum petqa tpi`
+    </h3>
+    ABC<br>
+    ACB<br>
+    BAC<br>
+    BCA<br>
+    CAB<br>
+    CBA<br>
+    <span class="m1">Hertakanutyun@ karevor che:</span>
+</div-->
+<div style="display: flex;flex-direction: column; align-items: center">
+    <input type="text" maxlength="6" oninput="f(this.value)" spellcheck="false">
+    <input type="text" maxlength="8" oninput="primeNumber(parseInt(this.value))" spellcheck="false">
+    <div id="res"></div>
+</div>
+
+
+<script>
+
+  f('ABC');
+
+  function f(value) {
+    let a = f1(value);
+
+    function f1(v, p = '', a = []) {
+      if (v.length === 1) return [p + v];
+      for (let i = 0; i < v.length; i++)
+        a.push(...f1(v.slice(0, i) + v.slice(i + 1), p + v[i]));
+      return a;
+    }
+
+    document.getElementById('res').innerHTML = a.join('<br>');
+  }
+
+  primeNumber();
+
+  function primeNumber(n = 10000) {
+    let p_arr = [2];
+    for (let i = 3; i <= n; i++) {
+      let bul = true;
+      for (let j = 0; j < p_arr.length && p_arr[j] <= Math.sqrt(i); j++) {
+        if (i / p_arr[j] === Math.floor(i / p_arr[j])) {
+          bul = false;
+          break;
+        }
+      }
+      if (bul) p_arr.push(i);
+    }
+    // console.log(p_arr);
+    console.log(p_arr[p_arr.length - 1], "\n", 'count =', p_arr.length);
+    console.log(p_arr.length/n);
+    document.getElementById('res').innerHTML = p_arr.join(', ');
+  }
+
+</script>
+</body>
+</html>

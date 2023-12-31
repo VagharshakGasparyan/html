@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>js to image, image to js</title>
+    <style>
+        img, canvas {
+            border: 5px dotted black;
+        }
+        .paths{
+            border: 1px solid black;
+            padding: 5px;
+        }
+        h2{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="paths">
+    <h2>js to image</h2>
+    <input type="file" oninput="f_inp_1(this)"><br>
+    <img id="img" src="#" alt="jsImage">
+    <a id="a_img" download="image.png">download image</a>
+<!--    <div id="for_canvas"></div>-->
+</div>
+<div class="paths">
+    <h2>image to js</h2>
+    <input type="file" oninput="f_inp_2(this) "><br>
+    <a id="a_text" download="script.js">download script.js</a>
+    <div id="for_js"></div>
+</div>
+
+
+</body>
+
+<script>
+    //console.log(' '.charCodeAt(0));//32
+    function f_inp_1(obj) {
+        let fr = new FileReader();
+        fr.readAsText(obj.files[0]);
+        fr.onload = function () {
+            let str_js = fr.result.toString();
+            textToImg(str_js);
+        }
+    }
+
+    function f_inp_2(obj) {
+        let img = new Image();
+        let fr = new FileReader();
+        fr.readAsDataURL(obj.files[0]);
+        fr.onload = function () {
+            console.log(fr.result.toString());
+            img.src = fr.result.toString();
+            img.onload = function () {
+                imgToText(img);
+            }
+        }
+    }
+
+    function textToImg(str_js) {
+        let len = Math.ceil(str_js.length / 2);
+        let width = Math.ceil(Math.sqrt(len));
+        let height = Math.ceil(len / width);
+        console.log('img_width=' + width + ', img_height=' + height + ', js size=' + str_js.length);
+        let canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        let ctx = canvas.getContext('2d');
+        let imageData = ctx.createImageData(width, height);
+        let i = 0;
+        for (let x = 0; x < width; x++) {
+            for (let y = 0; y < height; y++) {
+                let j = 2 * i, r, g, b, a;
+                if (i < str_js.length) {
+                    let num = str_js.charCodeAt(i);
+                    r = num % 255;
+                    g = Math.floor(num / 255);
+                } else {
+                    r = 32;
+                    g = 0;
+                }
+                imageData.data[j] = r;  // R value
+                imageData.data[j + 1] = g;    // G value
+                i++;
+                if (i < str_js.length) {
+                    let num = str_js.charCodeAt(i);
+                    b = num % 255;
+                    a = Math.floor(num / 255);
+                } else {
+                    b = 32;
+                    a = 0;
+                }
+                imageData.data[j + 2] = b;  // B value
+                imageData.data[j + 3] = 255 - a;
+                i++;
+            }
+        }
+        ctx.putImageData(imageData, 0, 0);
+        document.getElementById('img').src = canvas.toDataURL();
+        document.getElementById('a_img').href = canvas.toDataURL();
+        //document.getElementById('for_canvas').appendChild(canvas);
+    }
+
+    function imgToText(img) {
+        let width = img.width;
+        let height = img.height;
+        console.log(width, height);
+        let canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        let ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        let imageData = ctx.getImageData(0, 0, width, height);
+        let str_js = '';
+        let len = width * height * 4;
+        for (let i = 0; i < len; i += 4) {
+            let r = imageData.data[i];
+            let g = imageData.data[i + 1];
+            let b = imageData.data[i + 2];
+            let a = imageData.data[i + 3];
+            str_js += String.fromCharCode(r + g * 255) + String.fromCharCode(b + (255 - a) * 255);
+        }
+        document.getElementById('for_js').innerText = str_js;
+        document.getElementById('a_text').href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(str_js);
+        //eval(str_js);/*Ashxatacnel*/
+    }
+
+</script>
+</html>

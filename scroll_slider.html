@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+        window.onload = function () {
+
+        };
+    </script>
+    <style>
+        body {
+            background-color: #123;
+        }
+
+        .container {
+            min-height: 50px;
+            padding: 5px 35px;
+            border: 1px solid #0ff;
+            /*width: 80%;*/
+            margin: 0 auto;
+            position: relative;
+            overflow-x: scroll;
+            transition: all 200ms linear 0s;
+        }
+
+        .continer {
+            position: relative;
+            border: 1px solid green;
+            display: inline-block;
+            white-space: nowrap;
+            padding: 3px;
+        }
+
+        .contuner {
+            width: 150px;
+            height: 90px;
+            border: 1px solid #f0f;
+            position: relative;
+            display: inline-block;
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            line-height: 90px;
+        }
+
+        .arrow {
+            position: absolute;
+            width: 25px;
+            height: 35px;
+            /*border: 1px solid white;
+            background-color: #fff7;*/
+            z-index: 2;
+            color: #0f0;
+            line-height: 55px;
+            font-size: 35px;
+            user-select: none;
+            opacity: 0.3;
+            top: 30px;
+            transition: all 200ms linear 0s;
+        }
+
+        .arrow-left {
+            left: 0;
+        }
+
+        .arrow-right {
+            right: 0;
+        }
+
+        .arrow-left:hover, .arrow-right:hover {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+<div style="height: 150px"></div>
+
+<div style="position: relative;width: 80%;margin: 0 auto">
+    <div class="arrow arrow-left" onmousedown="scroll_by('l')">
+        <svg width="100%" height="100%" viewBox="0 0 700 1138">
+            <path fill="#00FF80" class="fil0"
+                  d="M700 1007l0 -875c0,-117 -141,-176 -224,-93l-438 438c-51,51 -51,135 0,186l438 438c83,83 224,24 224,-93z"></path>
+        </svg>
+    </div>
+    <div class="container">
+        <div class="continer">
+            <div class="contuner">1</div>
+            <div class="contuner">2</div>
+            <div class="contuner">3</div>
+            <div class="contuner">4</div>
+            <div class="contuner">5</div>
+            <div class="contuner">6</div>
+            <div class="contuner">7</div>
+            <div class="contuner">8</div>
+            <div class="contuner">9</div>
+            <div class="contuner">10</div>
+            <div class="contuner">11</div>
+            <div class="contuner">12</div>
+            <div class="contuner">13</div>
+            <div class="contuner">14</div>
+            <div class="contuner">15</div>
+            <div class="contuner">16</div>
+            <div class="contuner">17</div>
+            <div class="contuner">18</div>
+            <div class="contuner">19</div>
+            <div class="contuner">20</div>
+            <div class="contuner">21</div>
+            <div class="contuner">22</div>
+            <div class="contuner">23</div>
+        </div>
+    </div>
+    <div class="arrow arrow-right" onmousedown="scroll_by('r')">
+        <svg width="100%" height="100%" viewBox="0 0 700 1138">
+            <path fill="#00FF80" class="fil0"
+                  d="M0 1007l0 -875c0,-117 141,-176 224,-93l438 438c51,51 51,135 0,186l-438 438c-83,83 -224,24 -224,-93z"></path>
+        </svg>
+    </div>
+</div>
+<script>
+    let scr_ob = document.getElementsByClassName('container')[0];
+
+    function scroll_by(rl) {
+        let num = rl === 'r' ? 1 : -1;
+        //scr_ob.scrollBy(num * 75, 0);
+        let stime = 0, step = 5;
+        let time_step = 120;
+        let sin = setInterval(function () {
+            scr_ob.scrollBy(num * step, 0);
+            stime+=step;
+            if (stime > time_step) clearInterval(sin);
+        }, 20);
+
+    }
+</script>
+
+</body>
+</html>

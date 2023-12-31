@@ -1,0 +1,435 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>erkrach</title>
+    <link rel="stylesheet" href="">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            /*border:1px solid black;*/
+        }
+
+        #svg1 {
+            flex: 1;
+            margin: 2vmin;
+        }
+
+        #div1 {
+            /*border: 1px solid brown;*/
+            display: flex;
+            user-select: none;
+            width: 96vmin;
+            flex-direction: column;
+            font-family: sans-serif;
+            margin: 2vmin;
+        }
+
+        #div1 > div {
+            display: flex;
+            flex-direction: row;
+            border: 1px solid;
+            background-color: #fff;
+            height: 9.5vmin;
+        }
+
+        #div1 > div:nth-child(1) {
+            border-color: blue;
+            color: blue;
+            margin-bottom: 1vmin;
+        }
+
+        #div1 > div:nth-child(1) > div {
+            border-color: blue;
+        }
+
+        #div1 > div:nth-child(2) {
+            border-color: black;
+            color: black;
+            margin-bottom: 1vmin;
+        }
+
+        #div1 > div:nth-child(2) > div {
+            border-color: black;
+        }
+
+        #div1 > div:nth-child(3) {
+            border-color: red;
+            color: red;
+            margin-bottom: 1vmin;
+        }
+
+        #div1 > div:nth-child(3) > div {
+            border-color: red;
+        }
+
+        #div1 > div:nth-child(4) {
+            border-color: green;
+            color: green;
+            margin-bottom: 1vmin;
+        }
+
+        #div1 > div:nth-child(4) > div {
+            border-color: green;
+        }
+
+        #div1 > div:nth-child(5) {
+            border-color: #633;
+            color: #633;
+            margin-bottom: 1vmin;
+        }
+
+        #div1 > div:nth-child(5) > div {
+            border-color: #633;
+        }
+
+        #div1 > div > div {
+            display: flex;
+            font-size: 7vmin;
+            border: 1px solid lightseagreen;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kn {
+            border: 2px solid #555 !important;
+            border-radius: 2vmin;
+            margin: 0.5vmin;
+            background-color: #ddd;
+        }
+
+        .kn:active {
+            background-color: #f75;
+        }
+
+        @media only screen and (orientation: landscape) {
+            body {
+                flex-direction: row;
+            }
+        }
+
+        @media only screen and (orientation: portrait) {
+            body {
+                flex-direction: column;
+            }
+        }
+
+        table {
+            text-align: center;
+            width: 100%;
+            border-spacing: 1vmin 1vmin;
+        }
+
+        td {
+            border: 2px solid #555;
+            border-radius: 2vmin;
+            background-color: #dddddd;
+            font-size: 7vmin;
+            height: 8.5vmin;
+        }
+
+        td:active {
+            background-color: #ff7755;
+        }
+    </style>
+</head>
+<body>
+
+
+<!--svg width="50" height="50" viewBox="0 0 11250 15000">
+    <path fill="red" class="qyarpich"
+          d="M0 7500c3000,-2275 4500,-4775 5625,-7500 1124,2725 2624,5225 5625,7499 -3001,2275 -4501,4775 -5625,7501 -1125,-2725 -2625,-5225 -5625,-7500z"/>
+</svg-->
+
+<svg id="svg1" viewBox="0 0 1094.91 1046.45">
+    <defs>
+        <style type="text/css">
+            .str1 {
+                stroke: #006633;
+                stroke-width: 13.65;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-miterlimit: 22.9256
+            }
+
+            .str6 {
+                stroke: #663333;
+                stroke-width: 13.65;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-miterlimit: 22.9256
+            }
+
+            .str2 {
+                stroke: #663333;
+                stroke-width: 13.65;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-miterlimit: 22.9256
+            }
+
+            .str0 {
+                stroke: red;
+                stroke-width: 13.65;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-miterlimit: 22.9256
+            }
+
+            .str4 {
+                stroke: blue;
+                stroke-width: 5.46;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-miterlimit: 22.9256
+            }
+
+            .str3 {
+                stroke: red;
+                stroke-width: 5.46;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-miterlimit: 22.9256
+            }
+
+            .str5 {
+                stroke: #663333;
+                stroke-width: 2.08;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-miterlimit: 22.9256
+            }
+
+            .fil0 {
+                fill: none
+            }
+
+            .fil5 {
+                fill: #663333
+            }
+
+            .fil1 {
+                fill: black;
+                fill-rule: nonzero
+            }
+
+            .fil2 {
+                fill: blue;
+                fill-rule: nonzero
+            }
+
+            .fil3 {
+                fill: #006633;
+                fill-rule: nonzero
+            }
+
+            .fil4 {
+                fill: red;
+                fill-rule: nonzero
+            }
+        </style>
+    </defs>
+
+    <path class="fil0 str0"
+          d="M6.83 332.18c144.08,-146.76 333.34,-235.81 540.63,-235.81 207.29,0 396.55,89.05 540.63,235.81"/>
+    <polyline class="fil0 str1" points="6.83,332.18 547.45,1039.62 1088.08,332.18 "/>
+    <path class="fil0 str2" d="M412.3 862.76c36.02,-36.69 83.34,-58.95 135.16,-58.95 51.82,0 99.14,22.26 135.16,58.95"/>
+
+    <path class="fil1"
+          d="M547.45 96.42l17.7 35.39 -35.39 0 17.7 -35.39zm-6.83 34.93c0,-3.77 3.06,-6.83 6.83,-6.83 3.77,0 6.83,3.06 6.83,6.83l-13.65 0zm0 165.85l0 -165.85 13.65 0 0 165.85 -13.65 0zm6.83 34.93l-17.7 -35.39 35.39 0 -17.7 35.39zm6.83 -34.93c0,3.77 -3.06,6.83 -6.83,6.83 -3.77,0 -6.83,-3.06 -6.83,-6.83l13.65 0z"/>
+
+    <path class="fil2"
+          d="M599.57 504.82l47.52 -142.94 18.02 0 50.43 142.94 -18.65 0 -14.33 -43.32 -52.15 0 -13.44 43.32 -17.39 0zm35.64 -58.69l42.21 0 -12.92 -39.63c-3.89,-12.05 -6.84,-21.99 -8.88,-29.84 -1.7,9.31 -3.98,18.47 -6.83,27.52l-13.58 41.96z"/>
+    <path class="fil1"
+          d="M606.43 297.67l0 -142.94 46.48 0c9.45,0 17.04,1.43 22.77,4.33 5.71,2.89 10.18,7.35 13.41,13.38 3.26,5.99 4.87,12.28 4.87,18.87 0,6.09 -1.44,11.84 -4.3,17.23 -2.85,5.39 -7.18,9.75 -12.97,13.08 7.5,2.53 13.26,6.85 17.27,12.98 4.04,6.09 6.05,13.31 6.05,21.63 0,6.72 -1.24,12.94 -3.69,18.7 -2.45,5.76 -5.48,10.18 -9.08,13.31 -3.6,3.09 -8.13,5.46 -13.55,7.05 -5.45,1.6 -12.11,2.39 -20.01,2.39l-47.26 0zm16.43 -82.85l26.79 0c7.26,0 12.48,-0.57 15.63,-1.66 4.18,-1.43 7.32,-3.83 9.43,-7.15 2.11,-3.33 3.17,-7.49 3.17,-12.51 0,-4.76 -0.98,-8.95 -2.97,-12.55 -1.96,-3.63 -4.78,-6.12 -8.45,-7.45 -3.66,-1.33 -9.95,-2 -18.83,-2l-24.77 0 0 43.32zm0 66.08l30.85 0c5.31,0 9.03,-0.23 11.19,-0.7 3.75,-0.76 6.92,-2.06 9.46,-3.89 2.53,-1.83 4.61,-4.49 6.26,-7.98 1.64,-3.49 2.45,-7.52 2.45,-12.08 0,-5.36 -1.18,-9.98 -3.57,-13.94 -2.36,-3.96 -5.65,-6.72 -9.86,-8.32 -4.18,-1.6 -10.23,-2.4 -18.1,-2.4l-28.66 0 0 49.31z"/>
+    <path class="fil3"
+          d="M159.75 834.25l0 -142.94 54.89 0c11.04,0 19.43,1.3 25.17,3.86 5.74,2.56 10.32,7.09 13.75,13.57 3.43,6.49 5.13,13.68 5.13,21.53 0,10.15 -2.85,18.7 -8.53,25.65 -5.68,6.96 -14.45,11.35 -26.32,13.24 4.35,2.39 7.64,4.79 9.89,7.12 4.79,5.06 9.31,11.41 13.55,19.03l21.42 38.93 -20.47 0 -16.38 -29.75c-4.76,-8.62 -8.71,-15.17 -11.79,-19.73 -3.11,-4.56 -5.88,-7.72 -8.33,-9.55 -2.42,-1.8 -4.93,-3.06 -7.46,-3.79 -1.85,-0.43 -4.87,-0.66 -9.11,-0.66l-18.97 0 0 63.48 -16.43 0zm16.43 -79.86l35.17 0c7.5,0 13.32,-0.9 17.53,-2.7 4.21,-1.76 7.41,-4.63 9.57,-8.59 2.19,-3.93 3.29,-8.18 3.29,-12.81 0,-6.75 -2.11,-12.34 -6.34,-16.7 -4.24,-4.36 -10.93,-6.52 -20.07,-6.52l-39.15 0 0 47.32z"/>
+    <polygon class="fil4" points="984.35,142.94 984.35,0 1000.78,0 1000.78,126.17 1061.68,126.17 1061.68,142.94 "/>
+    <line class="fil0 str3" x1="959.82" y1="225.04" x2="1023.56" y2="159.44"/>
+    <polyline class="fil0 str4" points="611.61,539.4 732.71,539.4 854.35,332.18 "/>
+
+    <path class="fil2"
+          d="M6.83 332.18l67.43 -19.27 0 0 -0.87 1.2 -0.82 1.2 -0.76 1.2 -0.71 1.2 -0.65 1.2 -0.59 1.2 -0.54 1.2 -0.48 1.2 -0.42 1.2 -0.37 1.2 -0.31 1.2 -0.25 1.2 -0.2 1.2 -0.14 1.2 -0.08 1.2 -0.03 1.2 0.03 1.2 0.08 1.2 0.14 1.2 0.2 1.2 0.25 1.2 0.31 1.2 0.37 1.2 0.42 1.2 0.48 1.2 0.54 1.2 0.59 1.2 0.65 1.2 0.71 1.2 0.76 1.2 0.82 1.2 0.87 1.2 -67.43 -19.27zm48.03 6.83c-3.77,0 -6.83,-3.06 -6.83,-6.83 0,-3.77 3.06,-6.83 6.83,-6.83l0 13.65zm985.19 0l-985.19 0 0 -13.65 985.19 0 0 13.65zm48.03 -6.83l-67.43 19.27 0.87 -1.2 0.82 -1.2 0.76 -1.2 0.71 -1.2 0.65 -1.2 0.59 -1.2 0.54 -1.2 0.48 -1.2 0.42 -1.2 0.37 -1.2 0.31 -1.2 0.25 -1.2 0.2 -1.2 0.14 -1.2 0.08 -1.2 0.03 -1.2 -0.03 -1.2 -0.08 -1.2 -0.14 -1.2 -0.2 -1.2 -0.25 -1.2 -0.31 -1.2 -0.37 -1.2 -0.42 -1.2 -0.48 -1.2 -0.54 -1.2 -0.59 -1.2 -0.65 -1.2 -0.71 -1.2 -0.76 -1.2 -0.82 -1.2 -0.87 -1.2 0 0 67.43 19.27zm-48.03 -6.83c3.77,0 6.83,3.06 6.83,6.83 0,3.77 -3.06,6.83 -6.83,6.83l0 -13.65z"/>
+
+    <path class="fil5 str5"
+          d="M614.9 850.84c12.53,-2.98 21.22,-6.99 27.27,-16.99 6.05,-10 5.97,-22.52 3.77,-35.99l43.59 72.61 -74.62 -19.62z"/>
+    <path class="fil5 str5"
+          d="M478.3 850.5c-12.53,-2.98 -21.22,-6.99 -27.27,-16.99 -6.05,-10 -5.97,-22.52 -3.77,-35.99l-43.59 72.61 74.62 -19.62z"/>
+    <path class="fil0 str6"
+          d="M608.71 691.83c-18.02,53.75 -61.59,76.99 -76.99,76.99 -38.49,0 -38.49,-76.99 0,-76.99 46.19,0 50.94,105.2 92.39,69.86"/>
+
+</svg>
+<div id="div1">
+    <div>
+        <div style="flex: 0.15;font-weight: bold">A</div>
+        <div></div>
+    </div>
+    <div>
+        <div style="flex: 0.15;font-weight: bold">B</div>
+        <div></div>
+    </div>
+    <div>
+        <div style="flex: 0.15;font-weight: bold">L</div>
+        <div></div>
+    </div>
+    <div>
+        <div style="flex: 0.15;font-weight: bold">R</div>
+        <div></div>
+    </div>
+    <div>
+        <div style="flex: 0.15;">
+            <svg width="6vmin" height="6vmin" viewBox="0 0 22.09 14.85">
+                <path stroke="#663333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-miterlimit="22.9256" fill="none"
+                      d="M18.45 1.12c-2.95,8.8 -10.08,12.6 -12.6,12.6 -6.3,0 -6.3,-12.6 0,-12.6 7.56,0 8.34,17.22 15.13,11.44"/>
+            </svg>
+        </div>
+        <div></div>
+    </div>
+    <table>
+        <tr>
+            <td onclick="take_num('1')">1</td>
+            <td onclick="take_num('2')">2</td>
+            <td onclick="take_num('3')">3</td>
+            <td style="color: saddlebrown" onclick="andu_num()">&larr;</td>
+            <td style="color: red" onclick="delete_num()">c</td>
+            <td style="color: mediumvioletred" onclick="delete_all_num()">C</td>
+        </tr>
+        <tr>
+            <td onclick="take_num('4')">4</td>
+            <td onclick="take_num('5')">5</td>
+            <td onclick="take_num('6')">6</td>
+            <td onclick="take_num('.')">.</td>
+            <td style="color: blue" colspan="2" rowspan="2" onclick="eval_ablr()">Հաշվել</td>
+        </tr>
+        <tr>
+            <td onclick="take_num('7')">7</td>
+            <td onclick="take_num('8')">8</td>
+            <td onclick="take_num('9')">9</td>
+            <td onclick="take_num('0')">0</td>
+        </tr>
+    </table>
+</div>
+</div>
+
+<script>
+	//window.history.pushState(null, null, "/zizi-pizi");
+
+    let selected_num = null;
+    let ablr = {
+        A: {obj: document.querySelector('#div1 > div:nth-child(1)'), num: null, color: "#00f", bcolor: "#aaf"},
+        B: {obj: document.querySelector('#div1 > div:nth-child(2)'), num: null, color: "#000", bcolor: "#aaa"},
+        L: {obj: document.querySelector('#div1 > div:nth-child(3)'), num: null, color: "#f00", bcolor: "#faa"},
+        R: {obj: document.querySelector('#div1 > div:nth-child(4)'), num: null, color: "#070", bcolor: "#afa"},
+        a: {obj: document.querySelector('#div1 > div:nth-child(5)'), num: null, color: "#633", bcolor: "#fb9"}
+    };
+    for (let x in ablr) {
+        ablr[x].num = ablr[x].obj.querySelector('div:nth-child(2)');
+        ablr[x].obj.onmousedown = function () {
+            for (let x1 in ablr) {
+                ablr[x1].obj.style.backgroundColor = "#fff";
+            }
+            ablr[x].obj.style.backgroundColor = ablr[x].bcolor;
+            selected_num = ablr[x].num;
+        };
+    }
+
+    //ablr.R.num.innerHTML = "qwerty";
+
+    function take_num(num) {
+        if (selected_num) {
+            if ((num === '.' && selected_num.innerHTML.includes('.')) || (num === '0' && selected_num.innerHTML === '0')) {
+                return;
+            }
+            if (selected_num.innerHTML === '0' && num !== '.') {
+                selected_num.innerHTML = num;
+                return;
+            }
+            if (selected_num.innerHTML === '' && num === '.') {
+                selected_num.innerHTML = '0.';
+                return;
+            }
+            selected_num.innerHTML += num;
+        }
+    }
+
+    function delete_num() {
+        if (selected_num) {
+            selected_num.innerHTML = '';
+        }
+    }
+
+    function delete_all_num() {
+        for (let x in ablr) {
+            ablr[x].num.innerHTML = "";
+            ablr[x].obj.style.backgroundColor = "#fff";
+        }
+        selected_num = null;
+    }
+
+    function andu_num() {
+        if (selected_num && selected_num.innerHTML.length > 0) {
+            selected_num.innerHTML = selected_num.innerHTML.substring(0, selected_num.innerHTML.length - 1);
+        }
+    }
+
+    function eval_ablr() {
+        //10 tarberak AB AL AR Aa BL BR Ba LR La Ra
+        let A, B, L, R, a;
+        L = R * a * Math.PI / 180;
+        //console.log(L);
+
+
+
+    }
+
+</script>
+
+<!--script>
+    var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+    //console.log(mobile);
+    if (mobile) {
+        document.addEventListener("touchstart", touchHandler, true);
+        document.addEventListener("touchmove", touchHandler, true);
+        document.addEventListener("touchend", touchHandler, true);
+        document.addEventListener("touchcancel", touchHandler, true);
+        //let device_width = document.body.getBoundingClientRect().width;
+        //document.getElementById('for_mobile').setAttribute('content', 'width=device-width, initial-scale=' + device_width / 750);
+        //console.log(device_width);
+    } else {
+        //document.getElementById('for_mobile').remove();
+    }
+
+    function touchHandler(event) {
+        var touches = event.changedTouches,
+            first = touches[0],
+            type = "";
+        switch (event.type) {
+            case "touchstart":
+                type = "mousedown";
+                break;
+            case "touchmove":
+                type = "mousemove";
+                break;
+            case "touchend":
+                type = "mouseup";
+                break;
+            default:
+                return;
+        }
+
+        var simulatedEvent = document.createEvent("MouseEvent");
+        simulatedEvent.initMouseEvent(type, true, true, window, 1,
+            first.screenX, first.screenY,
+            first.clientX, first.clientY, false,
+            false, false, false, 0/*left*/, null);
+        first.target.dispatchEvent(simulatedEvent);
+        //event.preventDefault();
+    }
+</script-->
+</body>
+</html>

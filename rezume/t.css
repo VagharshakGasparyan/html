@@ -1,0 +1,27 @@
+.nclass{color:red; opacity:0.9;background:rgba(255,255,255,0.1);}
+p{
+		color:blue;
+		text-decoration:underline;
+		font-style:italic;
+		font-size:30px;
+		text-align:center;
+		font-weight:bold;
+	}
+	h1{
+		background:rgba(255,255,128,1);
+		color:rgba(0,158,100,1);
+		text-align:center;
+		font-style:italic;
+		font-size:50px;
+		font-weight:bold;
+		border:5px solid green;
+		margin:1px 3% 150px 30%;
+		outline: dotted green 2px;
+	}
+	h2{
+		color:rgba(0,0,255,1);
+		text-align:right;
+		font-size:20px;
+		font-weight:bold;
+	}
+	

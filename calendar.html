@@ -1,0 +1,383 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        .month-div {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            border: 3px double #555;
+            border-radius: 10px;
+            margin: 2px;
+            overflow: hidden;
+        }
+
+        .month-div .month-div-h {
+            /*color: brown;*/
+            font-size: 23px;
+            padding: 5px 0 5px 0;
+            /*font-family: sans-serif;*/
+            /*font-weight: bold;*/
+        }
+
+        .month-table {
+            /*display: inline-block;*/
+            border-spacing: 0;
+            border-collapse: collapse;
+            width: 170px;
+        }
+
+        .month-table tr {
+            display: flex;
+            width: 100%;
+        }
+
+        .month-table td {
+            border: 1px solid #ccc;
+            text-align: center;
+            padding: 0;
+            font-size: 19px;
+            flex: 1;
+        }
+
+        .month-table tr:nth-of-type(6) {
+            color: #05f;
+            font-weight: bold;
+        }
+
+        .month-table tr:nth-of-type(1) td {
+            border-top-width: 2px;
+        }
+
+        .month-table tr:nth-of-type(6) td {
+            border-top-width: 4px;
+        }
+
+        .month-table tr:nth-of-type(7) {
+            color: #f05;
+            font-weight: bold;
+        }
+
+        #calendar-div {
+            position: relative;
+            /*width: 725px;*/
+            /*margin: 0 auto;*/
+            left: 50%;
+            transform: translateX(-50%);
+            display: inline-block;
+        }
+
+        #calendar-year {
+            /*text-align: center;*/
+            /*font-size: 79px;*/
+        }
+
+        #calendar-settings1 {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            transition: 500ms;
+        }
+
+        #calendar-settings1:hover {
+            opacity: 1;
+        }
+
+        /*==============================*/
+        .month {
+            display: inline-flex;
+            flex-direction: column;
+            font-size: 19px;
+            /*width: 250px;*/
+            border: 3px double #999;
+            overflow: hidden;
+            border-radius: 10px;
+            font-family: sans-serif;
+        }
+
+        .month .month-name {
+            font-size: 21px;
+            font-weight: bold;
+            text-align: center;
+            padding: 5px 0 10px 0;
+        }
+
+        .month .month-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .month .month-body .tr {
+            display: flex;
+            margin-right: -1px;
+        }
+
+        .month .month-body .tr.tr-6 {
+            color: blue;
+            font-weight: bold;
+            border-top: 1px solid gray;
+        }
+
+        .month .month-body .tr.tr-7 {
+            color: #ff00aa;
+            font-weight: bold;
+            margin-bottom: -1px;
+        }
+
+        .month .month-body .tr .td {
+            /*padding: 2px;*/
+            margin: -1px 0 0 -1px;
+            height: 23px;
+            overflow: hidden;
+        }
+
+        .month .month-body .tr .td-week {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            /*justify-content: center;*/
+            font-style: italic;
+            text-align: center;
+            border: 1px solid gray;
+            padding: 0 3px;
+        }
+
+        .month .month-body .tr .td-day {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 1px solid gray;
+            width: 29px;
+        }
+
+        #year-head {
+            font-size: 75px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div id="calendar-div">
+    <div id="calendar-year"></div>
+    <div id="calendar-settings1">
+        <!--        <input type="number" step="1" value="2022">-->
+        <select id="year-select-2"></select>
+        <select id="year-select-4"></select>
+    </div>
+
+</div>
+
+<script>
+
+    let months = {
+        1: {hy: "Հունվար", en: "January", ru: "Январь"},
+        2: {hy: "Փետրվար", en: "February", ru: "Февраль"},
+        3: {hy: "Մարտ", en: "March", ru: "Март"},
+        4: {hy: "Ապրիլ", en: "April", ru: "Апрель"},
+        5: {hy: "Մայիս", en: "May", ru: "Май"},
+        6: {hy: "Հունիս", en: "June", ru: "Июнь"},
+        7: {hy: "Հուլիս", en: "July", ru: "Июль"},
+        8: {hy: "Օգոստոս", en: "August", ru: "Август"},
+        9: {hy: "Սեպտեմբեր", en: "September", ru: "Сентябрь"},
+        10: {hy: "Հոկտեմբեր", en: "October", ru: "Октябрь"},
+        11: {hy: "Նոյեմբեր", en: "November", ru: "Ноябрь"},
+        12: {hy: "Դեկտեմբեր", en: "December", ru: "Декабрь"},
+    };
+    let year = new Date().getFullYear();
+    fAddOptions();
+
+    function fAddOptions() {
+        for (let i = 0; i < 100; i++) {
+            let opt = document.createElement("option");
+            opt.setAttribute("value", i.toString());
+            opt.innerHTML = i.toString();
+            document.getElementById("year-select-2").appendChild(opt);
+        }
+        for (let i = 0; i < 100; i++) {
+            let opt = document.createElement("option");
+            let val = i < 10 ? "0" + i : i;
+            opt.setAttribute("value", val);
+            opt.innerHTML = val;
+            document.getElementById("year-select-4").appendChild(opt);
+        }
+    }
+
+    function fDaysInMonth(month, year = null) {
+        let days = month <= 7 ? 30 + month % 2 : 31 - month % 2;
+        days = month === 2 ? year && year % 4 === 0 ? 29 : 28 : days;
+        return days;
+    }
+
+    function fWeekDayJanuary1(year) {
+        let y1 = year % 28;
+        let c366 = Math.floor(y1 / 4);
+        let cm366 = y1 % 4;
+        let n = 5 + y1 + c366;
+        return (n + (cm366 > 0 ? 1 : 0)) % 7;
+    }
+
+    //fWeekDaysMonths(2022, "hy");
+
+    function fWeekDaysMonths(year, lang) {
+        document.getElementById("calendar-year").innerHTML = year;
+        let y28 = [4, 6, 0, 1, 2, 4, 5, 6, 0, 2, 3, 4, 5, 0, 1, 2, 3, 5, 6, 0, 1, 3, 4, 5, 6, 1, 2, 3];
+        let m_28_29 = {
+            28: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+            29: [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        };
+        let mw_28_29 = {
+            28: [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5],
+            29: [0, 3, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6]
+        };
+        let y = year % 28;
+        let f28or29 = year % 4 === 0 ? 29 : 28;
+        //console.log(y28[y] + mw_28_29[f28or29][0]);
+        let yearMonths = [];
+        //let tr_td = [];
+        for (let k = 0; k < 12; k++) {
+            yearMonths.push([]);
+            let table = document.createElement("table");
+            table.classList.add("month-table");
+            let div_h = document.createElement("div");
+            div_h.classList.add("month-div-h");
+            div_h.innerHTML = months[k + 1][lang];
+            let div = document.createElement("div");
+            div.classList.add("month-div");
+            div.appendChild(div_h);
+            div.appendChild(table);
+            //tr_td.push(table);
+            document.getElementById("calendar-div").appendChild(div);
+            let firstDay = y28[y] + mw_28_29[f28or29][k];
+            firstDay = firstDay % 7;
+            let j_len = Math.ceil((firstDay + m_28_29[f28or29][k]) / 7);
+            for (let i = 0; i < 7; i++) {
+                yearMonths[k].push([]);
+                let tr = document.createElement("tr");
+                //tr_td[k].push(tr);
+                table.appendChild(tr);
+                for (let j = 0; j < j_len; j++) {
+                    let val = j === 0 && firstDay > i ? 0 : i - firstDay + j * 7 + 1;
+                    val = val > m_28_29[f28or29][k] ? 0 : val;
+                    yearMonths[k][i].push(val);
+                    let td = document.createElement("td");
+                    td.innerHTML = val ? val : "";
+                    tr.appendChild(td);
+                }
+            }
+        }
+
+    }
+
+
+    // fMakeYearView(2021, "4x3");
+    fMakeYearView(2023, "4x3");
+
+    function fMakeYearView(year, mode = "4x3") {
+        let mw = 4, mh = 3;
+        switch (mode) {
+            case "1x12": mw = 1; mh = 12; break;
+            case "2x6": mw = 2; mh = 6; break;
+            case "3x4": mw = 3; mh = 4; break;
+            case "4x3": mw = 4; mh = 3; break;
+            case "6x2": mw = 6; mh = 2; break;
+            case "12x1": mw = 12; mh = 1; break;
+            default: mw = 4; mh = 3;
+        }
+        year = year === undefined ? new Date().getFullYear() : year;
+        let mainYearDiv = document.createElement("div");
+        mainYearDiv.innerHTML = year.toString();
+        mainYearDiv.style.cssText = "font-size:75px;font-weight:bold;text-align:center";
+        document.getElementById("calendar-year").appendChild(mainYearDiv);
+        for (let i = 0; i < mh; i++){
+            let rowDiv = document.createElement("div");
+            document.getElementById("calendar-year").appendChild(rowDiv);
+            for (let j = 0; j < mw; j++) {
+                let week = j === 0 ? "short" : "none";
+                rowDiv.appendChild(fMakeMonthView(year, (i * mw + j + 1), 'hy', week));
+            }
+        }
+    }
+
+
+    function fMakeMonthView(year, month, lang = 'en', week = 'none') {//month=1...12, week=short|long|none
+        let months = {
+            1: {hy: "Հունվար", en: "January", ru: "Январь"},
+            2: {hy: "Փետրվար", en: "February", ru: "Февраль"},
+            3: {hy: "Մարտ", en: "March", ru: "Март"},
+            4: {hy: "Ապրիլ", en: "April", ru: "Апрель"},
+            5: {hy: "Մայիս", en: "May", ru: "Май"},
+            6: {hy: "Հունիս", en: "June", ru: "Июнь"},
+            7: {hy: "Հուլիս", en: "July", ru: "Июль"},
+            8: {hy: "Օգոստոս", en: "August", ru: "Август"},
+            9: {hy: "Սեպտեմբեր", en: "September", ru: "Сентябрь"},
+            10: {hy: "Հոկտեմբեր", en: "October", ru: "Октябрь"},
+            11: {hy: "Նոյեմբեր", en: "November", ru: "Ноябрь"},
+            12: {hy: "Դեկտեմբեր", en: "December", ru: "Декабрь"},
+        };
+        let weekNames = {
+            1: {hy: ["Երկուշաբթի", "Երկ"], en: ["Sunday", "Sun"], ru: ["Понедельник", "Пн"]},
+            2: {hy: ["Երեքշաբթի", "Երեք"], en: ["Monday", "Mon"], ru: ["Вторник", "Вт"]},
+            3: {hy: ["Չորեքշաբթի", "Չորեք"], en: ["Tuesday", "Tue"], ru: ["Среда", "Ср"]},
+            4: {hy: ["Հինգշաբթի", "Հինգ"], en: ["Wednesday", "Wed"], ru: ["Четверг", "Чт"]},
+            5: {hy: ["ՈՒրբաթ", "ՈՒրբ"], en: ["Thursday", "Thu"], ru: ["Пятница", "Пт"]},
+            6: {hy: ["Շաբաթ", "Շաբ"], en: ["Friday", "Fri"], ru: ["Субботта", "Сб"]},
+            7: {hy: ["Կիրակի", "Կիր"], en: ["Saturday", "Sat"], ru: ["Воскресенье", "Вс"]},
+        };
+        let y28 = [4, 6, 0, 1, 2, 4, 5, 6, 0, 2, 3, 4, 5, 0, 1, 2, 3, 5, 6, 0, 1, 3, 4, 5, 6, 1, 2, 3];
+        let m_28_29 = {
+            28: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+            29: [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        };
+        let mw_28_29 = {
+            28: [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5],
+            29: [0, 3, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6]
+        };
+
+        let k = month - 1;
+        let y = year % 28;
+        let f28or29 = year % 4 === 0 ? 29 : 28;
+        let firstDay = y28[y] + mw_28_29[f28or29][k];
+        firstDay = firstDay % 7;
+
+        let j_len = Math.ceil((firstDay + m_28_29[f28or29][k]) / 7);
+        let mainDiv = document.createElement("div");
+        mainDiv.classList.add(months[month].en.toLowerCase(), 'month', 'month-' + month);
+        let monthNameDiv = document.createElement("div");
+        monthNameDiv.classList.add("month-name");
+        monthNameDiv.innerHTML = months[month][lang];
+        let table = document.createElement("div");
+        table.classList.add("month-body");
+        for (let i = 0; i < 7; i++) {
+            let tr = document.createElement("div");
+            tr.classList.add("tr", "tr-" + (i + 1));
+            table.appendChild(tr);
+            if (week === "short" || week === "long") {
+                let td = document.createElement("div");
+                td.classList.add("td", "td-week", "week-" + (i + 1));
+                td.innerHTML = weekNames[i + 1][lang][(week === "long" ? 0 : 1)];
+                tr.appendChild(td);
+            }
+            for (let j = 0; j < j_len; j++) {
+                let val = j === 0 && firstDay > i ? 0 : i - firstDay + j * 7 + 1;
+                val = val > m_28_29[f28or29][k] ? 0 : val;
+                let td = document.createElement("div");
+                td.classList.add("td", "td-" + (j + 1), "td-day");
+                td.innerHTML = val ? val : "";
+                tr.appendChild(td);
+            }
+        }
+        mainDiv.appendChild(monthNameDiv);
+        mainDiv.appendChild(table);
+        return mainDiv;
+    }
+
+
+</script>
+</body>
+</html>

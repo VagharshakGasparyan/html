@@ -1,0 +1,609 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+    <title>functions</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        :root{
+            --bg: #123;
+            --bg-hover: #246;
+            --bg-active: #369;
+            --t-color: #fff;
+            --border-color: #999;
+        }
+        body{
+            background-color: var(--bg);
+            color: var(--t-color);
+        }
+        .inp-file-container {
+            width: 512px;
+            max-width: 100vw;
+            height: 256px;
+            border: 2px dashed var(--border-color);
+            border-radius: 10px;
+            display: flex;
+            position: relative;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-family: sans-serif;
+        }
+
+        .inp-file-container:hover {
+            background-color: var(--bg-hover);
+        }
+
+        .inp-file-container:active {
+            background-color: var(--bg-active);
+        }
+
+        .inp-file-container:active span {
+            color: white;
+        }
+
+        .inp-file-container input {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .inp-file-container span {
+            color: gray;
+            font-size: 25px;
+        }
+
+        span.inp-name {
+            display: inline-block;
+            font-size: 14px;
+            margin-top: 10px;
+            color: #0a0;
+            max-width: calc(100% - 20px);
+            text-align: center;
+        }
+
+        span.inp-name-n {
+            color: #79f;
+            font-size: 16px;
+        }
+
+        .img-container {
+            /*width: 512px;*/
+            margin-top: 10px;
+            max-width: calc(100vw - 20px);
+            display: flex;
+            position: relative;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .img-container img {
+            max-width: 100%;
+        }
+
+        .text-container {
+            font-size: 16px;
+            box-sizing: border-box;
+            padding: 10px;
+            font-family: monospace;
+            tab-size: 4;
+            white-space: pre-wrap;
+        }
+
+        .obj {
+            padding-left: 20px;
+            transition: height 0.3s;
+            border-left: 3px dashed #fff3;
+            box-sizing: border-box;
+            position: relative;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .arr-key {
+            color: #fff5;
+        }
+
+        .obj-key {
+            font-weight: bold;
+        }
+
+        .num-val {
+            color: #79f;
+        }
+
+        .bool-val {
+            color: #0c0;
+        }
+
+        .null-val {
+            color: #f70;
+        }
+
+        .str-val {
+            color: #ff9;
+        }
+
+        .tree-dot {
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+            border-radius: 5px;
+            color: var(--t-color);
+            cursor: pointer;
+            user-select: none;
+            display: inline-block;
+        }
+
+        .tree-dot:hover {
+            color: white;
+            background-color: var(--bg-hover);
+        }
+
+        .tree-dot:active {
+            background-color: var(--bg-active);
+        }
+
+        .no-dot {
+            cursor: pointer;
+            user-select: none;
+            min-width: 46px;
+            display: none;
+        }
+
+        .no-dot:hover {
+            background-color: var(--bg-hover);
+        }
+
+        .no-dot:active {
+            background-color: var(--bg-active);
+        }
+
+        .ch-for-dot {
+            display: none;
+        }
+
+        .ch-for-dot:checked ~ .no-dot {
+            display: inline-block;
+        }
+
+        .ch-for-dot:checked ~ label .tree-dot {
+            display: none;
+        }
+
+        .ch-for-dot:checked ~ label .no-dot {
+            display: inline-block;
+        }
+
+        .ch-for-dot:checked ~ .obj {
+            height: unset;
+            border-top: 1px solid #fff3;
+            border-bottom: 1px solid #fff3;
+        }
+
+        .item:hover {
+            background-color: #fff2;
+        }
+        #head_info{
+            color: #f90;
+            padding: 7px 3px;
+        }
+        .sel{
+            outline: none;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg);
+            color: var(--t-color);
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-family: monospace;
+            padding: 3px;
+            margin: 0 3px;
+        }
+        .all-info{
+            position: sticky;
+            z-index: 999;
+            top: 0;
+            background-color: var(--bg);
+        }
+        #sequence_info{
+            font-size: 16px;
+            box-sizing: border-box;
+            font-family: monospace;
+        }
+        #open_close_all{
+            padding: 7px 3px;
+        }
+        #open_close_all button{
+            border: 1px solid var(--border-color);
+            outline: none;
+            border-radius: 5px;
+            color: var(--t-color);
+            background-color: var(--bg);
+            padding: 3px;
+        }
+        #open_close_all #search_json{
+            outline: none;
+            margin-left: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px 0 0 12px;
+            padding: 3px 5px;
+            color: var(--t-color);
+            background-color: var(--bg);
+            box-sizing: border-box;
+            width: 120px;
+            font-size: 14px;
+        }
+        #open_close_all #search_json:focus{
+            color: var(--bg);
+            background-color: var(--t-color);
+        }
+        #search_json::placeholder{
+            color: #aaa;
+        }
+        #open_close_all button:hover{
+            background-color: var(--bg-hover);
+        }
+        #open_close_all button:active{
+            background-color: var(--bg-active);
+        }
+        #iframe_file{
+            width: 100%;
+            height: 100vh;
+        }
+        #search_result{
+            font-size: 12px;
+            margin-top: 10px;
+            max-height: calc(100vh - 150px) ;
+            overflow-y: auto;
+            width: max-content;
+        }
+        #search_json_clear{
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: var(--border-color);
+            color: var(--bg);
+            line-height: 24px;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 0 12px 12px 0;
+            user-select: none;
+        }
+        #search_json_clear:hover{
+            background-color: var(--bg-hover);
+        }
+        #search_json_clear:active{
+            background-color: var(--bg-active);
+            color: var(--t-color);
+        }
+        .find-word{
+            background-color: #c00;
+            border-radius: 2px;
+            padding: 0 1px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="inp-file-container">
+    <span class="inp-info">Ընտրեք ֆայլը</span>
+    <span class="inp-name"></span>
+    <input class="inp-file" type="file" placeholder="placeholder">
+</div>
+<div class="img-container"><img></div>
+<div class="text-container"></div>
+
+<script>
+    function dataURLtoFile(dataUrl, filename) {
+        let arr = dataUrl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, {type: mime});
+    }
+
+    async function fileToBase64(file) {
+        let b64 = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+        });
+        return b64;
+    }
+
+    async function fileToText(file) {
+        let txt = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = () => resolve(reader.result);
+        });
+        return txt;
+    }
+
+    function htmlToText(t) {
+        let div = document.createElement('div');
+        div.innerText = t;
+        return div.innerHTML;
+    }
+    // function textToHtml(t) {
+    //     let div = document.createElement('div');
+    //     div.innerHTML = t;
+    //     return div.innerText;
+    // }
+
+    function jsonToHTML(obj, ch_id = 'ch_id_0', prev_keys = 'data') {
+        // console.log(typeof obj);
+        let returned = '';
+        if (Array.isArray(obj) || (typeof obj === "object" && obj !== null)) {
+            let op_cl = Array.isArray(obj) ? ['[', ']', 'arr-key', ''] : ['{', '}', 'obj-key', '&quot;'];
+            returned += '<input type="checkbox" class="ch-for-dot" id="' + ch_id + '"><label for="' + ch_id + '"><span class="no-dot">' + op_cl[0] + '</span><span class="tree-dot">'
+                + op_cl[0] + '...' + op_cl[1] + '</span></label><div class="obj">';
+            let i = 0;
+            for (let key in obj) {
+                let current_keys = prev_keys + '[' + op_cl[3] + htmlToText(key) + op_cl[3] + ']';
+                let cls = (Array.isArray(obj[key]) || (typeof obj[key] === "object" && obj[key] !== null)) ? 'items' : 'item';
+                returned += '<div class="' + cls + '"><span class="' + op_cl[2] + '" title="' + current_keys + '">'
+                    + htmlToText(key) + '</span>: ' + jsonToHTML(obj[key], ch_id + '_' + i, current_keys) + '</div>';
+                i++;
+            }
+            returned += '</div><label class="no-dot" for="' + ch_id + '">' + op_cl[1] + '</label>';
+        } else if (typeof obj === "string") {
+            returned += '<span class="str-val">"' + htmlToText(obj) + '"</span>';
+        } else if (typeof obj === "number") {
+            returned += '<span class="num-val">' + obj + '</span>';
+        } else if (typeof obj === "boolean") {
+            returned += '<span class="bool-val">' + obj.toString() + '</span>';
+        } else if (obj === null) {
+            returned += '<span class="null-val">null</span>';
+        }
+        // console.log(returned);
+        return returned;
+    }
+
+    // let b64Data = window.btoa("Hello, world"); //from original to base64
+    // console.log(b64Data);
+    // let decodedData = window.atob(b64Data); //from base64 to original
+    // console.log(decodedData);
+    window.addEventListener('load', function () {
+        let sequenceKeys = [];
+        document.querySelectorAll('.inp-file-container').forEach((container) => {
+            let inp = container.querySelector('input');
+            let fileNamePlace = container.querySelector('.inp-name');
+            inp.addEventListener('input', async (ev) => {
+                let file = inp.files[0];
+                // console.log(file);
+                fileNamePlace.innerHTML = '<span class="inp-name-n">Ֆայլի անուն՝ </span>' + file.name
+                    + '<br><span class="inp-name-n">Ֆայլի տեսակ՝ </span>' + file.type
+                    + '<br><span class="inp-name-n">Ֆայլի չափ՝ </span>' + file.size + '<span class="inp-name-n"> բայտ</span>';
+                let img = document.querySelector('.img-container img');
+                let txt = document.querySelector('.text-container');
+                img.src = '';
+                txt.innerHTML = '';
+                if (file.type.startsWith('image')) {
+                    img.src = await fileToBase64(file);
+                } else if (file.type.startsWith('text')) {
+                    let text = await fileToText(file);
+                    // console.log(text);
+                    txt.innerText = text;
+                } else if (file.type.startsWith('application/json')) {
+                    await forApplicationJson(file);
+                } else if (file.type.startsWith('application/pdf')) {
+                    txt.innerHTML = '<iframe id="iframe_file" src="" allowfullscreen></iframe>';
+                    try {
+                        let fileURL = URL.createObjectURL(file);
+                        document.getElementById('iframe_file').src = fileURL;
+                    }catch (e) {
+                        console.log(e);
+                    }
+                }
+            });
+        });
+        async function forApplicationJson(file) {
+            sequenceKeys = [];
+            let txt = document.querySelector('.text-container');
+            let text = await fileToText(file);
+            let json = JSON.parse(text);
+            console.log(json);
+            txt.innerHTML = '<div class="all-info">'
+                + '<div id="head_info">&nbsp;</div>'
+                + '<div id="sequence_info">data</div>'
+                + '<div id="open_close_all"><button id="open_all">Բացել բոլորը</button>&nbsp;'
+                + '<button id="close_all">&times;Փակել բոլորը</button><input type="text" id="search_json" placeholder="Որոնել">'
+                + '<div id="search_json_clear">&times;</div>'
+                + '<select class="sel" id="sel_search"><option value="optional">Կամընտիր</option><option value="insensitive">Բացառել մեծ ու փոքրատառ</option><option value="strictly">Խիստ</option></select>'
+                + '</div>'
+                + '</div>'
+                + jsonToHTML(json)
+                + '<div id="search_result"></div>';
+            document.querySelectorAll('.arr-key, .obj-key').forEach((item)=>{
+                item.addEventListener('click', (ev)=>{
+                    ev.stopPropagation();
+                    document.getElementById('head_info').innerText = item.title;
+                    console.log(item.title);
+                });
+            });
+            document.getElementById('open_all').addEventListener('click', ()=>{
+                document.querySelectorAll('input[type=\"checkbox\"].ch-for-dot').forEach((ch)=>{
+                    ch.checked = true;
+                });
+            });
+            document.getElementById('close_all').addEventListener('click', ()=>{
+                document.querySelectorAll('input[type=\"checkbox\"].ch-for-dot').forEach((ch)=>{
+                    ch.checked = false;
+                });
+            });
+
+            showSelects(json);
+            searchJson(json);
+        }
+        function searchJson(json) {
+            let selSearch = document.getElementById('sel_search');//optional, insensitive, strictly
+            let sClear = document.getElementById('search_json_clear');
+            let searchResult = document.getElementById('search_result');
+            let sj = document.getElementById('search_json');
+            let c = document.createElement('canvas');
+            let ctx = c.getContext("2d");
+            ctx.font = anyFont(sj);
+            let showByDataIndex = 0;
+            let timeoutId = -1;
+            selSearch.addEventListener('change', inpListener);
+            sj.addEventListener('input', inpListener);
+            function inpListener(ev) {
+                showByDataIndex = 0;
+                let val = sj.value;
+                let w = ctx.measureText(val).width;
+                sj.style.width = Math.max(120, w + 12) + 'px';
+                clearTimeout(timeoutId);
+                searchResult.innerHTML = '';
+                if(val === ""){
+                    return;
+                }
+                timeoutId = setTimeout(()=>{
+                    sw(json, [], val);
+                }, 1000);
+            }
+            sClear.addEventListener('click', ()=>{
+                sj.value = '';
+                inpListener();
+            });
+            function sw(obj, keySeq, val) {//search word in object
+                if(typeof obj === 'object' && obj !== null){
+                    for(let key in obj){
+                        let str0 = '', str1 = '', str2 = '';
+                        let str_i = key.toLowerCase().indexOf(val.toLowerCase());
+                        switch (selSearch.value) {
+                            case 'optional': str_i = key.toLowerCase().indexOf(val.toLowerCase()); break;
+                            case 'insensitive': str_i = key.toLowerCase() === val.toLowerCase() ? 0 : -1; break;
+                            case 'strictly': str_i = key === val ? 0 : -1; break;
+                        }
+                        if(str_i > -1){
+                            str0 = key.slice(0, str_i);
+                            str1 = key.slice(str_i, str_i + val.length);
+                            str2 = key.slice(str_i + val.length);
+                            let newVal = Array.isArray(obj) ? parseInt(val) : val;
+                            showByData([...keySeq, newVal], null, str0, str1, str2);
+                        }
+                    }
+                    if(Array.isArray(obj)){
+                        obj.forEach((ob, key)=>{
+                            sw(obj[key], [...keySeq, key], val);
+                        });
+                    }else{
+                        for(let key in obj){
+                            sw(obj[key], [...keySeq, key], val);
+                        }
+                    }
+                }else{
+                    let key = String(obj);
+                    let str0 = '', str1 = '', str2 = '';
+                    let str_i = key.toLowerCase().indexOf(val.toLowerCase());
+                    switch (selSearch.value) {
+                        case 'optional': str_i = key.toLowerCase().indexOf(val.toLowerCase()); break;
+                        case 'insensitive': str_i = key.toLowerCase() === val.toLowerCase() ? 0 : -1; break;
+                        case 'strictly': str_i = key === val ? 0 : -1; break;
+                    }
+                    if(str_i > -1){
+                        str0 = key.slice(0, str_i);
+                        str1 = key.slice(str_i, str_i + val.length);
+                        str2 = key.slice(str_i + val.length);
+                        showByData(keySeq, val, str0, str1, str2, typeof obj);
+                    }
+                }
+                // console.log(val);
+            }
+            function showByData(keySeq, value = null, str0, str1, str2, type = 'string') {
+                showByDataIndex++;
+                let sp0 = "<span class='find-word'>";
+                let sp1 = "</span>";
+                let str = "data";
+                keySeq.forEach((key, i)=>{
+                    let sp = (i === keySeq.length - 1 && value === null)
+                        ? htmlToText(str0) + sp0 + htmlToText(str1) + sp1 + htmlToText(str2)
+                        : htmlToText(key);
+                    if(typeof key === 'number'){
+                        str += "[" + sp + "]";
+                    }else{
+                        str += "[\"" + sp + "\"]";
+                    }
+                });
+                if(value !== null){
+                    let sp = (type === 'number' || type === 'boolean' || type === 'object') ? "" : "\"";
+                    str += " = " + sp + htmlToText(str0) + sp0 + htmlToText(str1) + sp1 + htmlToText(str2) + sp;
+                }
+                searchResult.innerHTML += '<div style="padding: 2px">' + showByDataIndex + ') ' + str + '</div>';
+                // console.log(str);
+            }
+        }
+        function anyFont(element) {
+            let prop = ["font-style", "font-variant", "font-weight", "font-size", "font-family"];
+            let font = "";
+            for (let x in prop){
+                font += window.getComputedStyle(element, null).getPropertyValue(prop[x]) + " ";
+            }
+            return font;
+        }
+        function showSelects(obj) {
+            let sequence_info = document.getElementById('sequence_info');
+            let ih = 'data';
+            let newObj = obj;
+            for(let i = 0; i < sequenceKeys.length; i++){
+                let key = sequenceKeys[i];
+                if(typeof newObj === 'object' && newObj !== null && key in newObj){
+                    ih += makeSelect(newObj, key);
+                    newObj = newObj[key];
+                }else{
+                    sequenceKeys.length = i;
+                    break;
+                }
+            }
+            ih += makeSelect(newObj);
+            sequence_info.innerHTML = ih;
+            addSelListeners(obj);
+        }
+        function addSelListeners(obj) {
+            document.querySelectorAll('#sequence_info select.sel').forEach((sel, i)=>{
+                sel.addEventListener('input', (ev)=>{
+                    if(sel.value){
+                        sequenceKeys[i] = sel.value;
+                    }else{
+                        sequenceKeys.length = i;
+                    }
+                    showSelects(obj);
+                });
+            })
+        }
+        function makeSelect(obj, selectedKey = '') {
+            if (Array.isArray(obj) || (typeof obj === "object" && obj !== null)) {
+                let sel = '<select class="sel"><option></option>';
+                for (let key in obj){
+                    sel += (selectedKey === key ? '<option selected>' : '<option>') + htmlToText(key) + '</option>';
+                }
+                sel += '</select>';
+                return sel;
+            } else if (typeof obj === "string") {
+                return '<span> = "' + htmlToText(obj) + '"</span>';
+            } else if (typeof obj === "number") {
+                return '<span> = ' + obj + '</span>';
+            } else if (typeof obj === "boolean") {
+                return '<span> = ' + obj.toString() + '</span>';
+            } else if (obj === null) {
+                return '<span> = null</span>';
+            }
+            return '';
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+
+    <style>
+        .full-screen {
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: #0007;
+            left: 0;
+            top: 0;
+            cursor: none;
+        }
+    </style>
+</head>
+<body style="height: 100vh;">
+<div>Incvor ban</div>
+<input id="open-full" type="button" value="open full screen">
+<!--<input id="my-text" type="text" >-->
+<div class="full-screen"></div>
+<script>
+
+    function closeFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
+        }
+    }
+    function fFullScreen(el){
+        if (el.requestFullscreen) {
+            el.requestFullscreen();
+        } else if (el.webkitRequestFullscreen) { /* Safari */
+            el.webkitRequestFullscreen();
+        } else if (el.msRequestFullscreen) { /* IE11 */
+            el.msRequestFullscreen();
+        }
+    }
+    // document.documentElement.addEventListener('fullscreenchange', function (e) {
+    //     console.log(555);
+    //     // if (document.documentElement.fullscreenElement) {
+    //     //     console.log('yes, fullscreen');
+    //     // }else{
+    //     //
+    //     //     fFullScreen(document.documentElement);
+    //     //     // location.reload();
+    //     //     console.log('no, fullscreen');
+    //     // }
+    // });
+    // window.addEventListener('load', function (e) {
+    //     document.getElementById('open-full').addEventListener('click', function () {
+    //         fu();
+    //     });
+    //     function f1() {
+    //         // let nWindow = window.open("", "MsgWindow", "left=0,top=0,width="+screen.width+",height="+screen.height);
+    //         let nWindow = window.open("", "MsgWindow", "fullscreen=yes, scrollbars=auto");
+    //         //nWindow.moveTo(0,0);
+    //         let nwdb = nWindow.document.body;
+    //         nwdb.style.backgroundColor='#000';
+    //         nWindow.document.oncontextmenu = function () {
+    //             return false;
+    //         };
+    //         nWindow.onkeydown = function(e){
+    //             //console.log(e.code);
+    //             return false;
+    //         }
+    //         nwdb.onclick = function (){
+    //             fFullScreen(nwdb);
+    //         }
+    //
+    //     }
+    //
+    //     function fu() {
+    //         let fs = document.querySelector('.full-screen');
+    //         //fs.style.display = 'block';
+    //         fFullScreen(document.body);
+    //
+    //
+    //         document.oncontextmenu = function () {
+    //             return false;
+    //         };
+    //         window.onkeydown = function(e){
+    //             console.log(e.code);
+    //             // setTimeout(()=>{
+    //             //     fFullScreen(document.body);
+    //             // },100);
+    //
+    //             // if (document.fullscreenElement) {
+    //             //     console.log('yes, fullscreen');
+    //             // }else{
+    //             //     fFullScreen(document.body);
+    //             //     console.log('no, fullscreen');
+    //             // }
+    //             //return false;
+    //         }
+    //         // window.onkeyup = function(e){
+    //         //     fFullScreen(document.body);
+    //         //     return false;
+    //         // }
+    //     }
+    // });
+
+</script>
+</body>
+</html>

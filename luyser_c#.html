@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .open-file {
+            border: 1px solid black;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .open-file:hover {
+            background-color: #ccc;
+        }
+
+        #cnv {
+            display: block;
+            background-color: black;
+            width: 1024px;
+            height: 768px;
+            transform: scaleY(-1);
+        }
+    </style>
+</head>
+<body>
+<div style="margin: 0 auto;padding: 10px;width: 1044px;border: 1px solid #eef;">
+    <label id="open-file" class="open-file" style="margin-bottom: 10px;">
+        <input id="just-file" type="file" style="display: none">
+        <div>Բացել json ֆայլը</div>
+    </label>
+    <canvas id="cnv" width="1024" height="768"></canvas>
+</div>
+
+
+<script>
+    window.addEventListener('load', function () {
+        document.getElementById('just-file').addEventListener('input', function (ev) {
+            let files = this.files;
+            if (files.length) {
+                let fr = new FileReader();
+                fr.readAsText(files[0]);
+                fr.onload = function (evt) {
+                    let data = evt.target.result.toString();
+                    console.log(data);
+                    console.log(JSON.parse(data));
+                    paint(JSON.parse(data));
+
+                }
+            }
+        });
+        let innerJson = [
+            {"x": 17, "y": 223},
+            {"x": 70, "y": 245},
+            {"x": 130, "y": 245},
+            {"x": 185, "y": 215},
+            {"x": 169, "y": 188},
+            {"x": 129, "y": 198},
+            {"x": 113, "y": 163},
+            {"x": 95, "y": 165},
+            {"x": 72, "y": 198},
+            {"x": 26, "y": 203}
+        ];
+        paint(innerJson);
+
+        function paint(jd) {
+            let cnv = document.getElementById('cnv');
+            let w = cnv.width, h = cnv.height;
+            let ctx = cnv.getContext('2d');
+            let mm_xy = {min_x: jd[0].x, max_x: jd[0].x, min_y: jd[0].y, max_y: jd[0].y};
+            jd.forEach((jdi, i) => {
+                if (jdi.x < mm_xy.min_x) {
+                    mm_xy.min_x = jdi.x;
+                }
+                if (jdi.x > mm_xy.max_x) {
+                    mm_xy.max_x = jdi.x;
+                }
+                if (jdi.y < mm_xy.min_y) {
+                    mm_xy.min_y = jdi.y;
+                }
+                if (jdi.y > mm_xy.max_y) {
+                    mm_xy.max_y = jdi.y;
+                }
+            });
+            let dx = mm_xy.max_x - mm_xy.min_x;
+            let dy = mm_xy.max_y - mm_xy.min_y;
+            let k = Math.min((w - 20) / dx, (w - 20) / dy);
+            let njd = [];
+            jd.forEach((jdi, i) => {
+                njd.push({
+                    x: (jdi.x - mm_xy.min_x) * k + 10,
+                    y: (jdi.y - mm_xy.min_y) * k + 10,
+                });
+            });
+            //--------------------draw main --------------------------
+            ctx.clearRect(0, 0, w, h);
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            njd.forEach((jdi, i) => {
+                if (i === 0) {
+                    ctx.moveTo(jdi.x, jdi.y);
+                } else {
+                    ctx.lineTo(jdi.x, jdi.y);
+                }
+            });
+            ctx.closePath();
+            ctx.stroke();
+            //---------------------------------------------------------
+            let lines = [];
+            for (let i = 1; i < njd.length; i++) {
+                lines.push({
+                    x1: njd[i - 1].x,
+                    y1: njd[i - 1].y,
+                    x2: njd[i].x,
+                    y2: njd[i].y
+                });
+            }
+            let i = njd.length - 1;
+            lines.push({
+                x1: njd[i].x,
+                y1: njd[i].y,
+                x2: njd[0].x,
+                y2: njd[0].y
+            });
+            console.log(lines);
+            let sticks = [];
+            for (let i = 0; i < lines.length; i++) {
+                for (let i1 = i + 1; i1 < lines.length; i1++) {
+                    console.log(i + '-' + i1);
+                    let stick = findStick(lines[i], lines[i1]);
+                    if (stick) {
+                        sticks.push(stick);
+                    }
+                }
+            }
+            //----------------------------------------------------
+
+            ctx.lineWidth = 2;
+            sticks.forEach((st, i) => {
+                ctx.beginPath();
+                ctx.strokeStyle = '#0a0';
+                ctx.moveTo(st.x1, st.y1);
+                ctx.lineTo(st.x2, st.y2);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.strokeStyle = '#900';
+                ctx.fillStyle = '#f56';
+                ctx.arc(st.x3, st.y3, 4, 0, 2 * Math.PI, false);
+                ctx.fill();
+                ctx.stroke();
+            });
+            //console.log(sticks);
+
+        }
+
+    });
+
+    function findStick(line1, line2) {
+        let dx1 = line1.x2 - line1.x1;
+        let dy1 = line1.y2 - line1.y1;
+        let dx2 = line2.x2 - line2.x1;
+        let dy2 = line2.y2 - line2.y1;
+        let a1 = Math.atan2(dy1, dx1);//angle
+        let a2 = Math.atan2(dy2, dx2);//angle
+        let da = a2 - a1;
+        let a3_90 = a1 + da / 2;
+        let a3 = a3_90 - Math.PI / 2;
+        let bb1 = (line1.y2 * line1.x1 - line1.y1 * line1.x2) / (line1.x1 - line1.x2);
+        let aa1 = (line1.y1 - bb1) / line1.x1;
+        let bb2 = (line2.y2 * line2.x1 - line2.y1 * line2.x2) / (line2.x1 - line2.x2);
+        let aa2 = (line2.y1 - bb2) / line2.x1;
+        let xh = (bb2 - bb1) / (aa1 - aa2);
+        let yh = aa1 * xh + bb1;
+
+        if (a3 > Math.PI / 2) {
+            a3 -= Math.PI;
+        }
+        if (a3 < -(Math.PI / 2)) {
+            a3 += Math.PI;
+        }
+        let aa3 = Math.tan(a3);
+        let bb3 = yh - aa3 * xh;
+        let x3 = 0;
+        let x4 = 1024;
+        let y3 = aa3 * x3 + bb3;
+        let y4 = aa3 * x4 + bb3;
+
+        //console.log(a1 * 180 / Math.PI, a2 * 180 / Math.PI, da * 180 / Math.PI, a3 * 180 / Math.PI);
+        //console.log(x3, y3, x4, y4);
+        return {
+            // x1: xh - Math.cos(a3) * 923,
+            // y1: yh - Math.sin(a3) * 923,
+            // x2: xh + Math.cos(a3) * 923,
+            // y2: yh + Math.sin(a3) * 923,
+            x1: x3,
+            y1: y3,
+            x2: x4,
+            y2: y4,
+            x3: xh,
+            y3: yh,
+            a: aa3,
+            b: bb3
+        };
+        // return {
+        //     x1: x3,
+        //     y1: y3,
+        //     x2: x4,
+        //     y2: y4
+        // };
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>թիթլ</title>
+    <style>
+        .c1 {
+            border-radius: 35px 35px;
+            border: 3px solid red;
+            height: 70px;
+            font-size: 35px;
+            color: blue;
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body onresize="getPageSize()">
+<a href="https://www.google.ru/">depi google</a>
+<div class="c1" id="t1"></div>
+<br>
+<pre>
+text1
+text2                               incvor     ban
+text3
+</pre>
+<hr size="1" align="center" width="54%" color="red">
+<hr size="2" align="center" width="51%" color="red">
+<hr size="3" align="center" width="48%" color="red">
+<hr size="4" align="center" width="45%" color="red">
+<hr size="5" align="center" width="42%" color="red">
+<hr size="6" align="center" width="39%" color="red">
+<hr size="7" align="center" width="36%" color="red">
+<hr size="8" align="center" width="33%" color="red">
+<hr size="9" align="center" width="30%" color="red">
+<hr size="10" align="center" width="27%" color="red">
+<hr size="11" align="center" width="24%" color="red">
+<hr size="12" align="center" width="21%" color="red">
+<hr size="13" align="center" width="18%" color="red">
+<hr size="14" align="center" width="15%" color="red">
+<hr size="15" align="center" width="12%" color="red">
+<hr size="16" align="center" width="9%" color="red">
+<hr size="17" align="center" width="6%" color="red">
+<hr size="18" align="center" width="3%" color="red">
+
+<ul>
+    <li>
+        <ul>
+            <li>nomer_1</li>
+            <li>nomer_2</li>
+            <li>nomer_3</li>
+        </ul>
+    </li>
+    <li>
+        <ul>
+            <li>nomer_1</li>
+            <li>nomer_2</li>
+            <li>nomer_3</li>
+        </ul>
+    </li>
+    <li>
+        <ul>
+            <li>nomer_1</li>
+            <li>nomer_2</li>
+            <li>nomer_3</li>
+        </ul>
+    </li>
+</ul>
+<ol>
+    <li>nomer_1</li>
+    <li>nomer_2</li>
+    <li>nomer_3</li>
+</ol>
+
+<script>
+
+    getPageSize();
+    function getPageSize() {
+        //var w = document.body.clientWidth;
+        //var hn = document.body.clientHeight;
+        var w = document.documentElement.clientWidth;
+        var hn = document.documentElement.clientHeight;
+        document.getElementById("t1").innerHTML = "lenq=" + w + " barcrutyun=" + hn;// + " x " + hn;
+        //document.write(w);
+    }
+</script>
+</body>
+</html>

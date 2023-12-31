@@ -1,0 +1,159 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <title> ? </title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        ul.category {
+            padding: 1px;
+            margin: 1px;
+        }
+        ul.category>li>ul{
+            font-size: 20px;
+        }
+        li {
+            list-style: none;
+        }
+
+        li a {
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        li ul {
+            display: none;
+        }
+        ul{
+            padding-left: 40px;
+            font-size: 25px;
+        }
+        body{
+            background-image: url("FreeSoftMap/fonssb200.png");
+            height: 5000px;
+            width: 3000px;
+        }
+    </style>
+</head>
+<body>
+<div style="border: 2px solid black;display: inline-block;vertical-align: top;bottom:50px;position: relative">
+    <ul class="category">
+        <li><a href="#">Կայքեր</a>
+            <ul class="subcategory">
+                <li><a href="https://www.google.ru" target="_blank">Google</a></li>
+                <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
+                <li><a href="https://www.youtube.com/" target="_blank">Youtube</a></li>
+                <li><a href="#">Audi</a></li>
+                <li><a href="#">Ferrari</a></li>
+                <li><a href="#">Bentley</a></li>
+                <li><a href="#">BMW</a></li>
+                <li><a href="#">Bugatti</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Menu 2</a>
+            <ul class="subcategory">
+                <li><a href="#">Sub menu 1</a></li>
+                <li><a href="#">Sub menu 2</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Menu 3</a>
+            <ul class="subcategory">
+                <li><a href="#">Sub menu 1</a></li>
+                <li><a href="#">Sub menu 2</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Menu 4</a>
+            <ul class="subcategory">
+                <li><a href="#">Sub menu 1</a></li>
+                <li><a href="#">Sub menu 2</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div style="display: inline-block;border: 2px solid black">
+    <ul class="category">
+        <li><a href="#">Mercedes</a>
+            <ul class="subcategory">
+                <li><a href="#">Benz</a></li>
+                <li><a href="#">A160</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Toyota</a>
+            <ul class="subcategory">
+                <li><a href="#">Korolla</a></li>
+                <li><a href="#">hundra</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Menu 3</a>
+            <ul class="subcategory">
+                <li><a href="#">Sub menu 1</a></li>
+                <li><a href="#">Sub menu 2</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Menu 4</a>
+            <ul class="subcategory">
+                <li><a href="#">Sub menu 1</a></li>
+                <li><a href="#">Sub menu 2</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Menu 5</a>
+            <ul class="subcategory">
+                <li><a href="#">Sub menu 1</a></li>
+                <li><a href="#">Sub menu 2</a></li>
+            </ul>
+        </li>
+    </ul>
+</div><br><br>
+<div>
+    <ul class="category">
+        <li><a href="#">Menu 1</a>
+            <ul class="subcategory">
+                <li><a href="#">Sub menu 1</a></li>
+                <li><a href="#">Sub menu 2</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Menu 2</a>
+            <ul class="subcategory">
+                <li><a href="#">Sub menu 1</a></li>
+                <li><a href="#">Sub menu 2</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Menu 3</a>
+            <ul class="subcategory">
+                <li><a href="#">Sub menu 1</a></li>
+                <li><a href="#">Sub menu 2</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div style="border: 1px solid blue;position: relative;display: inline-block;left: 100px;">text
+    <div style="border: 1px solid red;display: inline-block;position: fixed;left: auto">text1</div>
+    <div style="border: 1px solid red;display: inline-block;left: 25px">text2</div>text
+</div>
+<script>
+    var i, j, li = [];
+    var ul = document.querySelectorAll("ul.category");
+    for (i = 0; i < ul.length; i++) {
+        li[i] = ul[i].children;
+        for (j = 0; j < li[i].length; j++) {
+            //li[i][j].click();
+            eval('li[' + i + '][' + j + '].onclick = function(){categor(' + i + ',' + j + ');}');
+        }
+        li[i][0].click();
+    }
+    function categor(xumb, menu) {
+        var cati;
+        if (li[xumb][menu].children[1].style.display === "none") {
+            li[xumb][menu].children[1].style.display = "block";
+        } else {
+            li[xumb][menu].children[1].style.display = "none";
+        }
+        for (cati = 0; cati < menu; cati++) {
+            li[xumb][cati].children[1].style.display = "none";
+        }
+        for (cati = menu + 1; cati < li[xumb].length; cati++) {
+            li[xumb][cati].children[1].style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>

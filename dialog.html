@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>dialog</title>
+<style>
+	dialog {
+		background: #e6f6ff;
+		max-width: 600px; 
+		box-shadow: 0 0 5px rgba(0, 111, 167, 0.7);
+		border-radius: 10px;
+	}
+	dialog::backdrop {
+		background-color: rgba(230, 246, 255, 0.3);
+	}
+	.adblock_left{
+		float: left;
+		display: inline;
+	}
+	.adblock_right{  }
+	li{
+		list-style: none;
+	}
+	img.adblock_img{
+		width: 150px;
+		height: 150px;
+		margin: 10px;
+	}
+	p.adblock_vernagir{
+		font-size: 25px;
+		margin-left: 10px;
+		margin-bottom: 5px;
+		color: red;
+	}
+	ul.adblock_footer{
+		margin: 0px;
+		padding: 0px;
+	}
+	li.adblock_desc{
+		display: block;
+		font-size: 17px;
+		margin-left: 10px;
+		font-family:
+		sans-serif;
+		line-height: 20px;
+		margin-bottom: 5px;
+	}
+	div.dialog_footer{
+		font-size: 17px;
+		font-family:
+		sans-serif;
+	}
+
+	button#closedialog{
+		text-align: center;
+		background-color: #006fa6;
+		font-size: 25px;
+		color: #ffffff;
+		border-radius: 5px;
+		padding: 0.3em;
+		width: 80px;
+		float: right;
+		outline: none;
+	}
+</style>
+
+
+
+</head> 
+<body> 
+<button id="open_dialog">Bacel  Dialog@</button>
+
+<div class="afs_ads" style="font-size: 50px;color: brown">Zdes reklamni kod</div>
+
+<dialog>
+	<div class="adblock_left">
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Adblockplus_icon.svg/1200px-Adblockplus_icon.svg.png" class="adblock_img">
+	</div>
+	<div class="adblock_right">
+		<p class="adblock_vernagir">AdBlocker detected! Please pay attention to this information.</p>
+		<ul class="adblock_footer">
+			<li class="adblock_desc">We found that you are using AdBlock Plus or other adblocking software that prevents a full page load.</li>
+			<li class="adblock_desc">We do not have banners, flash, animation, disgusting sounds or pop-up ads. We do not implement these types of annoying ads!</li>
+		</ul>
+	</div>
+	<div class="dialog_footer">We need money to maintain the site, and almost all of them come from our online advertising.</div>
+	<div class="dialog_footer">Please add <a href="#">freesoftmap2.com</a> to your white list of ad blocking or disable the software blocking advertising.</div>
+	<p><button id="closedialog">OK</button></p>
+</dialog>
+
+
+<script>
+
+
+(function() {
+
+var dialog = document.querySelector('dialog');
+	document.querySelector('#open_dialog').onclick = function() {
+		dialog.show(); // Cucadrel  dialogayin  patuhan@
+	};
+	document.querySelector('#closedialog').onclick = function() {
+    dialog.close(); // Прячем диалоговое окно
+	window.location.href = 'http://localhost/Site/dialog.html';
+   };
+
+	var tryMessage = function() {
+		setTimeout(function() {
+			if(!document.getElementsByClassName) return;
+			var ads = document.getElementsByClassName('afs_ads'),
+				ad  = ads[ads.length - 1];
+			if(!ad || ad.innerHTML.length === 0 || ad.clientHeight === 0) {
+				dialog.show();
+				
+			} else {
+			//dialog.close();
+				//ad.style.display = 'none';
+			}
+		}, 3000);
+	};
+	if(window.addEventListener) {
+		window.addEventListener('load', tryMessage, false);
+	} else {
+		window.attachEvent('onload', tryMessage); //IE
+	}
+})();
+</script>
+</body> 
+</html>
