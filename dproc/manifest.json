@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "school",
+  "description": "դպրոցի հայտի լրացում",
+  "version": "1.0.0",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "48": "images/school_48.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "bookmarks",
+    "contentSettings",
+    "activeTab",
+    "scripting",
+    "identity",
+    "identity.email"
+  ],
+  "host_permissions": [
+    "https://hayt.emis.am/*"
+  ],
+  "content_scripts": [
+    {
+      "js": ["content/content.js"],
+      "css": ["content/content.css"],
+      "matches": [
+        "https://hayt.emis.am/*"
+      ]
+    }
+  ]
+}
