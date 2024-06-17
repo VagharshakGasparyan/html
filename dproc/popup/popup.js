@@ -5,14 +5,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 window.addEventListener("load", function () {
-    fSendMessageToTabs(message);
+    document.getElementById("btn1").addEventListener("click", function () {
+        fSendMessageToTabs({from: "popup", to: "content", message: "re_update"});
+    });
+    fSendMessageToTabs({from: "popup", to: "content", message: "how are you"});
 });
 
 async function fSendMessageToTabs(message) {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
         console.log(tabs);
         try {
-            await chrome.tabs.sendMessage(tabs[0].id, {from: "popup", to: "content", message: "how are you"} , /*function (response) {}*/);
+            await chrome.tabs.sendMessage(tabs[0].id, message, /*function (response) {}*/);
         }catch (e) {
 
         }
