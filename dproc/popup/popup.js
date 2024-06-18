@@ -13,15 +13,25 @@ window.addEventListener("load", function () {
     document.getElementById("btn1").addEventListener("click", function () {
         fSendMessageToTabs({from: "popup", to: "content", message: "re_update"});
     });
-    fSendMessageToTabs({from: "popup", to: "content", message: "how are you"});
+    fSendMessageToTabs({from: "popup", to: "content", message: "open_tab"});
+    fSendMessageToBackground();
 });
 
 async function fSendMessageToTabs(message) {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
+        console.log(tabs);
         try {
             await chrome.tabs.sendMessage(tabs[0].id, message, /*function (response) {}*/);
         }catch (e) {
 
         }
     });
+}
+
+async function fSendMessageToBackground(){
+    try {
+        await chrome.runtime.sendMessage({from: "popup", to: "background", message: "open_tab"});
+    }catch (e) {
+
+    }
 }
