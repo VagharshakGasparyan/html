@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chemistry</title>
+    <style>
+        .formula {
+            padding: 10px;
+            border: 2px solid green;
+            border-radius: 10px;
+            outline: none;
+            font-size: 25px;
+        }
+
+        .show {
+            padding: 5px;
+            border: 1px solid #950;
+            border-radius: 5px;
+            margin-top: 10px;
+            max-width: max-content;
+            font-size: 16px;
+            min-height: 16px;
+            line-height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div id="formula" contenteditable="true" class="formula">H<sub>2</sub>O + CO<sub>2</sub> = H<sub>2</sub>CO<sub>3</sub> ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+<div>
+    <div id="show0" class="show"></div>
+    <div id="show1" class="show" style="background-color: #950;color: white"></div>
+    <div id="show2" class="show"></div>
+</div>
+
+
+<script>
+
+    window.addEventListener('load', function () {
+        let formulaElem = document.getElementById('formula');
+        document.addEventListener('selectionchange', function (evt) {
+            let activeElement = evt.target.activeElement;
+            if(activeElement === formulaElem){
+                formula();
+            }
+            // console.log('sel changed');
+            // console.log(evt.target.activeElement);
+        });
+
+
+        // formulaElem.addEventListener('input', formula);
+        // formulaElem.addEventListener('mouseup', formula);
+        // formulaElem.addEventListener('click', formula);
+
+        function formula(evt) {
+            let sel = window.getSelection();
+            console.log(sel);
+            setTimeout(()=>{
+                console.log(sel);
+            }, 100);
+            // console.log(formulaElem.childNodes);
+            let t = ['', '', ''];
+            let s = [false, false];
+            formulaElem.childNodes.forEach(function (childNode) {
+                if (childNode.nodeName === '#text') {
+                    fNode(childNode);
+                } else {
+                    childNode.childNodes.forEach(function (child) {
+                        if (child.nodeName === '#text') {
+                            fNode(child);
+                        }
+                    });
+                }
+
+            });
+            function fNode(node) {
+                if (sel.baseNode === node) {
+                    if(!s[0]){
+                        s[0] = true;
+                        t[0] += node.nodeValue.slice(0, sel.baseOffset);
+                    }
+                }
+                if (sel.extentNode === node) {
+                    if(!s[1]){
+                        s[1] = true;
+                        t[2] += node.nodeValue.slice(0, sel.extentOffset);
+                    }
+                }
+                if(!s[0]){
+                    t[0] += node.nodeValue;
+                }
+                if(!s[1]){
+                    t[2] += node.nodeValue;
+                }
+            }
+            if(t[0].length > t[2].length){
+                let r = t[2];
+                t[2] = t[0];
+                t[0] = r;
+            }
+            t[1] = t[2].slice(t[0].length);
+            t[2] = formulaElem.innerText.slice(t[2].length);
+            console.log(t);
+            document.getElementById('show0').innerText = t[0];
+            document.getElementById('show1').innerText = t[1];
+            document.getElementById('show2').innerText = t[2];
+        }
+    });
+</script>
+</body>
+</html>
