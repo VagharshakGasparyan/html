@@ -10,6 +10,7 @@
 <body>
 <script>
     window.addEventListener("load", () => {
+        //C:\Program Files\JetBrains\Activate\vmoptions\phpstorm.vmoptions   -Xmx4096m
         //https://bscscan.com/assets/js/custom/web3-eth.min.js
         //web3 stake, payment, remix usdt
         let myPrivateKey = "0xb735c11b30af5e889405bc7248b94f7bd31cbcd7e3a1b961a3328a2d0c237b55";
@@ -29,6 +30,12 @@
         //     .then((peerCount)=>{
         //         console.log("peerCount=", peerCount);
         //     });
+        let ethereum = web3.eth;
+        // getAccount();
+        // async function getAccount() {
+        //     let accounts = await ethereum.request({method: 'eth_requestAccounts'});
+        //     console.log(accounts);
+        // }
 
         //============================================================
         function getBalance() {
@@ -127,10 +134,23 @@
         Этот пример отправит 0.1 эфира с адреса отправителя на адрес получателя, и если транзакция будет успешной, вы получите квитанцию с хэшем транзакции.
         */
         //======================Stake============================================================
-        //f();
+        // f();
         function f() {
-            const stakingContractABI = [/* ABI JSON here */];
-            const stakingContractAddress = '0xYourContractAddress';
+            const abi = [
+                {
+                    constant: false,
+                    inputs: [
+                        {name: "_to", type: "address"},
+                        {name: "_value", type: "uint256"},
+                    ],
+                    name: "transfer",
+                    outputs: [{name: "", type: "bool"}],
+                    type: "function",
+                },
+            ];
+            //https://rinkeby.etherscan.io/address/0xb8c77482e45f1f44de1745f52c74426c631bdd52
+            const stakingContractABI = abi;
+            const stakingContractAddress = '0x388C818CA8B9251b393131C08a736A67ccB19297';
             const stakingContract = new web3.eth.Contract(stakingContractABI, stakingContractAddress);
             const stakeTokens = async (fromAddress, amount) => {
                 const amountInWei = web3.utils.toWei(amount, 'ether');  // Преобразование в Wei (меньшая единица эфира)
