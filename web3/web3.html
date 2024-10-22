@@ -11,7 +11,7 @@
 <script>
     window.addEventListener("load", () => {
         //https://bscscan.com/assets/js/custom/web3-eth.min.js
-        //web3 stake, payment
+        //web3 stake, payment, remix usdt
         let myPrivateKey = "0xb735c11b30af5e889405bc7248b94f7bd31cbcd7e3a1b961a3328a2d0c237b55";
         let myAddress = "0xA206c400C6453C8C3cA67d486A5616825B225449";
 
@@ -20,11 +20,15 @@
         let networks = ["https://ethereum-goerli.publicnode.com", "https://eth.llamarpc.com"];
         let network = networks[1];
 
-        // const web3 = new Web3(network);
         const web3 = new Web3(network);
         console.log(Web3.version, web3);
-        console.log(web3.eth.accounts);
-
+        // web3.eth.getAccounts().then((accounts)=>{
+        //     console.log("accounts=", accounts);
+        // });
+        // web3.eth.net.getPeerCount()
+        //     .then((peerCount)=>{
+        //         console.log("peerCount=", peerCount);
+        //     });
 
         //============================================================
         function getBalance() {
@@ -39,7 +43,7 @@
         }
 
         //============================================================
-        //getContractAddressByTransactionHash();
+        // getContractAddressByTransactionHash();
         function getContractAddressByTransactionHash() {
             const txHash = '0xc2d3dfbafcae0b359208e7f7ab171e56ad99afbb4b4eae2b9e2b7d2d6fb8b153';
 
@@ -70,7 +74,7 @@
         const recipientAddress = '0xE4d5B82454EC837cD9AcF53EC1EB9050763f7a21';  // адрес получателя
         const privateKey = myPrivateKey;// '0xYourPrivateKey';  // Sender's private key (keep this secure!)
         const amountToSend = web3.utils.toWei('0.1', 'ether');  // Sending 0.1 Ether
-        //sendTransaction();
+        // sendTransaction();
         async function sendTransaction() {
             // Get the current nonce (transaction count for the sender)
             const nonce = await web3.eth.getTransactionCount(senderAddress, 'latest');  // 'latest' for the most recent block
@@ -122,6 +126,45 @@
         Транзакция успешна, хэш: 0xВашХэшТранзакции
         Этот пример отправит 0.1 эфира с адреса отправителя на адрес получателя, и если транзакция будет успешной, вы получите квитанцию с хэшем транзакции.
         */
+        //======================Stake============================================================
+        //f();
+        function f() {
+            const stakingContractABI = [/* ABI JSON here */];
+            const stakingContractAddress = '0xYourContractAddress';
+            const stakingContract = new web3.eth.Contract(stakingContractABI, stakingContractAddress);
+            const stakeTokens = async (fromAddress, amount) => {
+                const amountInWei = web3.utils.toWei(amount, 'ether');  // Преобразование в Wei (меньшая единица эфира)
+
+                try {
+                    const receipt = await stakingContract.methods.stake(amountInWei).send({
+                        from: fromAddress
+                    });
+
+                    console.log('Транзакция стейкинга завершена:', receipt);
+                } catch (error) {
+                    console.error('Ошибка при стейкинге:', error);
+                }
+            };
+
+            // Пример вызова функции
+            const userAddress = '0xA206c400C6453C8C3cA67d486A5616825B225449';
+            stakeTokens(userAddress, '10');  // Стейкинг 10 токенов
+
+            const unstakeTokens = async (fromAddress) => {
+                try {
+                    const receipt = await stakingContract.methods.unstake().send({
+                        from: fromAddress
+                    });
+
+                    console.log('Транзакция вывода токенов завершена:', receipt);
+                } catch (error) {
+                    console.error('Ошибка при выводе токенов:', error);
+                }
+            };
+
+            // Пример вызова функции для вывода токенов
+//             unstakeTokens(userAddress);
+        }
     });
 
 
