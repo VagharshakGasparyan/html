@@ -8,89 +8,116 @@
 </head>
 <body>
 <script>
-    let address = "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf";
+    window.addEventListener("load", () => {
+        //web3 stake, payment
+        let myPrivateKey = "0xb735c11b30af5e889405bc7248b94f7bd31cbcd7e3a1b961a3328a2d0c237b55";
+        let myAddress = "0xA206c400C6453C8C3cA67d486A5616825B225449";
 
-    let networks = ["https://ethereum-goerli.publicnode.com", "https://eth.llamarpc.com"];
+        let address = "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf";
 
-    // const web3 = new Web3(network);
-    const web3 = new Web3("https://eth.llamarpc.com");
-    console.log(Web3.version, web3);
-    web3.eth.getBalance(address).then(balance => {
-        console.log(balance);
-        const etherBalance = web3.utils.fromWei(balance, 'ether');
-        console.log(`Balance of ${address}: ${etherBalance} ETH`);
-    })
-        .catch(error => {
-        console.error('Error getting balance:', error);
-    });
-    //============================================================
-    // Создание нового аккаунта
-    function createNewAccount(){
-        const account = web3.eth.accounts.create();
+        let networks = ["https://ethereum-goerli.publicnode.com", "https://eth.llamarpc.com"];
+        let network = networks[1];
 
-        console.log('Адрес:', account.address);
-        console.log('Закрытый ключ:', account.privateKey);
-    }
-
-    
-    //=========================Transfer=======================================
-    const senderAddress = '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf';  // Замените на адрес отправителя
-    const recipientAddress = '0xE4d5B82454EC837cD9AcF53EC1EB9050763f7a21';  // Замените на адрес получателя
-    const privateKey = '0xYourPrivateKey';  // Sender's private key (keep this secure!)
-    const amountToSend = web3.utils.toWei('0.1', 'ether');  // Sending 0.1 Ether
-    async function sendTransaction() {
-        // Get the current nonce (transaction count for the sender)
-        const nonce = await web3.eth.getTransactionCount(senderAddress, 'latest');  // 'latest' for the most recent block
-
-        // Define the transaction object
-        const transaction = {
-            to: recipientAddress,           // Receiver's address
-            value: amountToSend,            // Amount to send in wei
-            gas: 21000,                     // Gas limit for a simple transfer
-            gasPrice: await web3.eth.getGasPrice(),  // Automatically get current gas price
-            nonce: nonce,                   // Sender's nonce
-        };
-
-        // Sign the transaction with the private key
-        const signedTransaction = await web3.eth.accounts.signTransaction(transaction, privateKey);
-
-        // Send the signed transaction
-        web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
-            .on('receipt', receipt => {
-                console.log('Transaction successful with hash:', receipt.transactionHash);
+        // const web3 = new Web3(network);
+        const web3 = new Web3(network);
+        console.log(Web3.version, web3);
+        //============================================================
+        function getBalance() {
+            web3.eth.getBalance(myAddress).then(balance => {
+                console.log("balance=", balance);
+                const etherBalance = web3.utils.fromWei(balance, 'ether');
+                console.log(`Balance of ${address}: ${etherBalance} ETH`);
             })
-            .on('error', error => {
-                console.error('Error sending transaction:', error);
-            });
-    }
-    /*
-    Объяснение:
-web3.eth.getTransactionCount(): Получает nonce (счетчик транзакций) для адреса отправителя. Nonce необходим для предотвращения повторной отправки транзакций и для правильного упорядочивания транзакций.
+                .catch(error => {
+                    console.error('Error getting balance:', error);
+                });
+        }
 
-Объект транзакции:
+        //============================================================
+        getContractAddressByTransactionHash();
+        function getContractAddressByTransactionHash() {
+            const txHash = '0xc2d3dfbafcae0b359208e7f7ab171e56ad99afbb4b4eae2b9e2b7d2d6fb8b153';
 
-to: Адрес получателя эфира.
-value: Сумма для перевода в Wei (наименьшая единица эфира).
-gas: Лимит газа. Для простой транзакции перевода 21,000 единиц газа достаточно.
-gasPrice: Цена за единицу газа в Wei (можно динамически получить с помощью web3.eth.getGasPrice()).
-nonce: Счетчик транзакций для адреса отправителя.
-web3.eth.accounts.signTransaction(): Подписывает транзакцию закрытым ключом отправителя. Только владелец аккаунта с этим закрытым ключом может авторизовать перевод средств.
+            // Получаем данные транзакции по её хэшу
+            web3.eth.getTransactionReceipt(txHash)
+                .then(receipt => {
+                    if (receipt.contractAddress) {
+                        console.log('Адрес контракта:', receipt.contractAddress);
+                    } else {
+                        console.log('Транзакция не связана с развертыванием контракта.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка получения информации о транзакции:', error);
+                });
+        }
+        //============================================================
+        // Создание нового аккаунта
+        //createNewAccount();
+        function createNewAccount() {
+            const account = web3.eth.accounts.create();
+            console.log('account', account);
+            console.log('Адрес:', account.address);
+            console.log('Закрытый ключ:', account.privateKey);
+        }
+        //=========================Transfer=======================================
+        const senderAddress = myAddress;// '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf';  // адрес отправителя
+        const recipientAddress = '0xE4d5B82454EC837cD9AcF53EC1EB9050763f7a21';  // адрес получателя
+        const privateKey = myPrivateKey;// '0xYourPrivateKey';  // Sender's private key (keep this secure!)
+        const amountToSend = web3.utils.toWei('0.1', 'ether');  // Sending 0.1 Ether
+        sendTransaction();
+        async function sendTransaction() {
+            // Get the current nonce (transaction count for the sender)
+            const nonce = await web3.eth.getTransactionCount(senderAddress, 'latest');  // 'latest' for the most recent block
+            console.log("nonce=", nonce);
+            // Define the transaction object
+            const transaction = {
+                to: recipientAddress,           // Receiver's address
+                value: amountToSend,            // Amount to send in wei
+                gas: 21000,                     // Gas limit for a simple transfer
+                gasPrice: await web3.eth.getGasPrice(),  // Automatically get current gas price
+                nonce: nonce,                   // Sender's nonce
+            };
 
-web3.eth.sendSignedTransaction(): Отправляет подписанную транзакцию в сеть Ethereum. После того как транзакция будет включена в блок, возвращается квитанция с хэшем транзакции.
+            // Sign the transaction with the private key
+            const signedTransaction = await web3.eth.accounts.signTransaction(transaction, privateKey);
 
-Важные моменты:
-Безопасность закрытого ключа: Никогда не разглашайте закрытый ключ. В рабочей среде храните его безопасно (например, в переменных окружения или зашифрованных хранилищах).
-Цена газа и комиссии: Убедитесь, что указана достаточная цена газа, чтобы избежать задержек или ошибок в транзакции.
-Пример вывода хэша транзакции:
-bash
-Копировать код
-Транзакция успешна, хэш: 0xВашХэшТранзакции
-Этот пример отправит 0.1 эфира с адреса отправителя на адрес получателя, и если транзакция будет успешной, вы получите квитанцию с хэшем транзакции.
-    */
-
-    sendTransaction();
+            // Send the signed transaction
+            web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
+                .on('receipt', receipt => {
+                    console.log('+++++++++++++++++++++Transaction successful with hash:', receipt.transactionHash);
+                })
+                .on('error', error => {
+                    console.error('------------------Error sending transaction:', error);
+                });
+        }
 
 
+        /*
+        Объяснение:
+        web3.eth.getTransactionCount(): Получает nonce (счетчик транзакций) для адреса отправителя. Nonce необходим для предотвращения повторной отправки транзакций и для правильного упорядочивания транзакций.
+
+        Объект транзакции:
+
+        to: Адрес получателя эфира.
+        value: Сумма для перевода в Wei (наименьшая единица эфира).
+        gas: Лимит газа. Для простой транзакции перевода 21,000 единиц газа достаточно.
+        gasPrice: Цена за единицу газа в Wei (можно динамически получить с помощью web3.eth.getGasPrice()).
+        nonce: Счетчик транзакций для адреса отправителя.
+        web3.eth.accounts.signTransaction(): Подписывает транзакцию закрытым ключом отправителя. Только владелец аккаунта с этим закрытым ключом может авторизовать перевод средств.
+
+        web3.eth.sendSignedTransaction(): Отправляет подписанную транзакцию в сеть Ethereum. После того как транзакция будет включена в блок, возвращается квитанция с хэшем транзакции.
+
+        Важные моменты:
+        Безопасность закрытого ключа: Никогда не разглашайте закрытый ключ. В рабочей среде храните его безопасно (например, в переменных окружения или зашифрованных хранилищах).
+        Цена газа и комиссии: Убедитесь, что указана достаточная цена газа, чтобы избежать задержек или ошибок в транзакции.
+        Пример вывода хэша транзакции:
+        bash
+        Копировать код
+        Транзакция успешна, хэш: 0xВашХэшТранзакции
+        Этот пример отправит 0.1 эфира с адреса отправителя на адрес получателя, и если транзакция будет успешной, вы получите квитанцию с хэшем транзакции.
+        */
+    });
 
 
 </script>
