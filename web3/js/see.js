@@ -24,7 +24,7 @@ function sendTransaction() {
         Livewire.emit('errorHandled', 'No Accounts detected')
         return;
     }
-    const abi = [
+    const abi = [//ABI (Application Binary Interface)
         {
             constant: false,
             inputs: [
@@ -70,7 +70,7 @@ function sendTransaction() {
 
 
 function addPRI() {
-    const tokenAddress = '{{config(\'app.erc20_contract_address\')}}';
+    const tokenAddress = "{{config('app.erc20_contract_address')}}";
     const tokenSymbol = 'PRI';
     const tokenDecimals = 18;
     const tokenImage = 'https://s2.coinmarketcap.com/static/img/coins/64x64/9586.png';
