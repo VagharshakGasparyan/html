@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
     <title>Web3</title>
     <script src="4.1.0/web3.min.js"></script>
+    <script src="js/web3-eth.js"></script>
 </head>
 <body>
 <script>
@@ -21,6 +22,9 @@
         // const web3 = new Web3(network);
         const web3 = new Web3(network);
         console.log(Web3.version, web3);
+        console.log(web3.eth.accounts);
+
+
         //============================================================
         function getBalance() {
             web3.eth.getBalance(myAddress).then(balance => {
@@ -34,7 +38,7 @@
         }
 
         //============================================================
-        getContractAddressByTransactionHash();
+        //getContractAddressByTransactionHash();
         function getContractAddressByTransactionHash() {
             const txHash = '0xc2d3dfbafcae0b359208e7f7ab171e56ad99afbb4b4eae2b9e2b7d2d6fb8b153';
 
@@ -65,7 +69,7 @@
         const recipientAddress = '0xE4d5B82454EC837cD9AcF53EC1EB9050763f7a21';  // адрес получателя
         const privateKey = myPrivateKey;// '0xYourPrivateKey';  // Sender's private key (keep this secure!)
         const amountToSend = web3.utils.toWei('0.1', 'ether');  // Sending 0.1 Ether
-        sendTransaction();
+        //sendTransaction();
         async function sendTransaction() {
             // Get the current nonce (transaction count for the sender)
             const nonce = await web3.eth.getTransactionCount(senderAddress, 'latest');  // 'latest' for the most recent block
