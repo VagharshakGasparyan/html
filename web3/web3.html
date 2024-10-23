@@ -10,6 +10,7 @@
 <body>
 <script>
     window.addEventListener("load", () => {
+        //провайдер Ethereum
         //C:\Program Files\JetBrains\Activate\vmoptions\phpstorm.vmoptions   -Xmx4096m
         //https://bscscan.com/assets/js/custom/web3-eth.min.js
         //web3 stake, payment, remix usdt
@@ -18,7 +19,7 @@
 
         let address = "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf";
 
-        let networks = ["https://ethereum-goerli.publicnode.com", "https://eth.llamarpc.com"];//сети
+        let networks = ["https://ethereum-goerli.publicnode.com", "https://eth.llamarpc.com"];//сети, провайдер Ethereum
         let network = networks[1];
 
         const web3 = new Web3(network);
@@ -184,6 +185,81 @@
 
             // Пример вызова функции для вывода токенов
 //             unstakeTokens(userAddress);
+        }
+        //======================another Stake============================================================
+
+        function f1() {
+            /*
+            3. Подключите кошелек:
+            Для взаимодействия с контрактами нужно разблокировать кошелек. Это можно сделать с помощью провайдера,
+            например MetaMask или приватного ключа.
+            Пример использования приватного ключа:
+            */
+            const privateKey = myPrivateKey;
+            const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+            web3.eth.accounts.wallet.add(account);
+            /*
+            4. Взаимодействие с депозитным контрактом Ethereum 2.0:
+            Чтобы сделать стейкинг через депозитный контракт Ethereum 2.0,
+             вам нужно отправить 32 ETH на специальный контракт. Его адрес на Mainnet:
+             0x00000000219ab540356cBB839Cbe05303d7705Fa
+            */
+            const contractAddress = '0x00000000219ab540356cBB839Cbe05303d7705Fa';
+            const amountInWei = web3.utils.toWei('32', 'ether');
+            const tx = {
+                from: account.address,
+                to: contractAddress,
+                value: amountInWei,
+                gas: 3000000,
+            };
+            web3.eth.sendTransaction(tx)
+                .on('transactionHash', (hash) => {
+                    console.log('Transaction Hash:', hash);
+                })
+                .on('receipt', (receipt) => {
+                    console.log('Transaction was mined. Receipt:', receipt);
+                })
+                .on('error', (error) => {
+                    console.error('Error occurred:', error);
+                });
+            /*
+            5. Подтверждение в сети Ethereum 2.0:
+            После отправки депозита на Ethereum 2.0 вам нужно будет завершить регистрацию валидатора
+             через генерацию и подачу необходимых данных
+             (например, сгенерировать ключ валидатора и подписать его).
+              Эти действия выполняются через launchpad.ethereum.org.
+            */
+            /*
+            6. Использование пулов стейкинга (например, Lido, Rocket Pool):
+            Если у вас нет 32 ETH для стейкинга, вы можете использовать пулы стейкинга.
+            В этом случае стейкинг можно делать через смарт-контракт пула.
+            Нужно будет найти ABI контракта пула и отправить транзакцию через Web3.js.
+            Пример для Lido (краткий пример отправки транзакции на контракт стейкинга):
+            */
+            const lidoContractAddress = '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'; // Lido's contract address
+            // ABI контракта Lido нужно получить с Etherscan или их документации.
+            const lidoABI = [ /* ABI контракта Lido */ ];
+            const lidoContract = new web3.eth.Contract(lidoABI, lidoContractAddress);
+            // Пример вызова функции для стейкинга (нужно проверить документацию контракта)
+            lidoContract.methods.submit(account.address)
+                .send({
+                    from: account.address,
+                    value: amountInWei,
+                    gas: 200000,
+                })
+                .on('transactionHash', (hash) => {
+                    console.log('Transaction Hash:', hash);
+                })
+                .on('receipt', (receipt) => {
+                    console.log('Transaction Receipt:', receipt);
+                });
+            /*
+            Важные моменты:
+            Gas fees: Учтите, что для транзакций на Ethereum нужны средства на оплату газа.
+            Beacon Chain: Ethereum 2.0 работает на Beacon Chain,
+             и для стейкинга через валидатора необходимы знания о том, как работают ключи валидатора.
+            Этот процесс подойдет для самостоятельного стейкинга или для использования пулов стейкинга.
+            */
         }
     });
 
