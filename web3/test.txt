@@ -1,0 +1,35 @@
+https://admin.moralis.com/
+
+API Key
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6IjMxZjRiNzM4LTZiZjYtNDg2MC04MTc4LTNkYmRkYzM3YTdhMCIsIm9yZ0lkIjoiNDEzMTg3IiwidXNlcklkIjoiNDI0NjI1IiwidHlwZUlkIjoiODRjOTAyNjEtNTRhZC00YmUzLWE4MjMtNzRjOTNmMjhlNjJjIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3Mjk3OTAwMTUsImV4cCI6NDg4NTU1MDAxNX0.AT-DNIJuNIdv7aIjz9eDkcKCibq3Dr7Pm8ZK_XW5iiE
+
+Workspace ID
+84c90261-54ad-4be3-a823-74c93f28e62c
+
+Secret Key
+NcwpojHEij0PxeFbZVNflfWbLVgBQ6O2Ue1KquH1jaM2WGp9jNZ5nKwapzn2WHFI
+
+
+
+
+
+Goerli Faucet: https://goerlifaucet.com/
+Sepolia Faucet: https://sepoliafaucet.com/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
