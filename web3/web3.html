@@ -10,6 +10,11 @@
 <body>
 <script>
     window.addEventListener("load", () => {
+        if (window.ethereum) {
+            console.log("+++window.ethereum=", window.ethereum);
+        }else{
+            console.log("---window.ethereum chka---");
+        }
         //провайдер Ethereum
         //C:\Program Files\JetBrains\Activate\vmoptions\phpstorm.vmoptions   -Xmx4096m
         //https://bscscan.com/assets/js/custom/web3-eth.min.js

@@ -1,0 +1,21 @@
+password koshelek: hgiki@123
+
+address
+0xe862373b44a4700FEbFBBA71f91308BE9A3DD068
+
+zakritiy klyuch
+721c231ed47539b0872df7aa9af65767ce19d769126af5ce467e8130d2b02f59
+
+URL-адрес RPC по умолчанию
+Infura
+mainnet.infura.io
+
+cit fraze
+1.photo     2.bounce   3.talk
+4.discover  5.setup    6.dove
+7.avoid     8.yellow   9.plunge
+10.trick   11.engine  12.burger
+
+photo bounce talk discover setup dove avoid yellow plunge trick engine burger
+=================================================================================
+https://etherscan.io/address/0xe862373b44a4700FEbFBBA71f91308BE9A3DD068
