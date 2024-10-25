@@ -52,11 +52,12 @@
 
         let address = "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf";
 
-        let networks = [
+        let providers = [
             "https://ethereum-goerli.publicnode.com",
             "https://eth.llamarpc.com",
             "https://sepoliafaucet.com",
-            "https://mainnet.infura.io/v3/3056a0fb7fc24fcca7e44c9498bd53fb"
+            "https://mainnet.infura.io/v3/3056a0fb7fc24fcca7e44c9498bd53fb",
+            "https://arbitrum-sepolia.infura.io/v3/3056a0fb7fc24fcca7e44c9498bd53fb",//test провайдер
         ];//сети, провайдер Ethereum
         //провайдеры Ethereum: Infura, Alchemy, QuickNode, Ankr, Moralis, Chainstack, GetBlock
         /*
@@ -68,9 +69,9 @@
         Chainstack: https://chainstack.com
         GetBlock:   https://getblock.io
         */
-        let network = networks[3];
+        let provider = providers[4];
 
-        const web3 = new Web3(network);
+        const web3 = new Web3(provider);
         console.log(Web3.version, web3);
         // web3.eth.getAccounts().then((accounts)=>{
         //     console.log("accounts=", accounts);
@@ -139,7 +140,7 @@
             const transaction = {
                 to: recipientAddress,           // Receiver's address
                 value: amountToSend,            // Amount to send in wei
-                gas: 21000,                     // Gas limit for a simple transfer
+                gas: 200000,                     // Gas limit for a simple transfer
                 gasPrice: await web3.eth.getGasPrice(),  // Automatically get current gas price
                 nonce: nonce,                   // Sender's nonce
             };
