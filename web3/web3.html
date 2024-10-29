@@ -81,6 +81,14 @@
 
             return await web3.eth.sendTransaction(transactionParameters);
         }
+        window.ethereum.on('accountsChanged', (accounts) => {
+            console.log('Account changed:', accounts[0]);
+        });
+
+        window.ethereum.on('chainChanged', (chainId) => {
+            console.log('Network changed to:', chainId);
+            // Optionally reload the page or handle the chain change
+        });
 
         return 0;
         //eth free test net
