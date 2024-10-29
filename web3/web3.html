@@ -5,18 +5,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
     <title>Web3</title>
     <script src="4.1.0/web3.min.js"></script>
-<!--    <script src="js/web3-eth.min.js"></script>-->
+    <!--    <script src="js/web3-eth.min.js"></script>-->
     <style>
-        body{
+        body {
             background-color: #123;
             color: white;
         }
-        #metamaskus{
+
+        #metamaskus {
             border: 3px double white;
             min-height: 10px;
             padding: 10px;
         }
-        #connect{
+
+        #connect, #btn2 {
             color: #123;
         }
     </style>
@@ -24,26 +26,29 @@
 <body>
 <div id="metamaskus"></div>
 <button id="connect">CONNECT WALLET</button>
+<div>
+    <button id="btn2" >STAKING</button>
+</div>
 <script>
-    const getWeb3 = async ()=>{
-        return new Promise(async (resolve, reject)=>{
+    const getWeb3 = async () => {
+        return new Promise(async (resolve, reject) => {
             const web3 = new Web3(window.ethereum);
             try {
                 await window.ethereum.request({method: "eth_requestAccounts"});
                 resolve(web3);
-            }catch (e) {
+            } catch (e) {
                 reject(e);
             }
         })
     };
     window.addEventListener("load", () => {
-        document.getElementById("connect").addEventListener("click", async ()=>{
+        document.getElementById("connect").addEventListener("click", async () => {
             if (typeof window.ethereum !== 'undefined') {
                 // MetaMask is available
                 const web3 = new Web3(window.ethereum);
 
                 // Request account access from the user
-                window.ethereum.request({ method: 'eth_requestAccounts' })
+                window.ethereum.request({method: 'eth_requestAccounts'})
                     .then(accounts => {
                         document.getElementById("metamaskus").innerText = 'Connected with account: ' + accounts[0];
                         console.log('Connected with account:', accounts[0]);
@@ -64,14 +69,17 @@
             // const walletBalanceInEth = Web3.utils.fromWei(walletBalanceInWei);
 
         });
+
         async function getCurrentAccount() {
             const accounts = await web3.eth.getAccounts();
             return accounts[0];
         }
+
         async function getAccountBalance(account) {
             const balance = await web3.eth.getBalance(account);
             return web3.utils.fromWei(balance, 'ether'); // Convert from Wei to Ether
         }
+
         async function _sendTransaction(from, to, amount) {
             const transactionParameters = {
                 from: from,
@@ -81,6 +89,7 @@
 
             return await web3.eth.sendTransaction(transactionParameters);
         }
+
         window.ethereum.on('accountsChanged', (accounts) => {
             console.log('Account changed:', accounts[0]);
         });
@@ -90,19 +99,20 @@
             // Optionally reload the page or handle the chain change
         });
 
-        return 0;
+        // return 0;
         //eth free test net
         let md = document.getElementById("metamaskus");
+
         function kaTeChka() {
-            setInterval(()=>{
+            setInterval(() => {
                 if (window.ethereum) {
                     console.log("+++window.ethereum=", window.ethereum);
                     md.innerHTML = "+++window.ethereum=";
-                }else{
+                } else {
                     console.log("---window.ethereum chka---");
                     md.innerHTML = "---window.ethereum chka---";
                 }
-                setTimeout(()=>{
+                setTimeout(() => {
                     md.innerHTML = "";
                 }, 1000);
             }, 2000);
@@ -136,7 +146,7 @@
         Chainstack: https://chainstack.com
         GetBlock:   https://getblock.io
         */
-        let provider = providers[4];
+        let provider = providers[3];
 
         const web3 = new Web3(provider);
         console.log(Web3.version, web3);
@@ -154,7 +164,8 @@
         // }
 
         //============================================================
-        getBalance();
+        // getBalance();
+
         function getBalance() {
             web3.eth.getBalance(myAddress).then(balance => {
                 console.log("balance=", balance);
@@ -184,6 +195,7 @@
                     console.error('Ошибка получения информации о транзакции:', error);
                 });
         }
+
         //============================================================
         // Создание нового аккаунта
         //createNewAccount();
@@ -193,6 +205,7 @@
             console.log('Адрес:', account.address);
             console.log('Закрытый ключ:', account.privateKey);
         }
+
         //=========================Transfer=======================================
         const senderAddress = myAddress;// '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf';  // адрес отправителя
         const recipientAddress = '0xE4d5B82454EC837cD9AcF53EC1EB9050763f7a21';  // адрес получателя
@@ -302,6 +315,7 @@
             // Пример вызова функции для вывода токенов
 //             unstakeTokens(userAddress);
         }
+
         //======================another Stake============================================================
 
         function f1() {
@@ -354,7 +368,7 @@
             */
             const lidoContractAddress = '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'; // Lido's contract address
             // ABI контракта Lido нужно получить с Etherscan или их документации.
-            const lidoABI = [ /* ABI контракта Lido */ ];
+            const lidoABI = [ /* ABI контракта Lido */];
             const lidoContract = new web3.eth.Contract(lidoABI, lidoContractAddress);
             // Пример вызова функции для стейкинга (нужно проверить документацию контракта)
             lidoContract.methods.submit(account.address)
@@ -377,7 +391,55 @@
             Этот процесс подойдет для самостоятельного стейкинга или для использования пулов стейкинга.
             */
         }
+        document.getElementById("btn2").addEventListener("click", ()=>{f2();});
+        function f2() {
+            console.log("STAKING***");
+            const contractAddress = "0xd9145CCE52D386f254917e481eB44e9943F39138";
+            const contractABI = [
+                {
+                    "inputs": [],
+                    "name": "retrieve",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "num",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "store",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                }
+            ];
+
+            const contract = new web3.eth.Contract(contractABI, contractAddress);
+            const amountToStake = Web3.utils.toWei('1', 'ether'); // Стейкинг 1 ETH
+            contract.methods.stake(amountToStake).send({ from: /*вашАдресКошельк*/"0xe862373b44a4700FEbFBBA71f91308BE9A3DD068" })
+                .on('transactionHash', (hash) => {
+                    console.log('Хэш транзакции:', hash);
+                })
+                .on('receipt', (receipt) => {
+                    console.log('Квитанция транзакции:', receipt);
+                })
+                .on('error', (error) => {
+                    console.error('Ошибка:', error);
+                });
+
+        }
     });
+
 
 
 </script>
