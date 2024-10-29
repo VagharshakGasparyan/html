@@ -92,25 +92,22 @@
 
         return 0;
         //eth free test net
-        // let md = document.getElementById("metamaskus");
-        // if (window.ethereum) {
-        //     console.log("+++window.ethereum=", window.ethereum);
-        // }else{
-        //     console.log("---window.ethereum chka---");
-        //     md.innerHTML = "---window.ethereum chka---";
-        // }
-        // setInterval(()=>{
-        //     if (window.ethereum) {
-        //         console.log("+++window.ethereum=", window.ethereum);
-        //         md.innerHTML = "+++window.ethereum=";
-        //     }else{
-        //         console.log("---window.ethereum chka---");
-        //         md.innerHTML = "---window.ethereum chka---";
-        //     }
-        //     setTimeout(()=>{
-        //         md.innerHTML = "";
-        //     }, 1000);
-        // }, 2000);
+        let md = document.getElementById("metamaskus");
+        function kaTeChka() {
+            setInterval(()=>{
+                if (window.ethereum) {
+                    console.log("+++window.ethereum=", window.ethereum);
+                    md.innerHTML = "+++window.ethereum=";
+                }else{
+                    console.log("---window.ethereum chka---");
+                    md.innerHTML = "---window.ethereum chka---";
+                }
+                setTimeout(()=>{
+                    md.innerHTML = "";
+                }, 1000);
+            }, 2000);
+        }
+
         //провайдер Ethereum
         //C:\Program Files\JetBrains\Activate\vmoptions\phpstorm.vmoptions   -Xmx4096m
         //https://bscscan.com/assets/js/custom/web3-eth.min.js
@@ -200,7 +197,7 @@
         const senderAddress = myAddress;// '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf';  // адрес отправителя
         const recipientAddress = '0xE4d5B82454EC837cD9AcF53EC1EB9050763f7a21';  // адрес получателя
         const privateKey = myPrivateKey;// '0xYourPrivateKey';  // Sender's private key (keep this secure!)
-        const amountToSend = web3.utils.toWei('0.1', 'ether');  // Sending 0.1 Ether
+        const amountToSend = web3.utils.toWei('0.01', 'ether');  // Sending 0.1 Ether
         // sendTransaction();
         async function sendTransaction() {
             // Get the current nonce (transaction count for the sender)
@@ -210,21 +207,21 @@
             const transaction = {
                 to: recipientAddress,           // Receiver's address
                 value: amountToSend,            // Amount to send in wei
-                gas: 200000,                     // Gas limit for a simple transfer
+                gas: 200000000,                     // Gas limit for a simple transfer
                 gasPrice: await web3.eth.getGasPrice(),  // Automatically get current gas price
                 nonce: nonce,                   // Sender's nonce
             };
-
+            console.log("transaction=", transaction);
             // Sign the transaction with the private key
             const signedTransaction = await web3.eth.accounts.signTransaction(transaction, privateKey);
-
+            console.log("signedTransaction=", signedTransaction);
             // Send the signed transaction
             web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
                 .on('receipt', receipt => {
                     console.log('+++++++++++++++++++++Transaction successful with hash:', receipt.transactionHash);
                 })
                 .on('error', error => {
-                    console.error('------------------Error sending transaction:', error);
+                    console.error('------------------Error sending transaction:', error, '------------------------|||');
                 });
         }
 
