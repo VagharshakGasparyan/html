@@ -51,6 +51,9 @@
         ctx.strokeStyle = "#970";
         ctx.lineJoin = "round";
         ctx.lineCap = "round";
+        let kx = Math.cos(Math.PI / 6) * hexagon_side * 2;
+        let ky = hexagon_side * 2;
+
         requestAnimationFrame(draw);
 
         function draw() {
@@ -59,9 +62,20 @@
             requestAnimationFrame(draw);
         }
         function fMakeHex() {
-            let x0 = 0;
-            let y0 = 0;
+            //1)x=0, kx, 2kx, ...
+            //2)x=0.5kx, 1.5kx, 2.5kx, ...
+            //y=0, 0.75ky, 1.5ky, 2.25ky, 3ky
+            let ny = Math.round(cxy.y / (0.75 * ky));
+            let y0 = ny * ky;
+            let x0 = ny % 2 === 0
+                ? Math.round(cxy.x / kx) * kx
+                : Math.round(cxy.x / kx) * kx + 0.5 * kx;
 
+            ctx.lineWidth = hexagon_side;
+            ctx.beginPath();
+            ctx.moveTo(x0, y0);
+            ctx.lineTo(x0 + 1, y0 + 1);
+            ctx.stroke();// Draw the Path
         }
 
         function f1() {
