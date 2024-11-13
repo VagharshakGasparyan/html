@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!--html lang="en"-->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>hexagon</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #123;
+        }
+
+        canvas#canvas-hexagon {
+            /*border: 1px solid gray;*/
+            background-color: black;
+            /*width: 100%;*/
+            display: block;
+            width: 1280px;
+            height: 512px;
+            margin: 25px auto;
+        }
+
+    </style>
+
+</head>
+<body style="margin: 0">
+<canvas id="canvas-hexagon"></canvas>
+
+
+<script>
+    window.addEventListener('load', function () {
+        //------------------user settings--------------------------
+        let hexagon_side = 30;
+        //------------------user settings--------------------------
+        let c = document.getElementById("canvas-hexagon");
+        let cxy = {x: 0, y: 0, c: false};
+        c.addEventListener("mousemove", (ev) => {
+            cxy.x = ev.offsetX;
+            cxy.y = ev.offsetY;
+        });
+        c.addEventListener("mousedown", (ev) => {
+            cxy.c = true;
+        });
+        c.addEventListener("mouseup", (ev) => {
+            cxy.c = false;
+        });
+        c.width = c.getBoundingClientRect().width;
+        c.height = c.getBoundingClientRect().height;
+        let ctx = c.getContext('2d');//CanvasRenderingContext2D
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#970";
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        requestAnimationFrame(draw);
+
+        function draw() {
+            ctx.clearRect(0, 0, c.width, c.height);
+            f1();
+            requestAnimationFrame(draw);
+        }
+        function fMakeHex() {
+            let x0 = 0;
+            let y0 = 0;
+
+        }
+
+        function f1() {
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "#970";
+            ctx.lineJoin = "round";
+            ctx.lineCap = "round";
+            ctx.beginPath();
+            ctx.moveTo(20, 20);
+            ctx.lineTo(100, 100);
+            ctx.lineTo(200, 100);
+            ctx.stroke();// Draw the Path
+
+            // ctx.beginPath();
+            // ctx.moveTo(cxy.x - 5, cxy.y - 5);
+            // ctx.lineTo(cxy.x + 5, cxy.y + 5);
+            // ctx.stroke();// Draw the Path
+            fMakeHex();
+        }
+    });
+
+
+    //ctx.font = "100px Arial";//bold 48px serif
+    //ctx.font = "bold 100px Arial";//bold 48px serif
+    //ctx.font = "bold  italic  100px arial serif";//bold 100px serif
+    //bold 100px serif
+    //ctx.font = "italic 12em \"Fira Sans\", serif";//bold 100px serif
+
+
+    //ctx.strokeText('Hello world', 50, 100);
+
+    //console.log(ctx);
+
+    //ctx.lineWidth;
+    /*
+    direction: "inherit" | "ltr" | "rtl";
+
+    fillStyle: string | CanvasGradient | CanvasPattern;
+
+    filter: "none" | "url("filters.svg#filter-id") blur(5px) brightness(0.4) contrast(200%) drop-shadow(16px 16px 20px blue) grayscale(50%) hue-rotate(90deg) invert(75%) opacity(25%) saturate(30%) sepia(60%)";
+
+    font: "line-height font-weight font-variant font-style font-stretch font-size font-family";
+        font-stretch: ultra-condensed | extra-condensed | condensed | semi-condensed | normal | semi-expanded |
+            expanded | extra-expanded | ultra-expanded | x% | inherit | initial | unset;
+        font-style: normal | italic | oblique | oblique 10deg | inherit | initial | unset;
+        font-variant: small-caps | common-ligatures small-caps | inherit | initial | unset;
+
+    globalAlpha: 0...1;
+
+    globalCompositeOperation: "source-over"(default) | "source-in" | "source-out" | "source-atop" | "destination-over" |
+        "destination-in" | "destination-out" | "destination-atop" | "lighter" | "copy" | "xor" | "multiply" | "screen" |
+         "overlay" | "darken" | "lighten" | "color-dodge" | "color-burn" | "hard-light" | "soft-light" | "difference" |
+         "exclusion" | "hue" | "saturation" | "luminosity";
+
+    imageSmoothingEnabled: true | false;
+
+    imageSmoothingQuality: "high" | "low" | "medium";
+
+    lineCap: "butt" | "round" | "square";
+
+    lineDashOffset: number;
+
+    lineJoin: "bevel" | "miter" | "round";
+
+    lineWidth: 1
+    miterLimit: 10
+    shadowBlur: 0
+    shadowColor: "rgba(0, 0, 0, 0)"
+    shadowOffsetX: 0
+    shadowOffsetY: 0
+    strokeStyle: "#000000"
+    textAlign: "start"
+    textBaseline: "alphabetic"
+    arc: ƒ arc()
+    arcTo: ƒ arcTo()
+    beginPath: ƒ beginPath()
+    bezierCurveTo: ƒ bezierCurveTo()
+    canvas: canvas
+    clearRect: ƒ clearRect()
+    clip: ƒ clip()
+    closePath: ƒ closePath()
+    createImageData: ƒ createImageData()
+    createLinearGradient: ƒ createLinearGradient()
+    createPattern: ƒ createPattern()
+    createRadialGradient: ƒ createRadialGradient()
+    drawFocusIfNeeded: ƒ drawFocusIfNeeded()
+    drawImage: ƒ drawImage()
+    ellipse: ƒ ellipse()
+    fill: ƒ fill()
+    fillRect: ƒ fillRect()
+    fillText: ƒ fillText()
+    getContextAttributes: ƒ getContextAttributes()
+    getImageData: ƒ getImageData()
+    getLineDash: ƒ getLineDash()
+    getTransform: ƒ getTransform()
+    isPointInPath: ƒ isPointInPath()
+    isPointInStroke: ƒ isPointInStroke()
+    lineTo: ƒ lineTo()
+    measureText: ƒ measureText()
+    putImageData: ƒ putImageData()
+    quadraticCurveTo: ƒ quadraticCurveTo()
+    rect: ƒ rect()
+    resetTransform: ƒ resetTransform()
+    restore: ƒ restore()
+    rotate: ƒ rotate()
+    save: ƒ save()
+    scale: ƒ scale()
+    setLineDash: ƒ setLineDash()
+    setTransform: ƒ setTransform()
+    stroke: ƒ stroke()
+    strokeRect: ƒ strokeRect()
+    strokeText: ƒ strokeText()
+    transform: ƒ transform()
+    translate: ƒ translate()
+
+    */
+
+
+</script>
+</body>
+</html>
+
