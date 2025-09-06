@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<script>
+
+    window.addEventListener('load', function () {
+		// Проверяем, поддерживает ли браузер этот API
+		if (document.hidden !== undefined) {
+			// Событие срабатывает при изменении видимости
+			document.addEventListener("visibilitychange", function() {
+				if (document.hidden) {
+					console.log("Вкладка неактивна (скрыта или свёрнута)");
+				} else {
+					console.log("Вкладка снова активна!");
+				}
+			});
+
+			// Можно также проверить статус сразу
+			console.log("Сейчас вкладка активна?", !document.hidden);
+		}
+    });
+	//document.hidden: возвращает true, если страница скрыта.
+
+	//document.visibilityState: возвращает строку:
+
+	//'visible': страница видима.
+
+	//'hidden': страница не видима.
+
+	//'prerender': страница готовится к показу (предварительная отрисовка).
+
+</script>
+</body>
+</html>

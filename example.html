@@ -3,56 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <style>
-
+        * {
+            box-sizing: border-box;
+        }
 
     </style>
 </head>
 <body>
+<div id="a" style="height:70px;padding:20px;border:10px solid black;overflow: hidden">dghjkfyuk</div>
 
 <script>
-    // sa #faq -i scrolli hamara
-    window.addEventListener('load', function () {
-        setTimeout(function () {
-            let hash = document.location.hash;
-            let faq = document.getElementById('faq');
-            if(hash === '#faq' && faq){
-                //console.log(faq.getBoundingClientRect().top);
-                window.scrollBy(0, faq.getBoundingClientRect().top - 100);
-            }
-        }, 300);
-    });
-    // isk sa en #probetraining-i hamara, hin@ poxi` es dir, refreshic heto popup@ chi bacvi, menak en ejic hghumov ancnelov
-    window.addEventListener('load', function () {
-        //pum-5343   popmake-5343
-        setTimeout(function () {
-            let pum = document.getElementById('pum-5343');
-            let pop = document.getElementById('popmake-5343');
-            if (pum && pop && window.location.search === '?pum=t') {
-                window.history.pushState({}, "", document.location.pathname + document.location.hash);
-                pum.style.display = 'block';
-                pum.style.opacity = '1';
-                pum.style.overflow = 'auto';
-                pum.setAttribute('aria-modal', 'true');
-                pum.classList.add('pum-active');
-                pop.style.display = 'block';
-                pop.style.opacity = '1';
-                pop.querySelector('button.pum-close.popmake-close').addEventListener('click', function () {
-                    let op = 1, interval = 30, q = 15;
-                    let interval_id = setInterval(function () {
-                        op -= 1 / q;
-                        pum.style.opacity = op.toString();
-                        pop.style.opacity = op.toString();
-                    }, 30);
-                    setTimeout(function () {
-                        clearInterval(interval_id);
-                        pum.style.display = 'none';
-                        pop.style.display = 'none';
-                    }, interval * q);
-                });
-            }
-        }, 300);
-    });
 
+    window.addEventListener('load', function () {
+        let s = document.getElementById("a").getBoundingClientRect();
+        console.log(s);
+        for (let r = 60; r <= 200; r += 10) {
+            let dl = r - (r ** 2 - 8 ** 2) ** 0.5;
+            console.log(r.toFixed(0), dl.toFixed(2));
+        }
+    });
 
 </script>
 </body>

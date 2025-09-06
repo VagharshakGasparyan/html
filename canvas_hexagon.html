@@ -31,7 +31,8 @@
     window.addEventListener('load', function () {
         //------------------user settings--------------------------
         let hexagon_side = 20;
-        let lineWidth = 3;
+        let lineWidth = 2;
+		let hexColors = ["#f00", "#ff0", "#0f0", "#00f", "#f0f", "#970", "#fff"];
         //------------------user settings--------------------------
         let c = document.getElementById("canvas-hexagon");
         if(!c){
@@ -52,7 +53,9 @@
         c.height = c.getBoundingClientRect().height;
         let ctx = c.getContext('2d');//CanvasRenderingContext2D
         ctx.lineWidth = lineWidth;
-        ctx.strokeStyle = "#970";
+		let newColor = hexColors[Math.floor(Math.random() * hexColors.length)];
+        ctx.strokeStyle = newColor;//  "#970";
+		ctx.fillStyle = newColor;
         ctx.lineJoin = "round";
         ctx.lineCap = "round";
         let kx = Math.cos(Math.PI / 6) * hexagon_side * 2;
@@ -73,7 +76,8 @@
             let x0 = hex.x, y0 = hex.y, t = hex.t;
             let m = 100;
             let opacity = (Math.floor(15.99999 * Math.max(m - t, 0) / m)).toString(16);
-            ctx.strokeStyle = "#970" + opacity;
+            ctx.strokeStyle = hex.c + opacity;
+            ctx.fillStyle = hex.c + "3";//hex.c + opacity;
             ctx.beginPath();
             ctx.moveTo(x0 - 0.5 * kx, y0 - 0.5 * hexagon_side);
             ctx.lineTo(x0, y0 - hexagon_side);
@@ -83,6 +87,7 @@
             ctx.lineTo(x0 - 0.5 * kx, y0 + 0.5 * hexagon_side);
             ctx.closePath();
             ctx.stroke();// Draw the Path
+            ctx.fill();
             g.hexes[i].t = t + 1;
             if (t > m){
                 g.hexes.splice(i, 1);
@@ -100,7 +105,8 @@
             let hexMoment = "x" + x0 + "y" + y0;
             if(hexMoment !== g.hexMoment){
                 g.hexMoment = hexMoment;
-                g.hexes.push({x: x0, y: y0, t: 0});
+				let newColor = hexColors[Math.floor(Math.random() * hexColors.length)];
+                g.hexes.push({x: x0, y: y0, t: 0, c: newColor});
             }
             g.hexes.forEach((hex, i)=>{
                 fMakeHexByCenter(hex, i);
