@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+    <title>English</title>
+    <style>
+        :root {
+            --bg: #112233;
+            --c: #dddddd;
+            --c1: #5f5;
+            --c2: #7af;
+            --bd: #fff2;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--c);
+        }
+
+        .content {
+            max-width: 100vw;
+            width: max-content;
+            margin: 0 auto;
+        }
+
+        .table {
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .table td, .table th {
+            border: 1px solid var(--bd);
+            padding: 3px 5px;
+        }
+        .table tbody tr td{
+            position: relative;
+        }
+        .table tbody tr td:nth-child(1) {
+            color: var(--c1);
+        }
+        .table tbody tr td:nth-child(2) {
+            color: var(--c);
+        }
+        .table tbody tr td:nth-child(3) {
+            color: var(--c1);
+            text-align: center;
+        }
+        .table tbody tr td:nth-child(4) {
+            color: var(--c2);
+        }
+        .copy{
+            border: 2px solid var(--c);
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 15px;
+            height: 20px;
+            background-color: var(--bd);
+            cursor: pointer;
+        }
+        .copy:hover{
+            background-color: var(--c1);
+        }
+        .copy:active{
+            background-color: var(--c2);
+        }
+        select{
+            background-color: var(--bg);
+            color: var(--c);
+            border: 1px solid var(--bd);
+            outline: none;
+        }
+        #variants{
+            min-width: 200px;
+        }
+        button {
+            background-color: var(--bg);
+            color: var(--c);
+            border: 1px solid var(--bd);
+            outline: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: var(--bd);
+        }
+        button:active {
+            background-color: var(--c);
+            color: var(--bg);
+        }
+        .info-items{
+            border: 1px solid var(--bd);
+            font-size: 14px;
+            padding: 2px 5px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="content" style="padding-bottom: 20px;">
+    <div>
+        <label>
+            <input type="checkbox" id="training">
+            <span>Тренировка</span>
+        </label>
+    </div>
+    <div id="training_body" style="display: none;margin-top: 10px;font-size: 18px;">
+        <div>
+            <label for="variants" id="word_label" style="padding: 0 10px;margin-right: 10px; border: 1px solid var(--bd);">
+                <span id="word"></span>
+            </label>
+            <select id="variants" style="font-size: 18px;">
+                <option value=""></option>
+            </select>
+            <button id="dont_know">Не знаю</button>
+        </div>
+        <div id="info"></div>
+    </div>
+</div>
+<div class="content">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>N</th>
+            <th>English</th>
+            <th>Transcription</th>
+            <th>Translation</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+<div style="height: 50vh"></div>
+<!--<script src="english_2.js"></script>-->
+<script>
+    // let en_ru_8000_modern = {};
+    // en_ru_8000.forEach((item) => {
+    //     en_ru_8000_modern[item.en] = item.en_transcription;
+    // });
+
+    let en_ru = [
+        {en:"cat", ru: "кошка, կատու", _: "kæt"},
+        {en:"bat", ru: "летучая мышь, չղջիկ", _: "bæt"},
+        {en:"rat", ru: "крыса, առնետ", _: "ræt"},
+        {en:"one", ru: "один, одна, одно, մեկ", _: "wʌn"},
+        {en:"lesson", ru: "урок, դաս", _: "lesn"},
+        {en:"cap", ru: "кепка, կեպի", _: "kæp"},
+        {en:"hat", ru: "шляпа, գլխարկ", _: "hæt"},
+        {en:"pen", ru: "ручка, գրիչ", _: "pen"},
+        {en:"hen", ru: "курица, հավ", _: "[ hen ]"},
+        {en:"and", ru: "и, և", _: "[ ənd ]"},
+        {en:"three", ru: "три, երեք", _: "[ θri: ]"},
+        {en:"dog", ru: "собака, շուն", _: "[ dɔg ]"},
+        {en:"pig", ru: "свинья, խոզ", _: "[ pig ]"},
+        {en:"cup", ru: "чашка, բաժակ", _: "[ kʌp ]"},
+        {en:"gun", ru: "ружьё, հրացան", _: "[ gʌn ]"},
+        {en:"four", ru: "четыре", _: "[ fɔ: ]"},
+        {en:"box", ru: "коробка, ящик", _: "[ bɔks ]"},
+        {en:"fox", ru: "лиса, աղվես", _: "[ fɔks ]"},
+        {en:"bed", ru: "кровать", _: "[ bed ]"},
+        {en:"jam", ru: "варенье", _: "[ ʤæm ]"},
+        {en:"five", ru: "пять", _: "[ faiv ]"},
+        {en:"star", ru: "звезда", _: "[ stɑ: ]"},
+        {en:"vase", ru: "ваза", _: "[ vɑ:z ]"},
+        {en:"kitten", ru: "котёнок", _: "[ kitn ]"},
+        {en:"lamp", ru: "лампа", _: "[ læmp ]"},
+        {en:"six", ru: "шесть", _: "[ siks ]"},
+        {en:"boy", ru: "мальчик, տղա", _: "[ bɔi ]"},
+        {en:"wolf", ru: "волк, գայլ", _: "[ wulf ]"},
+        {en:"zebra", ru: "зебра", _: "[ zi:brə ]"},
+        {en:"squirrel", ru: "белка, սկյուռիկ", _: "[ 'skwirəl ]"},
+        {en:"two", ru: "два", _: "[ tu: ]"},
+        {en:"seven", ru: "семь", _: "[ sevn ]"},
+        {en:"have", ru: "иметь", _: "[ hæv ]"},
+        {en:"book", ru: "книга, գիրք", _: "[ buk ]"},
+        {en:"copy-book", ru: "тетрадь, տետր", _: "[ kɔpibuk ]"},
+        {en:"but", ru: "но, բայց", _: "[ bʌt ]"},
+        {en:"spoon", ru: "ложка, գդալ", _: "[ spu:n ]"},
+        {en:"show", ru: "показывать, ցուցադրել", _: "[ ʃou ]"},
+        {en:"give", ru: "давать, տալ", _: "[ giv ]"},
+        {en:"eight", ru: "восемь, ութ", _: "[ eit ]"},
+        {en:"this", ru: "этот, эта, это, այս", _: "[ ðis ]"},
+        {en:"these", ru: "эти, սրանք", _: "[ ði:z ]"},
+        {en:"that", ru: "тот, та, то, այն", _: "[ ðæt ]"},
+        {en:"those", ru: "те, դրանք", _: "[ ðəuz ]"},
+        {en:"he", ru: "он", _: "[ hi: ]"},
+        {en:"ball", ru: "мяч, գնդակ", _: "[ bɔ:l ]"},
+        {en:"stick", ru: "палка, փայտ", _: "[ stik ]"},
+        {en:"too", ru: "тоже, նույնպես", _: "[ tu: ]"},
+        {en:"pistol", ru: "пистолет, ատրճանակ", _: "[ 'pistl ]"},
+        {en:"word", ru: "слово, բառ", _: "[ wə:d ]"},
+        {en:"say", ru: "сказать, ասել", _: "[ sei ]"},
+        {en:"nine", ru: "девять, ինը", _: "[ nain ]"},
+        {en:"girl", ru: "девочка, աղջիկ", _: "[ gə:l ]"},
+        {en:"dish", ru: "блюдо", _: "[ diʃ ]"},
+        {en:"fish", ru: "рыба, ձուկ", _: "[ fiʃ ]"},
+        {en:"is", ru: "находится, на, գտնվում է", _: "[ iz ]"},
+        {en:"on", ru: "на, վրա", _: "[ ɔn ]"},
+        {en:"she", ru: "она", _: "[ ʃi: ]"},
+        {en:"frog", ru: "лягушка, գորտ", _: "[ frɔg ]"},
+        {en:"log", ru: "бревно, գերան", _: "[ lɔg ]"},
+        {en:"in", ru: "в, մեջ", _: "[ in ]"},
+        {en:"lake", ru: "озеро, լիճ", _: "[ leik ]"},
+        {en:"snake", ru: "змея, օձ", _: "[ sneik ]"},
+        {en:"like", ru: "любить, нравиться", _: "[ laik ]"},
+        {en:"cake", ru: "торт, пирожное", _: "[ keik ]"},
+        {en:"doll", ru: "кукла", _: "[ dɔl ]"},
+        {en:"ten", ru: "десять", _: "[ ten ]"},
+        {en:"yes", ru: "да, այո", _: "[ jes ]"},
+        {en:"you", ru: "ты, вы, դու, դուք", _: "[ ju: ]"},
+        {en:"rabbit", ru: "кролик", _: "[ 'ræbit ]"},
+        {en:"no", ru: "нет", _: "[ nəu ]"},
+        {en:"chicken", ru: "цыплёнок", _: "[ 'ʧikin ]"},
+        {en:"count", ru: "считать", _: "[ kaunt ]"},
+        {en:"from", ru: "от", _: "[ frɔm ]"},
+        {en:"to", ru: "до", _: "[ tu: ]"},
+        {en:"try", ru: "пытаться", _: "[ trai ]"},
+        {en:"catch", ru: "ловить", _: "[ kæʧ ]"},
+        {en:"eleven", ru: "одиннадцать", _: "[ i'levn ]"},
+        {en:"how", ru: "как", _: "[ hau ]"},
+        {en:"many", ru: "много", _: "[ 'meni ]"},
+        {en:"how many", ru: "сколько", _: ""},
+        {en:"we", ru: "мы", _: "[ wi: ]"},
+        {en:"duck", ru: "утка", _: "[ dʌk ]"},
+        {en:"duckling", ru: "утёнок", _: "[ dʌkliŋ ]"},
+        {en:"cow", ru: "корова", _: "[ kau ]"},
+        {en:"it", ru: "это, он, она, оно", _: "[ it ]"},
+        {en:"with", ru: "с", _: "[ wið ]"},
+        {en:"twelve", ru: "двенадцать", _: "[ twelv ]"},
+        {en:"they", ru: "они", _: "[ ðei ]"},
+        {en:"horse", ru: "лошадь", _: "[ hɔ:s ]"},
+        {en:"black", ru: "чёрный", _: "[ blæk ]"},
+        {en:"big", ru: "большой", _: "[ big ]"},
+        {en:"goat", ru: "коза", _: "[ gəut ]"},
+        {en:"white", ru: "белый", _: "[ wait ]"},
+        {en:"red", ru: "красный", _: "[ red ]"},
+        {en:"car", ru: "автомобиль", _: "[ kɑ: ]"},
+        {en:"street", ru: "улица", _: "[ stri:t ]"},
+        {en:"ribbon", ru: "лента", _: "[ 'ribən ]"},
+        {en:"lemon", ru: "лимон", _: "[ 'lemən ]"},
+        {en:"thirteen", ru: "тринадцать", _: "[ 'θə:'ti:n ]"},
+        {en:"where", ru: "где", _: "[ wɛə ]"},
+        {en:"room", ru: "комната", _: "[ rum ]"},
+        {en:"your", ru: "твой, ваш", _: "[ jɔ: ]"},
+        {en:"table", ru: "стол", _: "[ teibl ]"},
+        {en:"house", ru: "дом", _: "[ haus ]"},
+        {en:"garden", ru: "сад", _: "[ gɑ:dn ]"},
+        {en:"I am", ru: "я (есть)", _: ""},
+        {en:"he, she, it is", ru: "он, она, оно (есть)", _: ""},
+        {en:"my", ru: "мой, моя, моё", _: "[ mai ]"},
+        {en:"under", ru: "под", _: "[ 'ʌndə ]"},
+        {en:"tree", ru: "дерево", _: "[ tri: ]"},
+        {en:"very", ru: "очень", _: "[ 'veri ]"},
+        {en:"good", ru: "хороший", _: "[ gud ]"},
+        {en:"fourteen", ru: "четырнадцать", _: "[ 'fɔ:'ti:n ]"},
+        {en:"flag", ru: "флаг", _: "[ flæg ]"},
+        {en:"shirt", ru: "рубашка (мужская)", _: "[ ʃə:t ]"},
+        {en:"green", ru: "зелёный", _: "[ gri:n ]"},
+        {en:"grey", ru: "серый", _: "[ grei ]"},
+        {en:"dress", ru: "платье", _: "[ dres ]"},
+        {en:"blue", ru: "голубой, синий", _: "[ blu: ]"},
+        {en:"his", ru: "его", _: "[ hiz ]"},
+        {en:"pencil", ru: "карандаш", _: "[ 'pensil ]"},
+        {en:"Daddy", ru: "папа", _: "[ dædi ]"},
+        {en:"Mammy", ru: "мама", _: "[ mæmi ]"},
+        {en:"her", ru: "её, ей", _: "[ hə: ]"},
+        {en:"take", ru: "брать", _: "[ teik ]"},
+        {en:"fifteen", ru: "пятнадцать", _: "[ 'fif:'ti:n ]"},
+        {en:"look", ru: "смотреть", _: "[ luk ]"},
+        {en:"what", ru: "что", _: "[ wɔt ]"},
+        {en:"flower", ru: "цветок", _: "[ 'flauə ]"},
+        {en:"rose", ru: "роза", _: "[ rəuz ]"},
+        {en:"violet", ru: "фиалка, մանուշակ", _: "[ 'vaiələt ]"},
+        {en:"or", ru: "или", _: "[ ɔ: ]"},
+        {en:"bird", ru: "птица", _: "[ bə:d ]"},
+        {en:"cage", ru: "клетка", _: "[ keiʤ ]"},
+        {en:"little", ru: "маленький", _: "[ litl ]"},
+        {en:"umbrella", ru: "зонт", _: "[ ʌm'brelə ]"},
+        {en:"yellow", ru: "жёлтый", _: "[ 'jeləu ]"},
+        {en:"trousers", ru: "брюки", _: "[ 'trauzəz ]"},
+        {en:"bad", ru: "плохой", _: "[ bæd ]"},
+        {en:"sixteen", ru: "шестнадцать", _: "[ 'siks'ti:n ]"},
+        {en:"old", ru: "старый", _: "[ əuld ]"},
+        {en:"silver", ru: "серебряный", _: "[ 'silvə ]"},
+        {en:"bell", ru: "колокольчик", _: "[ bel ]"},
+        {en:"new", ru: "новый", _: "[ nju: ]"},
+        {en:"long", ru: "длинный", _: "[ lɔŋ ]"},
+        {en:"strong", ru: "сильный, крепкий", _: "[ strɔŋ ]"},
+        {en:"our", ru: "наш", _: "[ 'auə ]"},
+        {en:"their", ru: "их", _: "[ ðɛə ]"},
+        {en:"children", ru: "дети, ребята", _: "[ 'ʧildrən ]"},
+        {en:"at home", ru: "дома", _: ""},
+        {en:"father", ru: "отец, папа", _: "[ 'fɑ:ðə ]"},
+        {en:"mother", ru: "мать, мама", _: "[ 'mʌðə ]"},
+        {en:"bring", ru: "приносить", _: "[ briŋ ]"},
+        {en:"please", ru: "пожалуйста", _: "[ pli:z ]"},
+        {en:"seventeen", ru: "семнадцать", _: "[ 'sevn'ti:n ]"},
+        {en:"what", ru: "который, какой, что за", _: "[ wɔt ]"},
+        {en:"animal", ru: "животное", _: "[ 'æniməl ]"},
+        {en:"tiger", ru: "тигр", _: "[ 'taigə ]"},
+        {en:"jackal", ru: "шакал", _: "[ 'ʤækɔ:l ]"},
+        {en:"small", ru: "маленький", _: "[ smɔ:l ]"},
+        {en:"weak", ru: "слабый", _: "[ wi:k ]"},
+        {en:"lion", ru: "лев", _: "[ 'laiən ]"},
+        {en:"daisy", ru: "маргаритка", _: "[ 'deizi ]"},
+        {en:"its", ru: "его, её, свой", _: "[ its ]"},
+        {en:"as...as", ru: "такой же...как", _: ""},
+        {en:"not so...as", ru: "не такой...как", _: ""},
+        {en:"see", ru: "видеть, смотреть", _: "[ si: ]"},
+        {en:"quail", ru: "перепёлка, լոր", _: "[ kweil ]"},
+        {en:"tame", ru: "ручной", _: "[ teim ]"},
+        {en:"eagle", ru: "орёл", _: "[ 'i:gl ]"},
+        {en:"beak", ru: "клюв", _: "[ bi:k ]"},
+        {en:"sharp", ru: "острый", _: "[ ʃɑ:p ]"},
+        {en:"cock", ru: "петух", _: "[ kɔk ]"},
+        {en:"leg", ru: "нога", _: "[ leg ]"},
+        {en:"tail", ru: "хвост, պոչ", _: "[ teil ]"},
+        {en:"claw", ru: "коготь", _: "[ klɔ: ]"},
+        {en:"ring", ru: "кольцо", _: "[ riŋ ]"},
+        {en:"coat", ru: "пальто", _: "[ kəut ]"},
+        {en:"gold", ru: "золото, золотой", _: "[ gəuld ]"},
+        {en:"brown", ru: "коричневый", _: "[ braun ]"},
+        {en:"toy", ru: "игрушка", _: "[ tɔi ]"},
+        {en:"nineteen", ru: "девятнадцать", _: ""},
+        {en:"who", ru: "кто", _: "[ hu: ]"},
+        {en:"man", ru: "мужчина", _: "[ mæn ]"},
+        {en:"hunter", ru: "охотник", _: "[ 'hʌntə ]"},
+        {en:"son", ru: "сын", _: "[ sʌn ]"},
+        {en:"puppy", ru: "щенок", _: "[ 'pʌpi ]"},
+        {en:"clever", ru: "умный", _: "[ 'klevə ]"},
+        {en:"Mr.", ru: "мистер", _: ""},
+        {en:"doctor", ru: "доктор", _: "[ 'dɔktə ]"},
+        {en:"brother", ru: "брат", _: "[ 'brʌðə ]"},
+        {en:"friend", ru: "друг", _: "[ frend ]"},
+        {en:"twenty", ru: "двадцать", _: "[ 'twenti ]"},
+        {en:"pair", ru: "пара", _: "[ pɛə ]"},
+        {en:"shoe", ru: "ботинок", _: "[ ʃu: ]"},
+        {en:"a pair of shoes", ru: "пара туфель", _: ""},
+        {en:"chair", ru: "стул", _: "[ ʧɛə ]"},
+        {en:"stocking", ru: "чулок", _: "[ 'stɔkiŋ ]"},
+        {en:"sofa", ru: "диван", _: "[ 'səufə ]"},
+        {en:"at the cinema", ru: "в кино", _: ""},
+        {en:"plate", ru: "тарелка", _: "[ pleit ]"},
+        {en:"nest", ru: "гнездо", _: "[ nest ]"},
+        {en:"cupboard", ru: "буфет", _: "[ 'kʌbəd ]"},
+        {en:"to put on", ru: "надевать", _: ""},
+        {en:"put", ru: "класть, положить", _: "[ put ]"},
+        {en:"How old are you?", ru: "Сколько тебе лет?", _: ""},
+        {en:"year", ru: "год", _: "[ jiə ]"},
+        {en:"monkey", ru: "обезьяна", _: "[ 'mʌŋki ]"},
+        {en:"funny", ru: "забавный", _: "[ 'fʌni ]"},
+        {en:"donkey", ru: "ослик", _: "[ 'dɔnki ]"},
+        {en:"back", ru: "спина", _: "[ bæk ]"},
+        {en:"go", ru: "идти", _: "[ gəu ]"},
+        {en:"to", ru: "к", _: "[ tu: ]"},
+        {en:"open", ru: "открывать", _: "[ əupn ]"},
+        {en:"Open!", ru: "Открой!", _: ""},
+        {en:"fork", ru: "вилка", _: "[ fɔ:k ]"},
+        {en:"to put down", ru: "класть, положить", _: ""},
+        {en:"knife", ru: "нож", _: "[ naif ]"},
+        {en:"knives", ru: "ножы", _: "[ naivz ]"},
+        {en:"penknife", ru: "перочинный нож", _: "[ 'pennaif ]"},
+        {en:"read", ru: "читать", _: "[ ri:d ]"},
+        {en:"Sit down!", ru: "Сядь!", _: ""},
+        {en:"write", ru: "писать", _: "[ rait ]"},
+        {en:"lorry", ru: "грузовик", _: "[ 'lɔri ]"},
+        {en:"driver", ru: "шофер", _: "[ 'draivə ]"},
+        {en:"sister", ru: "сестра", _: "[ 'sistə ]"},
+        {en:"I can", ru: "Я могу, умею", _: ""},
+        {en:"I cannot", ru: "Я не умею, я не могу", _: ""},
+        {en:"run", ru: "бегать", _: "[ rʌn ]"},
+        {en:"fast", ru: "быстро", _: "[ fɑ:st ]"},
+        {en:"swim", ru: "плавать", _: "[ swim ]"},
+        {en:"at all", ru: "совсем", _: ""},
+        {en:"now", ru: "теперь", _: "[ nau ]"},
+        {en:"well", ru: "хорошо", _: "[ wel ]"},
+        {en:"turkey", ru: "индюшка", _: "[ 'tə:ki ]"},
+        {en:"to fly", ru: "летать", _: "[ flai ]"},
+        {en:"swallow", ru: "ласточка", _: "[ 'swɔləu ]"},
+        {en:"drive", ru: "водить машину", _: "[ draiv ]"},
+        {en:"motor-car", ru: "легковой автомобиль", _: ""},
+        {en:"may", ru: "можно", _: "[ mei ]"},
+        {en:"must", ru: "должен", _: "[ mʌst ]"},
+        {en:"there", ru: "туда, там", _: "[ ðɛə ]"},
+        {en:"ill", ru: "больной", _: "[ il ]"},
+        {en:"whose", ru: "чей, чьи", _: "[ hu:z ]"},
+        {en:"yard", ru: "двор", _: "[ jɑ:d ]"},
+        {en:"too", ru: "слишком", _: "[ tu: ]"},
+        {en:"far", ru: "далеко", _: "[ fɑ: ]"},
+        {en:"to come in", ru: "входить", _: ""},
+        {en:"sit", ru: "сидеть", _: "[ sit ]"},
+        {en:"kite", ru: "бумажный змей", _: "[ kait ]"},
+        {en:"school", ru: "школа", _: "[ sku:l ]"},
+        {en:"why", ru: "почему", _: "[ wai ]"},
+        {en:"to come to see", ru: "повидаться", _: ""},
+        {en:"to the cinema", ru: "в кино", _: ""},
+        {en:"to school", ru: "в школу", _: ""},
+        {en:"learn", ru: "учиться", _: "[ lə:n ]"},
+        {en:"lazy", ru: "ленивый", _: "[ 'leizi ]"},
+        {en:"to get up", ru: "вставать", _: ""},
+        {en:"early", ru: "рано", _: "[ 'ə:li ]"},
+        {en:"draw", ru: "рисовать", _: "[ drɔ: ]"},
+        {en:"glass", ru: "стакан, стекло", _: "[ glɑ:s ]"},
+        {en:"minute", ru: "минута", _: "[ 'minit ]"},
+        {en:"bottle", ru: "бутылка", _: "[ bɔtl ]"},
+        {en:"milk", ru: "молоко", _: "[ milk ]"},
+        {en:"saucer", ru: "блюдце", _: "[ 'sɔ:sə ]"},
+        {en:"camel", ru: "верблюд", _: ""},
+        {en:"even", ru: "даже", _: "[ 'i:vən ]"},
+        {en:"an Indian", ru: "индеец", _: ""},
+        {en:"pine-tree", ru: "сосна", _: ""},
+        {en:"fir-tree", ru: "ель", _: ""},
+        {en:"late", ru: "поздно", _: "[ leit ]"},
+        {en:"coloured", ru: "цветной", _: "[ 'kʌləd ]"},
+        {en:"Good-bye!", ru: "До свидания!", _: ""},
+        {en:"there is", ru: "имеется, есть", _: ""},
+        {en:"there are", ru: "имеются", _: ""},
+        {en:"some", ru: "несколько, немного", _: "[ sʌm ]"},
+        {en:"nut", ru: "орех", _: "[ nʌt ]"},
+        {en:"owl", ru: "сова", _: "[ aul ]"},
+        {en:"mouse", ru: "мышь", _: "[ maus ]"},
+        {en:"mice", ru: "мыши", _: "[ mais ]"},
+        {en:"apple", ru: "яблоко", _: "[ æpl ]"},
+        {en:"wood", ru: "лес", _: "[ wud ]"},
+        {en:"at school", ru: "в школе", _: ""},
+        {en:"water", ru: "вода", _: "[ 'wɔ:tə ]"},
+        {en:"boiled", ru: "кипячённый", _: "[ bɔild ]"},
+        {en:"eye", ru: "глаз", _: "[ ai ]"},
+        {en:"eyes", ru: "глаза", _: ""},
+        {en:"wing", ru: "крыло", _: "[ wiŋ ]"},
+        {en:"eat", ru: "есть, кушать", _: "[ i:t ]"},
+        {en:"any", ru: "любой, сколько-нибудь", _: ""},
+        {en:"bread", ru: "хлеб", _: "[ bred ]"},
+        {en:"for", ru: "для", _: "[ fɔ: ]"},
+        {en:"dinner", ru: "обед", _: "[ 'dinə ]"},
+        {en:"for dinner", ru: "на обед", _: ""},
+        {en:"much", ru: "много (неисчисляемые)", _: "[ mʌʧ ]"},
+        {en:"jug", ru: "кувшин", _: "[ ʤʌg ]"},
+        {en:"class", ru: "клас", _: "[ klɑ:s ]"},
+        {en:"forest", ru: "лес", _: "[ 'fɔrist ]"},
+        {en:"kettle", ru: "чайник, котелок", _: "[ ketl ]"},
+        {en:"cheese", ru: "сыр", _: "[ ʧi:z ]"},
+        {en:"butter", ru: "масло", _: "[ 'bʌtə ]"},
+        {en:"tea", ru: "чай", _: "[ ti: ]"},
+        {en:"for tea", ru: "к чаю", _: ""},
+        {en:"kitchen", ru: "кухня", _: "[ 'kiʧin ]"},
+        {en:"put", ru: "класть, ставить, положить", _: "[ put ]"},
+        {en:"a fly", ru: "муха", _: ""},
+        {en:"flies", ru: "мухи", _: ""},
+        {en:"window", ru: "окно", _: "[ 'windəu ]"},
+        {en:"door", ru: "дверь", _: "[ dɔ: ]"},
+        {en:"here", ru: "здесь", _: "[ hiə ]"},
+        {en:"of course", ru: "конечно", _: "ըվ՛քը։ս"},
+        {en:"bee", ru: "пчела", _: "[ bi: ]"},
+        {en:"at the table", ru: "за столом", _: ""},
+        {en:"floor", ru: "пол, этаж", _: "[ flɔ: ]"},
+        {en:"ladybird", ru: "божья коровка", _: "՛լեյդիբը։դ"},
+        {en:"leaf", ru: "лист", _: "[ li:f ]"},
+        {en:"leaves", ru: "листы", _: ""},
+        {en:"berry", ru: "ягода", _: "՛բերի"},
+        {en:"berries", ru: "ягоды", _: "[ 'beriz ]"},
+        {en:"mushroom", ru: "гриб", _: "մաշռու։մ"},
+        {en:"bush", ru: "куст", _: "[ buʃ ]"},
+        {en:"butterfly", ru: "бабочка", _: "բաթըֆլայ"},
+        {en:"field", ru: "поле", _: "[ fi:ld ]"},
+        {en:"honey", ru: "мёд", _: "[ 'hʌni ]"},
+        {en:"when", ru: "когда", _: "[ wen ]"},
+        {en:"moon", ru: "луна", _: "[ mu:n ]"},
+        {en:"sky", ru: "небо", _: "[ skai ]"},
+        {en:"night", ru: "ночь", _: "[ nait ]"},
+        {en:"at night", ru: "ночью", _: ""},
+        {en:"day", ru: "день", _: "[ dei ]"},
+        {en:"by day", ru: "днём", _: ""},
+        {en:"sun", ru: "солнце", _: "[ sʌn ]"},
+        {en:"in the sun", ru: "на солнце", _: ""},
+        {en:"else", ru: "ещё", _: "[ els ]"},
+        {en:"cloud", ru: "облако", _: "[ klaud ]"},
+        {en:"dark", ru: "тёмный", _: "[ dɑ:k ]"},
+        {en:"dark-grey", ru: "тёмно-серый", _: ""},
+        {en:"to be", ru: "быть", _: ""},
+        {en:"may be", ru: "может быть", _: ""},
+        {en:"month", ru: "месяц", _: "[ mʌnθ ]"},
+        {en:"week", ru: "неделя", _: "[ wi:k ]"},
+        {en:"thirty", ru: "тридцать", _: "[ 'θə:ti ]"},
+        {en:"sunshine", ru: "солнечный свет", _: "[ 'sʌnʃain ]"},
+        {en:"warm", ru: "теплый", _: "[ wɔ:m ]"},
+        {en:"light", ru: "свет", _: "[ lait ]"},
+        {en:"moonlight", ru: "лунный свет", _: "[ 'mu:nlait ]"},
+        {en:"hot", ru: "жаркий, горячий", _: "[ hɔt ]"},
+        {en:"shade", ru: "тень", _: "[ ʃeid ]"},
+        {en:"in the shade", ru: "в тени", _: ""},
+        {en:"rhyme", ru: "стишок, рифма", _: "[ raim ]"},
+        {en:"fat", ru: "жирный", _: "[ fæt ]"},
+        {en:"for that", ru: "за это", _: ""},
+        {en:"if", ru: "если", _: "[ if ]"},
+        {en:"you will have", ru: "ты будешь иметь, ты получишь", _: ""},
+        {en:"them", ru: "им, их", _: "[ ðem ]"},
+        {en:"sleep", ru: "спать", _: "[ sli:p ]"},
+        {en:"poor", ru: "бедный", _: "[ puə ]"},
+        {en:"pure", ru: "чистый", _: "[ pjuə ]"},
+        {en:"maybe", ru: "может быть", _: "[ 'meibi ]"},
+        {en:"help", ru: "помогать", _: "[ help ]"},
+        {en:"balloon", ru: "воздушный шар", _: "[ bə'lu:n ]"},
+        {en:"Mrs.", ru: "миссис", _: ""},
+        {en:"short", ru: "короткий", _: "[ ʃɔ:t ]"},
+        {en:"shorter", ru: "ниже (ростом)", _: "[ ʃɔrter ]"},
+        {en:"than", ru: "чем (при сравнении)", _: "[ ðən ]"},
+        {en:"husband", ru: "муж", _: "[ 'hʌzbənd ]"},
+        {en:"wife", ru: "жена", _: "[ waif ]"},
+        {en:"older", ru: "старше", _: ""},
+        {en:"while", ru: "в то время, как", _: "[ wail ]"},
+        {en:"tall", ru: "высокий", _: "[ tɔ:l ]"},
+        {en:"because", ru: "потому что", _: "[ bi:'kɔ:z ]"},
+        {en:"snow", ru: "снег", _: "[ snəu ]"},
+        {en:"high", ru: "высокий", _: "[ hai ]"},
+        {en:"wall", ru: "стена", _: "[ wɔ:l ]"},
+        {en:"What is (he)?", ru: "Кто (он)? (по профессии)", _: ""},
+        {en:"another", ru: "другой, ещё один", _: "[ ə'nʌðə ]"},
+        {en:"to come out", ru: "выходить", _: ""},
+        {en:"out of", ru: "из", _: ""},
+        {en:"say", ru: "говорить", _: "[ sei ]"},
+        {en:"says", ru: "говорит", _: ""},
+        {en:"won't = will not", ru: "не хочу (не буду)", _: ""},
+        {en:"leave", ru: "покидать", _: "[ li:v ]"},
+        {en:"also", ru: "тоже", _: "[ 'ɔ:lsəu ]"},
+        {en:"thin", ru: "худой", _: "[ θin ]"},
+        {en:"always", ru: "всегда", _: "[ 'ɔ:lwəz ]"},
+        {en:"hungry", ru: "голодный", _: "[ 'hʌŋgri ]"},
+        {en:"grain", ru: "зерно", _: "[ 'grein ]"},
+        {en:"hear", ru: "слышать", _: "[ hiə ]"},
+        {en:"patter", ru: "скороговорка", _: ""},
+        {en:"Bunny", ru: "Зайка", _: ""},
+        {en:"bear", ru: "медведь", _: "[ bɛə ]"},
+        {en:"stork", ru: "аист", _: "[ stɔ:k ]"},
+        {en:"sparrow", ru: "воробей", _: "[ 'spærəu ]"},
+        {en:"pea", ru: "горошина", _: "[ pi: ]"},
+        {en:"peas", ru: "горох", _: "[ pi:z ]"},
+        {en:"rice", ru: "рис", _: "[ rais ]"},
+        {en:"all", ru: "всё, все", _: "[ ɔ:l ]"},
+        {en:"again", ru: "опять", _: "[ ə'gen ]"},
+        {en:"soup", ru: "суп", _: "[ su:p ]"},
+        {en:"porridge", ru: "каша", _: "[ 'pɔriʤ ]"},
+        {en:"money", ru: "деньги", _: "[ 'mʌni ]"},
+        {en:"I'll = I will", ru: "я буду", _: ""},
+        {en:"buy", ru: "покупать", _: "[ bai ]"},
+        {en:"make", ru: "делать, шить", _: "[ meik ]"},
+        {en:"baby", ru: "ребёнок, младенец", _: "[ 'beibi ]"},
+        {en:"babies", ru: "дети", _: ""},
+        {en:"woman", ru: "женщина", _: "[ 'wumən ]"},
+        {en:"women", ru: "женщины", _: "[ 'wimin ]"},
+        {en:"palm", ru: "пальма", _: "[ pɑ:m ]"},
+        {en:"plant", ru: "растение", _: "[ plɑ:nt ]"},
+        {en:"grow", ru: "расти", _: "[ grəu ]"},
+        {en:"the South", ru: "юг", _: ""},
+        {en:"in the South", ru: "на юге", _: ""},
+        {en:"wild", ru: "дикий", _: "[ waild ]"},
+        {en:"sheep", ru: "овца, овцы", _: "[ 'ʃi:p ]"},
+        {en:"domestic", ru: "домашний", _: "[ də'mestik ]"},
+        {en:"ant", ru: "муравей", _: "[ ænt ]"},
+        {en:"insect", ru: "насекомое", _: "[ 'insekt ]"},
+        {en:"artist", ru: "художник", _: "[ 'ɑ:tist ]"},
+        {en:"full", ru: "полный", _: "[ ful ]"},
+        {en:"sea", ru: "море", _: "[ si: ]"},
+        {en:"lie", ru: "лежать", _: "[ lai ]"},
+        {en:"shore", ru: "берег", _: "[ ʃɔ: ]"},
+        {en:"seashore", ru: "морской берег", _: ""},
+        {en:"some of", ru: "некоторые из", _: ""},
+        {en:"winter", ru: "зима", _: "[ 'wintə ]"},
+        {en:"in winter", ru: "зимой", _: ""},
+        {en:"such", ru: "такой", _: "[ sʌʧ ]"},
+        {en:"evergreen", ru: "вечнозелёный", _: ""},
+        {en:"who", ru: "кто, который", _: "[ hu: ]"},
+        {en:"the English", ru: "англичане", _: ""},
+        {en:"to live", ru: "жить", _: ""},
+        {en:"England", ru: "Англия", _: "[ 'ɪŋglənd ]"},
+        {en:"speak", ru: "говорить, владеть", _: "[ spi:k ]"},
+        {en:"English", ru: "английский, по-английски", _: "[ 'iŋgliʃ ]"},
+        {en:"the Chinese", ru: "китайцы", _: ""},
+        {en:"China", ru: "Китай", _: "[ 'ʧainə ]"},
+        {en:"Chinese", ru: "китайский, по-китайски", _: ""},
+        {en:"the Americans", ru: "американцы", _: ""},
+        {en:"America", ru: "Америка", _: ""},
+        {en:"the French", ru: "французы", _: ""},
+        {en:"France", ru: "Франция", _: "[ fræns ]"},
+        {en:"French", ru: "французский, по-французски", _: "[ frenʧ ]"},
+        {en:"the Germans", ru: "немцы", _: ""},
+        {en:"German", ru: "немецкий, по-немецки", _: "[ 'ʤə:mən ]"},
+        {en:"the Russians", ru: "русские", _: ""},
+        {en:"Russian", ru: "русский, по-русски", _: "[ 'rʌʃən ]"},
+        {en:"though", ru: "хотя, չնայած", _: "[ ðəu ]"},
+        {en:"to be well", ru: "быть здоровым", _: ""},
+        {en:"I am well", ru: "я здоров", _: ""},
+        {en:"pick", ru: "срывать", _: "[ pik ]"},
+        {en:"apple-tree", ru: "яблоня", _: ""},
+        {en:"to look at", ru: "смотреть на", _: ""},
+        {en:"ripe", ru: "спелый", _: "[ raip ]"},
+        {en:"round", ru: "круглый", _: "[ raund ]"},
+        {en:"juicy", ru: "сочный", _: "[ 'ʤu:si ]"},
+        {en:"ask", ru: "спрашивать", _: "[ ɑ:sk ]"},
+        {en:"angry", ru: "сердито", _: "[ 'æŋgri ]"},
+        {en:"to be angry with", ru: "сердиться на", _: ""},
+        {en:"silly", ru: "глупый", _: "[ 'sili ]"},
+        {en:"to try", ru: "попробовать", _: ""},
+        {en:"guess", ru: "отгадывать", _: "[ ges ]"},
+        {en:"that", ru: "что (союз)", _: "[ ðæt ]"},
+        {en:"picture", ru: "картина", _: "[ 'pikʧə ]"},
+        {en:"elephant", ru: "слон", _: "[ 'elifənt ]"},
+        {en:"after", ru: "после", _: "[ 'ɑ:ftə ]"},
+        {en:"home", ru: "домой", _: "[ həum ]"},
+        {en:"any", ru: "какой-нибудь, любой", _: ""},
+        {en:"tomorrow", ru: "завтра", _: "[ tə'mɔrəu ]"},
+        {en:"only", ru: "только", _: "[ 'əunli ]"},
+        {en:"Sunday", ru: "воскресенье", _: "[ 'sʌndi ]"},
+        {en:"on Sundays", ru: "по воскресеньям", _: ""},
+        {en:"next", ru: "следующий", _: "[ nekst ]"},
+        {en:"Let us!", ru: "Давайте!", _: ""},
+        {en:"together", ru: "вместе", _: "[ tə'geðə ]"},
+        {en:"film", ru: "фильм, кинокартина", _: "[ film ]"},
+        {en:"about", ru: "о, об", _: "[ ə'baut ]"},
+        {en:"they say", ru: "говорят", _: ""},
+        {en:"biggest", ru: "самый большой", _: "բիգիստ"},
+        {en:"the world", ru: "мир, свет", _: ""},
+        {en:"in the world", ru: "на свете", _: ""},
+        {en:"where", ru: "где, куда", _: "[ wɛə ]"},
+        {en:"mine", ru: "мой, իմն է", _: "[ main ]"},
+        {en:"pear", ru: "груша", _: "[ pɛə ]"},
+        {en:"orange", ru: "апельсин", _: "[ 'ɔrinʤ ]"},
+        {en:"peach", ru: "персик, դեղձ", _: "[ pi:ʧ ]"},
+        {en:"plum", ru: "слива, սալոր", _: "[ plʌm ]"},
+        {en:"grapes", ru: "виноград", _: "[ greɪps ]"},
+        {en:"grape", ru: "виноградинка", _: ""},
+        {en:"sly", ru: "хитрый", _: "[ 'slai ]"},
+        {en:"large", ru: "большой", _: "[ lɑ:ʤ ]"},
+        {en:"deep", ru: "глубокий", _: "[ di:p ]"},
+        {en:"river", ru: "река", _: "[ 'rivə ]"},
+        {en:"pond", ru: "пруд", _: "[ pɔnd ]"},
+        {en:"fruit", ru: "фрукты", _: "[ fru:t ]"},
+        {en:"fruit-tree", ru: "фруктовое дерево", _: ""},
+        {en:"rise", ru: "подниматься, вставать", _: "[ raiz ]"},
+        {en:"head", ru: "голова", _: "[ hed ]"},
+        {en:"call", ru: "вызвать", _: "[ kɔ:l ]"},
+        {en:"to go to bed", ru: "идти спать", _: ""},
+        {en:"sing", ru: "петь", _: "[ siŋ ]"},
+        {en:"lullaby", ru: "колыбельная", _: "լալըբայ"},
+        {en:"very much", ru: "очень", _: ""},
+        {en:"rest", ru: "отдых", _: "[ rest ]"},
+        {en:"pillow", ru: "подушка", _: "[ 'piləu ]"},
+        {en:"shut", ru: "закрывать", _: "[ ʃʌt ]"},
+        {en:"amazing", ru: "удивительный", _: "[ ə'meiziŋ ]"},
+        {en:"sting", ru: "жало, ужалить", _: ""},
+        {en:"boar", ru: "кабан", _: ""},
+        {en:"forever", ru: "навсегда", _: "[ fə'revə ]"},
+        {en:"messy", ru: "беспорядочно", _: ""},
+        {en:"interact", ru: "взаимодействие", _: ""},
+        {en:"pillar", ru: "столб", _: "[ 'pilə ]"},
+        {en:"still", ru: "всё ещё", _: "[ stil ]"},
+        {en:"feeling", ru: "чувство", _: "[ 'fi:liŋ ]"},
+        {en:"feel", ru: "чувствовать", _: "[ fi:l ]"},
+        {en:"enjoy", ru: "обожать", _: "[ in'jɔi ]"},
+        {en:"as", ru: "как", _: "[ əz ]"},
+        {en:"especially", ru: "особенно", _: "[ is'peʃəli ]"},
+        {en:"quite", ru: "довольно", _: "[ kwait ]"},
+        {en:"rather", ru: "довольно-таки, բավականին", _: "[ 'rɑ:ðə ]"},
+        {en:"I would like", ru: "Я бы хотел", _: ""},
+        {en:"have to", ru: "должен", _: ""},
+        {en:"attractive", ru: "привлекательный", _: "[ ə'træktiv ]"},
+        {en:"offer", ru: "предложение", _: "[ 'ɔfə ]"},
+        {en:"reliable", ru: "надежный", _: "[ ri'laiəbl ]"},
+        {en:"choice", ru: "выбор", _: "[ ʧɔis ]"},
+        {en:"owner", ru: "владелец", _: "[ 'əunə ]"},
+        {en:"depend", ru: "зависит", _: "[ di'pend ]"},
+        {en:"seems", ru: "кажется", _: ""},
+        {en:"it seems to me", ru: "мне кажется", _: ""},
+        {en:"them", ru: "их", _: "[ ðem ]"},
+        {en:"their", ru: "их(что-то)", _: "[ ðɛə ]"},
+        {en:"don't=do not", ru: "нет", _: ""},
+        {en:"such", ru: "такой", _: "[ sʌʧ ]"},
+        {en:"the same", ru: "такой же, одинаковый", _: ""},
+        {en:"prefer", ru: "предпочитать", _: "[ pri:fə: ]"},
+        {en:"forgot", ru: "забыл", _: "[ fɔrgɔt ]"},
+        {en:"impression", ru: "впечатление", _: "[ im'preʃn ]"},
+        {en:"fill", ru: "заполнить", _: "[ fil ]"},
+        {en:"happen", ru: "случаться", _: "[ hæpn ]"},
+        {en:"spend", ru: "тратить", _: "[ spend ]"},
+        {en:"pay", ru: "платить", _: "[ pei ]"},
+        {en:"pay for", ru: "платить за", _: ""},
+        {en:"course", ru: "курс", _: "[ kɔ:s ]"},
+        {en:"talk about", ru: "говорить о/об", _: ""},
+        {en:"discuss", ru: "обсуждать", _: "[ dis'kʌs ]"},
+        {en:"politics", ru: "политика", _: "[ 'pɔlitiks ]"},
+        {en:"business", ru: "бизнес", _: "[ 'biznis ]"},
+        {en:"mistake", ru: "ошибка", _: "[ mis'teik ]"},
+        {en:"sometimes", ru: "иногда", _: "[ ,'sʌmtaimz ]"},
+        {en:"manager", ru: "менеджер", _: "[ 'mænəʤə ]"},
+        {en:"for a start", ru: "для начала", _: ""},
+        {en:"another", ru: "другой", _: "[ ə'nʌðə ]"},
+        {en:"other", ru: "другие", _: "[ 'ʌðə ]"},
+        {en:"visit", ru: "посетить", _: "[ 'vizit ]"},
+        {en:"food", ru: "еда", _: "[ fu:d ]"},
+        {en:"practice", ru: "практика", _: "[ 'præktis ]"},
+        {en:"service", ru: "услуга, сервис", _: "[ 'sə:vis ]"},
+        {en:"communicate", ru: "общаться", _: "[ kə'mju:nikeit ]"},
+        {en:"almost", ru: "почти", _: "[ 'ɔ:lməust ]"},
+        {en:"some", ru: "несколько, немного", _: "[ sʌm ]"},
+        {en:"also", ru: "также, тоже", _: "[ 'ɔ:lsəu ]"},
+        {en:"remember", ru: "помнить", _: "[ ri'membə ]"},
+        {en:"spare time, free time", ru: "свободное время", _: ""},
+        {en:"a bit", ru: "чуть-чуть", _: ""},
+        {en:"a little bit", ru: "чуточку", _: ""},
+        {en:"naturally", ru: "естественно", _: ""},
+        {en:"I'd like to", ru: "я хотел бы", _: ""},
+        {en:"abroad", ru: "за границей", _: "[ ə'brɔ:d ]"},
+        {en:"matter", ru: "имеет значение", _: "[ 'mætə ]"},
+        {en:"inspire", ru: "вдохновлять", _: ""},
+        {en:"opinion", ru: "мнение", _: "[ ə'pinjən ]"},
+        {en:"aim", ru: "цель", _: "[ eim ]"},
+        {en:"thought", ru: "мысль", _: "[ θɔ:t ]"},
+        {en:"instead", ru: "вместо", _: "[ in'sted ]"},
+        {en:"sooner", ru: "раньше", _: "[ 'su:nər ]"},
+        {en:"ass", ru: "задница, жопа", _: "[ æs ]"},
+        {en:"fart", ru: "пердеть", _: "[ färt ]"},
+        {en:"offend", ru: "обидеть, վիրավորել", _: "[ ə'fend ]"},
+        {en:"enough", ru: "достаточно", _: "[ iˈnəf ]"},
+        {en:"damn", ru: "проклятие", _: "[ dam ]"},
+        {en:"bill", ru: "счет, հաշիվ", _: "[ bil ]"},
+        {en:"reason", ru: "причина, պատճառ", _: "[ ˈrēz(ə)n ]"},
+        {en:"throw", ru: "бросать", _: "[ THrō ]"},
+        {en:"unusual", ru: "необычно, необычный", _: "[ ˌənˈyo͞oZH(əw)əl ]"},
+        {en:"strange", ru: "странный, տարօրինակ", _: "[ streinʤ ]"},
+        {en:"answer", ru: "ответ, պատասխան", _: "[ 'ɑ:nsə ]"},
+        {en:"expensive", ru: "дорогой, թանկարժեք", _: "[ ikˈspensiv ]"},
+        {en:"vibe", ru: "атмосфера, մթնոլորտ", _: "[ vīb ]"},
+        {en:"spooky", ru: "жуткий, սարսափելի", _: "[ spo͞okē ]"},
+        {en:"entire", ru: "весь, ամբողջովին", _: "[ ənˈtī(ə)r ]"},
+        {en:"solve", ru: "решать, լուծել", _: "[ sälv ]"},
+        {en:"defense", ru: "защита, оборона", _: "[ dəˈfens ]"},
+        {en:"solution", ru: "решение, լուծում", _: "[ səˈlo͞oSHən ]"},
+        {en:"decision", ru: "решение", _: "[ di'siʒn ]"},
+        {en:"joke", ru: "шутка, կատակ", _: "[ jōk ]"},
+        {en:"useful", ru: "полезный, օգտակար", _: "[ ˈyo͞osf(ə)l ]"},
+        {en:"mosquito", ru: "комар, մժեղ", _: "[ məˈskēdō ]"},
+        {en:"swat", ru: "удар", _: "[ swät ]"},
+        {en:"laugh", ru: "смех", _: "[ laf ]"},
+        {en:"story", ru: "история", _: "[ stôrē ]"},
+        {en:"history", ru: "история", _: "[ hist(ə)rē ]"},
+        {en:"subtle", ru: "тонкий", _: "[ ˈsəd(ə)l ]"},
+        {en:"knob", ru: "ручка, բռնակ", _: "[ näb ]"},
+        {en:"salmon", ru: "лосось", _: "[ ˈsamən ]"},
+        {en:"wrap", ru: "сворачивать", _: "[ rap ]"},
+        {en:"follow", ru: "следовать, հետևել", _: "[ ˈfälō ]"},
+        {en:"appear", ru: "появляться", _: "əˈpir"},
+        {en:"however", ru: "однако, սակայն", _: "houˈevər"},
+        {en:"should", ru: "должен, պետք է", _: "SHo͝od"},
+        {en:"guide", ru: "гид, ուղեցույց", _: "ɡīd"},
+        {en:"verb", ru: "глагол, բայ", _: "vərb"},
+        {en:"typo", ru: "опечатка, տպագրական սխալ", _: "tīˌpō"},
+        // {en:"", ru: "", _: ""},
+        // {en:"", ru: "", _: ""},
+
+        ];
+
+    let fs = [];
+    window.addEventListener('load', function () {
+        let tbody = document.querySelector('.table tbody');
+        let trs = '';
+
+        en_ru.forEach((tr, index)=>{
+            // let en_tr = tr["_"] ? tr["_"] : ((tr.en in en_ru_8000_modern) ? en_ru_8000_modern[tr.en] : '-');
+            let en_tr = tr["_"];
+            // let copy = '<div class="copy" onclick="fs[' + index + ']()"></div>';
+            let copy = '';
+            trs += '<tr>'
+                + '<td>' + (index + 1) + '</td>'
+                + '<td>' + tr.en + '</td>'
+                // + '<td>' + (tr.en_transcription ?? '-') + '</td>'
+                + '<td>' + en_tr + copy + '</td>'
+                + '<td>' + tr.ru + '</td>'
+                + '</tr>';
+            // function f() {
+            //     navigator.clipboard.writeText(en_tr);
+            // }
+            // fs.push(f);
+        });
+        tbody.innerHTML = trs;
+        //----------------------------------------------------------------------------------------------
+        let training = document.getElementById('training');
+        let training_body = document.getElementById('training_body');
+        let word = document.getElementById('word');
+        let word_label = document.getElementById('word_label');
+        let variants = document.getElementById('variants');
+        let dont_know = document.getElementById('dont_know');
+        let info = document.getElementById('info');
+        //----variables------------------------------------------------
+        let trueVariant = -1;
+        let trueVariantObj = {en: "", ru: "", _: ""};
+        let forgets = [];
+
+        training.addEventListener('input', () => {
+            if (training.checked) {
+                tbody.style.display = 'none';
+                training_body.style.display = 'block';
+                generateVariants();
+            }else{
+                tbody.style.display = 'table-row-group';
+                training_body.style.display = 'none';
+            }
+        });
+
+        dont_know.addEventListener('click', ()=>{
+            forgets.push(trueVariantObj);
+            en_ru.push(trueVariantObj);
+            info.innerHTML = en_ru.length.toString();
+            forgets.forEach((f)=>{
+                info.innerHTML += '<div class="info-items">' + f.en + '</div>';
+            });
+            generateVariants();
+        });
+        variants.addEventListener('input', () => {
+            let val = variants.value;
+            if (val) {
+                if(parseInt(val) === trueVariant) {
+                    word_label.style.borderColor = '#0f0';
+                    setTimeout(()=>{
+                        generateVariants();
+                    }, 1000);
+                }else{
+                    word_label.style.borderColor = '#f05';
+                    forgets.push(trueVariantObj);
+                    en_ru.push(trueVariantObj);
+                }
+                info.innerHTML = en_ru.length.toString();
+                forgets.forEach((f)=>{
+                    info.innerHTML += '<div class="info-items">' + f.en + '</div>';
+                });
+            }
+        });
+        
+        function generateVariants() {
+            word_label.style.borderColor = 'var(--bd)';
+            let variantsCount = 10;
+            let n = Math.floor(Math.random() * en_ru.length);
+            trueVariant = n;
+            trueVariantObj = en_ru[n];
+            let myWord = en_ru[n].en;
+            let transcription = en_ru[n]._;
+            let translated = en_ru[n].ru;
+            word.innerHTML = myWord + '<span style="margin-left: 10px;color: green">' + transcription + '</span>';
+            variants.innerHTML = '<option value=""></option>';
+
+            let ns = [];
+            ns.length = en_ru.length;
+            ns.fill(0);
+            ns.forEach((v, index)=>{
+                ns[index] = index;
+            });
+            let last_n = ns.length - 1;
+            let r = ns[last_n];
+            ns[last_n] = ns[n];
+            ns[n] = r;
+            last_n --;
+            let items = [];
+            items.push('<option value="' + n + '">' + translated + '</option>');
+            for (let i = 0; i < variantsCount - 1; i++){
+                let n1 = Math.floor(Math.random() * (last_n + 1));
+                let translated1 = en_ru[ns[n1]].ru;
+                items.push('<option value="' + n1 + '">' + translated1 + '</option>');
+                r = ns[last_n];
+                ns[last_n] = ns[n1];
+                ns[n1] = r;
+                last_n --;
+            }
+            let r_item_n = Math.floor(Math.random() * variantsCount);
+            let r_item = items[r_item_n];
+            items[r_item_n] = items[0];
+            items[0] = r_item;
+            variants.innerHTML += items.join('');
+            en_ru.splice(n, 1);
+            // variants.focus();
+            // console.log(en_ru);
+        }
+
+
+    });
+
+    // (()=>{
+    //     let en_ru_8000 = [];
+    //     let trs = document.querySelectorAll('#WordsTable tbody tr');
+    //     trs.forEach((tr)=>{
+    //         let en = tr.querySelector('td:nth-child(2)');
+    //         let en_transcription = tr.querySelector('td:nth-child(3)');
+    //         let ru = tr.querySelector('td:nth-child(4)');
+    //         if(en && en_transcription && ru){
+    //             en_ru_8000.push({
+    //                 en: en.innerText.replace(/ /ig, ' '),
+    //                 en_transcription: en_transcription.innerText.replace(/ /ig, ' '),
+    //                 ru: ru.innerText.replace(/ /ig, ' ')
+    //             });
+    //         }
+    //     });
+    //     // console.log(en_ru_8000.length);
+    //     console.log(JSON.stringify(en_ru_8000));
+    // })();
+
+
+
+
+</script>
+</body>
+</html>
