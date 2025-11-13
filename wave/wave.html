@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+    <title>Wave</title>
+    <style>
+        :root {
+            --bg: #112233;
+            --c: #dddddd;
+            --c1: #19BB00;
+            --c2: #7af;
+            --c3: #976E00;
+            --c4: #FA0000;
+            --c5: #DC00FE;
+            --bd: #fff2;
+        }
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--c);
+        }
+        body {
+            margin: 0;
+        }
+        .c0{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .c1_1{
+            max-height: 100vh;
+            /*padding: 7vmin;*/
+            /*border: 1px solid var(--c);*/
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .c1_2{
+            padding: 7vmin;
+        }
+        @media (orientation: portrait) {
+            .c1_1{
+                width: 100%;
+            }
+            .c1_2{
+                width: 100%;
+            }
+            input[type="text"]{
+                padding: 2vw;
+                font-size: 8vw;
+            }
+            .label{
+                font-size: 8vw;
+            }
+            .close{
+                font-size: 10vw;
+            }
+            #answer{
+                font-size: 8vw;
+            }
+        }
+        @media (orientation: landscape) {
+            .c1_1{
+                width: 50%;
+            }
+            .c1_2{
+                width: 50%;
+            }
+            input[type="text"]{
+                padding: 1vw;
+                font-size: 4vw;
+            }
+            .label{
+                font-size: 4vw;
+            }
+            .close{
+                font-size: 5vw;
+            }
+            #answer{
+                font-size: 4vw;
+            }
+        }
+        #wave_img{
+            width: 85%;
+            height: 85%;
+        }
+        input[type="text"]{
+            width: 100%;
+            outline: none;
+            background-color: var(--bg);
+            /*color: var(--c);*/
+        }
+        label[for="var_w"], #var_w{
+            color: var(--c3);
+        }
+        #var_w{
+            border: 1px solid var(--c3);
+        }
+        label[for="var_h"], #var_h{
+            color: var(--c1);
+        }
+        #var_h{
+            border: 1px solid var(--c1);
+        }
+        .close{
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            outline: none;
+            border: none;
+            cursor: pointer;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+        }
+        #close_w{
+            background-color: var(--c3);
+            color: var(--bg);
+        }
+        #close_w:hover{
+            opacity: 0.5;
+        }
+        #close_w:active{
+            background-color: var(--bg);
+            color: var(--c3);
+        }
+        #close_h{
+            background-color: var(--c1);
+            color: var(--bg);
+        }
+        #close_h:hover{
+            opacity: 0.5;
+        }
+        #close_h:active{
+            background-color: var(--bg);
+            color: var(--c1);
+        }
+    </style>
+</head>
+<body>
+<div class="c0">
+    <div class="c1_1">
+        <img id="wave_img" src="wave.svg" alt="wave">
+    </div>
+    <div class="c1_2">
+        <label class="label" style="display: block" for="var_w">W</label>
+        <div style="position: relative;">
+            <input id="var_w" type="text" placeholder="w">
+            <button class="close" id="close_w">&times;</button>
+        </div>
+
+        <label style="margin-top:2vmin;display: block" class="label" for="var_h">h</label>
+        <div style="position: relative;">
+            <input id="var_h" type="text" placeholder="w">
+            <button class="close" id="close_h">&times;</button>
+        </div>
+        <div id="answer"></div>
+
+    </div>
+</div>
+<script>
+    window.addEventListener('load', () => {
+        const answer = document.getElementById('answer');
+        const var_w = document.getElementById('var_w');
+        const close_w = document.getElementById('close_w');
+        const var_h = document.getElementById('var_h');
+        const close_h = document.getElementById('close_h');
+        let w = '';
+        let h = '';
+        var_w.addEventListener('input', () => {
+            let value = var_w.value;
+            if(value === ''){
+                w = '';
+            }else if (isNaN(value) || isNaN(parseFloat(value))) {
+                var_w.value = w;
+            }else{
+                w = Math.abs(parseFloat(value)).toString();
+            }
+            evaluate();
+        });
+        var_h.addEventListener('input', () => {
+            let value = var_h.value;
+            if(value === ''){
+                h = '';
+            }if (isNaN(value) || isNaN(parseFloat(value))) {
+                var_h.value = h;
+            }else{
+                h = Math.abs(parseFloat(value)).toString();
+            }
+            evaluate();
+        });
+        close_w.addEventListener('click', () => {
+            w = '';
+            var_w.value = w;
+            evaluate();
+        });
+        close_h.addEventListener('click', () => {
+            h = '';
+            var_h.value = h;
+            evaluate();
+        });
+        function evaluate() {
+            if(w === '' || h === ''){
+                answer.innerHTML = '';
+                return;
+            }
+            let pw = parseFloat(w);
+            let ph = parseFloat(h);
+            let pa = pw - Math.sqrt(0.5 * pw * pw + 0.5 * ph * ph);
+            let pb = 0.5 * pw - pa;
+            let pr = 3 * ph / 4 + pw * (pa - pb) / (2 * ph);
+            let r = pr.toPrecision(4);
+            let a = pa.toPrecision(4);
+            answer.innerHTML = '<span style="color: var(--c4)">R = ' + r + '</span>'
+            + '<br><span style="color: var(--c5)">a = ' + a + '</span>';
+        }
+
+
+    });
+</script>
+
+</body>
+</html>
