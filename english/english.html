@@ -1638,9 +1638,9 @@
         let transcription = "";
         bb.forEach((b, i)=>{
             if(i < 3){
-                let b1 = b.split("/");
+                let b1 = b.split(" /");
                 if(b1.length > 1){
-                    transcription = b1[1].trim();
+                    transcription = b1[1].trim().replace("/", "");
                 }
                 obj._.push(transcription);
                 obj.en.push(b1[0].trim());
