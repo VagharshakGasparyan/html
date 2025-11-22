@@ -1,0 +1,226 @@
+Անգլերեն բառ (English Word)	Տառադարձություն (Transcription)	Հայերեն թարգմանություն (Armenian Translation)
+try	/traɪ/	փորձել
+catch	/kætʃ/	բռնել
+shirt	/ʃɜːrt/	վերնաշապիկ
+violet	/ˈvaɪələt/	մանուշակ, մանուշակագույն
+cage	/keɪdʒ/	վանդակ
+trousers	/ˈtraʊzərz/	տաբատ (շալվար)
+their	/ðer/	նրանց, իրենց
+bring	/brɪŋ/	բերել
+weak	/wiːk/	թույլ
+daisy	/ˈdeɪzi/	մարգարիտածաղիկ
+quail	/kweɪl/	լոր
+tame	/teɪm/	ընտելացված, ձեռնասուն
+beak	/biːk/	կտուց
+sharp	/ʃɑːrp/	սուր
+tail	/teɪl/	պոչ
+claw	/klɔː/	ճանկ
+coat	/koʊt/	վերարկու
+toy	/tɔɪ/	խաղալիք
+even	/ˈiːvən/	նույնիսկ, հավասար
+pine-tree	/ˈpaɪn triː/	սոճի
+fir-tree	/ˈfɜːr triː/	եղևնի
+coloured	/ˈkʌlərd/	գունավոր
+some	/sʌm/	որոշ, մի քանի
+wing	/wɪŋ/	թև
+any	/ˈeni/	որևէ, ցանկացած
+kettle	/ˈketl/	թեյնիկ
+kitchen	/ˈkɪtʃɪn/	խոհանոց
+here	/hɪr/	այստեղ
+leaf	/liːf/	տերև
+leaves	/liːvz/	տերևներ
+bush	/bʊʃ/	թուփ
+fat	/fæt/	գեր, ճարպ
+poor	/pɔːr/	աղքատ, խեղճ
+pure	/pjʊr/	մաքուր, զուտ
+tall	/tɔːl/	բարձրահասակ
+high	/haɪ/	բարձր
+leave	/liːv/	հեռանալ, թողնել
+also	/ˈɔːlsoʊ/	նաև
+thin	/θɪn/	բարակ, նիհար
+hungry	/ˈhʌŋɡri/	սոված
+grain	/ɡreɪn/	հացահատիկ, հատիկ
+hear	/hɪr/	լսել
+patter	/ˈpætər/	թխթխկոց (ոտնաձայներ/անձրև)
+bunny	/ˈbʌni/	նապաստակ (փաղաքշական)
+bear	/ber/	արջ
+stork	/stɔːrk/	արագիլ
+pea	/piː/	ոլոռ (հատիկ)
+peas	/piːz/	ոլոռ (հոգնակի)
+rice	/raɪs/	բրինձ
+soup	/suːp/	ապուր
+palm	/pɑːm/	ափ (ձեռքի), արմավենի
+plant	/plænt/	բույս (գոյական), տնկել (բայ)
+grow	/ɡroʊ/	աճել, աճեցնել
+the South	/ðə saʊθ/	Հարավը
+sheep	/ʃiːp/	ոչխար
+insect	/ˈɪnsekt/	միջատ
+artist	/ˈɑːrtɪst/	նկարիչ, արվեստագետ
+full	/fʊl/	լիքը, կուշտ
+lie	/laɪ/	սուտ, ստել, պառկել
+shore	/ʃɔːr/	ափ (ծովի/լճի)
+seashore	/ˈsiːʃɔːr/	ծովափ
+some of	/sʌm əv/	մի մասը, որոշները
+such	/sʌtʃ/	այսպիսի, այնպիսի
+to live	/tə lɪv/	ապրել
+though	/ðoʊ/	թեև, չնայած
+pick	/pɪk/	ընտրել, հավաքել (օր.՝ ծաղիկ)
+ripe	/raɪp/	հասած (միրգ)
+juicy	/ˈdʒuːsi/	հյութալի
+angry	/ˈæŋɡri/	բարկացած
+to be angry with	/tə bi ˈæŋɡri wɪð/	բարկացած լինել (մեկի վրա)
+silly	/ˈsɪli/	հիմարիկ, միամիտ
+guess	/ɡes/	գուշակել, ենթադրել
+guest	/ɡest/	հյուր
+Let us!	/let əs/	Եկե՛ք (անենք ինչ-որ բան)
+pear	/per/	տանձ
+peach	/piːtʃ/	դեղձ
+plum	/plʌm/	սալոր
+grapes	/ɡreɪps/	խաղող
+grape	/ɡreɪp/	խաղողի հատիկ
+sly	/slaɪ/	խորամանկ
+large	/lɑːrdʒ/	մեծ, խոշոր
+deep	/diːp/	խորը
+pond	/pɑːnd/	լճակ
+rise	/raɪz/	բարձրանալ, ծագել (արև)
+call	/kɔːl/	զանգել, կանչել
+to go to bed	/tə ɡoʊ tə bed/	գնալ քնելու
+sing	/sɪŋ/	երգել
+rest	/rest/	հանգիստ (գոյ.), հանգստանալ (բայ)
+pillow	/ˈpɪloʊ/	բարձ
+shut	/ʃʌt/	փակել
+amazing	/əˈmeɪzɪŋ/	զարմանալի, հիանալի
+sting	/stɪŋ/	խայթոց, խայթել
+boar	/bɔːr/	վարազ
+forever	/fərˈevər/	ընդմիշտ
+messy	/ˈmesi/	թափթփված, անկարգ
+interact	/ˌɪntərˈækt/	փոխազդել, շփվել
+pillar	/ˈpɪlər/	սյուն
+still	/stɪl/	դեռ (մակբայ), հանգիստ (ածական)
+feeling	/ˈfiːlɪŋ/	զգացմունք
+feel	/fiːl/	զգալ
+enjoy	/ɪnˈdʒɔɪ/	վայելել
+as	/æz/	որպես, քանի որ
+especially	/ɪˈspeʃəli/	հատկապես
+quite	/kwaɪt/	բավականին, միանգամայն
+rather	/ˈræðər/	ավելի շուտ (նախընտրություն), բավականին
+I would like	/aɪ wʊd laɪk/	ես կցանկանայի
+have to	/ˈhæv tu/	ստիպված լինել, պետք է
+attractive	/əˈtræktɪv/	գրավիչ
+offer	/ˈɔːfər/	առաջարկ, առաջարկել
+reliable	/rɪˈlaɪəbl/	վստահելի, հուսալի
+choice	/tʃɔɪs/	ընտրություն
+owner	/ˈoʊnər/	սեփականատեր
+depend	/dɪˈpend/	կախված լինել
+seems	/siːmz/	թվում է
+it seems to me	/ɪt siːmz tə mi/	ինձ թվում է
+the same	/ðə seɪm/	նույնը
+prefer	/prɪˈfɜːr/	նախընտրել
+forget	/fərˈɡet/	մոռանալ
+impression	/ɪmˈpreʃn/	տպավորություն
+fill	/fɪl/	լցնել
+happen	/ˈhæpən/	պատահել, տեղի ունենալ
+spend	/spend/	ծախսել (փող), անցկացնել (ժամանակ)
+pay	/peɪ/	վճարել
+pay for	/peɪ fɔːr/	վճարել (ինչ-որ բանի համար)
+course	/kɔːrs/	դասընթաց, ուղղություն, ընթացք
+talk about	/tɔːk əˈbaʊt/	խոսել (ինչ-որ բանի) մասին
+discuss	/dɪˈskʌs/	քննարկել
+mistake	/mɪˈsteɪk/	սխալ
+sometimes	/ˈsʌmtaɪmz/	երբեմն
+for a start	/fər ə stɑːrt/	սկզբի համար
+visit	/ˈvɪzɪt/	այցելել
+communicate	/kəˈmjuːnɪkeɪt/	հաղորդակցվել, շփվել
+spare time	/sper taɪm/	ազատ ժամանակ
+free time	/friː taɪm/	ազատ ժամանակ
+a bit	/ə bɪt/	մի քիչ
+a little bit	/ə ˈlɪtl bɪt/	մի փոքր
+naturally	/ˈnætʃrəli/	բնականաբար
+I'd like to	/aɪd laɪk tu/	ես կցանկանայի
+abroad	/əˈbrɔːd/	արտասահման
+matter	/ˈmætər/	խնդիր/հարց (գոյ.), կարևոր լինել (բայ)
+inspire	/ɪnˈspaɪər/	ոգեշնչել
+opinion	/əˈpɪnjən/	կարծիք
+aim	/eɪm/	նպատակ, նշան բռնել
+thought	/θɔːt/	միտք (գոյ.), մտածեցի (բայ)
+instead	/ɪnˈsted/	փոխարենը
+sooner	/ˈsuːnər/	ավելի շուտ
+ass	/æs/	հետույք (ժարգոն), էշ (կենդանի)
+fart	/fɑːrt/	փորափուչություն, «թողնել» (խոսկց.)
+offend	/əˈfend/	վիրավորել, նեղացնել
+enough	/ɪˈnʌf/	բավական է, հերիք է
+damn	/dæm/	անիծյալ, գրողը տանի
+bill	/bɪl/	հաշիվ (վճարման), օրինագիծ
+reason	/ˈriːzn/	պատճառ, բանականություն
+throw	/θroʊ/	նետել, գցել
+unusual	/ʌnˈjuːʒuəl/	անսովոր
+strange	/streɪndʒ/	տարօրինակ
+expensive	/ɪkˈspensɪv/	թանկ, թանկարժեք
+vibe	/vaɪb/	մթնոլորտ, տրամադրություն, «աուրա»
+spooky	/ˈspuːki/	սարսափազդու
+entire	/ɪnˈtaɪər/	ամբողջ, լրիվ
+solve	/sɑːlv/	լուծել (խնդիր)
+defense	/dɪˈfens/	պաշտպանություն
+solution	/səˈluːʃn/	լուծում
+decision	/dɪˈsɪʒn/	որոշում
+joke	/dʒoʊk/	կատակ
+useful	/ˈjuːsfl/	օգտակար
+mosquito	/məˈskiːtoʊ/	մոծակ
+swat	/swɑːt/	ճանճ/մոծակ սպանել (հարվածով)
+laugh	/læf/	ծիծաղել
+story	/ˈstɔːri/	պատմություն
+subtle	/ˈsʌtl/	նուրբ, աննկատ
+knob	/nɑːb/	բռնակ (կլոր, դռան/սարքի)
+salmon	/ˈsæmən/	սաղմոն (ձուկ)
+wrap	/ræp/	փաթաթել
+follow	/ˈfɑːloʊ/	հետևել
+appear	/əˈpɪr/	հայտնվել, երևալ
+however	/haʊˈevər/	այնուամենայնիվ, սակայն
+should	/ʃʊd/	պետք է (խորհուրդ)
+guide	/ɡaɪd/	ուղեցույց (գոյ.), ուղեկցել (բայ)
+verb	/vɜːrb/	բայ
+typo	/ˈtaɪpoʊ/	տպագրական սխալ, վրիպակ
+touch	/tʌtʃ/	հպվել, շոշափել
+respect	/rɪˈspekt/	հարգանք, հարգել
+brilliant	/ˈbrɪljənt/	փայլուն, հանճարեղ
+boring	/ˈbɔːrɪŋ/	ձանձրալի
+tech	/tek/	տեխնոլոգիա (կրճատ)
+event	/ɪˈvent/	իրադարձություն
+flow	/floʊ/	հոսք, հոսել
+excited	/ɪkˈsaɪtɪd/	ոգևորված, հուզված
+excite	/ɪkˈsaɪt/	ոգևորել, հուզել
+happiness	/ˈhæpinəs/	երջանկություն
+glad	/ɡlæd/	ուրախ
+avoid	/əˈvɔɪd/	խուսափել
+annotate	/ˈænəteɪt/	ծանոթագրել
+scraper	/ˈskreɪpər/	քերիչ
+tasty	/ˈteɪsti/	համեղ
+taste	/teɪst/	համ (գոյ.), համտեսել (բայ)
+nowadays	/ˈnaʊədeɪz/	մեր օրերում, այժմ
+just	/dʒʌst/	ուղղակի, հենց նոր, արդար
+cheap	/tʃiːp/	էժան
+consider	/kənˈsɪdər/	համարել, հաշվի առնել, մտածել
+proof	/pruːf/	ապացույց
+evolving	/iˈvɑːlvɪŋ/	զարգացող (աստիճանաբար)
+evolve	/iˈvɑːlv/	զարգանալ (էվոլյուցիա ապրել)
+adjective	/ˈædʒɪktɪv/	ածական
+noun	/naʊn/	գոյական
+invent	/ɪnˈvent/	հնարել, գյուտ անել
+rebate	/ˈriːbeɪt/	զեղչ, գումարի վերադարձ (հարկային)
+revenue	/ˈrevənuː/	հասույթ, եկամուտ
+cover	/ˈkʌvər/	ծածկել, կափարիչ/շապիկ
+notch	/nɑːtʃ/	կտրվածք, նշագիծ, մակարդակ
+poll	/poʊl/	հարցում, քվեարկություն
+silence	/ˈsaɪləns/	լռություն
+assembly	/əˈsembli/	ժողով, հավաք, մոնտաժ
+beyond	/bɪˈjɑːnd/	այն կողմ, դուրս, վեր
+precision	/prɪˈsɪʒn/	ճշգրտություն
+hit back	/hɪt bæk/	հակահարված տալ
+schedule	/ˈskedʒuːl/	գրաֆիկ, ժամանակացույց
+alive	/əˈlaɪv/	ողջ, կենդանի
+boon	/buːn/	օրհնություն, մեծ օգուտ
+collect	/kəˈlekt/	հավաքել
+fee	/fiː/	վճար (ծառայության դիմաց)
+mortgage	/ˈmɔːrɡɪdʒ/	հիփոթեք
+affordability	/əˌfɔːrdəˈbɪləti/	մատչելիություն (գնային)
+lender	/ˈlendər/	վարկատու, պարտատեր

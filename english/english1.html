@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+    <title>English</title>
+    <style>
+        :root {
+            --bg: #112233;
+            --c: #dddddd;
+            --c1: #5f5;
+            --c2: #7af;
+            --c3: #a70;
+            --c4: #f59;
+            --c5: #ff4;
+            --bd: #fff2;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--c);
+        }
+
+        .content {
+            /*max-width: 100vw;*/
+            /*width: max-content;*/
+            margin: 0 auto;
+        }
+
+        .table {
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .table td, .table th {
+            border: 1px solid var(--bd);
+            padding: 3px 5px;
+        }
+
+        .table tbody tr td {
+            position: relative;
+        }
+
+        #test_table.table tbody tr td:nth-child(1) {
+            color: var(--c1);
+        }
+
+        #test_table.table tbody tr td:nth-child(2) {
+            color: var(--c);
+        }
+
+        #test_table.table tbody tr td:nth-child(3) {
+            color: var(--c1);
+            text-align: center;
+        }
+
+        #test_table.table tbody tr td:nth-child(4) {
+            color: var(--c2);
+        }
+
+        .copy {
+            border: 2px solid var(--c);
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 15px;
+            height: 20px;
+            background-color: var(--bd);
+            cursor: pointer;
+        }
+
+        .copy:hover {
+            background-color: var(--c1);
+        }
+
+        .copy:active {
+            background-color: var(--c2);
+        }
+
+        select {
+            background-color: var(--bg);
+            color: var(--c);
+            border: 1px solid var(--bd);
+            outline: none;
+        }
+
+        #variants {
+            min-width: 200px;
+        }
+
+        button {
+            background-color: var(--bg);
+            color: var(--c);
+            border: 1px solid var(--bd);
+            outline: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: var(--bd);
+        }
+
+        button:active {
+            background-color: var(--c);
+            color: var(--bg);
+        }
+
+        .info-items {
+            border: 1px solid var(--bd);
+            font-size: 14px;
+            padding: 2px 5px;
+        }
+
+        #ppf tbody td {
+            white-space: pre-line;
+        }
+
+        c1 {
+            color: var(--c1);
+        }
+
+        c2 {
+            color: var(--c2);
+        }
+
+        c3 {
+            color: var(--c3);
+        }
+
+        c4 {
+            color: var(--c4);
+        }
+
+        c5 {
+            color: var(--c5);
+        }
+
+        c1, c2, c3, c4, c5 {
+            display: inline-block;
+        }
+        .en_item{
+            padding: 1px 3px;
+            border: 1px solid var(--bd);
+            border-radius: 3px;
+            display: inline-flex;
+            flex-direction: column;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="content" id="content1" style="padding-bottom: 20px;">
+
+</div>
+
+
+<div style="height: 50vh"></div>
+<script src="en_base1.js"></script>
+<script>
+
+    // let en_ru_8000_modern = {};
+    // en_ru_8000.forEach((item) => {
+    //     en_ru_8000_modern[item.en] = item.en_transcription;
+    // });
+
+
+    // let en_ru = en1_0_2000;
+    let en_ru = en_base1;
+    // en_ru.push(...irregular_verbs);
+
+    window.addEventListener('load', function () {
+
+        let tbody = document.querySelector('#content1');
+        let trs = '';
+        en_ru.forEach((tr, index) => {
+            trs += '<div class="en_item"><span translate="no">' + tr.en + '</span><span>' + tr.en + '</span></div>';
+        });
+        tbody.innerHTML = trs;
+
+
+
+
+
+    });
+
+
+
+
+</script>
+</body>
+</html>
