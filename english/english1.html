@@ -157,12 +157,12 @@
 <body>
 
 <div class="content" id="content1" style="padding-bottom: 20px;">
-
 </div>
-
+<button id="get_tr" >Get translated</button>
 
 <div style="height: 50vh"></div>
-<script src="en_base1.js"></script>
+<!--<script src="en_base1.js"></script>-->
+<script src="en1_0_2000.js"></script>
 <script>
 
     // let en_ru_8000_modern = {};
@@ -172,19 +172,27 @@
 
 
     // let en_ru = en1_0_2000;
-    let en_ru = en_base1;
+    let en_ru = en1_0_2000;
     // en_ru.push(...irregular_verbs);
 
     window.addEventListener('load', function () {
+        let get_tr = document.getElementById("get_tr");
 
         let tbody = document.querySelector('#content1');
         let trs = '';
         en_ru.forEach((tr, index) => {
-            trs += '<div class="en_item"><span translate="no">' + tr.en + '</span><span>' + tr.en + '</span></div>';
+            trs += '<div class="en_item"><span translate="no" class="not_translated">' + tr.en + '</span><span class="my_translated">' + tr.en + '</span></div>';
         });
         tbody.innerHTML = trs;
 
-
+        get_tr.addEventListener('click', function () {
+            let newArr = [];
+            document.querySelectorAll(".en_item").forEach((el, i) => {
+                let my_translated = el.querySelector(".my_translated");
+                en_ru[i].hy = my_translated.innerText;
+            });
+            console.log(JSON.stringify(en_ru));
+        });
 
 
 

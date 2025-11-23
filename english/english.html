@@ -63,6 +63,9 @@
             color: var(--c2);
         }
 
+        #test_table.table tbody tr td:nth-child(5) {
+            color: var(--c3);
+        }
         .copy {
             border: 2px solid var(--c);
             position: absolute;
@@ -147,6 +150,11 @@
             font-size: 18px;
             min-width: 100px;
         }
+        .hy_tr{
+            color: var(--c3);
+            display: inline-block;
+            padding-right: 7px;
+        }
 
     </style>
 
@@ -181,8 +189,9 @@
             <th>N</th>
             <th>English</th>
             <th>Transcription</th>
-            <th>Թարկմանություն</th>
-            <th>Перевод</th>
+<!--            <th>Перевод</th>-->
+<!--            <th>Թարգմանություն</th>-->
+            <th>Translation</th>
         </tr>
         </thead>
         <tbody>
@@ -382,7 +391,8 @@
 <!--<script src="text.txt"></script>-->
 <!--<script src="irregular_verbs.js"></script>-->
 <!--<script src="en1_0_2000.js"></script>-->
-<script src="en_base1.js"></script>
+<!--<script src="en_base1.js"></script>-->
+<script src="en_hy_0_2000.js"></script>
 <script>
 
     // let en_ru_8000_modern = {};
@@ -392,7 +402,12 @@
 
 
     // let en_ru = en1_0_2000;
-    let en_ru = en_base1;
+    let en_ru = [];
+    en_hy_0_2000.forEach((item)=>{
+        if(("s" in item) && item.s === 0){
+            en_ru.push(item);
+        }
+    });
     // en_ru.push(...irregular_verbs);
 
     window.addEventListener('load', function () {
@@ -419,8 +434,8 @@
                 + '<td>' + (index + 1) + '</td>'
                 + '<td>' + tr_en + '</td>'
                 + '<td>' + en_tr + '</td>'
-                + '<td>' + tr_hy + '</td>'
-                + '<td>' + tr_ru + '</td>'
+                + '<td>' + '<span class="hy_tr" style="color: var(--c3)">' + tr_hy + '</span>' + tr_ru + '</td>'
+                // + '<td>' + tr_hy + '</td>'
                 + '</tr>';
         });
         tbody.innerHTML = trs;
