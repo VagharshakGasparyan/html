@@ -165,7 +165,7 @@
     <div>
         <label>
             <input type="checkbox" id="training">
-            <span>Тренировка</span>
+            <span>Մարզում</span>
         </label>
     </div>
     <div id="training_body" style="display: none;margin-top: 10px;font-size: 18px;">
@@ -174,10 +174,10 @@
                    style="padding: 0 10px;margin-right: 10px; border: 1px solid var(--bd);">
                 <span id="word"></span>
             </label>
-            <select id="variants">
+            <select id="variants" style="display: block">
                 <option value=""></option>
             </select>
-            <button id="dont_know">Не знаю</button>
+            <button id="dont_know">Չգիտեմ</button>
         </div>
         <div id="info"></div>
     </div>
@@ -359,11 +359,7 @@
                 видимый результат) к определенному моменту в прошлом. Акцент на продолжительности.<br>
                 Маркеры: for, since.
                 Формула:
-                <c1>had + been</c1>
-                +
-                <c4>Verb</c4>
-                <c1>ing</c1>
-                .
+                <c1>had + been</c1> + <c4>Verb</c4><c1>ing</c1>.
                 Примеры:
                 He had been working for 5 hours when I called him. (Он проработал уже 5 часов, когда я ему позвонил) — к
                 моменту звонка в прошлом он уже 5 часов работал.
@@ -492,8 +488,8 @@
             forgets.forEach((f) => {
                 htm += '<div style="display: flex">'
                     + '<div class="info-items" style="flex: 1;white-space: nowrap;">' + f.en + '</div>'
-                    + '<div class="info-items" style="flex: 1;white-space: nowrap; color: var(--c1)">' + f._ + '</div>'
-                    + '<div class="info-items" style="flex: 1;white-space: nowrap; color: var(--c2)">' + f.ru + '</div>'
+                    + '<div class="info-items" style="flex: 1;white-space: nowrap; color: var(--c1)">' + (f._ ?? f.t) + '</div>'
+                    + '<div class="info-items" style="flex: 1;white-space: nowrap; color: var(--c2)">' + (f.hy ? '<span style="color: var(--c3);margin-right: 10px;">' + f.hy + '</span>' : '') + f.ru + '</div>'
                     + '</div>';
             });
             info.innerHTML = htm;
@@ -506,8 +502,8 @@
             trueVariant = n;
             trueVariantObj = en_ru[n];
             let myWord = en_ru[n].en;
-            let transcription = en_ru[n]._;
-            let translated = en_ru[n].ru;
+            let transcription = en_ru[n]._ ?? en_ru[n].t;
+            let translated = (en_ru[n].hy ? en_ru[n].hy + ", " : "") + en_ru[n].ru;
             word.innerHTML = myWord + '<span style="margin-left: 10px;color: green">' + transcription + '</span>';
             variants.innerHTML = '<option value=""></option>';
 
@@ -526,7 +522,7 @@
             items.push('<option value="' + n + '">' + translated + '</option>');
             for (let i = 0; i < variantsCount - 1; i++) {
                 let n1 = Math.floor(Math.random() * (last_n + 1));
-                let translated1 = en_ru[ns[n1]].ru;
+                let translated1 = (en_ru[ns[n1]].hy ? en_ru[ns[n1]].hy + ", " : "") + en_ru[ns[n1]].ru;
                 items.push('<option value="' + n1 + '">' + translated1 + '</option>');
                 r = ns[last_n];
                 ns[last_n] = ns[n1];
