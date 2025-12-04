@@ -15,13 +15,17 @@
             --c5: #ff4;
             --bd: #fff2;
         }
+        ::selection {
+            background: #f07;
+            color: #ff0;
+        }
 
         * {
             box-sizing: border-box;
         }
 
         html {
-            font-family: Arial, sans-serif;
+            font-family: Consolas, sans-serif;
             background-color: var(--bg);
             color: var(--c);
         }
@@ -155,7 +159,16 @@
             display: inline-block;
             padding-right: 7px;
         }
-
+        .mtr td:first-of-type{
+            cursor: pointer;
+        }
+        .mtr:hover td:first-of-type{
+            background-color: #fff2;
+            /*color: var(--bg) !important;*/
+        }
+        .mtr_c{
+            background-color: #fff2;
+        }
     </style>
 
 </head>
@@ -426,7 +439,7 @@
             let tr_hy = "hy" in tr
                 ? Array.isArray(tr["hy"]) ? tr["hy"].join("<br>") : tr["hy"]
                 : "";
-            trs += '<tr>'
+            trs += '<tr class="mtr" id="mtrc' + index + '">'
                 + '<td>' + (index + 1) + '</td>'
                 + '<td>' + tr_en + '</td>'
                 + '<td>' + en_tr + '</td>'
@@ -435,6 +448,23 @@
                 + '</tr>';
         });
         tbody.innerHTML = trs;
+
+        let mtrc = localStorage.getItem("mtrc");
+        let prev_tr = document.getElementById('mtrc' + mtrc);
+        if(mtrc !== null && prev_tr){
+            prev_tr.classList.add('mtr_c');
+        }
+
+        document.querySelectorAll('.mtr').forEach((tr, i)=>{
+            tr.querySelector('td:first-of-type').addEventListener('click', (e)=>{
+                if(prev_tr){
+                    prev_tr.classList.remove('mtr_c');
+                }
+                tr.classList.add('mtr_c');
+                prev_tr = tr;
+                localStorage.setItem('mtrc', i.toString());
+            });
+        });
         // console.log(JSON.stringify(ens));
         //----------------------------------------------------------------------------------------------
         let training = document.getElementById('training');

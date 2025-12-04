@@ -139,6 +139,35 @@
             background-color: var(--bg);
             color: var(--c1);
         }
+        #similar_wave{
+            margin-top: 5vmin;
+            display: none;
+            align-items: flex-start;
+            border-bottom: 5vw solid #59f;
+        }
+        #w1_1, #w1_2{
+            width: 50%;
+            overflow: hidden;
+            position: relative;
+            flex: 1;
+        }
+        #w1_2{
+            background-color: #59f;
+        }
+        #w2_1, #w2_2{
+            border-radius: 50%;
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+        #w2_1{
+            top: 0;
+            background-color: #59f;
+        }
+        #w2_2{
+            bottom: 0;
+            background-color: var(--bg);
+        }
     </style>
 </head>
 <body>
@@ -159,7 +188,10 @@
             <button class="close" id="close_h">&times;</button>
         </div>
         <div id="answer"></div>
-
+        <div id="similar_wave">
+            <div id="w1_1"><div id="w2_1"></div></div>
+            <div id="w1_2"><div id="w2_2"></div></div>
+        </div>
     </div>
 </div>
 <script>
@@ -169,6 +201,11 @@
         const close_w = document.getElementById('close_w');
         const var_h = document.getElementById('var_h');
         const close_h = document.getElementById('close_h');
+        const w1_1 = document.getElementById('w1_1');
+        const w1_2 = document.getElementById('w1_2');
+        const w2_1 = document.getElementById('w2_1');
+        const w2_2 = document.getElementById('w2_2');
+        const similar_wave = document.getElementById('similar_wave');
         let w = '';
         let h = '';
         var_w.addEventListener('input', () => {
@@ -206,8 +243,10 @@
         function evaluate() {
             if(w === '' || h === ''){
                 answer.innerHTML = '';
+                similar_wave.style.display = 'none';
                 return;
             }
+            similar_wave.style.display = 'flex';
             let pw = parseFloat(w);
             let ph = parseFloat(h);
             let pa = pw - Math.sqrt(0.5 * pw * pw + 0.5 * ph * ph);
@@ -217,6 +256,20 @@
             let a = pa.toPrecision(4);
             answer.innerHTML = '<span style="color: var(--c4)">R = ' + r + '</span>'
             + '<br><span style="color: var(--c5)">a = ' + a + '</span>';
+
+            let aspectRatio = pw / (2 * ph);
+            let styleWidth = 400 * pr / pw;
+            w1_1.style.aspectRatio = w1_2.style.aspectRatio = (pw / 2).toPrecision(5) + ' / ' + ph.toPrecision(5);
+            // w1_1.style.aspectRatio = w1_2.style.aspectRatio = "1 / 1";
+            w2_1.style.width = w2_2.style.width = styleWidth + "%";
+            w2_1.style.height = w2_2.style.height = (styleWidth * aspectRatio).toPrecision(5) + "%";
+            w2_2.style.right =  w2_1.style.left = "-" + (200 * (pr - pa) / pw).toPrecision(5) + "%";
+            w2_2.style.bottom = "0";
+            // w/2 ~ 100%
+
+
+
+
         }
 
 
