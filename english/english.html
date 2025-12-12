@@ -396,7 +396,7 @@
     </table>
 </div>
 <div style="height: 50vh"></div>
-
+<script>document.write(new Date().getFullYear().toString())</script>
 <!--<script src="text.txt"></script>-->
 <!--<script src="irregular_verbs.js"></script>-->
 <!--<script src="en1_0_2000.js"></script>-->
@@ -449,6 +449,7 @@
         });
         tbody.innerHTML = trs;
 
+        let mtr_last_i = document.querySelectorAll('.mtr').length - 1;
         let mtrc = localStorage.getItem("mtrc");
         let prev_tr = document.getElementById('mtrc' + mtrc);
         if(mtrc !== null && prev_tr){
@@ -464,6 +465,52 @@
                 prev_tr = tr;
                 localStorage.setItem('mtrc', i.toString());
             });
+        });
+        document.addEventListener('keydown', (e)=>{
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                e.preventDefault();
+            }
+            // console.log(e.code);
+            if(mtr_last_i < 0){
+                return;
+            }
+            let prev_i = -1, prev_top = 0;
+            if(prev_tr){
+                let prev_id = prev_tr.getAttribute("id");
+                prev_i = parseInt(prev_id.slice(4));
+                prev_top = prev_tr.getBoundingClientRect().top;
+            }
+            let next_i = prev_i;
+            if(e.code === "ArrowDown"){
+                next_i++;
+            }else if(e.code === "ArrowUp"){
+                next_i--;
+            }else{
+                return;
+            }
+            next_i = next_i < 0 ? 0 : next_i;
+            next_i = next_i > mtr_last_i ? mtr_last_i : next_i;
+            if(prev_tr){
+                prev_tr.classList.remove('mtr_c');
+            }
+            prev_tr = document.getElementById('mtrc' + next_i);
+            prev_tr.classList.add('mtr_c');
+            let top = prev_tr.getBoundingClientRect().top;
+            let bottom = prev_tr.getBoundingClientRect().bottom;
+            let scrollY = window.scrollY;
+            let wsh = window.innerHeight;
+            localStorage.setItem('mtrc', next_i.toString());
+            // window.scrollTo(0, top - wsh * 0.5 + scrollY);
+            let scrollBy = top - prev_top;
+            if(top < 0){
+                scrollBy = top;
+            }else if(top > wsh){
+                scrollBy = bottom - wsh;
+            }
+            window.scrollBy(0, scrollBy);
+            // setTimeout(()=>{
+            //     window.scrollTo(0, top - wsh * 0.5 + scrollY);
+            // }, 200);
         });
         // console.log(JSON.stringify(ens));
         //----------------------------------------------------------------------------------------------
