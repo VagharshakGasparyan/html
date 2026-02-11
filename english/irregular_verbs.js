@@ -1,6 +1,6 @@
 let irregular_verbs = [
     {"en": ["bet", "bet", "bet"], "_": ["bet", "bet", "bet"], "ru": "держать пари"},
-    {"en": ["bid (делать ставку)", "bid", "bid"], "_": ["bɪd", "bɪd", "bɪd"], "ru": "предлагать цену, торговаться"},
+    {"en": ["bid", "bid", "bid"], "_": ["bɪd", "bɪd", "bɪd"], "ru": "предлагать цену, торговаться"},
     {
         "en": ["broadcast", "broadcast", "broadcast"],
         "_": ["ˈbrɔːd.kɑːst", "ˈbrɔːd.kɑːst", "ˈbrɔːd.kɑːst"],

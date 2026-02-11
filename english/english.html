@@ -227,28 +227,29 @@
             <td>Simple (Простое)</td>
             <td>
                 <c5>1.1. Present Simple (Простое настоящее)</c5>
-
-                Что выражает: Регулярные, повторяющиеся действия, факты, истины, привычки.
-                Маркеры: always, usually, often, sometimes, never, every day/week.
-                Формула:
                 <c2>I / We / You / They</c2> + <c4>Verb</c4>.
                 <c2>He / She / It</c2> + <c4>Verb</c4><c1>s</c1>.
-                Примеры:
-                I work every day. (Я работаю каждый день) — регулярность.
-                The sun rises in the east. (Солнце встает на востоке) — факт.
-                He plays tennis. (Он играет в теннис) — умение, привычка.
+                You work. He works.
+                <c2>I / We / You / They</c2> + don't + <c4>Verb</c4>.
+                <c2>He / She / It</c2> + doesn't + <c4>Verb</c4>.
+                You don't work. He doesn't work.
+                Do + <c2>I / We / You / They</c2> + <c4>Verb</c4>?
+                Do<c1>es</c1> + <c2>He / She / It</c2> + <c4>Verb</c4>?
+                Do you work? Does it work?
+                <c2>I / We / You / They</c2> + don't + <c4>Verb</c4>?
+                <c2>He / She / It</c2> + do<c1>es</c1>n't + <c4>Verb</c4>?
+                You don't work? He doesn't work?
             </td>
             <td>
                 <c5>2.1. Past Simple (Простое прошедшее)</c5>
-
-                Что выражает: Завершенное действие в прошлом, известен момент времени.
-                Маркеры: yesterday, last week, 2 years ago, in 1990.
-                Формула:
-                <c4>Verb2</c4> или <c4>Verb</c4><c1>ed</c1>
-                (вторая форма глагола: worked, went, saw).
-                Примеры:
-                I worked yesterday. (Я работал вчера) — действие завершено.
-                She went to Paris last year. (Она ездила в Париж в прошлом году).
+                <c4>Verb2</c4> | <c4>Verb</c4><c1>ed</c1>
+                He went. You worked.
+                <c2>I / We / You / They / He / She / It</c2> + <c1>didn't</c1> + <c4>Verb</c4>
+                He didn't go. You didn't work.
+                <c1>Did</c1> + <c2>I / We / You / They / He / She / It</c2> + <c4>Verb</c4>?
+                Did He go? Did You work?
+                <c2>I / We / You / They / He / She / It</c2> + <c1>didn't</c1> + <c4>Verb</c4>?
+                He didn't go? You didn't work?
             </td>
             <td>
                 <c5>3.1. Future Simple (Простое будущее)</c5>
@@ -404,6 +405,7 @@
 <!--<script src="en1_0_2000.js"></script>-->
 <!--<script src="en_base1.js"></script>-->
 <script src="en_hy_0_2000.js"></script>
+<script src="en1_2000_3000.js"></script>
 <script>
 
     // let en_ru_8000_modern = {};
@@ -415,6 +417,11 @@
     // let en_ru = en1_0_2000;
     let en_ru = [];
     en_hy_0_2000.forEach((item)=>{
+        if(("s" in item) && item.s === 0){
+            en_ru.push(item);
+        }
+    });
+    en1_2000_3000.forEach((item)=>{
         if(("s" in item) && item.s === 0){
             en_ru.push(item);
         }
