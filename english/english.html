@@ -401,7 +401,7 @@
 <div style="height: 50vh"></div>
 <script>document.write(new Date().getFullYear().toString())</script>
 <!--<script src="text.txt"></script>-->
-<!--<script src="irregular_verbs.js"></script>-->
+<script src="irregular_verbs.js"></script>
 <!--<script src="en1_0_2000.js"></script>-->
 <!--<script src="en_base1.js"></script>-->
 <script src="en_hy_0_2000.js"></script>
@@ -415,17 +415,33 @@
 
 
     // let en_ru = en1_0_2000;
+    let irregular_verbs_obj = {};
+    irregular_verbs.forEach((irregular_verb)=>{
+        let key = irregular_verb.en[0];
+        irregular_verbs_obj[key] = irregular_verb;
+    });
     let en_ru = [];
     en_hy_0_2000.forEach((item)=>{
-        if(("s" in item) && item.s === 0){
+        if(("s" in item) /*&& item.s === 0*/){
+            let en = item.en;
+            if(en in irregular_verbs_obj){
+                item.en = irregular_verbs_obj[en].en;
+                item.t = irregular_verbs_obj[en]._;
+            }
             en_ru.push(item);
         }
     });
     en1_2000_3000.forEach((item)=>{
-        if(("s" in item) && item.s === 0){
+        if(("s" in item) /*&& item.s === 0*/){
+            let en = item.en;
+            if(en in irregular_verbs_obj){
+                item.en = irregular_verbs_obj[en].en;
+                item.t = irregular_verbs_obj[en]._;
+            }
             en_ru.push(item);
         }
     });
+    // console.log(JSON.stringify(en_ru));
     // en_ru.push(...irregular_verbs);
 
     window.addEventListener('load', function () {
