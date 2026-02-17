@@ -227,6 +227,7 @@
             <td>Simple (Простое)</td>
             <td>
                 <c5>1.1. Present Simple (Простое настоящее)</c5>
+
                 <c2>I / We / You / They</c2> + <c4>Verb</c4>.
                 <c2>He / She / It</c2> + <c4>Verb</c4><c1>s</c1>.
                 You work. He works.
@@ -242,6 +243,7 @@
             </td>
             <td>
                 <c5>2.1. Past Simple (Простое прошедшее)</c5>
+
                 <c4>Verb2</c4> | <c4>Verb</c4><c1>ed</c1>
                 He went. You worked.
                 <c2>I / We / You / They / He / She / It</c2> + <c1>didn't</c1> + <c4>Verb</c4>
@@ -268,15 +270,27 @@
             <td>
                 <c5>1.2. Present Continuous (Настоящее продолженное)</c5>
 
-                Что выражает: Действие, происходящее прямо сейчас, в момент речи; или временная ситуация вокруг
-                настоящего момента.
-                Маркеры: now, at the moment, currently, right now.
-                Формула:
-                <c2>am / is / are</c2> + <c4>Verb</c4><c1>ing</c1>.
-                Примеры:
-                I am working right now. (Я работаю прямо сейчас) — в данный момент.
-                She is staying with her friends this week. (Она гостит у друзей на этой неделе) — временная ситуация.
-                Look! It is raining! (Смотри! Идет дождь!) — действие в момент речи.
+                <c2>(I'm) I</c2> + <c2>am</c2> + <c4>Verb</c4><c1>ing</c1>.
+                <c2>(We're / You're / They're) We / You / They</c2> + <c2>are</c2> + <c4>Verb</c4><c1>ing</c1>.
+                <c2>(He's / She's / It's) He / She / It</c2> + <c2>is</c2> + <c4>Verb</c4><c1>ing</c1>.
+                I'm working right now.
+                <c2>(I'm) I</c2> + <c2>am</c2> + <c1>not</c1> + <c4>Verb</c4><c1>ing</c1>.
+                <c2>We / You / They</c2> + <c1>aren't</c1> + <c4>Verb</c4><c1>ing</c1>.
+                <c2>He / She / It</c2> + <c1>isn't</c1> + <c4>Verb</c4><c1>ing</c1>.
+                I'm not working right now. It isn't working right now.
+                <c2>Are</c2> + <c2>We / You / They</c2> + <c4>Verb</c4><c1>ing</c1>?
+                <c2>Is</c2> + <c2>He / She / It</c2> + <c4>Verb</c4><c1>ing</c1>?
+                <c2>Am</c2> + <c2>I</c2> + <c4>Verb</c4><c1>ing</c1>?
+                Am I working right now? Is it working right now?
+                Are You working right now?
+                <c2>Are</c2> + <c2>We / You / They</c2> + <c1>not</c1> + <c4>Verb</c4><c1>ing</c1>?
+                <c2>Aren't</c2> + <c2>We / You / They</c2> + <c4>Verb</c4><c1>ing</c1>?
+                <c2>Is</c2> + <c2>He / She / It</c2> + <c1>not</c1> + <c4>Verb</c4><c1>ing</c1>?
+                <c2>Isn't</c2> + <c2>He / She / It</c2> + <c4>Verb</c4><c1>ing</c1>?
+                <c2>Am</c2> + <c2>I</c2> + <c1>not</c1> + <c4>Verb</c4><c1>ing</c1>?
+                Am I not working right now?
+                Is it not working right now? Isn't it working right now?
+                Are You not working right now? Aren't you working right now?
             </td>
             <td>
                 <c5>2.2. Past Continuous (Прошедшее продолженное)</c5>
@@ -400,49 +414,21 @@
 </div>
 <div style="height: 50vh"></div>
 <script>document.write(new Date().getFullYear().toString())</script>
-<!--<script src="text.txt"></script>-->
 <script src="irregular_verbs.js"></script>
-<!--<script src="en1_0_2000.js"></script>-->
-<!--<script src="en_base1.js"></script>-->
-<script src="en_hy_0_2000.js"></script>
-<script src="en1_2000_3000.js"></script>
+<script src="en_hy_ru_0_3000.js"></script>
 <script>
 
-    // let en_ru_8000_modern = {};
-    // en_ru_8000.forEach((item) => {
-    //     en_ru_8000_modern[item.en] = item.en_transcription;
-    // });
-
-
-    // let en_ru = en1_0_2000;
     let irregular_verbs_obj = {};
     irregular_verbs.forEach((irregular_verb)=>{
         let key = irregular_verb.en[0];
         irregular_verbs_obj[key] = irregular_verb;
     });
     let en_ru = [];
-    en_hy_0_2000.forEach((item)=>{
-        if(("s" in item) /*&& item.s === 0*/){
-            let en = item.en;
-            if(en in irregular_verbs_obj){
-                item.en = irregular_verbs_obj[en].en;
-                item.t = irregular_verbs_obj[en]._;
-            }
+    en_hy_ru_0_3000.forEach((item)=>{
+        if(("s" in item) && item.s === 0){
             en_ru.push(item);
         }
     });
-    en1_2000_3000.forEach((item)=>{
-        if(("s" in item) /*&& item.s === 0*/){
-            let en = item.en;
-            if(en in irregular_verbs_obj){
-                item.en = irregular_verbs_obj[en].en;
-                item.t = irregular_verbs_obj[en]._;
-            }
-            en_ru.push(item);
-        }
-    });
-    // console.log(JSON.stringify(en_ru));
-    // en_ru.push(...irregular_verbs);
 
     window.addEventListener('load', function () {
         // let ens = [];
