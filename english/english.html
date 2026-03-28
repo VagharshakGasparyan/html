@@ -171,8 +171,10 @@
         }
     </style>
 
+
 </head>
 <body>
+
 
 <div class="content" style="padding-bottom: 20px;">
     <div>
@@ -237,9 +239,9 @@
                 Do + <c2>I / We / You / They</c2> + <c4>Verb</c4>?
                 Do<c1>es</c1> + <c2>He / She / It</c2> + <c4>Verb</c4>?
                 Do you work? Does it work?
-                <c2>I / We / You / They</c2> + don't + <c4>Verb</c4>?
-                <c2>He / She / It</c2> + do<c1>es</c1>n't + <c4>Verb</c4>?
-                You don't work? He doesn't work?
+                Don't + <c2>I / We / You / They</c2> + <c4>Verb</c4>?
+                Do<c1>es</c1>n't + <c2>He / She / It</c2> + <c4>Verb</c4>?
+                Don't You work? Doesn't He work?
             </td>
             <td>
                 <c5>2.1. Past Simple (Простое прошедшее)</c5>
@@ -250,8 +252,8 @@
                 He didn't go. You didn't work.
                 <c1>Did</c1> + <c2>I / We / You / They / He / She / It</c2> + <c4>Verb</c4>?
                 Did He go? Did You work?
-                <c2>I / We / You / They / He / She / It</c2> + <c1>didn't</c1> + <c4>Verb</c4>?
-                He didn't go? You didn't work?
+                <c1>Didn't</c1> + <c2>I / We / You / They / He / She / It</c2> + <c4>Verb</c4>?
+                Didn't He go? Didn't You work?
             </td>
             <td>
                 <c5>3.1. Future Simple (Простое будущее)</c5>
@@ -329,7 +331,14 @@
                 Маркеры: already, yet, ever, never, just, since, for.
                 Формула:
                 <c2>I / We / You / They</c2> + <c1>have</c1> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
+                <c2>I've / We've / You've / They've</c2> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
                 <c2>He / She / It</c2> + <c1>has</c1> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
+                <c2>He's / She's / It's</c2> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
+                I have finished my work. He's finished his work.
+                <c1>Have</c1> + <c2>I / We / You / They</c2> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>?
+                <c1>Has</c1> + <c2>He / She / It</c2> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>?
+                Has He finished his work?
+
                 (третия форма глагола/причастие прошедшего времени).
                 Примеры:
                 I have finished my work. (Я закончил работу) — результат: работа готова сейчас.
@@ -416,13 +425,15 @@
 <script>document.write(new Date().getFullYear().toString())</script>
 <script src="irregular_verbs.js"></script>
 <script src="en_hy_ru_0_3000.js"></script>
+<!--<script src="en_8000.js"></script>-->
+
 <script>
 
-    let irregular_verbs_obj = {};
-    irregular_verbs.forEach((irregular_verb)=>{
-        let key = irregular_verb.en[0];
-        irregular_verbs_obj[key] = irregular_verb;
-    });
+    // let irregular_verbs_obj = {};
+    // irregular_verbs.forEach((irregular_verb)=>{
+    //     let key = irregular_verb.en[0];
+    //     irregular_verbs_obj[key] = irregular_verb;
+    // });
     let en_ru = [];
     en_hy_ru_0_3000.forEach((item)=>{
         if(("s" in item) && item.s === 0){
@@ -653,6 +664,27 @@
     //     })
     //     .catch(error => console.error('Ошибка:', error));
 
+//https://wooordhunt.ru/dic/list/en_ru/ne
+    let doubleKey = document.querySelectorAll('div#content>div>b')[1].innerText;
+    let txt = "\"" + doubleKey + "\": [\n";
+    let arr_txt = [];
+    document.querySelectorAll('div#content p').forEach((p)=>{
+        let a_text = p.querySelector('a').innerText;
+        let p_text = "";
+        for (let node of p.childNodes) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                p_text += node.textContent.trim();
+            }
+        }
+        let arr_p_text = p_text.split('—');
+        let transcription = arr_p_text[0].trim();
+        let translation = arr_p_text[1].trim();
+        arr_txt.push("[\"" + a_text + "\", \"" + transcription + "\", \"" + translation + "\"]");
+    });
+    txt += arr_txt.join(',\n');
+    txt += "\n],";
+    //navigator.clipboard.writeText("txt");
+    console.log(txt);
 
 </script>
 </body>
