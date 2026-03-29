@@ -678,7 +678,7 @@
         }
         let arr_p_text = p_text.split('—');
         let transcription = arr_p_text[0].trim();
-        let translation = arr_p_text[1].replace(/"/ig, '\\\"').trim();
+        let translation = arr_p_text[1].replace(/\\/ig, '').replace(/"/ig, '\\"').trim();
         arr_txt.push("[\"" + a_text + "\", \"" + transcription + "\", \"" + translation + "\"]");
     });
     txt += arr_txt.join(',\n');
