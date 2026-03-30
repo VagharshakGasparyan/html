@@ -174,7 +174,9 @@
 
 </head>
 <body>
-
+<div>
+    <input type="file" id="file" name="file" accept="text/plain">
+</div>
 
 <div class="content" style="padding-bottom: 20px;">
     <div>
@@ -425,9 +427,53 @@
 <script>document.write(new Date().getFullYear().toString())</script>
 <script src="irregular_verbs.js"></script>
 <script src="en_hy_ru_0_3000.js"></script>
+<script src="englishDictionary.js"></script>
 <!--<script src="en_8000.js"></script>-->
 
 <script>
+    //console.log(english_dictionary);
+    dict();
+    function dict() {
+        let inputFile = document.getElementById('file');
+        inputFile.addEventListener('change', function() {
+            let file = inputFile.files[0];
+            let reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function(e) {
+                let text = reader.result;
+                let arrText = text.split('\r\n');
+                // console.log(arrText);
+                let newObj = [];
+                let undefinedWords = [];
+                arrText.forEach((word)=>{
+                    if (word.length < 1) {
+                        return 0;
+                    }
+                    let firstSymbol = word.charAt(0).toLowerCase();
+                    let coupleSymbols = firstSymbol + word.charAt(1).toLowerCase();
+                    if((firstSymbol in english_dictionary) && (coupleSymbols in english_dictionary[firstSymbol])){
+                        let find = false;
+                        for(let i = 0; i < english_dictionary[firstSymbol][coupleSymbols].length; i++){
+                            let arr = english_dictionary[firstSymbol][coupleSymbols][i];
+                            if(arr[0].toLowerCase() === word.toLowerCase()){
+                                newObj.push(arr);
+                                find = true;
+                                break;
+                            }
+                        }
+                        if(!find){
+                            undefinedWords.push(word);
+                        }
+                    }else {
+                        undefinedWords.push(word);
+                    }
+                });
+                console.log(undefinedWords);
+                console.log(newObj);
+            };
+        });
+    }
+
 
     // let irregular_verbs_obj = {};
     // irregular_verbs.forEach((irregular_verb)=>{
@@ -665,26 +711,29 @@
     //     .catch(error => console.error('Ошибка:', error));
 
 //https://wooordhunt.ru/dic/list/en_ru/ne
-    let doubleKey = document.querySelectorAll('div#content>div>b')[1].innerText;
-    let txt = "\"" + doubleKey + "\": [\n";
-    let arr_txt = [];
-    document.querySelectorAll('div#content p').forEach((p)=>{
-        let a_text = p.querySelector('a').innerText;
-        let p_text = "";
-        for (let node of p.childNodes) {
-            if (node.nodeType === Node.TEXT_NODE) {
-                p_text += node.textContent.trim();
+    function f() {
+        let doubleKey = document.querySelectorAll('div#content>div>b')[1].innerText;
+        let txt = "\"" + doubleKey + "\": [\n";
+        let arr_txt = [];
+        document.querySelectorAll('div#content p').forEach((p)=>{
+            let a_text = p.querySelector('a').innerText;
+            let p_text = "";
+            for (let node of p.childNodes) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    p_text += node.textContent.trim();
+                }
             }
-        }
-        let arr_p_text = p_text.split('—');
-        let transcription = arr_p_text[0].trim();
-        let translation = arr_p_text[1].replace(/\\/ig, '').replace(/"/ig, '\\"').trim();
-        arr_txt.push("[\"" + a_text + "\", \"" + transcription + "\", \"" + translation + "\"]");
-    });
-    txt += arr_txt.join(',\n');
-    txt += "\n],";
-    //navigator.clipboard.writeText("txt");
-    console.log(txt);
+            let arr_p_text = p_text.split('—');
+            let transcription = arr_p_text[0].trim();
+            let translation = arr_p_text[1].replace(/\\/ig, '').replace(/"/ig, '\\"').trim();
+            arr_txt.push("[\"" + a_text + "\", \"" + transcription + "\", \"" + translation + "\"]");
+        });
+        txt += arr_txt.join(',\n');
+        txt += "\n],";
+        //navigator.clipboard.writeText("txt");
+        console.log(txt);
+    }
+
 
 </script>
 </body>
