@@ -426,21 +426,13 @@
 <div style="height: 50vh"></div>
 <script>document.write(new Date().getFullYear().toString())</script>
 <script src="irregular_verbs.js"></script>
-<script src="en_hy_ru_0_3000.js"></script>
+<!--<script src="en_hy_ru_0_3000.js"></script>-->
 <script src="5000.js"></script>
 
 <script>
     // console.log(w5000);
-    let undesc = [];
-    w5000.forEach((w)=>{
-        if(w[1].length < 3){
-            undesc.push(w[0]);
-        }
-    });
-    console.log(undesc.join('\n'));
 
-
-    dict();
+    //dict();
     function dict() {
         let inputFile = document.getElementById('file');
         inputFile.addEventListener('change', function() {
@@ -456,16 +448,24 @@
     }
 
 
-    // let irregular_verbs_obj = {};
-    // irregular_verbs.forEach((irregular_verb)=>{
-    //     let key = irregular_verb.en[0];
-    //     irregular_verbs_obj[key] = irregular_verb;
-    // });
+    let irregular_verbs_obj = {};
+    irregular_verbs.forEach((irregular_verb)=>{
+        let key = irregular_verb.en[0];
+        irregular_verbs_obj[key] = irregular_verb;
+    });
     let en_ru = [];
-    en_hy_ru_0_3000.forEach((item)=>{
-        if(("s" in item) && item.s === 0){
-            en_ru.push(item);
+    // en_hy_ru_0_3000.forEach((item)=>{
+    //     if(("s" in item) && item.s === 0){
+    //         en_ru.push(item);
+    //     }
+    // });
+    w5000.forEach((item)=>{
+        let newItem = {"en": item[0], "_": item[1], "hy": "", "ru": item[2]};
+        if(item[0] in irregular_verbs_obj){
+            newItem["en"] = irregular_verbs_obj[item[0]]["en"];
+            newItem["_"] = irregular_verbs_obj[item[0]]["_"];
         }
+        en_ru.push(newItem);
     });
 
     window.addEventListener('load', function () {
