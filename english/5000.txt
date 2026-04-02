@@ -492,7 +492,7 @@ sandwich
 second
 theatre
 third
-tommorrow
+tomorrow
 will
 immediately
 office
@@ -626,7 +626,7 @@ longer
 discover
 armchair
 article
-beatifully
+beautifully
 break
 camel
 cut
@@ -662,7 +662,8 @@ copy
 desk
 fall
 kilo
-paperpotatoes
+paper
+potatoes
 then
 tree
 wine
@@ -875,7 +876,7 @@ diving
 drawing
 episode
 expression
-gadening
+gardening
 genius
 heavy
 hobby
@@ -1014,7 +1015,7 @@ model
 organisation
 outside
 powerful
-repitation
+reputation
 tall
 tax
 windy
@@ -1244,7 +1245,7 @@ glad
 guarantee
 guess
 initiative
-particioate
+participate
 perhaps
 react
 resolve
@@ -1326,7 +1327,7 @@ ability
 advise
 album
 although
-analitical
+analytical
 chapter
 majority
 midnight
@@ -1402,14 +1403,14 @@ hurt
 independence
 knee
 leg
-masterpriece
+masterpiece
 piece
 pound
 soldier
 supplier
 beat
 bell
-contcentration
+concentration
 incredibly
 palace
 patience
@@ -1918,7 +1919,7 @@ bitter
 candy
 creative
 dead
-disappointement
+disappointment
 distance
 educational
 forbid
@@ -2189,7 +2190,7 @@ system
 along
 billionaire
 energetic
-globaliation
+globalisation
 haircut
 hairstyle
 ineffectively
@@ -2611,7 +2612,7 @@ boxing
 electricity
 forced
 industry
-occation
+occasion
 proposal
 underestimate
 let down
@@ -2747,7 +2748,7 @@ upcoming
 violence
 advertisement
 anybody
-assistantce
+assistance
 contribution
 cooperation
 cuisine
@@ -3362,7 +3363,7 @@ hesitate
 imply
 justify
 king
-knel
+kneel
 maintain
 nod
 rush
@@ -3713,7 +3714,7 @@ stand out
 freak out
 hang up
 hang on
-fairy tail
+fairy tale
 adorable
 businesswoman
 cute
@@ -3904,7 +3905,7 @@ impatiently
 low-paid
 overseas
 picturesque
-scarcely 
+scarcely
 spill
 well-behaved
 prime minister
@@ -3942,7 +3943,7 @@ widely
 astoundingly
 chronic
 contaminated
-critical 
+critical
 desperately
 excessively
 extraordinarily
@@ -4445,7 +4446,7 @@ iceberg
 lesser
 single-room
 spirit
-tаре
+tape
 beans
 blessing
 bull

@@ -434,6 +434,363 @@
     //console.log(english_dictionary);
     dict();
     function dict() {
+        let undef_w = "a lot\t[ə lɒt]\tмного\n" +
+            "lots of\t[lɒts əv]\tмного / уйма\n" +
+            "a bit\t[ə bɪt]\tнемного\n" +
+            "a few\t[ə fjuː]\tнесколько\n" +
+            "plenty of\t[ˈplenti əv]\tдостаточно / много\n" +
+            "per cent\t[pə ˈsent]\tпроцент\n" +
+            "at all\t[ət ɔːl]\tвообще (в отрицаниях)\n" +
+            "in advance\t[ɪn ədˈvɑːns]\tзаранее\n" +
+            "at once\t[ət wʌns]\tнемедленно / сразу\n" +
+            "due to\t[djuː tuː]\tиз-за / благодаря\n" +
+            "according to\t[əˈkɔːdɪŋ tuː]\tсогласно\n" +
+            "in spite of\t[ɪn spaɪt əv]\tнесмотря на\n" +
+            "because of\t[bɪˈkɒz əv]\tиз-за\n" +
+            "on your own\t[ɒn jɔːr əʊn]\tсамостоятельно\n" +
+            "by yourself\t[baɪ jɔːˈself]\tсам (один)\n" +
+            "by myself\t[baɪ maɪˈself]\tсам / самостоятельно\n" +
+            "for the sake\t[fə ðə seɪk]\tради\n" +
+            "vice versa\t[ˌvaɪs ˈvɜːsə]\tнаоборот\n" +
+            "in a nutshell\t[ɪn ə ˈnʌtʃel]\tв двух словах\n" +
+            "sooner or later\t[ˈsuːnər ɔː ˈleɪtə]\tрано или поздно\n" +
+            "tomorrow\t[təˈmɒrəʊ]\tзавтра\n" +
+            "someday\t[ˈsʌmdeɪ]\tкогда-нибудь\n" +
+            "right now\t[raɪt naʊ]\tпрямо сейчас\n" +
+            "urgent\t[ˈɜːdʒənt]\tсрочный\n" +
+            "in front of\t[ɪn frʌnt əv]\tперед\n" +
+            "suburbs\t[ˈsʌbɜːbz]\tпригород\n" +
+            "living room\t[ˈlɪvɪŋ ruːm]\tгостиная\n" +
+            "dining room\t[ˈdaɪnɪŋ ruːm]\tстоловая\n" +
+            "swimming pool\t[ˈswɪmɪŋ puːl]\tбассейн\n" +
+            "aqua park\t[ˈækwə pɑːk]\tаквапарк\n" +
+            "railway station\t[ˈreɪlweɪ ˈsteɪʃən]\tвокзал\n" +
+            "police station\t[pəˈliːs ˈsteɪʃən]\tполицейский участок\n" +
+            "petrol station\t[ˈpetrəl ˈsteɪʃən]\tзаправка\n" +
+            "country house\t[ˈkʌntri haʊs]\tзагородный дом\n" +
+            "online store\t[ɒnˈlaɪn stɔː]\tинтернет-магазин\n" +
+            "parents\t[ˈpeərənts]\tродители\n" +
+            "elder sister\t[ˈeldə ˈsɪstə]\tстаршая сестра\n" +
+            "younger brother\t[ˈjʌŋɡə ˈbrʌðə]\tмладший брат\n" +
+            "native speaker\t[ˌneɪtɪv ˈspiːkə]\tноситель языка\n" +
+            "groupmate\t[ˈɡruːpmeɪt]\tодногруппник\n" +
+            "shop assistant\t[ʃɒp əˈsɪstənt]\tпродавец\n" +
+            "businessman\t[ˈbɪznəsmæn]\tбизнесмен\n" +
+            "businesswoman\t[ˈbɪznəswʊmən]\tбизнес-леди\n" +
+            "prime minister\t[praɪm ˈmɪnɪstə]\tпремьер-министр\n" +
+            "co-founder\t[kəʊ ˈfaʊndə]\tсооснователь\n" +
+            "others\t[ˈʌðəz]\tдругие\n" +
+            "no one\t[ˈnəʊ wʌn]\tникто\n" +
+            "ice cream\t[aɪs kriːm]\tмороженое\n" +
+            "vegetables\t[ˈvedʒtəbəlz]\tовощи\n" +
+            "beans\t[biːnz]\tбобы / фасоль\n" +
+            "chewing gum\t[ˈtʃuːɪŋ ɡʌm]\tжвачка\n" +
+            "sushi\t[ˈsuːʃi]\tсуши\n" +
+            "potatoes\t[pəˈteɪtəʊz]\tкартофель\n" +
+            "alarm clock\t[əˈlɑːm klɒk]\tбудильник\n" +
+            "whiteboard\t[ˈwaɪtbɔːd]\tбелая доска\n" +
+            "remote control\t[rɪˈməʊt kənˈtrəʊl]\tпульт\n" +
+            "T-shirt\t[ˈtiː ʃɜːt]\tфутболка\n" +
+            "shoes\t[ʃuːz]\tобувь\n" +
+            "trainers\t[ˈtreɪnəz]\tкроссовки\n" +
+            "rollerblades\t[ˈrəʊləbleɪdz]\tролики\n" +
+            "swimming suit\t[ˈswɪmɪŋ suːt]\tкупальник\n" +
+            "seatbelt\t[ˈsiːtbelt]\tремень безопасности\n" +
+            "curtains\t[ˈkɜːtənz]\tшторы\n" +
+            "nails\t[neɪlz]\tгвозди / ногти\n" +
+            "vacuum cleaner\t[ˈvækjuːm kliːnə]\tпылесос\n" +
+            "washing machine\t[ˈwɒʃɪŋ məˈʃiːn]\tстиральная машина\n" +
+            "credit card\t[ˈkredɪt kɑːd]\tкредитка\n" +
+            "cell phone\t[ˈsel fəʊn]\tмобильник\n" +
+            "e-book\t[ˈiː bʊk]\tэлектронная книга\n" +
+            "anti-virus\t[ˌænti ˈvaɪrəs]\tантивирус\n" +
+            "alright\t[ɔːlˈraɪt]\tнормально / ладно\n" +
+            "fed up\t[fed ʌp]\tсыт по горло\n" +
+            "impressed\t[ɪmˈprest]\tвпечатлён\n" +
+            "thrilled\t[θrɪld]\tв восторге\n" +
+            "overwhelmed\t[ˌəʊvəˈwelmd]\tперегружен / ошеломлён\n" +
+            "relieved\t[rɪˈliːvd]\tиспытавший облегчение\n" +
+            "appalled\t[əˈpɔːld]\tв ужасе\n" +
+            "astonished\t[əˈstɒnɪʃt]\tизумлён\n" +
+            "staggered\t[ˈstæɡəd]\tошеломлён\n" +
+            "taken aback\t[ˈteɪkən əˈbæk]\tзастигнут врасплох\n" +
+            "disappointed\t[ˌdɪsəˈpɔɪntɪd]\tразочарован\n" +
+            "soaked\t[səʊkt]\tпромокший насквозь\n" +
+            "flooded\t[ˈflʌdɪd]\tзатопленный\n" +
+            "unlocked\t[ʌnˈlɒkt]\tразблокирован\n" +
+            "critical\t[ˈkrɪtɪkəl]\tкритический\n" +
+            "unproven\t[ʌnˈpruːvən]\tнедоказанный\n" +
+            "debated\t[dɪˈbeɪtɪd]\tспорный\n" +
+            "bound to\t[baʊnd tuː]\tобязательно (сделает)\n" +
+            "beautifully\t[ˈbjuːtəfli]\tкрасиво\n" +
+            "expensively\t[ɪkˈspensɪvli]\tдорого\n" +
+            "urgently\t[ˈɜːdʒəntli]\tсрочно\n" +
+            "stupidly\t[ˈstjuːpɪdli]\tглупо\n" +
+            "impolitely\t[ˌɪmpəˈlaɪtli]\tневежливо\n" +
+            "immorally\t[ɪˈmɒrəli]\tаморально\n" +
+            "unjustly\t[ʌnˈdʒʌstli]\tнесправедливо\n" +
+            "unprecedentedly\t[ʌnˈpresɪdentɪdli]\tбеспрецедентно\n" +
+            "unsurprisingly\t[ˌʌnsəˈpraɪzɪŋli]\tнеудивительно\n" +
+            "uncontrollably\t[ˌʌnkənˈtrəʊləbli]\tнеконтролируемо\n" +
+            "wisely\t[ˈwaɪzli]\tмудро\n" +
+            "wonderfully\t[ˈwʌndəfəli]\tзамечательно\n" +
+            "patiently\t[ˈpeɪʃəntli]\tтерпеливо\n" +
+            "impatiently\t[ɪmˈpeɪʃəntli]\tнетерпеливо\n" +
+            "indecisively\t[ˌɪndɪˈsaɪsɪvli]\tнерешительно\n" +
+            "offensively\t[əˈfensɪvli]\tоскорбительно\n" +
+            "blissfully\t[ˈblɪsfəli]\tблаженно\n" +
+            "modestly\t[ˈmɒdɪstli]\tскромно\n" +
+            "capriciously\t[kəˈprɪʃəsli]\tкапризно\n" +
+            "creatively\t[kriˈeɪtɪvli]\tкреативно\n" +
+            "fruitfully\t[ˈfruːtfəli]\tплодотворно\n" +
+            "inexpensively\t[ˌɪnɪkˈspensɪvli]\tнедорого\n" +
+            "realistically\t[ˌrɪəˈlɪstɪkli]\tреалистично\n" +
+            "healthily\t[ˈhelθɪli]\tполезно для здоровья\n" +
+            "steadily\t[ˈstedɪli]\tустойчиво\n" +
+            "astonishingly\t[əˈstɒnɪʃɪŋli]\tудивительно\n" +
+            "irritably\t[ˈɪrɪtəbli]\tраздражённо\n" +
+            "attentively\t[əˈtentɪvli]\tвнимательно\n" +
+            "clearly\t[ˈklɪəli]\tясно\n" +
+            "unclearly\t[ʌnˈklɪəli]\tнеясно\n" +
+            "wonderfully\t[ˈwʌndəfəli]\tчудесно\n" +
+            "paradoxically\t[ˌpærəˈdɒksɪkli]\tпарадоксально\n" +
+            "realise\t[ˈrɪəlaɪz]\tосознавать\n" +
+            "specialise\t[ˈspeʃəlaɪz]\tспециализироваться\n" +
+            "participate\t[pɑːˈtɪsɪpeɪt]\tучаствовать\n" +
+            "summarise\t[ˈsʌməraɪz]\tрезюмировать\n" +
+            "revolutionise\t[ˌrevəˈluːʃənaɪz]\tреволюционизировать\n" +
+            "unsubscribe\t[ˌʌnsəbˈskraɪb]\tотписаться\n" +
+            "uninstall\t[ˌʌnɪnˈstɔːl]\tудалить (программу)\n" +
+            "wake up\t[weɪk ʌp]\tпросыпаться\n" +
+            "look for\t[lʊk fɔː]\tискать\n" +
+            "look after\t[lʊk ˈɑːftə]\tзаботиться\n" +
+            "look forward to\t[lʊk ˈfɔːwəd tuː]\tждать с нетерпением\n" +
+            "look down on\t[lʊk daʊn ɒn]\tсмотреть свысока\n" +
+            "look into\t[lʊk ˈɪntə]\tизучать / разбираться\n" +
+            "get rid of\t[ɡet rɪd əv]\tизбавиться от\n" +
+            "get along with\t[ɡet əˈlɒŋ wɪð]\tладить с\n" +
+            "get on with\t[ɡet ɒn wɪð]\tладить / продолжать\n" +
+            "get down to\t[ɡet daʊn tuː]\tприступить к\n" +
+            "get into\t[ɡet ˈɪntə]\tвлезть / увлечься\n" +
+            "catch up with\t[kætʃ ʌp wɪð]\tдогнать / наверстать\n" +
+            "keep up with\t[kiːp ʌp wɪð]\tне отставать от\n" +
+            "run out of\t[rʌn aʊt əv]\tисчерпать запас\n" +
+            "run into\t[rʌn ˈɪntə]\tнаткнуться на\n" +
+            "come from\t[kʌm frɒm]\tпроисходить из\n" +
+            "come up with\t[kʌm ʌp wɪð]\tпридумать\n" +
+            "come across as\t[kʌm əˈkrɒs æz]\tпроизводить впечатление\n" +
+            "lag behind\t[læɡ bɪˈhaɪnd]\tотставать\n" +
+            "put up with\t[pʊt ʌp wɪð]\tмириться с\n" +
+            "go in for\t[ɡəʊ ɪn fɔː]\tувлекаться\n" +
+            "go ahead\t[ɡəʊ əˈhed]\tдействовать / продолжать\n" +
+            "go after\t[ɡəʊ ˈɑːftə]\tпреследовать\n" +
+            "go back on\t[ɡəʊ bæk ɒn]\tнарушить (обещание)\n" +
+            "cheer up\t[tʃɪər ʌp]\tвзбодриться / развеселить\n" +
+            "calm down\t[kɑːm daʊn]\tуспокоиться\n" +
+            "deal with\t[diːl wɪð]\tиметь дело с\n" +
+            "move forward\t[muːv ˈfɔːwəd]\tдвигаться вперёд\n" +
+            "break into\t[breɪk ˈɪntə]\tворваться\n" +
+            "cut down on\t[kʌt daʊn ɒn]\tсократить (потребление)\n" +
+            "put down to\t[pʊt daʊn tuː]\tприписать (причине)\n" +
+            "end up\t[end ʌp]\tоказаться в итоге\n" +
+            "end in\t[end ɪn]\tзакончиться (чем-то)\n" +
+            "stand up for\t[stænd ʌp fɔː]\tзаступаться\n" +
+            "call for\t[kɔːl fɔː]\tтребовать / призывать\n" +
+            "brighten up\t[ˈbraɪtən ʌp]\tпроясниться / оживиться\n" +
+            "go against\t[ɡəʊ əˈɡenst]\tидти против\n" +
+            "come up against\t[kʌm ʌp əˈɡenst]\tстолкнуться с\n" +
+            "do about\t[duː əˈbaʊt]\tпредпринять (по поводу)\n" +
+            "watch out\t[wɒtʃ aʊt]\tостерегаться\n" +
+            "flick through\t[flɪk θruː]\tпролистать\n" +
+            "mull over\t[mʌl ˈəʊvə]\tобдумывать\n" +
+            "bank on\t[bæŋk ɒn]\tрассчитывать на\n" +
+            "cling to\t[klɪŋ tuː]\tцепляться за\n" +
+            "take to\t[teɪk tuː]\tпривязаться / начать любить\n" +
+            "dawn on\t[dɔːn ɒn]\tосенить (о мысли)\n" +
+            "account for\t[əˈkaʊnt fɔː]\tобъяснять / составлять\n" +
+            "brush up on\t[brʌʃ ʌp ɒn]\tосвежить (знания)\n" +
+            "spark off\t[spɑːk ɒf]\tспровоцировать\n" +
+            "boil down to\t[bɔɪl daʊn tuː]\tсводиться к\n" +
+            "come down to\t[kʌm daʊn tuː]\tсводиться к\n" +
+            "slog away\t[slɒɡ əˈweɪ]\tвкалывать\n" +
+            "gobble up\t[ˈɡɒbəl ʌp]\tпожирать\n" +
+            "occur to\t[əˈkɜː tuː]\tприходить в голову\n" +
+            "carry away\t[ˈkæri əˈweɪ]\tувлекать\n" +
+            "pour down\t[pɔː daʊn]\tлить (о дожде)\n" +
+            "plug into\t[plʌɡ ˈɪntə]\tподключать к\n" +
+            "bump into\t[bʌmp ˈɪntə]\tслучайно встретить\n" +
+            "run across\t[rʌn əˈkrɒs]\tнаткнуться\n" +
+            "dwell on\t[dwel ɒn]\tзацикливаться на\n" +
+            "nod off\t[nɒd ɒf]\tзадремать\n" +
+            "fall apart\t[fɔːl əˈpɑːt]\tразваливаться\n" +
+            "hack into\t[hæk ˈɪntə]\tвзломать\n" +
+            "stick to\t[stɪk tuː]\tпридерживаться\n" +
+            "polish up\t[ˈpɒlɪʃ ʌp]\tотшлифовать\n" +
+            "deprive of\t[dɪˈpraɪv əv]\tлишить\n" +
+            "note down\t[nəʊt daʊn]\tзаписать\n" +
+            "copy down\t[kɔːpi daʊn]\tпереписать\n" +
+            "grow out of\t[ɡrəʊ aʊt əv]\tперерасти\n" +
+            "read up on\t[riːd ʌp ɒn]\tначитаться / изучить\n" +
+            "pop into\t[pɒp ˈɪntə]\tзаскочить\n" +
+            "fall for\t[fɔːl fɔː]\tвлюбиться / попасться\n" +
+            "add up to\t[æd ʌp tuː]\tсоставлять (сумму)\n" +
+            "break in\t[breɪk ɪn]\tвломиться / врываться\n" +
+            "look out for\t[lʊk aʊt fɔː]\tвысматривать\n" +
+            "burst into\t[bɜːst ˈɪntə]\tворваться / разразиться\n" +
+            "turn into\t[tɜːn ˈɪntə]\tпревратиться в\n" +
+            "do without\t[duː wɪˈðaʊt]\tобходиться без\n" +
+            "jot down\t[dʒɒt daʊn]\tнабросать (запись)\n" +
+            "see to\t[siː tuː]\tпозаботиться о\n" +
+            "go ahead with\t[ɡəʊ əˈhed wɪð]\tприступить к\n" +
+            "leap at\t[liːp æt]\tухватиться за (шанс)\n" +
+            "leave aside\t[liːv əˈsaɪd]\tоставить в стороне\n" +
+            "meet up\t[miːt ʌp]\tвстретиться\n" +
+            "drop by\t[drɒp baɪ]\tзайти на минутку\n" +
+            "head for\t[hed fɔː]\tнаправляться к\n" +
+            "think ahead\t[θɪŋk əˈhed]\tдумать наперёд\n" +
+            "move on to\t[muːv ɒn tuː]\tперейти к\n" +
+            "scribble down\t[ˈskrɪbəl daʊn]\tнацарапать\n" +
+            "be up to\t[biː ʌp tuː]\tзатевать / быть годным\n" +
+            "plan ahead\t[plæn əˈhed]\tпланировать заранее\n" +
+            "dwell upon\t[dwel əˈpɒn]\tзадерживаться на\n" +
+            "go with\t[ɡəʊ wɪð]\tсочетаться / выбрать\n" +
+            "laze around\t[leɪz əˈraʊnd]\tлениться\n" +
+            "laze about\t[leɪz əˈbaʊt]\tлениться\n" +
+            "move up to\t[muːv ʌp tuː]\tперейти на (уровень)\n" +
+            "zoom in\t[zuːm ɪn]\tприблизить\n" +
+            "zoom out\t[zuːm aʊt]\tотдалить\n" +
+            "hear from\t[hɪə frɒm]\tполучать весточку от\n" +
+            "grow on\t[ɡrəʊ ɒn]\tначинать нравиться\n" +
+            "ring back\t[rɪŋ bæk]\tперезвонить\n" +
+            "phone back\t[fəʊn bæk]\tперезвонить\n" +
+            "keep away from\t[kiːp əˈweɪ frɒm]\tдержаться подальше\n" +
+            "boot up\t[buːt ʌp]\tзагрузить (компьютер)\n" +
+            "tidy up\t[ˈtaɪdi ʌp]\tприбрать\n" +
+            "call by\t[kɔːl baɪ]\tзайти ненадолго\n" +
+            "change into\t[tʃeɪndʒ ˈɪntə]\tпереодеться / превратиться\n" +
+            "see after\t[siː ˈɑːftə]\tприсматривать за\n" +
+            "bear with\t[beə wɪð]\tпотерпеть\n" +
+            "subscribe\t[səbˈskraɪb]\tподписаться\n" +
+            "log in\t[lɒɡ ɪn]\tвойти в систему\n" +
+            "slow down\t[sləʊ daʊn]\tзамедлиться\n" +
+            "be into\t[biː ˈɪntə]\tувлекаться\n" +
+            "wanna\t[ˈwɒnə]\tхотеть (разг.)\n" +
+            "9. Спорт и активный отдых\n" +
+            "Слово\tТранскрипция\tПеревод\n" +
+            "table tennis\t[ˈteɪbəl ˌtenɪs]\tнастольный теннис\n" +
+            "snowboarding\t[ˈsnəʊbɔːdɪŋ]\tсноубординг\n" +
+            "rollerblading\t[ˈrəʊləbleɪdɪŋ]\tкатание на роликах\n" +
+            "10. Медиа, интернет, общение\n" +
+            "Слово\tТранскрипция\tПеревод\n" +
+            "email\t[ˈiːmeɪl]\tэлектронная почта\n" +
+            "webinar\t[ˈwebɪnɑː]\tвебинар\n" +
+            "blogging\t[ˈblɒɡɪŋ]\tведение блога\n" +
+            "talk show\t[ˈtɔːk ʃəʊ]\tток-шоу\n" +
+            "mass media\t[mæs ˈmiːdiə]\tсредства массовой информации\n" +
+            "bestseller\t[ˌbestˈselə]\tбестселлер\n" +
+            "flashcard\t[ˈflæʃkɑːd]\tкарточка для запоминания\n" +
+            "linking words\t[ˈlɪŋkɪŋ wɜːdz]\tслова-связки\n" +
+            "phrasal verb\t[ˈfreɪzəl vɜːb]\tфразовый глагол\n" +
+            "non-native\t[nɒn ˈneɪtɪv]\tне носитель языка\n" +
+            "shopaholic\t[ˌʃɒpəˈhɒlɪk]\tшопоголик\n" +
+            "low-quality\t[ləʊ ˈkwɒləti]\tнизкокачественный\n" +
+            "organisation\t[ˌɔːɡənaɪˈzeɪʃən]\tорганизация\n" +
+            "civilisation\t[ˌsɪvəlaɪˈzeɪʃən]\tцивилизация\n" +
+            "globalisation\t[ˌɡləʊbəlaɪˈzeɪʃən]\tглобализация\n" +
+            "concentration\t[ˌkɒnsənˈtreɪʃən]\tконцентрация\n" +
+            "disappointment\t[ˌdɪsəˈpɔɪntmənt]\tразочарование\n" +
+            "unprofessionalism\t[ˌʌnprəˈfeʃənəlɪzəm]\tнепрофессионализм\n" +
+            "assistance\t[əˈsɪstəns]\tпомощь\n" +
+            "negotiations\t[nɪˌɡəʊʃiˈeɪʃənz]\tпереговоры\n" +
+            "real estate\t[ˈrɪəl ɪˈsteɪt]\tнедвижимость\n" +
+            "volunteering\t[ˌvɒlənˈtɪərɪŋ]\tволонтёрство\n" +
+            "elections\t[ɪˈlekʃənz]\tвыборы\n" +
+            "troops\t[truːps]\tвойска\n" +
+            "tears\t[tɪəz]\tслёзы\n" +
+            "muscles\t[ˈmʌsəlz]\tмышцы\n" +
+            "calories\t[ˈkæləriz]\tкалории\n" +
+            "drugs\t[drʌɡz]\tнаркотики\n" +
+            "fairy tale\t[ˈfeəri teɪl]\tсказка\n" +
+            "masterpiece\t[ˈmɑːstəpiːs]\tшедевр\n" +
+            "reputation\t[ˌrepjʊˈteɪʃən]\tрепутация\n" +
+            "shoelaces\t[ˈʃuːleɪsɪz]\tшнурки\n" +
+            "traffic jam\t[ˈtræfɪk dʒæm]\tпробка\n" +
+            "12. Учёба, работа, профессионализм\n" +
+            "Слово\tТранскрипция\tПеревод\n" +
+            "schooldays\t[ˈskuːldeɪz]\tшкольные годы\n" +
+            "schoolchildren\t[ˈskuːltʃɪldrən]\tшкольники\n" +
+            "homework\t[ˈhəʊmwɜːk]\tдомашнее задание\n" +
+            "non-traditional\t[nɒn trəˈdɪʃənəl]\tнетрадиционный\n" +
+            "Upper-Intermediate\t[ˈʌpər ˌɪntəˈmiːdiət]\tвыше среднего (уровень)\n" +
+            "well-qualified\t[wel ˈkwɒlɪfaɪd]\tвысококвалифицированный\n" +
+            "single-room\t[ˈsɪŋɡəl ruːm]\tодноместная комната\n" +
+            "spending\t[ˈspendɪŋ]\tтраты\n" +
+            "gardening\t[ˈɡɑːdənɪŋ]\tсадоводство\n" +
+            "13. То, что не вошло в группы (но нужно)\n" +
+            "Слово\tТранскрипция\tПеревод\n" +
+            "o'clock\t[əˈklɒk]\tчас (ровно)\n" +
+            "let's\t[lets]\tдавай\n" +
+            "paper\t[ˈpeɪpə]\tбумага\n" +
+            "tape\t[teɪp]\tлента / скотч / запись\n" +
+            "honestly\t[ˈɒnɪstli]\tчестно\n" +
+            "scarcely\t[ˈskeəsli]\tедва ли\n" +
+            "bound to\t[baʊnd tuː]\tобязательно" +
+            "tomorrow\t[təˈmɒrəʊ]\tзавтра\n" +
+            "harder\t[ˈhɑːdə]\tтруднее / сильнее\n" +
+            "beautifully\t[ˈbjuːtəfli]\tкрасиво\n" +
+            "uninformative\t[ˌʌnɪnˈfɔːmətɪv]\tмалоинформативный\n" +
+            "pop music\t[ˈpɒp mjuːzɪk]\tпоп-музыка\n" +
+            "fond of\t[ˈfɒnd əv]\tлюбящий что-то\n" +
+            "keen on\t[ˈkiːn ɒn]\tувлекающийся чем-то\n" +
+            "spare time\t[ˈspeə taɪm]\tсвободное время\n" +
+            "businessmen\t[ˈbɪznəsmən]\tбизнесмены\n" +
+            "analytical\t[ˌænəˈlɪtɪkəl]\tаналитический\n" +
+            "unprofessionally\t[ˌʌnprəˈfeʃənəli]\tнепрофессионально\n" +
+            "masterpiece\t[ˈmɑːstəpiːs]\tшедевр\n" +
+            "concentration\t[ˌkɒnsənˈtreɪʃən]\tконцентрация\n" +
+            "unexpectedly\t[ˌʌnɪkˈspektɪdli]\tнеожиданно\n" +
+            "disappointment\t[ˌdɪsəˈpɔɪntmənt]\tразочарование\n" +
+            "ought to\t[ˈɔːt tuː]\tследует / должен\n" +
+            "globalisation\t[ˌɡləʊbəlaɪˈzeɪʃən]\tглобализация\n" +
+            "air conditioning\t[ˈeə kənˌdɪʃənɪŋ]\tкондиционирование\n" +
+            "look up to\t[ˈlʊk ʌp tuː]\tуважать, восхищаться\n" +
+            "make up for\t[ˈmeɪk ʌp fɔː]\tкомпенсировать\n" +
+            "take after\t[ˈteɪk ˈɑːftə]\tпойти в (быть похожим на родственника)\n" +
+            "get at\t[ˈɡet æt]\tдобираться до / намекать\n" +
+            "occasion\t[əˈkeɪʒən]\tслучай, мероприятие\n" +
+            "assistance\t[əˈsɪstəns]\tпомощь\n" +
+            "based\t[beɪst]\tоснованный\n" +
+            "subscribed\t[səbˈskraɪbd]\tподписан(ный)\n" +
+            "knelt\t[nelt]\tвстал на колени (прош. вр. от kneel)\n" +
+            "face up to\t[ˈfeɪs ʌp tuː]\tсмело встретить (проблему)\n" +
+            "liven up\t[ˈlaɪvən ʌp]\tоживить(ся)\n" +
+            "pick up on\t[ˈpɪk ʌp ɒn]\tзаметить, уловить\n" +
+            "get back to\t[ˈɡet bæk tuː]\tвернуться к (кому-то / чему-то)\n" +
+            "undeniably\t[ˌʌndɪˈnaɪəbli]\tнеоспоримо\n" +
+            "carried away\t[ˈkærid əˈweɪ]\tувлечённый, захваченный\n" +
+            "spendings\t[ˈspendɪŋz]\tтраты, расходы\n" +
+            "run up against\t[ˈrʌn ʌp əˌɡenst]\tстолкнуться с (трудностью)\n" +
+            "pros and cons\t[ˌprəʊz ənd ˈkɒnz]\tплюсы и минусы\n" +
+            "broke in\t[ˈbrəʊk ɪn]\tвломился / вторгся\n" +
+            "fairy tale\t[ˈfeəri teɪl]\tсказка\n" +
+            "unsurprising\t[ˌʌnsəˈpraɪzɪŋ]\tнеудивительный\n" +
+            "phenomenally\t[fɪˈnɒmɪnəli]\tфеноменально\n" +
+            "scarcely\t[ˈskeəsli]\tедва, вряд ли\n" +
+            "astoundingly\t[əˈstaʊndɪŋli]\tпоразительно\n" +
+            "critical\t[ˈkrɪtɪkəl]\tкритический\n" +
+            "unusually\t[ʌnˈjuːʒuəli]\tнеобычно\n" +
+            "responsibly\t[rɪˈspɒnsəbli]\tответственно\n" +
+            "unwisely\t[ʌnˈwaɪzli]\tнеблагоразумно\n" +
+            "tape\t[teɪp]\tлента / запись / скотч\n" +
+            "swimsuit\t[ˈswɪmsuːt]\tкупальник\n" +
+            "illegally\t[ɪˈliːɡəli]\tнезаконно";
+        let undef_w_arr = undef_w.split('\n');
+        for(let i = 0; i < undef_w_arr.length; i++){
+            let item_arr = undef_w_arr[i].split('\t');
+            undef_w_arr[i] = item_arr;
+        }
+        //console.log(undef_w_arr);
+
         let inputFile = document.getElementById('file');
         inputFile.addEventListener('change', function() {
             let file = inputFile.files[0];
@@ -449,10 +806,10 @@
                     if (word.length < 1) {
                         return 0;
                     }
+                    let find = false;
                     let firstSymbol = word.charAt(0).toLowerCase();
                     let coupleSymbols = firstSymbol + word.charAt(1).toLowerCase();
                     if((firstSymbol in english_dictionary) && (coupleSymbols in english_dictionary[firstSymbol])){
-                        let find = false;
                         for(let i = 0; i < english_dictionary[firstSymbol][coupleSymbols].length; i++){
                             let arr = english_dictionary[firstSymbol][coupleSymbols][i];
                             if(arr[0].toLowerCase() === word.toLowerCase()){
@@ -461,15 +818,22 @@
                                 break;
                             }
                         }
-                        if(!find){
-                            undefinedWords.push(word);
+                    }
+                    if(!find){
+                        for(let i = 0; i < undef_w_arr.length; i++){
+                            if(undef_w_arr[i][0].toLowerCase() === word.toLowerCase()){
+                                newObj.push(undef_w_arr[i]);
+                                find = true;
+                                break;
+                            }
                         }
-                    }else {
+                    }
+                    if(!find){
                         undefinedWords.push(word);
                     }
                 });
-                console.log(undefinedWords);
-                console.log(newObj);
+                console.log(undefinedWords.join('\n'));
+                console.log(JSON.stringify(newObj));
             };
         });
     }
