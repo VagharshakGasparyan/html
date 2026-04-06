@@ -1,0 +1,29 @@
+:root {
+    --bg: #112233;
+    --c: #dddddd;
+    --c1: #5f5;
+    --c2: #7af;
+    --c3: #a70;
+    --c4: #f59;
+    --c5: #ff4;
+    --bd: #fff2;
+}
+* {
+    box-sizing: border-box;
+}
+html {
+    font-family: Consolas, sans-serif;
+    background-color: var(--bg);
+    color: var(--c);
+}
+body {
+    display: flow-root;
+    margin: 0;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-image: url(my-school.png);
+    /*background-size: contain;*/
+    background-attachment: fixed;
+
+}
