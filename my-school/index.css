@@ -10,6 +10,8 @@
 }
 * {
     box-sizing: border-box;
+    font-size: 7vmin;
+    color: var(--c);
 }
 html {
     font-family: Consolas, sans-serif;
@@ -21,9 +23,75 @@ body {
     margin: 0;
     min-height: 100vh;
     background-repeat: no-repeat;
-    background-position: top center;
-    background-image: url(my-school.png);
-    /*background-size: contain;*/
+    /*background-position: top center;*/
+    background-position: center;
+    background-image: url(my-school-25.png);
+    background-size: contain;
     background-attachment: fixed;
-
+}
+.container{
+    /*border: 1px solid var(--c);*/
+    margin: 0 auto;
+    padding: 2vmin 6vmin;
+    width: 100vmin;
+}
+.num-container{
+    display: flex;
+    align-items: center;
+    margin: 3vmin 0;
+}
+#num{
+    display: inline-block;
+}
+#answer{
+    display: inline-flex;
+    min-width: 8vmin;
+    height: 8vmin;
+    border: 0.5vmin solid var(--c);
+    align-items: center;
+    justify-content: center;
+    padding: 0 1vmin;
+}
+button{
+    outline: none;
+    padding: 1vmin 2vmin;
+    border-radius: 2vmin;
+    border: 0.5vmin solid var(--c);
+    background-color: transparent;
+    cursor: pointer;
+}
+button:hover{
+    background-color: var(--bd);
+}
+button:active{
+    background-color: var(--c);
+    color: var(--bg);
+}
+.calc{
+    display: flex;
+    flex-direction: column;
+}
+.calc-row{
+    display: flex;
+}
+.calc-column{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12vmin;
+    height: 12vmin;
+    font-size: 9vmin;
+    border: 0.5vmin solid var(--c3);
+    user-select: none;
+    margin: 0.5vmin;
+    border-radius: 1vmin;
+    color: var(--c3);
+    font-weight: bold;
+}
+.calc-column:hover{
+    background-color: var(--bd);
+}
+.calc-column:active{
+    background-color: var(--c);
+    color: var(--bg);
 }

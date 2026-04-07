@@ -2,14 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>My school</title>
     <link rel="stylesheet" href="index.css" >
 </head>
 <body>
-<h1>My School</h1>
+<header>
+    <h1 style="text-align: center">My School</h1>
+</header>
+<main class="container">
+    <button>Սկսել</button>
+<div class="num-container">
+<span id="num"></span>
+<span id="answer"></span>
+</div>
+    <div class="calc">
+        <div class="calc-row">
+            <div class="calc-column">7</div>
+            <div class="calc-column">8</div>
+            <div class="calc-column">9</div>
+        </div>
+        <div class="calc-row">
+            <div class="calc-column">4</div>
+            <div class="calc-column">5</div>
+            <div class="calc-column">6</div>
+        </div>
+        <div class="calc-row">
+            <div class="calc-column">1</div>
+            <div class="calc-column">2</div>
+            <div class="calc-column">3</div>
+        </div>
+        <div class="calc-row">
+            <div class="calc-column">0</div>
+            <div class="calc-column">&larr;</div>
+        </div>
+    </div>
+</main>
+<footer>
+
+</footer>
+
 <script>
     window.addEventListener('load', function () {
+        let num = document.getElementById('num');
+        let answer = document.getElementById('answer');
+        let n1 = Math.floor(Math.random() * 10 + 1);
+        let n2 = Math.floor(Math.random() * 10 + 1);
+        let nn = n1 + " * " + n2 + " =&nbsp;";
+        num.innerHTML = nn;
+        let iToNum = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0, 'left'];
+        document.querySelectorAll('.calc .calc-column').forEach((btn, i) => {
+            btn.addEventListener('click',  () => {
+                let n3 = iToNum[i];
+                if(n3 === 'left'){
+                    answer.innerHTML = answer.innerHTML.slice(0, answer.innerHTML.length - 1);
+                }else{
+                    answer.innerHTML += n3;
+                }
+
+            });
+        });
 
     });
 </script>
