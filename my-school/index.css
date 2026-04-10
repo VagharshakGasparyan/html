@@ -36,9 +36,10 @@ body {
     width: 100vmin;
 }
 .num-container{
-    display: flex;
+    /*display: flex;*/
     align-items: center;
     margin: 3vmin 0;
+    display: none;
 }
 #num{
     display: inline-block;
@@ -68,8 +69,9 @@ button:active{
     color: var(--bg);
 }
 .calc{
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
+    display: none;
 }
 .calc-row{
     display: flex;
@@ -95,3 +97,24 @@ button:active{
     background-color: var(--c);
     color: var(--bg);
 }
+#score, #score *{
+    font-size: 5vmin;
+}
+#score>:nth-child(2){
+    color: var(--c1);
+}
+#score>:nth-child(3){
+    color: var(--c4);
+}
+
+
+
+
+
+
+
+
+
+
+
+

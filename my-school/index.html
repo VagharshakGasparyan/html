@@ -11,7 +11,8 @@
     <h1 style="text-align: center">My School</h1>
 </header>
 <main class="container">
-    <button>Սկսել</button>
+    <button id="begin">Սկսել</button>
+    <div id="score"><span>100</span> / <span>0</span> / <span>0</span></div>
 <div class="num-container">
 <span id="num"></span>
 <span id="answer"></span>
@@ -44,24 +45,99 @@
 
 <script>
     window.addEventListener('load', function () {
+        let numContainer = document.querySelector('.num-container');
+        let calc = document.querySelector('.calc');
+        let scores = document.querySelectorAll('#score>span');
         let num = document.getElementById('num');
+        let begin = document.getElementById('begin');
         let answer = document.getElementById('answer');
-        let n1 = Math.floor(Math.random() * 10 + 1);
-        let n2 = Math.floor(Math.random() * 10 + 1);
-        let nn = n1 + " * " + n2 + " =&nbsp;";
-        num.innerHTML = nn;
+        let n1, n2;
+        let nTrue = 0;
+        let nFalse = 0;
+        let answerText = "";
+        let numbers = [];
+        for(let i = 1; i <= 10; i++){
+            for(let j = 1; j <= 10; j++){
+                numbers.push([i, j]);
+            }
+        }
+        let len = numbers.length;
+        let len1 = len;
+        scores[0].innerHTML = len.toString();
+        begin.addEventListener('click', function () {
+            fBegin();
+        });
         let iToNum = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0, 'left'];
         document.querySelectorAll('.calc .calc-column').forEach((btn, i) => {
             btn.addEventListener('click',  () => {
                 let n3 = iToNum[i];
                 if(n3 === 'left'){
-                    answer.innerHTML = answer.innerHTML.slice(0, answer.innerHTML.length - 1);
+                    answerText = answerText.slice(0, answerText.length - 1);
                 }else{
-                    answer.innerHTML += n3;
+                    answerText += n3;
                 }
-
+                toCheck();
             });
         });
+        function makeTrue(){
+            nTrue++;
+            setTimeout(function(){
+                answerText = "";
+                answer.innerHTML = answerText;
+            }, 700);
+        }
+        function makeFalse(){
+            nFalse++;
+            setTimeout(function(){
+                answerText = "";
+                answer.innerHTML = answerText;
+            }, 700);
+        }
+        function toCheck() {
+            let realAnswer = (n1 * n2).toString();
+            answer.innerHTML = answerText;
+            if(answerText.length < realAnswer.length){
+                return 0;
+            }
+            if(answerText === realAnswer){
+                makeTrue();
+            }else{
+                makeFalse();
+            }
+            scores[1].innerHTML = nTrue.toString();
+            scores[2].innerHTML = nFalse.toString();
+            fGenerate();
+        }
+        function fBegin() {
+            len1 = len;
+            nTrue = 0;
+            nFalse = 0;
+            answerText = "";
+            numContainer.style.display = 'flex';
+            calc.style.display = 'flex';
+            answer.innerHTML = answerText;
+            scores[0].innerHTML = len.toString();
+            scores[1].innerHTML = nTrue.toString();
+            scores[2].innerHTML = nFalse.toString();
+            fGenerate();
+        }
+        function fGenerate() {
+            if(len1 < 1){
+                num.innerHTML = "";
+                numContainer.style.display = 'none';
+                calc.style.display = 'none';
+                return 0;
+            }
+            let r = Math.floor(Math.random() * len1);
+            n1 = numbers[r][0];
+            n2 = numbers[r][1];
+            num.innerHTML = n1 + " &times; " + n2 + " =&nbsp;";
+            len1 --;
+            let reserve = numbers[len1];
+            numbers[len1] = numbers[r];
+            numbers[r] = reserve;
+
+        }
 
     });
 </script>
