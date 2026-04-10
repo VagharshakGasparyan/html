@@ -430,9 +430,20 @@
 <script src="hy5000.js"></script>
 
 <script>
-    // console.log(w5000);
+    // let a = [];
+    // for(let i = 4027; i < w5000.length; i++){
+    //     a.push(w5000[i][0]);
+    // }
+    // console.log(a.join('\n'));
 
-    //dict();
+    // console.log(w5000);
+    // let jsn = {};
+    // w5000.forEach(function(w){
+    //     jsn[w[0]] = w[2];
+    // });
+    // console.log(JSON.stringify(jsn));
+
+    // dict();
     function dict() {
         let inputFile = document.getElementById('file');
         inputFile.addEventListener('change', function() {
@@ -443,6 +454,41 @@
                 let text = reader.result;
                 let arrText = text.split('\r\n');
                 // console.log(arrText);
+                let beginText = "perhaps";
+                let arrText1 = [];
+                arrText.forEach(function(t) {
+                    if(t.length > 0) {
+                        let t1t2 = t.split(' — ');
+                        if(t1t2.length < 2) {
+                            console.log(t1t2);
+                        }else{
+                            let t120 = t1t2[0].split(' / ');
+                            if(t120.length > 1) {
+                                arrText1.push([t120[0], t1t2[1]]);
+                                arrText1.push([t120[1], t1t2[1]]);
+                            }else{
+                                arrText1.push(t1t2);
+                            }
+
+                        }
+                    }
+                });
+                console.log(arrText1.length);
+                for(let i = 4027; i < w5000.length; i++){
+                    let w1 = w5000[i][0].toLowerCase();
+                    arrText1.forEach(function(t1) {
+                        let w2 = t1[0].toLowerCase();
+                        if(w1 === w2){
+                            w5000[i][2] = t1[1];
+                        }
+                    });
+
+                    // console.log(w1, w2); break;
+
+                }
+                console.log(w5000);
+                console.log(JSON.stringify(w5000));
+
             };
         });
     }
