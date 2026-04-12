@@ -425,9 +425,11 @@
 </div>
 <div style="height: 50vh"></div>
 <script>document.write(new Date().getFullYear().toString())</script>
-<script src="irregular_verbs.js"></script>
+<!--<script src="irregular_verbs.js"></script>-->
 <!--<script src="en_hy_ru_0_3000.js"></script>-->
-<script src="hy5000.js"></script>
+<!--<script src="hy5000.js"></script>-->
+<script src="hy_1_5000.js"></script>
+<!--<script src="en_8000.js"></script>-->
 
 <script>
     // let a = [];
@@ -442,6 +444,39 @@
     //     jsn[w[0]] = w[2];
     // });
     // console.log(JSON.stringify(jsn));
+    // f1();
+    function f1() {
+        let w_s = {};
+        en_ru_8000.forEach((item)=>{
+            w_s[item['en']] = item["_"];
+        });
+        let irregular_verbs_obj = {};
+        irregular_verbs.forEach((irregular_verb)=>{
+            let key = irregular_verb.en[0];
+            irregular_verbs_obj[key] = irregular_verb;
+        });
+        // console.log(irregular_verbs_obj);
+        let en_hy_ru_0_3000_obj = {};
+        en_hy_ru_0_3000.forEach((item)=>{
+            en_hy_ru_0_3000_obj[item['en']] = item["s"];
+        });
+
+        let newW5000 = [];
+        w5000.forEach((item)=>{
+            let newItem = item.slice(0);
+            if(item[0] in irregular_verbs_obj){
+                newItem[0] = irregular_verbs_obj[item[0]]["en"];
+                newItem[1] = irregular_verbs_obj[item[0]]["_"];
+            }else if(item[0] in w_s){
+                newItem[1] = w_s[item[0]];
+            }
+            if(item[0] in en_hy_ru_0_3000_obj && en_hy_ru_0_3000_obj[item[0]] === 1){
+                newItem[3] = 1;
+            }
+            newW5000.push(newItem);
+        });
+        console.log(JSON.stringify(newW5000));
+    }
 
     // dict();
     function dict() {
@@ -494,23 +529,34 @@
     }
 
 
-    let irregular_verbs_obj = {};
-    irregular_verbs.forEach((irregular_verb)=>{
-        let key = irregular_verb.en[0];
-        irregular_verbs_obj[key] = irregular_verb;
-    });
+    // let irregular_verbs_obj = {};
+    // irregular_verbs.forEach((irregular_verb)=>{
+    //     let key = irregular_verb.en[0];
+    //     irregular_verbs_obj[key] = irregular_verb;
+    // });
+
+    // let str = "[";
+    // hy_1_5000.forEach((item)=>{
+    //     str += "\n\t" + JSON.stringify(item) + ",";
+    // });
+    // str += "];";
+    // console.log(str);
+
     let en_ru = [];
     // en_hy_ru_0_3000.forEach((item)=>{
     //     if(("s" in item) && item.s === 0){
     //         en_ru.push(item);
     //     }
     // });
-    w5000.forEach((item)=>{
+    hy_1_5000.forEach((item)=>{
+		if(item.length > 3 && item[3] === 1){
+			return 0;
+		}
         let newItem = {"en": item[0], "_": item[1], "hy": "", "ru": item[2]};
-        if(item[0] in irregular_verbs_obj){
-            newItem["en"] = irregular_verbs_obj[item[0]]["en"];
-            newItem["_"] = irregular_verbs_obj[item[0]]["_"];
-        }
+        // if(item[0] in irregular_verbs_obj){
+        //     newItem["en"] = irregular_verbs_obj[item[0]]["en"];
+        //     newItem["_"] = irregular_verbs_obj[item[0]]["_"];
+        // }
         en_ru.push(newItem);
     });
 
