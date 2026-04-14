@@ -548,8 +548,10 @@
     //         en_ru.push(item);
     //     }
     // });
+    let knownCount = 0;
     hy_1_5000.forEach((item)=>{
 		if(item.length > 3 && item[3] === 1){
+            knownCount ++;
 			return 0;
 		}
         let newItem = {"en": item[0], "_": item[1], "hy": "", "ru": item[2]};
@@ -559,6 +561,7 @@
         // }
         en_ru.push(newItem);
     });
+    console.log("knownCount=", knownCount);
 
     window.addEventListener('load', function () {
         // let ens = [];
