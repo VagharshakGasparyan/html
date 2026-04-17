@@ -444,103 +444,27 @@
     //     jsn[w[0]] = w[2];
     // });
     // console.log(JSON.stringify(jsn));
-    // f1();
     function f1() {
-        let w_s = {};
-        en_ru_8000.forEach((item)=>{
-            w_s[item['en']] = item["_"];
-        });
-        let irregular_verbs_obj = {};
-        irregular_verbs.forEach((irregular_verb)=>{
-            let key = irregular_verb.en[0];
-            irregular_verbs_obj[key] = irregular_verb;
-        });
-        // console.log(irregular_verbs_obj);
-        let en_hy_ru_0_3000_obj = {};
-        en_hy_ru_0_3000.forEach((item)=>{
-            en_hy_ru_0_3000_obj[item['en']] = item["s"];
-        });
-
-        let newW5000 = [];
-        w5000.forEach((item)=>{
-            let newItem = item.slice(0);
-            if(item[0] in irregular_verbs_obj){
-                newItem[0] = irregular_verbs_obj[item[0]]["en"];
-                newItem[1] = irregular_verbs_obj[item[0]]["_"];
-            }else if(item[0] in w_s){
-                newItem[1] = w_s[item[0]];
+        for (let i = 0; i < hy_1_5000.length - 1; i++){
+            let a1 = hy_1_5000[i][0];
+            if(Array.isArray(a1)){
+                a1 = a1[0];
             }
-            if(item[0] in en_hy_ru_0_3000_obj && en_hy_ru_0_3000_obj[item[0]] === 1){
-                newItem[3] = 1;
-            }
-            newW5000.push(newItem);
-        });
-        console.log(JSON.stringify(newW5000));
-    }
-
-    // dict();
-    function dict() {
-        let inputFile = document.getElementById('file');
-        inputFile.addEventListener('change', function() {
-            let file = inputFile.files[0];
-            let reader = new FileReader();
-            reader.readAsText(file);
-            reader.onload = function(e) {
-                let text = reader.result;
-                let arrText = text.split('\r\n');
-                // console.log(arrText);
-                let beginText = "perhaps";
-                let arrText1 = [];
-                arrText.forEach(function(t) {
-                    if(t.length > 0) {
-                        let t1t2 = t.split(' — ');
-                        if(t1t2.length < 2) {
-                            console.log(t1t2);
-                        }else{
-                            let t120 = t1t2[0].split(' / ');
-                            if(t120.length > 1) {
-                                arrText1.push([t120[0], t1t2[1]]);
-                                arrText1.push([t120[1], t1t2[1]]);
-                            }else{
-                                arrText1.push(t1t2);
-                            }
-
-                        }
-                    }
-                });
-                console.log(arrText1.length);
-                for(let i = 4027; i < w5000.length; i++){
-                    let w1 = w5000[i][0].toLowerCase();
-                    arrText1.forEach(function(t1) {
-                        let w2 = t1[0].toLowerCase();
-                        if(w1 === w2){
-                            w5000[i][2] = t1[1];
-                        }
-                    });
-
-                    // console.log(w1, w2); break;
-
+            for (let j = i + 1; j < hy_1_5000.length; j++){
+                let a2 = hy_1_5000[j][0];
+                if(Array.isArray(a2)){
+                    a2 = a2[0];
                 }
-                console.log(w5000);
-                console.log(JSON.stringify(w5000));
-
-            };
-        });
+                if(a1.toLowerCase() === a2.toLowerCase()){
+                    console.log(a1);
+                    // break;
+                }
+            }
+        }
     }
 
 
-    // let irregular_verbs_obj = {};
-    // irregular_verbs.forEach((irregular_verb)=>{
-    //     let key = irregular_verb.en[0];
-    //     irregular_verbs_obj[key] = irregular_verb;
-    // });
 
-    // let str = "[";
-    // hy_1_5000.forEach((item)=>{
-    //     str += "\n\t" + JSON.stringify(item) + ",";
-    // });
-    // str += "];";
-    // console.log(str);
 
     let en_ru = [];
     // en_hy_ru_0_3000.forEach((item)=>{
