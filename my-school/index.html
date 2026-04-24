@@ -17,7 +17,7 @@
     <div id="score"><span>100</span> / <span>0</span> / <span>0</span></div>
 <div class="num-container">
 <span id="num"></span>
-<span id="answer"></span>
+<span id="answer"><span id="answer_text"></span></span>
 <span id="answer_animation"></span>
 </div>
     <div class="calc">
@@ -52,6 +52,7 @@
         let num = document.getElementById('num');
         let begin = document.getElementById('begin');
         let answer = document.getElementById('answer');
+        let answer_text = document.getElementById('answer_text');
         let correct_answer = document.getElementById('correct_answer');
         let wrong_answer = document.getElementById('wrong_answer');
         let answer_animation = document.getElementById('answer_animation');
@@ -83,6 +84,8 @@
         let nTrue = 0;
         let nFalse = 0;
         let answerText = "";
+        let realAnswer = "";
+        let allowClick = true;
         let numbers = [];
         for(let i = 1; i <= 10; i++){
             for(let j = 1; j <= 10; j++){
@@ -98,6 +101,9 @@
         let iToNum = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'left'];
         document.querySelectorAll('.calc .calc-column').forEach((btn, i) => {
             btn.addEventListener('click',  () => {
+                if(!allowClick){
+                    return false;
+                }
                 let n3 = iToNum[i];
                 if(n3 === 'left'){
                     answerText = answerText.slice(0, answerText.length - 1);
@@ -107,34 +113,46 @@
                 toCheck();
             });
         });
+        function sleep(t) {
+            return new Promise((resolve) => {
+                setTimeout(resolve, t);
+            });
+        }
         function makeTrue(){
             nTrue++;
             answer_animation.innerHTML = trueSVG;
             correct_answer.play();
             setTimeout(function(){
                 answerText = "";
-                answer.innerHTML = answerText;
+                answer_text.innerHTML = answerText;
                 answer_animation.innerHTML = "";
                 fGenerate();
             }, 700);
         }
-        function makeFalse(){
+        async function makeFalse(){
             nFalse++;
             answer_animation.innerHTML = falseSVG;
             wrong_answer.play();
-            setTimeout(function(){
-                answerText = "";
-                answer.innerHTML = answerText;
-                answer_animation.innerHTML = "";
-                fGenerate();
-            }, 700);
+            await sleep(700);
+            answer_text.classList.add('answer_text_0');
+            await sleep(300);
+            answer_text.innerHTML = realAnswer;
+            answer_text.classList.remove('answer_text_0');
+            answer_text.classList.add('answer_text_1');
+            await sleep(1300);
+            answer_text.classList.remove('answer_text_1');
+            answerText = "";
+            answer_text.innerHTML = answerText;
+            answer_animation.innerHTML = "";
+            fGenerate();
         }
         function toCheck() {
-            let realAnswer = (n1 * n2).toString();
-            answer.innerHTML = answerText;
+            realAnswer = (n1 * n2).toString();
+            answer_text.innerHTML = answerText;
             if(answerText.length < realAnswer.length){
                 return 0;
             }
+            allowClick = false;
             if(answerText === realAnswer){
                 makeTrue();
             }else{
@@ -148,10 +166,11 @@
             answerText = "";
             numContainer.style.display = 'flex';
             calc.style.display = 'flex';
-            answer.innerHTML = answerText;
+            answer_text.innerHTML = answerText;
             fGenerate();
         }
         function fGenerate() {
+            allowClick = true;
             scores[0].innerHTML = len1.toString();
             scores[1].innerHTML = nTrue.toString();
             scores[2].innerHTML = nFalse.toString();

@@ -56,11 +56,25 @@ body {
 #num, #answer{
     font-size: 10vmin;
 }
+#answer_text{
+    font-size: 10vmin;
+}
+.answer_text_0{
+    transition: all 300ms linear;
+    transform: rotate(180deg);
+    font-size: 1vmin !important;
+}
+.answer_text_1{
+    transition: all 300ms linear;
+    transform: rotate(360deg);
+    color: var(--c1) !important;
+}
 #answer_animation{
     height: 12vmin;
     width: 12vmin;
     margin: -2vmin 0 -2vmin 2vmin;
 }
+
 button{
     outline: none;
     padding: 1vmin 2vmin;

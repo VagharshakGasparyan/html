@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -164,6 +164,62 @@
 </head>
 <body>
 <div class="co-container">
+    <div class="head">Generate private and public keys</div>
+    <div class="inp-container">
+        <span class="help">SSH-բանալու գեներացում
+            <br>համակարգչում պետք է ստեղծել private(մնում է համակարգչում)
+            <br> և public(GitHub/GitLab տալու համար) բանալիներ։
+        </span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">ssh-keygen -t rsa -b 4096</span>
+        <span class="help">գեներացնում է բանալին</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">eval "$(ssh-agent -s)"</span>
+        <span class="help">համակարգչի մենեջերում բանալին հիշելու համար</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">ssh-add ~/.ssh/</span>
+        <span class="inp" ls_name="ssh_id" contenteditable="true">id_ed25519</span>
+        <span class="help">ավելացնում է private բանալին</span>
+    </div>
+    <div class="inp-container">
+        <span class="help">պատճենեք</span>
+        <span class="inp" ls_name="ssh_id" contenteditable="true">id_ed25519</span>
+        <span class="text">.pub</span>
+        <span class="help">ֆայլի պարունակությունը GitHub/GitLab-ում տեղադրելու համար</span>
+    </div>
+    <div class="tiny-hr"></div>
+    <div class="head">Link to git</div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git init</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git add .</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git commit -m "</span>
+        <span class="inp" ls_name="initial_commit" contenteditable="true">initial commit</span>
+        <span class="text">"</span>
+    </div>
+    <div class="inp-container">
+        <span class="help">GitHub-ում ստեղծել դատարկ ռեպոզիտորիա եթե չկա և պատճենել URL-ը</span>
+    </div>
+    <div class="inp-container">
+        <span class="copy"></span>
+        <span class="text">git remote add origin </span>
+
+        <span class="inp" ls_name="remote_application_https_0">https://github.com/VagharshakGasparyan/my_school</span>
+        <span class="fl1"></span>
+    </div>
+    <hr>
     <div class="inp-container">
         <span class="copy"></span>
         <span class="text">git remote set-url origin https://</span>
