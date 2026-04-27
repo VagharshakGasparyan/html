@@ -1,0 +1,44 @@
+Группа Simple (Простые времена)
+Используются для фактов, привычек и регулярных действий.
+Время,          Утверждение (+),     Отрицание (-),                    Вопрос (?),Отриц. вопрос (?-)
+Present Simple, I work / He works,   I don't work / He doesn't work,   Do you work? / Does he work?,Don't you work? / Doesn't he work?
+Past Simple,    I worked / I went,I didn't work / I didn't go,Did you work? / Did you go?,Didn't you work? / Didn't you go?
+Future Simple,  I will work,I won't work,Will you work?,Won't you work?
+
+Группа Continuous (Длительные времена)
+Используются для процессов, происходящих в конкретный момент.
+Время,Утверждение (+),Отрицание (-),Вопрос (?),Отриц. вопрос (?-)
+Present Cont.,I am working,I am not working,Are you working?,Aren't you working?
+Past Continuous,I was working,I wasn't working,Were you working?,Weren't you working?
+Future Cont.,I will be working,I won't be working,Will you be working?,Won't you be working?
+
+Группа Perfect (Совершенные времена)
+Используются, когда важен результат действия к определенному моменту.
+Время,Утверждение (+),Отрицание (-),Вопрос (?),Отриц. вопрос (?-)
+Present Perfect,I have worked,I haven't worked,Have you worked?,Haven't you worked?
+Past Perfect,I had worked,I hadn't worked,Had you worked?,Hadn't you worked?
+Future Perfect,I will have worked,I won't have worked,Will you have worked?,Won't you have worked?
+
+Группа Perfect Continuous (Совершенно-длительные)
+Используются, чтобы показать, как долго длилось действие до определенного момента.
+Время,Утверждение (+),Отрицание (-),Вопрос (?),Отриц. вопрос (?-)
+Pres. Perf. Cont.,I have been working,I haven't been working,Have you been working?,Haven't you been working?
+Past Perf. Cont.,I had been working,I hadn't been working,Had you been working?,Hadn't you been working?
+Fut. Perf. Cont.,I will have been working,I won't have been working,Will you have been working?,Won't you have been working?
+
+
+Основные правила построения:
+Отрицания (-): Частица not всегда ставится после первого вспомогательного глагола (do, be, have, will).
+
+Вопросы (?): Первый вспомогательный глагол выносится на место перед подлежащим.
+
+Отрицательные вопросы (?-): Обычно используются сокращенные формы (Don't, Haven't, Won't), которые выносятся вперед целиком. Они часто переводятся с оттенком удивления: "Разве ты не...?".
+
+
+
+
+
+
+
+
+
