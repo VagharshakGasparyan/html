@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>English</title>
     <style>
         :root {
@@ -169,6 +169,16 @@
         .mtr_c{
             background-color: #fff2;
         }
+		#btn1{
+			width: 100px;
+			height: 50px;
+			background-color: white;
+			color: black;
+		}
+		#btn1:active{
+			background-color: black;
+			color: white;
+		}
     </style>
 
 
@@ -176,6 +186,7 @@
 <body>
 <div>
     <input type="file" id="file" name="file" accept="text/plain">
+	<input type="button" value="BUTTON" id="btn1">
 </div>
 
 <div class="content" style="padding-bottom: 20px;">
@@ -214,6 +225,12 @@
         <tbody>
 
         </tbody>
+    </table>
+</div>
+<div>
+    <table class="table" id="tense_table" style="margin: 20px auto 0 auto;">
+        <thead></thead>
+        <tbody></tbody>
     </table>
 </div>
 <div>
@@ -432,6 +449,114 @@
 <!--<script src="en_8000.js"></script>-->
 
 <script>
+    const tenses = {
+        "simple": {
+            "present": {
+                "+": {"text": ["I work", "He works"], "html": ""},
+                "-": {"text": ["I don't work", "He doesn't work"], "html": ""},
+                "?": {"text": ["Do you work?", "Does he work?"], "html": ""},
+                "?-": {"text": ["Don't you work?", "Doesn't he work?"], "html": ""}
+            },
+            "past": {
+                "+": {"text": ["I worked", "I went"], "html": ""},
+                "-": {"text": ["I didn't work", "I didn't go"], "html": ""},
+                "?": {"text": ["Did you work?", "Did you go?"], "html": ""},
+                "?-": {"text": ["Didn't you work?", "Didn't you go?"], "html": ""}
+            },
+            "future": {
+                "+": {"text": ["I will work", ""], "html": ""},
+                "-": {"text": ["I won't work", "I will not work"], "html": ""},
+                "?": {"text": ["Will you work?", ""], "html": ""},
+                "?-": {"text": ["Won't you work?", "Will not you work?"], "html": ""}
+            }
+        },
+        "continuous": {
+            "present": {
+                "+": {"text": ["I am working", ""], "html": ""},
+                "-": {"text": ["I am not working", ""], "html": ""},
+                "?": {"text": ["Are you working?", ""], "html": ""},
+                "?-": {"text": ["Aren't you working?", "Are not you working?"], "html": ""}
+            },
+            "past": {
+                "+": {"text": ["I was working", ""], "html": ""},
+                "-": {"text": ["I wasn't working", ""], "html": ""},
+                "?": {"text": ["Were you working?", ""], "html": ""},
+                "?-": {"text": ["Weren't you working?", ""], "html": ""}
+            },
+            "future": {
+                "+": {"text": ["I will be working", ""], "html": ""},
+                "-": {"text": ["I won't be working", "I will not be working"], "html": ""},
+                "?": {"text": ["Will you be working?", ""], "html": ""},
+                "?-": {"text": ["Won't you be working?", "Will not you be working?"], "html": ""}
+            }
+        },
+        "perfect": {
+            "present": {
+                "+": {"text": ["I have worked", ""], "html": ""},
+                "-": {"text": ["I haven't worked", ""], "html": ""},
+                "?": {"text": ["Have you worked?", ""], "html": ""},
+                "?-": {"text": ["Haven't you worked?", ""], "html": ""}
+            },
+            "past": {
+                "+": {"text": ["I had worked", ""], "html": ""},
+                "-": {"text": ["I hadn't worked", ""], "html": ""},
+                "?": {"text": ["Had you worked?", ""], "html": ""},
+                "?-": {"text": ["Hadn't you worked?", ""], "html": ""}
+            },
+            "future": {
+                "+": {"text": ["I will have worked", ""], "html": ""},
+                "-": {"text": ["I won't have worked", "I will not have worked"], "html": ""},
+                "?": {"text": ["Will you have worked?", ""], "html": ""},
+                "?-": {"text": ["Won't you have worked?", "Will not you have worked?"], "html": ""}
+            }
+        },
+        "perfect_continuous": {
+            "present": {
+                "+": {"text": ["I have been working", ""], "html": ""},
+                "-": {"text": ["I haven't been working", ""], "html": ""},
+                "?": {"text": ["Have you been working?", ""], "html": ""},
+                "?-": {"text": ["Haven't you been working?", ""], "html": ""}
+            },
+            "past": {
+                "+": {"text": ["I had been working", ""], "html": ""},
+                "-": {"text": ["I hadn't been working", ""], "html": ""},
+                "?": {"text": ["Had you been working?", ""], "html": ""},
+                "?-": {"text": ["Hadn't you been working?", ""], "html": ""}
+            },
+            "future": {
+                "+": {"text": ["I will have been working", ""], "html": ""},
+                "-": {"text": ["I won't have been working", ""], "html": ""},
+                "?": {"text": ["Will you have been working?", ""], "html": ""},
+                "?-": {"text": ["Won't you have been working?", "Will not you have been working?"], "html": ""}
+            }
+        },
+    };
+    function makeTenseTable(tense_table) {
+        let tbody = tense_table.querySelector('tbody');
+        let ppf = ["past", "present","future"];
+        let htm = "<tr><td></td>";
+        ppf.forEach((a, i)=>{
+            htm += "<td colspan='2'>" + (i + 1) + ". " + a +  "</td>";
+        });
+        htm += "</tr>";
+        ["simple","continuous", "perfect", "perfect_continuous"].forEach((scp, i)=>{
+            htm += "<tr><td rowspan='5'>" + scp + "</td>";
+            ppf.forEach((a, j)=>{
+                htm += "<td colspan='2' style='text-align: center'><c5>" + (j + 1) + "." + (i + 1) + ". " + a + " " + scp + "</c5></td>";
+            });
+            htm += "</tr>";
+
+            ["+", "-", "?", "?-"].forEach((pm)=>{
+                htm += "<tr>";
+                ppf.forEach((a, j)=>{
+                    htm += "<td style='text-align: center'>" + pm + "</td><td>" + tenses[scp][a][pm]["text"].join("<br>") + "</td>";
+                });
+                htm += "</tr>";
+            });
+
+        });
+        tbody.innerHTML = htm;
+    }
     // let a = [];
     // for(let i = 4027; i < w5000.length; i++){
     //     a.push(w5000[i][0]);
@@ -488,6 +613,7 @@
     console.log("knownCount=", knownCount);
 
     window.addEventListener('load', function () {
+        makeTenseTable(document.getElementById('tense_table'));
         // let ens = [];
 
         let tbody = document.querySelector('#test_table.table tbody');
@@ -733,6 +859,7 @@
         //navigator.clipboard.writeText("txt");
         console.log(txt);
     }
+
 
 
 </script>
