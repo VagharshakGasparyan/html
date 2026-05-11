@@ -523,10 +523,10 @@
                 "?-": {"text": ["Aren't you working?", "Are not you working?"], "html": ["<c1>Am</c1> <c2>I not</c2> <c4>work</c4>ing?", "<c1>Aren't (Are not)</c1> <c2>you</c2> <c4>work</c4>ing?", "<c1>Isn't (Is not)</c1> <c2>it</c2> <c4>work</c4>ing?"]}
             },
             "past": {
-                "+": {"text": ["I was working", ""], "html": ["<c2>I/He/She/It</c2> <c1>was</c1> <c4>work</c4>ing", "<c2>We/They/You</c2> <c1>where</c1> <c4>work</c4>ing"]},
-                "-": {"text": ["I wasn't working", ""], "html": ["<c2>I/He/She/It</c2> <c1>wasn't</c1> <c4>work</c4>ing", "<c2>We/They/You</c2> <c1>weren't</c1> <c4>work</c4>ing"]},
-                "?": {"text": ["Were you working?", ""], "html": ["<c1>Was</c1> <c2>I/He/She/It</c2> <c4>work</c4>ing?", "<c1>Were</c1> <c2>We/They/You</c2> <c4>work</c4>ing?"]},
-                "?-": {"text": ["Weren't you working?", ""], "html": ["<c1>Wasn't (Was not)</c1> <c2>I/He/She/It</c2> <c4>work</c4>ing?", "<c1>Weren't (Were not)</c1> <c2>We/They/You</c2> <c4>work</c4>ing?"]}
+                "+": {"text": ["I was working", ""], "html": ["<c2>He/She/It</c2> <c1>was</c1> <c4>work</c4>ing", "<c2>I/We/You/They</c2> <c1>where</c1> <c4>work</c4>ing"]},
+                "-": {"text": ["I wasn't working", ""], "html": ["<c2>He/She/It</c2> <c1>wasn't</c1> <c4>work</c4>ing", "<c2>I/We/You/They</c2> <c1>weren't</c1> <c4>work</c4>ing"]},
+                "?": {"text": ["Were you working?", ""], "html": ["<c1>Was</c1> <c2>He/She/It</c2> <c4>work</c4>ing?", "<c1>Were</c1> <c2>I/We/You/They</c2> <c4>work</c4>ing?"]},
+                "?-": {"text": ["Weren't you working?", ""], "html": ["<c1>Wasn't (Was not)</c1> <c2>He/She/It</c2> <c4>work</c4>ing?", "<c1>Weren't (Were not)</c1> <c2>I/We/You/They</c2> <c4>work</c4>ing?"]}
             },
             "future": {
                 "+": {"text": ["I will be working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>will be</c1> <c4>work</c4>ing"]},
@@ -581,30 +581,54 @@
                     ]}
             },
             "future": {
-                "+": {"text": ["I will have worked", ""], "html": ""},
-                "-": {"text": ["I won't have worked", "I will not have worked"], "html": ""},
-                "?": {"text": ["Will you have worked?", ""], "html": ""},
-                "?-": {"text": ["Won't you have worked?", "Will not you have worked?"], "html": ""}
+                "+": {"text": ["I will have worked", ""], "html": [
+                        "<c2>I/We/You/They/He/She/It</c2> <c1>will have</c1> <c4>work</c4>ed",
+                        "<c2>I/We/You/They/He/She/It</c2> <c1>will have</c1> <c4>gone (v3)</c4>"
+                    ]},
+                "-": {"text": ["I won't have worked", "I will not have worked"], "html": [
+                        "<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not) have</c1> <c4>work</c4>ed",
+                        "<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not) have</c1> <c4>gone (v3)</c4>"
+                    ]},
+                "?": {"text": ["Will you have worked?", ""], "html": [
+                        "<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>work</c4>ed",
+                        "<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>gone (v3)</c4>"
+                    ]},
+                "?-": {"text": ["Won't you have worked?", "Will not you have worked?"], "html": [
+                        "<c1>Won't (will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>work</c4>ed",
+                        "<c1>Won't (will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>gone (v3)</c4>"
+                    ]}
             }
         },
         "perfect_continuous": {
             "present": {
-                "+": {"text": ["I have been working", ""], "html": ""},
-                "-": {"text": ["I haven't been working", ""], "html": ""},
-                "?": {"text": ["Have you been working?", ""], "html": ""},
-                "?-": {"text": ["Haven't you been working?", ""], "html": ""}
+                "+": {"text": ["I have been working", ""], "html": [
+                        "<c2>I/We/You/They</c2> <c1>have been</c1> <c4>work</c4>ing",
+                        "<c2>He/She/It</c2> <c1>has been</c1> <c4>work</c4>ing"
+                    ]},
+                "-": {"text": ["I haven't been working", ""], "html": [
+                        "<c2>I/We/You/They</c2> <c1>haven't (have not) been</c1> <c4>work</c4>ing",
+                        "<c2>He/She/It</c2> <c1>hasn't (has not) been</c1> <c4>work</c4>ing"
+                    ]},
+                "?": {"text": ["Have you been working?", ""], "html": [
+                        "<c1>Have</c1> <c2>I/We/You/They</c2> <c1>been</c1> <c4>work</c4>ing?",
+                        "<c1>Has</c1> <c2>He/She/It</c2> <c1>been</c1> <c4>work</c4>ing?"
+                    ]},
+                "?-": {"text": ["Haven't you been working?", ""], "html": [
+                        "<c1>Haven't (Have not)</c1> <c2>I/We/You/They</c2> <c1>been</c1> <c4>work</c4>ing?",
+                        "<c1>Hasn't (Has not)</c1> <c2>He/She/It</c2> <c1>been</c1> <c4>work</c4>ing?"
+                    ]}
             },
             "past": {
-                "+": {"text": ["I had been working", ""], "html": ""},
-                "-": {"text": ["I hadn't been working", ""], "html": ""},
-                "?": {"text": ["Had you been working?", ""], "html": ""},
-                "?-": {"text": ["Hadn't you been working?", ""], "html": ""}
+                "+": {"text": ["I had been working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>had been</c1> <c4>work</c4>ing"]},
+                "-": {"text": ["I hadn't been working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>hadn't (had not) been</c1> <c4>work</c4>ing"]},
+                "?": {"text": ["Had you been working?", ""], "html": ["<c1>Had</c1> <c2>I/We/You/They/He/She/It</c2> <c1>been</c1> <c4>work</c4>ing?"]},
+                "?-": {"text": ["Hadn't you been working?", ""], "html": ["<c1>Hadn't (Had not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>been</c1> <c4>work</c4>ing?"]}
             },
             "future": {
-                "+": {"text": ["I will have been working", ""], "html": ""},
-                "-": {"text": ["I won't have been working", ""], "html": ""},
-                "?": {"text": ["Will you have been working?", ""], "html": ""},
-                "?-": {"text": ["Won't you have been working?", "Will not you have been working?"], "html": ""}
+                "+": {"text": ["I will have been working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>will have been</c1> <c4>work</c4>ing"]},
+                "-": {"text": ["I won't have been working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not) have been</c1> <c4>work</c4>ing"]},
+                "?": {"text": ["Will you have been working?", ""], "html": ["<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have been</c1> <c4>work</c4>ing?"]},
+                "?-": {"text": ["Won't you have been working?", "Will not you have been working?"], "html": ["<c1>Won't (Will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have been</c1> <c4>work</c4>ing?"]}
             }
         },
     };
