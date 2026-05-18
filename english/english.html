@@ -231,6 +231,7 @@
 <header class="header">
     <div class="header_btn">Worlds</div>
     <div class="header_btn">Tenses</div>
+    <div class="header_btn">Pronouns</div>
 </header>
 
 <div class="content content-1 display_none" style="padding-bottom: 20px;">
@@ -273,6 +274,12 @@
 </div>
 <div class="content-2 display_none">
     <table class="table" id="tense_table" style="margin: 20px auto 0 auto;">
+        <thead></thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div class="content-3 display_none">
+    <table class="table" id="pronouns_table" style="margin: 20px auto 0 auto;">
         <thead></thead>
         <tbody></tbody>
     </table>
@@ -487,10 +494,8 @@
 <div style="height: 50vh"></div>
 <script>document.write(new Date().getFullYear().toString())</script>
 <!--<script src="irregular_verbs.js"></script>-->
-<!--<script src="en_hy_ru_0_3000.js"></script>-->
-<!--<script src="hy5000.js"></script>-->
 <script src="hy_1_5000.js"></script>
-<!--<script src="en_8000.js"></script>-->
+<script src="pronouns.js"></script>
 
 <script>
     //c1 green, c2 blue, c3 brown, c4 red, c5 yellow
@@ -590,12 +595,12 @@
                         "<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not) have</c1> <c4>gone (v3)</c4>"
                     ]},
                 "?": {"text": ["Will you have worked?", ""], "html": [
-                        "<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>work</c4>ed",
-                        "<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>gone (v3)</c4>"
+                        "<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>work</c4>ed?",
+                        "<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>gone (v3)</c4>?"
                     ]},
                 "?-": {"text": ["Won't you have worked?", "Will not you have worked?"], "html": [
-                        "<c1>Won't (will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>work</c4>ed",
-                        "<c1>Won't (will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>gone (v3)</c4>"
+                        "<c1>Won't (will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>work</c4>ed?",
+                        "<c1>Won't (will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>gone (v3)</c4>?"
                     ]}
             }
         },
@@ -660,18 +665,31 @@
         });
         tbody.innerHTML = htm;
     }
-    // let a = [];
-    // for(let i = 4027; i < w5000.length; i++){
-    //     a.push(w5000[i][0]);
-    // }
-    // console.log(a.join('\n'));
+    
+    function makePronounsTable(pronouns_table) {
+        let tbody = pronouns_table.querySelector('tbody');
+        let arr = pronouns.split(/\s{2,}/ig);
+        console.log(arr);
+        let htm = "";
+        let j = 0;
+        arr.forEach((a, i)=>{
+            if(a === ""){
+                return 0;
+            }
+            j++;
+            if(j === 1){
+                htm += "<tr>";
+            }
+            let b = a.split(" - ");
+            htm += "<td>" + b[0] + " - " + "<c2>" +  b[1] + "</c2>" + "</td>";
+            if(j === 5){
+                htm += "</tr>";
+                j = 0;
+            }
+        });
+        tbody.innerHTML = htm;
+    }
 
-    // console.log(w5000);
-    // let jsn = {};
-    // w5000.forEach(function(w){
-    //     jsn[w[0]] = w[2];
-    // });
-    // console.log(JSON.stringify(jsn));
     function f1() {
         for (let i = 0; i < hy_1_5000.length - 1; i++){
             let a1 = hy_1_5000[i][0];
@@ -695,11 +713,6 @@
 
 
     let en_ru = [];
-    // en_hy_ru_0_3000.forEach((item)=>{
-    //     if(("s" in item) && item.s === 0){
-    //         en_ru.push(item);
-    //     }
-    // });
     let knownCount = 0;
     hy_1_5000.forEach((item)=>{
 		if(item.length > 3 && item[3] === 1){
@@ -747,6 +760,7 @@
 
 
         makeTenseTable(document.getElementById('tense_table'));
+        makePronounsTable(document.getElementById('pronouns_table'));
         // let ens = [];
 
         let tbody = document.querySelector('#test_table.table tbody');

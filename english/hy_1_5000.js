@@ -1226,7 +1226,7 @@ let hy_1_5000 = [
     ["contest","n'kɔntest","մրցույթ"],
     ["glad","glæd","ուրախ"],
     ["guarantee",",gærən'ti:","երաշխիք"],
-    ["guess","ges","գուշակել"],
+    ["guess","ges","գուշակել, կռահել"],
     ["initiative","[ˌɪˈnɪʃətɪv]","նախաձեռնություն"],
     ["participate","pɑ:'tisipeit","մասնակցել"],
     ["perhaps","pə'hæps","թերևս / հավանաբար"],
