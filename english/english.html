@@ -223,6 +223,20 @@
         .display_none{
             display: none !important;
         }
+        .checkbox{
+            width: 20px;
+            height: 20px;
+            accent-color: var(--c2);
+            color-scheme: dark;
+            /*border: 1px solid var(--bd);*/
+            /*background-color: var(--c2);*/
+        }
+        /*.checkbox:checked{*/
+        /*    background-color: var(--c1);*/
+        /*}*/
+        #variants{
+            padding: 3px 10px;
+        }
     </style>
 
 
@@ -236,19 +250,18 @@
 
 <div class="content content-1 display_none" style="padding-bottom: 20px;">
     <div>
-        <label>
-            <input type="checkbox" id="training">
+        <label style="display: flex; flex-direction: row; align-items: center;padding: 0 10px;">
+            <input class="checkbox" style="margin-right: 10px;" type="checkbox" id="training">
             <span>Մարզում</span>
         </label>
     </div>
     <div id="training_body" style="display: none;margin-top: 10px;font-size: 18px;">
         <div>
-            <label for="variants" id="word_label"
-                   style="padding: 0 10px;margin-right: 10px; border: 1px solid var(--bd);">
+            <label style="padding: 0 10px;margin-right: 10px; border: 1px solid var(--bd);" for="variants" id="word_label">
                 <span id="word"></span>
             </label>
-            <select id="variants" style="display: block">
-                <option value=""></option>
+            <select id="variants" style="display: block;margin-top:10px;min-width: 512px;overflow: hidden;" multiple="multiple" size="5">
+<!--                <option value=""></option>-->
             </select>
             <button id="dont_know">Չգիտեմ</button>
         </div>
@@ -497,6 +510,10 @@
 <script src="hy_1_5000.js"></script>
 <script src="pronouns.js"></script>
 
+
+<script src="my_english.js" defer></script>
+
+
 <script>
     //c1 green, c2 blue, c3 brown, c4 red, c5 yellow
     const tenses = {
@@ -669,7 +686,7 @@
     function makePronounsTable(pronouns_table) {
         let tbody = pronouns_table.querySelector('tbody');
         let arr = pronouns.split(/\s{2,}/ig);
-        console.log(arr);
+        // console.log(arr);
         let htm = "";
         let j = 0;
         arr.forEach((a, i)=>{
@@ -726,9 +743,10 @@
         // }
         en_ru.push(newItem);
     });
-    console.log("knownCount=", knownCount);
+    // console.log("knownCount=", knownCount);
 
     window.addEventListener('load', function () {
+        console.log(my_english);
         let headerButtons = document.querySelectorAll("header .header_btn");
         let content_number = localStorage.getItem("content_number");
 
@@ -915,7 +933,7 @@
 
         function generateVariants() {
             word_label.style.borderColor = 'var(--bd)';
-            let variantsCount = Math.min(10, en_ru.length);
+            let variantsCount = Math.min(5, en_ru.length);
             let n = Math.floor(Math.random() * en_ru.length);
             trueVariant = n;
             trueVariantObj = en_ru[n];
@@ -923,7 +941,8 @@
             let transcription = en_ru[n]._ ?? en_ru[n].t;
             let translated = (en_ru[n].hy ? en_ru[n].hy + ", " : "") + en_ru[n].ru;
             word.innerHTML = myWord + '<span style="margin-left: 10px;color: green">' + transcription + '</span>';
-            variants.innerHTML = '<option value=""></option>';
+            // variants.innerHTML = '<option value=""></option>';
+            variants.innerHTML = '';
 
             let ns = [];
             ns.length = en_ru.length;
