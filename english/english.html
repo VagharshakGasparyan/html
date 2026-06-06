@@ -246,6 +246,7 @@
     <div class="header_btn">Worlds</div>
     <div class="header_btn">Tenses</div>
     <div class="header_btn">Pronouns</div>
+    <div class="header_btn">My worlds</div>
 </header>
 
 <div class="content content-1 display_none" style="padding-bottom: 20px;">
@@ -504,6 +505,8 @@
         </tbody>
     </table>
 </div>
+<div class="content content-4 display_none">
+</div>
 <div style="height: 50vh"></div>
 <script>document.write(new Date().getFullYear().toString())</script>
 <!--<script src="irregular_verbs.js"></script>-->
@@ -706,6 +709,31 @@
         });
         tbody.innerHTML = htm;
     }
+    
+    function makeMyWorlds(content) {
+        let myEnglishArr = my_english.split("\n");
+        console.log(myEnglishArr);
+        let htm = '';
+        myEnglishArr.forEach((myEnglish, index)=>{
+            if(index === 0){
+                return;
+            }
+            let myEnglishRow = myEnglish;
+            if(myEnglish.includes('--')){
+                myEnglishRow = myEnglish.split('--');
+                if(myEnglishRow.length === 2){
+                    myEnglishRow[1] = '<c2>' + myEnglishRow[1].trim() + '</c2>';
+                }else if(myEnglishRow.length > 2){
+                    myEnglishRow[1] = '<c1>' + myEnglishRow[1].trim() + '</c1>';
+                    myEnglishRow[2] = '<c2>' + myEnglishRow[2].trim() + '</c2>';
+                }
+
+                myEnglishRow = myEnglishRow.join(' ');
+            }
+            htm += '<div><c1 style="width: 45px;text-align: end;margin-right: 10px;">' + index + '</c1>' + myEnglishRow + '</div>';
+        });
+        content.innerHTML = htm;
+    }
 
     function f1() {
         for (let i = 0; i < hy_1_5000.length - 1; i++){
@@ -746,7 +774,8 @@
     // console.log("knownCount=", knownCount);
 
     window.addEventListener('load', function () {
-        console.log(my_english);
+        makeMyWorlds(document.querySelector('.content-4'));
+        //console.log(my_english);
         let headerButtons = document.querySelectorAll("header .header_btn");
         let content_number = localStorage.getItem("content_number");
 
