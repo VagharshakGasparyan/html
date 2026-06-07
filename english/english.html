@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
@@ -16,6 +17,7 @@
             --bd: #fff2;
             --bd1: #fff4;
         }
+
         ::selection {
             background: #f07;
             color: #ff0;
@@ -30,9 +32,11 @@
             background-color: var(--bg);
             color: var(--c);
         }
-        body{
+
+        body {
             margin: 0;
         }
+
         .content {
             max-width: 100vw;
             width: max-content;
@@ -44,7 +48,8 @@
             font-size: 14px;
         }
 
-        .table td, .table th {
+        .table td,
+        .table th {
             border: 1px solid var(--bd);
             padding: 3px 5px;
         }
@@ -73,6 +78,7 @@
         #test_table.table tbody tr td:nth-child(5) {
             color: var(--c3);
         }
+
         .copy {
             border: 2px solid var(--c);
             position: absolute;
@@ -150,51 +156,67 @@
             color: var(--c5);
         }
 
-        c1, c2, c3, c4, c5 {
+        c1,
+        c2,
+        c3,
+        c4,
+        c5 {
             display: inline-block;
         }
-        #variants{
+
+        #variants {
             font-size: 18px;
             min-width: 100px;
         }
-        .hy_tr{
+
+        .hy_tr {
             color: var(--c3);
             display: inline-block;
             padding-right: 7px;
         }
-        .mtr td:first-of-type{
+
+        .mtr td:first-of-type {
             cursor: pointer;
         }
-        .mtr:hover td:first-of-type{
+
+        .mtr:hover td:first-of-type {
             background-color: #fff2;
             /*color: var(--bg) !important;*/
         }
-        .mtr_c{
+
+        .mtr_c {
             background-color: #fff2;
         }
-		#btn1{
-			width: 100px;
-			height: 50px;
-			background-color: white;
-			color: black;
-		}
-		#btn1:active{
-			background-color: black;
-			color: white;
-		}
-        .thick_border_left{
+
+        #btn1 {
+            width: 100px;
+            height: 50px;
+            background-color: white;
+            color: black;
+        }
+
+        #btn1:active {
+            background-color: black;
+            color: white;
+        }
+
+        .thick_border_left {
             border-left: 2px solid var(--bd1) !important;
         }
-        .thick_border_right{
+
+        .thick_border_right {
             border-right: 2px solid var(--bd1) !important;
         }
-        .thick_border_bottom{
+
+        .thick_border_bottom {
             border-bottom: 2px solid var(--bd1) !important;
         }
-        .thick_border_top{
+
+        .thick_border_top {
             border-top: 2px solid var(--bd1) !important;
         }
-        .header{
+
+        .header {
             display: flex;
             position: sticky;
             top: 5px;
@@ -205,7 +227,8 @@
             border-bottom: 1px solid var(--c);
             z-index: 999;
         }
-        .header .header_btn{
+
+        .header .header_btn {
             cursor: pointer;
             padding: 2px 10px;
             border-top: 1px solid var(--c);
@@ -217,13 +240,16 @@
             user-select: none;
             background-color: var(--bg);
         }
-        .header .header_btn:hover{
+
+        .header .header_btn:hover {
             background-color: var(--bd);
         }
-        .display_none{
+
+        .display_none {
             display: none !important;
         }
-        .checkbox{
+
+        .checkbox {
             width: 20px;
             height: 20px;
             accent-color: var(--c2);
@@ -231,832 +257,947 @@
             /*border: 1px solid var(--bd);*/
             /*background-color: var(--c2);*/
         }
+
         /*.checkbox:checked{*/
         /*    background-color: var(--c1);*/
         /*}*/
-        #variants{
+        #variants {
             padding: 3px 10px;
         }
     </style>
 
 
 </head>
+
 <body>
-<header class="header">
-    <div class="header_btn">Worlds</div>
-    <div class="header_btn">Tenses</div>
-    <div class="header_btn">Pronouns</div>
-    <div class="header_btn">My worlds</div>
-</header>
-
-<div class="content content-1 display_none" style="padding-bottom: 20px;">
-    <div>
-        <label style="display: flex; flex-direction: row; align-items: center;padding: 0 10px;">
-            <input class="checkbox" style="margin-right: 10px;" type="checkbox" id="training">
-            <span>Մարզում</span>
-        </label>
-    </div>
-    <div id="training_body" style="display: none;margin-top: 10px;font-size: 18px;">
+    <header class="header">
+        <div class="header_btn">Worlds</div>
+        <div class="header_btn">Tenses</div>
+        <div class="header_btn">Pronouns</div>
+        <div class="header_btn">My worlds</div>
+    </header>
+    <!-- <button id="open_file_btn" style="margin-left: auto;">Открыть файл</button> -->
+    <div class="content content-1 display_none" style="padding-bottom: 20px;">
         <div>
-            <label style="padding: 0 10px;margin-right: 10px; border: 1px solid var(--bd);" for="variants" id="word_label">
-                <span id="word"></span>
+            <label style="display: flex; flex-direction: row; align-items: center;padding: 0 10px;">
+                <input class="checkbox" style="margin-right: 10px;" type="checkbox" id="training">
+                <span>Մարզում</span>
             </label>
-            <select id="variants" style="display: block;margin-top:10px;min-width: 512px;overflow: hidden;" multiple="multiple" size="5">
-<!--                <option value=""></option>-->
-            </select>
-            <button id="dont_know">Չգիտեմ</button>
         </div>
-        <div id="info"></div>
+        <div id="training_body" style="display: none;margin-top: 10px;font-size: 18px;">
+            <div>
+                <label style="padding: 0 10px;margin-right: 10px; border: 1px solid var(--bd);" for="variants"
+                    id="word_label">
+                    <span id="word"></span>
+                </label>
+                <select id="variants" style="display: block;margin-top:10px;min-width: 512px;overflow: hidden;"
+                    multiple="multiple" size="5">
+                    <!--                <option value=""></option>-->
+                </select>
+                <button id="dont_know">Չգիտեմ</button>
+            </div>
+            <div id="info"></div>
+        </div>
     </div>
-</div>
-<div class="content content-1 display_none">
-    <table class="table" id="test_table">
-        <thead>
-        <tr>
-            <th>N</th>
-            <th>English</th>
-            <th>Transcription</th>
-<!--            <th>Перевод</th>-->
-<!--            <th>Թարգմանություն</th>-->
-            <th>Translation</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="content content-1 display_none">
+        <table class="table" id="test_table">
+            <thead>
+                <tr>
+                    <th>N</th>
+                    <th>English</th>
+                    <th>Transcription</th>
+                    <!--            <th>Перевод</th>-->
+                    <!--            <th>Թարգմանություն</th>-->
+                    <th>Translation</th>
+                </tr>
+            </thead>
+            <tbody>
 
-        </tbody>
-    </table>
-</div>
-<div class="content-2 display_none">
-    <table class="table" id="tense_table" style="margin: 20px auto 0 auto;">
-        <thead></thead>
-        <tbody></tbody>
-    </table>
-</div>
-<div class="content-3 display_none">
-    <table class="table" id="pronouns_table" style="margin: 20px auto 0 auto;">
-        <thead></thead>
-        <tbody></tbody>
-    </table>
-</div>
-<div class="content-2 display_none">
-    <table class="table" id="ppf" style="margin: 20px auto 0 auto;">
-        <thead>
-        </thead>
-        <tbody>
-        <tr>
-            <td></td>
-            <td style="min-width: 300px">1. Present (Настоящее время)</td>
-            <td style="min-width: 300px">2. Past (Прошедшее время)</td>
-            <td style="min-width: 300px">3. Future (Будущее время)</td>
-        </tr>
-        <tr>
-            <td>Simple (Простое)</td>
-            <td>
-                <c5>1.1. Present Simple (Простое настоящее)</c5>
+            </tbody>
+        </table>
+    </div>
+    <div class="content-2 display_none">
+        <table class="table" id="tense_table" style="margin: 20px auto 0 auto;">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="content-3 display_none">
+        <table class="table" id="pronouns_table" style="margin: 20px auto 0 auto;">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="content-2 display_none">
+        <table class="table" id="ppf" style="margin: 20px auto 0 auto;">
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td style="min-width: 300px">1. Present (Настоящее время)</td>
+                    <td style="min-width: 300px">2. Past (Прошедшее время)</td>
+                    <td style="min-width: 300px">3. Future (Будущее время)</td>
+                </tr>
+                <tr>
+                    <td>Simple (Простое)</td>
+                    <td>
+                        <c5>1.1. Present Simple (Простое настоящее)</c5>
 
-                <c2>I / We / You / They</c2> + <c4>Verb</c4>.
-                <c2>He / She / It</c2> + <c4>Verb</c4><c1>s</c1>.
-                You work. He works.
-                <c2>I / We / You / They</c2> + don't + <c4>Verb</c4>.
-                <c2>He / She / It</c2> + doesn't + <c4>Verb</c4>.
-                You don't work. He doesn't work.
-                Do + <c2>I / We / You / They</c2> + <c4>Verb</c4>?
-                Do<c1>es</c1> + <c2>He / She / It</c2> + <c4>Verb</c4>?
-                Do you work? Does it work?
-                Don't + <c2>I / We / You / They</c2> + <c4>Verb</c4>?
-                Do<c1>es</c1>n't + <c2>He / She / It</c2> + <c4>Verb</c4>?
-                Don't You work? Doesn't He work?
-            </td>
-            <td>
-                <c5>2.1. Past Simple (Простое прошедшее)</c5>
+                        <c2>I / We / You / They</c2> + <c4>Verb</c4>.
+                        <c2>He / She / It</c2> + <c4>Verb</c4>
+                        <c1>s</c1>.
+                        You work. He works.
+                        <c2>I / We / You / They</c2> + don't + <c4>Verb</c4>.
+                        <c2>He / She / It</c2> + doesn't + <c4>Verb</c4>.
+                        You don't work. He doesn't work.
+                        Do + <c2>I / We / You / They</c2> + <c4>Verb</c4>?
+                        Do<c1>es</c1> + <c2>He / She / It</c2> + <c4>Verb</c4>?
+                        Do you work? Does it work?
+                        Don't + <c2>I / We / You / They</c2> + <c4>Verb</c4>?
+                        Do<c1>es</c1>n't + <c2>He / She / It</c2> + <c4>Verb</c4>?
+                        Don't You work? Doesn't He work?
+                    </td>
+                    <td>
+                        <c5>2.1. Past Simple (Простое прошедшее)</c5>
 
-                <c4>Verb2</c4> | <c4>Verb</c4><c1>ed</c1>
-                He went. You worked.
-                <c2>I / We / You / They / He / She / It</c2> + <c1>didn't</c1> + <c4>Verb</c4>
-                He didn't go. You didn't work.
-                <c1>Did</c1> + <c2>I / We / You / They / He / She / It</c2> + <c4>Verb</c4>?
-                Did He go? Did You work?
-                <c1>Didn't</c1> + <c2>I / We / You / They / He / She / It</c2> + <c4>Verb</c4>?
-                Didn't He go? Didn't You work?
-            </td>
-            <td>
-                <c5>3.1. Future Simple (Простое будущее)</c5>
+                        <c4>Verb2</c4> | <c4>Verb</c4>
+                        <c1>ed</c1>
+                        He went. You worked.
+                        <c2>I / We / You / They / He / She / It</c2> + <c1>didn't</c1> + <c4>Verb</c4>
+                        He didn't go. You didn't work.
+                        <c1>Did</c1> + <c2>I / We / You / They / He / She / It</c2> + <c4>Verb</c4>?
+                        Did He go? Did You work?
+                        <c1>Didn't</c1> + <c2>I / We / You / They / He / She / It</c2> + <c4>Verb</c4>?
+                        Didn't He go? Didn't You work?
+                    </td>
+                    <td>
+                        <c5>3.1. Future Simple (Простое будущее)</c5>
 
-                Что выражает: Спонтанное решение, обещание, прогноз, простое действие в будущем.
-                Маркеры: tomorrow, next week, in 2030, I think, I hope.
-                Формула:
-                <c1>will</c1> + <c4>Verb</c4>.
-                Примеры:
-                I think it will rain tomorrow. (Думаю, завтра будет дождь) — прогноз.
-                The phone is ringing! — I will answer it. (Телефон звонит! — Я отвечу) — спонтанное решение.
-            </td>
-        </tr>
-        <tr>
-            <td>Continuous (продолженное)</td>
-            <td>
-                <c5>1.2. Present Continuous (Настоящее продолженное)</c5>
+                        Что выражает: Спонтанное решение, обещание, прогноз, простое действие в будущем.
+                        Маркеры: tomorrow, next week, in 2030, I think, I hope.
+                        Формула:
+                        <c1>will</c1> + <c4>Verb</c4>.
+                        Примеры:
+                        I think it will rain tomorrow. (Думаю, завтра будет дождь) — прогноз.
+                        The phone is ringing! — I will answer it. (Телефон звонит! — Я отвечу) — спонтанное решение.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Continuous (продолженное)</td>
+                    <td>
+                        <c5>1.2. Present Continuous (Настоящее продолженное)</c5>
 
-                <c2>(I'm) I</c2> + <c2>am</c2> + <c4>Verb</c4><c1>ing</c1>.
-                <c2>(We're / You're / They're) We / You / They</c2> + <c2>are</c2> + <c4>Verb</c4><c1>ing</c1>.
-                <c2>(He's / She's / It's) He / She / It</c2> + <c2>is</c2> + <c4>Verb</c4><c1>ing</c1>.
-                I'm working right now.
-                <c2>(I'm) I</c2> + <c2>am</c2> + <c1>not</c1> + <c4>Verb</c4><c1>ing</c1>.
-                <c2>We / You / They</c2> + <c1>aren't</c1> + <c4>Verb</c4><c1>ing</c1>.
-                <c2>He / She / It</c2> + <c1>isn't</c1> + <c4>Verb</c4><c1>ing</c1>.
-                I'm not working right now. It isn't working right now.
-                <c2>Are</c2> + <c2>We / You / They</c2> + <c4>Verb</c4><c1>ing</c1>?
-                <c2>Is</c2> + <c2>He / She / It</c2> + <c4>Verb</c4><c1>ing</c1>?
-                <c2>Am</c2> + <c2>I</c2> + <c4>Verb</c4><c1>ing</c1>?
-                Am I working right now? Is it working right now?
-                Are You working right now?
-                <c2>Are</c2> + <c2>We / You / They</c2> + <c1>not</c1> + <c4>Verb</c4><c1>ing</c1>?
-                <c2>Aren't</c2> + <c2>We / You / They</c2> + <c4>Verb</c4><c1>ing</c1>?
-                <c2>Is</c2> + <c2>He / She / It</c2> + <c1>not</c1> + <c4>Verb</c4><c1>ing</c1>?
-                <c2>Isn't</c2> + <c2>He / She / It</c2> + <c4>Verb</c4><c1>ing</c1>?
-                <c2>Am</c2> + <c2>I</c2> + <c1>not</c1> + <c4>Verb</c4><c1>ing</c1>?
-                Am I not working right now?
-                Is it not working right now? Isn't it working right now?
-                Are You not working right now? Aren't you working right now?
-            </td>
-            <td>
-                <c5>2.2. Past Continuous (Прошедшее продолженное)</c5>
+                        <c2>(I'm) I</c2> + <c2>am</c2> + <c4>Verb</c4>
+                        <c1>ing</c1>.
+                        <c2>(We're / You're / They're) We / You / They</c2> + <c2>are</c2> + <c4>Verb</c4>
+                        <c1>ing</c1>.
+                        <c2>(He's / She's / It's) He / She / It</c2> + <c2>is</c2> + <c4>Verb</c4>
+                        <c1>ing</c1>.
+                        I'm working right now.
+                        <c2>(I'm) I</c2> + <c2>am</c2> + <c1>not</c1> + <c4>Verb</c4>
+                        <c1>ing</c1>.
+                        <c2>We / You / They</c2> + <c1>aren't</c1> + <c4>Verb</c4>
+                        <c1>ing</c1>.
+                        <c2>He / She / It</c2> + <c1>isn't</c1> + <c4>Verb</c4>
+                        <c1>ing</c1>.
+                        I'm not working right now. It isn't working right now.
+                        <c2>Are</c2> + <c2>We / You / They</c2> + <c4>Verb</c4>
+                        <c1>ing</c1>?
+                        <c2>Is</c2> + <c2>He / She / It</c2> + <c4>Verb</c4>
+                        <c1>ing</c1>?
+                        <c2>Am</c2> + <c2>I</c2> + <c4>Verb</c4>
+                        <c1>ing</c1>?
+                        Am I working right now? Is it working right now?
+                        Are You working right now?
+                        <c2>Are</c2> + <c2>We / You / They</c2> + <c1>not</c1> + <c4>Verb</c4>
+                        <c1>ing</c1>?
+                        <c2>Aren't</c2> + <c2>We / You / They</c2> + <c4>Verb</c4>
+                        <c1>ing</c1>?
+                        <c2>Is</c2> + <c2>He / She / It</c2> + <c1>not</c1> + <c4>Verb</c4>
+                        <c1>ing</c1>?
+                        <c2>Isn't</c2> + <c2>He / She / It</c2> + <c4>Verb</c4>
+                        <c1>ing</c1>?
+                        <c2>Am</c2> + <c2>I</c2> + <c1>not</c1> + <c4>Verb</c4>
+                        <c1>ing</c1>?
+                        Am I not working right now?
+                        Is it not working right now? Isn't it working right now?
+                        Are You not working right now? Aren't you working right now?
+                    </td>
+                    <td>
+                        <c5>2.2. Past Continuous (Прошедшее продолженное)</c5>
 
-                Что выражает: Действие, которое длилось в определенный момент в прошлом; или два действия, одно из
-                которых (Continuous) было прервано другим (Simple).
-                Маркеры: at 5 pm yesterday, while, when.
-                Формула:
-                <c1>was / were</c1> + <c4>Verb</c4><c1>ing</c1>.
-                Примеры:
-                I was working at 6 pm yesterday. (Я работал в 6 вечера вчера) — в определенный момент.
-                When he came home, I was cooking dinner. (Когда он пришел домой, я готовила ужин) — готовила, когда он
-                прервал мое действие.
-            </td>
-            <td>
-                <c5>3.2. Future Continuous (Будущее продолженное)</c5>
+                        Что выражает: Действие, которое длилось в определенный момент в прошлом; или два действия, одно
+                        из
+                        которых (Continuous) было прервано другим (Simple).
+                        Маркеры: at 5 pm yesterday, while, when.
+                        Формула:
+                        <c1>was / were</c1> + <c4>Verb</c4>
+                        <c1>ing</c1>.
+                        Примеры:
+                        I was working at 6 pm yesterday. (Я работал в 6 вечера вчера) — в определенный момент.
+                        When he came home, I was cooking dinner. (Когда он пришел домой, я готовила ужин) — готовила,
+                        когда он
+                        прервал мое действие.
+                    </td>
+                    <td>
+                        <c5>3.2. Future Continuous (Будущее продолженное)</c5>
 
-                Что выражает: Действие, которое будет длиться в определенный момент в будущем.
-                Маркеры: at 5 pm tomorrow, this time next week.
-                Формула:
-                <c1>will be</c1> + <c4>Verb</c4><c1>ing</c1>.
-                Примеры:
-                This time tomorrow I will be flying to Rome.
-                (В это же время завтра я буду лететь в Рим).
-                Don't call at 8, I will be having dinner.
-                (Не звони в 8, я буду ужинать).
-            </td>
-        </tr>
-        <tr>
-            <td>Perfect (совершенное)</td>
-            <td>
-                <c5>1.3. Present Perfect (Настоящее совершенное)</c5>
+                        Что выражает: Действие, которое будет длиться в определенный момент в будущем.
+                        Маркеры: at 5 pm tomorrow, this time next week.
+                        Формула:
+                        <c1>will be</c1> + <c4>Verb</c4>
+                        <c1>ing</c1>.
+                        Примеры:
+                        This time tomorrow I will be flying to Rome.
+                        (В это же время завтра я буду лететь в Рим).
+                        Don't call at 8, I will be having dinner.
+                        (Не звони в 8, я буду ужинать).
+                    </td>
+                </tr>
+                <tr>
+                    <td>Perfect (совершенное)</td>
+                    <td>
+                        <c5>1.3. Present Perfect (Настоящее совершенное)</c5>
 
-                Что выражает: Действие в прошлом, результат которого важен СЕЙЧАС. Или действие, которое началось в
-                прошлом и длится до сих пор.
-                Маркеры: already, yet, ever, never, just, since, for.
-                Формула:
-                <c2>I / We / You / They</c2> + <c1>have</c1> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
-                <c2>I've / We've / You've / They've</c2> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
-                <c2>He / She / It</c2> + <c1>has</c1> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
-                <c2>He's / She's / It's</c2> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
-                I have finished my work. He's finished his work.
-                <c1>Have</c1> + <c2>I / We / You / They</c2> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>?
-                <c1>Has</c1> + <c2>He / She / It</c2> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>?
-                Has He finished his work?
+                        Что выражает: Действие в прошлом, результат которого важен СЕЙЧАС. Или действие, которое
+                        началось в
+                        прошлом и длится до сих пор.
+                        Маркеры: already, yet, ever, never, just, since, for.
+                        Формула:
+                        <c2>I / We / You / They</c2> + <c1>have</c1> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
+                        <c2>I've / We've / You've / They've</c2> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
+                        <c2>He / She / It</c2> + <c1>has</c1> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
+                        <c2>He's / She's / It's</c2> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
+                        I have finished my work. He's finished his work.
+                        <c1>Have</c1> + <c2>I / We / You / They</c2> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>?
+                        <c1>Has</c1> + <c2>He / She / It</c2> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>?
+                        Has He finished his work?
 
-                (третия форма глагола/причастие прошедшего времени).
-                Примеры:
-                I have finished my work. (Я закончил работу) — результат: работа готова сейчас.
-                He has lost his keys. (Он потерял ключи) — результат: ключей сейчас нет.
-                We have known each other since childhood. (Мы знаем друг друга с детства) — действие, длящееся до сих
-                пор.
-            </td>
-            <td>
-                <c5>2.3. Past Perfect (Прошедшее совершенное)</c5>
-                Что выражает: Действие, которое произошло раньше другого действия в прошлом. "Прошлое до прошлого".
-                Маркеры: by the time, after, before, when.
-                Формула:
-                <c1>had</c1> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
-                Примеры:
-                When I arrived, she had already left.
-                (Когда я приехал, она уже ушла) — Сначала она ушла, потом я приехал.
-                He had finished his report by 5 o'clock.
-                (Он закончил отчет к 5 часам).
-            </td>
-            <td>
-                <c5>3.3. Future Perfect (Будущее совершенное)</c5>
+                        (третия форма глагола/причастие прошедшего времени).
+                        Примеры:
+                        I have finished my work. (Я закончил работу) — результат: работа готова сейчас.
+                        He has lost his keys. (Он потерял ключи) — результат: ключей сейчас нет.
+                        We have known each other since childhood. (Мы знаем друг друга с детства) — действие, длящееся
+                        до сих
+                        пор.
+                    </td>
+                    <td>
+                        <c5>2.3. Past Perfect (Прошедшее совершенное)</c5>
+                        Что выражает: Действие, которое произошло раньше другого действия в прошлом. "Прошлое до
+                        прошлого".
+                        Маркеры: by the time, after, before, when.
+                        Формула:
+                        <c1>had</c1> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
+                        Примеры:
+                        When I arrived, she had already left.
+                        (Когда я приехал, она уже ушла) — Сначала она ушла, потом я приехал.
+                        He had finished his report by 5 o'clock.
+                        (Он закончил отчет к 5 часам).
+                    </td>
+                    <td>
+                        <c5>3.3. Future Perfect (Будущее совершенное)</c5>
 
-                Что выражает: Действие, которое завершится к определенному моменту в будущем.
-                Маркеры: by, by the time, before.
-                Формула:
-                <c1>will have</c1> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
-                Примеры:
-                By 2030, I will have bought a house. (К 2030 году я куплю дом).
-                She will have finished the report by Friday. (Она закончит отчет к пятнице).
-            </td>
-        </tr>
-        <tr>
-            <td>Perfect Continuous
-                (совершенное продолженное)
-            </td>
-            <td>
-                <c5>1.4. Present Perfect Continuous (Настоящее совершенное продолженное)</c5>
-                Что выражает: Действие, которое началось в прошлом, длилось какое-то время и все еще продолжается сейчас
-                (или только что закончилось, и виден его результат). Акцент на продолжительности.
-                Маркеры: for, since, all day/week.
-                Формула:
-                <c2>I / We / You / They</c2> + <c1>have (not) been</c1> + <c4>Verb</c4><c1>ing</c1>.
-                <c2>He / She / It</c2> + <c1>has (not) been</c1> + <c4>Verb</c4><c1>ing</c1>.
-                <c1>Have not</c1> + <c2>I / We / You / They</c2> + <c1>been</c1> <c4>Verb</c4><c1>ing?</c1>
-                <c1>Has not</c1> + <c2>He / She / It</c2> + <c1>been</c1> <c4>Verb</c4><c1>ing?</c1>
-                Примеры:
-                I have been working for 3 hours. (Я работаю уже 3 часа) — начал в прошлом, все еще работаю.
-                She has been cooking all day. (Она готовит весь день) — и кухня, вероятно, в беспорядке (видимый
-                результат).
-                Why are you tired? — I have been running. (Почему ты устал? — Я бегал) — действие только что
-                закончилось, и мы видим его результат (усталость).
-            </td>
-            <td>
-                <c5>2.4. Past Perfect Continuous (Прошедшее совершенное продолженное)</c5>
+                        Что выражает: Действие, которое завершится к определенному моменту в будущем.
+                        Маркеры: by, by the time, before.
+                        Формула:
+                        <c1>will have</c1> + <c4>Verb3 (Verb<c1>ed</c1>)</c4>.
+                        Примеры:
+                        By 2030, I will have bought a house. (К 2030 году я куплю дом).
+                        She will have finished the report by Friday. (Она закончит отчет к пятнице).
+                    </td>
+                </tr>
+                <tr>
+                    <td>Perfect Continuous
+                        (совершенное продолженное)
+                    </td>
+                    <td>
+                        <c5>1.4. Present Perfect Continuous (Настоящее совершенное продолженное)</c5>
+                        Что выражает: Действие, которое началось в прошлом, длилось какое-то время и все еще
+                        продолжается сейчас
+                        (или только что закончилось, и виден его результат). Акцент на продолжительности.
+                        Маркеры: for, since, all day/week.
+                        Формула:
+                        <c2>I / We / You / They</c2> + <c1>have (not) been</c1> + <c4>Verb</c4>
+                        <c1>ing</c1>.
+                        <c2>He / She / It</c2> + <c1>has (not) been</c1> + <c4>Verb</c4>
+                        <c1>ing</c1>.
+                        <c1>Have not</c1> + <c2>I / We / You / They</c2> + <c1>been</c1>
+                        <c4>Verb</c4>
+                        <c1>ing?</c1>
+                        <c1>Has not</c1> + <c2>He / She / It</c2> + <c1>been</c1>
+                        <c4>Verb</c4>
+                        <c1>ing?</c1>
+                        Примеры:
+                        I have been working for 3 hours. (Я работаю уже 3 часа) — начал в прошлом, все еще работаю.
+                        She has been cooking all day. (Она готовит весь день) — и кухня, вероятно, в беспорядке (видимый
+                        результат).
+                        Why are you tired? — I have been running. (Почему ты устал? — Я бегал) — действие только что
+                        закончилось, и мы видим его результат (усталость).
+                    </td>
+                    <td>
+                        <c5>2.4. Past Perfect Continuous (Прошедшее совершенное продолженное)</c5>
 
-                Что выражает: Действие, которое длилось в прошлом в течение какого-то времени и закончилось (или имело
-                видимый результат) к определенному моменту в прошлом. Акцент на продолжительности.<br>
-                Маркеры: for, since.
-                Формула:
-                <c1>had + been</c1> + <c4>Verb</c4><c1>ing</c1>.
-                Примеры:
-                He had been working for 5 hours when I called him. (Он проработал уже 5 часов, когда я ему позвонил) — к
-                моменту звонка в прошлом он уже 5 часов работал.
-                Her eyes were red because she had been crying. (Ее глаза были красными, потому что она плакала) —
-                видимый результат в прошлом.
-            </td>
-            <td>
-                <c5>3.4. Future Perfect Continuous (Будущее совершенное продолженное)</c5>
+                        Что выражает: Действие, которое длилось в прошлом в течение какого-то времени и закончилось (или
+                        имело
+                        видимый результат) к определенному моменту в прошлом. Акцент на продолжительности.<br>
+                        Маркеры: for, since.
+                        Формула:
+                        <c1>had + been</c1> + <c4>Verb</c4>
+                        <c1>ing</c1>.
+                        Примеры:
+                        He had been working for 5 hours when I called him. (Он проработал уже 5 часов, когда я ему
+                        позвонил) — к
+                        моменту звонка в прошлом он уже 5 часов работал.
+                        Her eyes were red because she had been crying. (Ее глаза были красными, потому что она плакала)
+                        —
+                        видимый результат в прошлом.
+                    </td>
+                    <td>
+                        <c5>3.4. Future Perfect Continuous (Будущее совершенное продолженное)</c5>
 
-                Что выражает: Действие, которое будет длиться в течение какого-то времени и все еще будет продолжаться
-                (или только что завершится) к определенному моменту в будущем. Акцент на продолжительности.
-                Маркеры: by... for.
-                Формула:
-                <c1>will have been</c1> + <c4>Verb</c4><c1>ing</c1>.
-                Примеры:
-                By next month, I will have been working here for 10 years. (К следующему месяцу я буду работать здесь
-                уже 10 лет).
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<div class="content content-4 display_none">
-</div>
-<div style="height: 50vh"></div>
-<script>document.write(new Date().getFullYear().toString())</script>
-<!--<script src="irregular_verbs.js"></script>-->
-<script src="hy_1_5000.js"></script>
-<script src="pronouns.js"></script>
+                        Что выражает: Действие, которое будет длиться в течение какого-то времени и все еще будет
+                        продолжаться
+                        (или только что завершится) к определенному моменту в будущем. Акцент на продолжительности.
+                        Маркеры: by... for.
+                        Формула:
+                        <c1>will have been</c1> + <c4>Verb</c4>
+                        <c1>ing</c1>.
+                        Примеры:
+                        By next month, I will have been working here for 10 years. (К следующему месяцу я буду работать
+                        здесь
+                        уже 10 лет).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="content content-4 display_none">
+    </div>
+    <div style="height: 50vh"></div>
+    <script>document.write(new Date().getFullYear().toString())</script>
+    <!--<script src="irregular_verbs.js"></script>-->
+    <script src="hy_1_5000.js"></script>
+    <script src="pronouns.js"></script>
 
 
-<script src="my_english.js" defer></script>
+    <script src="my_english.js" defer></script>
 
 
-<script>
-    //c1 green, c2 blue, c3 brown, c4 red, c5 yellow
-    const tenses = {
-        "simple": {
-            "present": {
-                "+": {"text": ["I work", "He works"], "html": ["<c2>I/We/You/They</c2> <c4>work</c4>", "<c2>He/She/It</c2> <c4>work</c4>s"]},
-                "-": {"text": ["I don't work", "He doesn't work"], "html": ["<c2>I/We/You/They</c2> <c1>don't</c1> <c4>work</c4>", "<c2>He/She/It</c2> <c1>doesn't</c1> <c4>work</c4>"]},
-                "?": {"text": ["Do you work?", "Does he work?"], "html": ["<c1>Do</c1> <c2>I/We/You/They</c2> <c4>work</c4>?", "<c1>Does</c1> <c2>He/She/It</c2> <c4>work</c4>?"]},
-                "?-": {"text": ["Don't you work?", "Doesn't he work?"], "html": ["<c1>Don't</c1> <c2>I/We/You/They</c2> <c4>work</c4>?", "<c1>Doesn't</c1> <c2>He/She/It</c2> <c4>work</c4>?"]}
+    <script>
+        //c1 green, c2 blue, c3 brown, c4 red, c5 yellow
+        const tenses = {
+            "simple": {
+                "present": {
+                    "+": { "text": ["I work", "He works"], "html": ["<c2>I/We/You/They</c2> <c4>work</c4>", "<c2>He/She/It</c2> <c4>work</c4>s"] },
+                    "-": { "text": ["I don't work", "He doesn't work"], "html": ["<c2>I/We/You/They</c2> <c1>don't</c1> <c4>work</c4>", "<c2>He/She/It</c2> <c1>doesn't</c1> <c4>work</c4>"] },
+                    "?": { "text": ["Do you work?", "Does he work?"], "html": ["<c1>Do</c1> <c2>I/We/You/They</c2> <c4>work</c4>?", "<c1>Does</c1> <c2>He/She/It</c2> <c4>work</c4>?"] },
+                    "?-": { "text": ["Don't you work?", "Doesn't he work?"], "html": ["<c1>Don't</c1> <c2>I/We/You/They</c2> <c4>work</c4>?", "<c1>Doesn't</c1> <c2>He/She/It</c2> <c4>work</c4>?"] }
+                },
+                "past": {
+                    "+": { "text": ["I worked", "I went"], "html": ["<c2>I/We/You/They/He/She/It</c2> <c4>work</c4>ed", "<c2>I/We/You/They/He/She/It</c2> <c4>went (v2)</c4>"] },
+                    "-": { "text": ["I didn't work", "I didn't go"], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>didn't</c1> <c4>work</c4>", "<c2>I/We/You/They/He/She/It</c2> <c1>didn't</c1> <c4>go</c4>"] },
+                    "?": { "text": ["Did you work?", "Did you go?"], "html": ["<c1>Did</c1> <c2>I/We/You/They/He/She/It</c2> <c4>work</c4>?", "<c1>Did</c1> <c2>I/We/You/They/He/She/It</c2> <c4>go</c4>?"] },
+                    "?-": { "text": ["Didn't you work?", "Didn't you go?"], "html": ["<c1>Didn't (Did not)</c1> <c2>I/We/You/They/He/She/It</c2> <c4>work</c4>?", "<c1>Didn't (Did not)</c1> <c2>I/We/You/They/He/She/It</c2> <c4>go</c4>?"] }
+                },
+                "future": {
+                    "+": { "text": ["I will work", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>will</c1> <c4>work</c4>"] },
+                    "-": { "text": ["I won't work", "I will not work"], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not)</c1> <c4>work</c4>"] },
+                    "?": { "text": ["Will you work?", ""], "html": ["<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c4>work</c4>?", ""] },
+                    "?-": { "text": ["Won't you work?", "Will not you work?"], "html": ["<c1>Won't (Will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c4>work</c4>?"] }
+                }
             },
-            "past": {
-                "+": {"text": ["I worked", "I went"], "html": ["<c2>I/We/You/They/He/She/It</c2> <c4>work</c4>ed", "<c2>I/We/You/They/He/She/It</c2> <c4>went (v2)</c4>"]},
-                "-": {"text": ["I didn't work", "I didn't go"], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>didn't</c1> <c4>work</c4>", "<c2>I/We/You/They/He/She/It</c2> <c1>didn't</c1> <c4>go</c4>"]},
-                "?": {"text": ["Did you work?", "Did you go?"], "html": ["<c1>Did</c1> <c2>I/We/You/They/He/She/It</c2> <c4>work</c4>?", "<c1>Did</c1> <c2>I/We/You/They/He/She/It</c2> <c4>go</c4>?"]},
-                "?-": {"text": ["Didn't you work?", "Didn't you go?"], "html": ["<c1>Didn't (Did not)</c1> <c2>I/We/You/They/He/She/It</c2> <c4>work</c4>?", "<c1>Didn't (Did not)</c1> <c2>I/We/You/They/He/She/It</c2> <c4>go</c4>?"]}
+            "continuous": {
+                "present": {
+                    "+": { "text": ["I am working", ""], "html": ["<c2>I</c2> <c1>am</c1> <c4>work</c4>ing", "<c2>You</c2> <c1>are</c1> <c4>work</c4>ing", "<c2>It</c2> <c1>is</c1> <c4>work</c4>ing"] },
+                    "-": { "text": ["I am not working", ""], "html": ["<c2>I</c2> <c1>am not</c1> <c4>work</c4>ing", "<c2>You</c2> <c1>are not</c1> <c4>work</c4>ing", "<c2>It</c2> <c1>is not</c1> <c4>work</c4>ing"] },
+                    "?": { "text": ["Are you working?", ""], "html": ["<c1>Am</c1> <c2>I</c2> <c4>work</c4>ing?", "<c1>Are</c1> <c2>you</c2> <c4>work</c4>ing?", "<c1>Is</c1> <c2>it</c2> <c4>work</c4>ing?"] },
+                    "?-": { "text": ["Aren't you working?", "Are not you working?"], "html": ["<c1>Am</c1> <c2>I not</c2> <c4>work</c4>ing?", "<c1>Aren't (Are not)</c1> <c2>you</c2> <c4>work</c4>ing?", "<c1>Isn't (Is not)</c1> <c2>it</c2> <c4>work</c4>ing?"] }
+                },
+                "past": {
+                    "+": { "text": ["I was working", ""], "html": ["<c2>I/He/She/It</c2> <c1>was</c1> <c4>work</c4>ing", "<c2>We/You/They</c2> <c1>where</c1> <c4>work</c4>ing"] },
+                    "-": { "text": ["I wasn't working", ""], "html": ["<c2>I/He/She/It</c2> <c1>wasn't</c1> <c4>work</c4>ing", "<c2>We/You/They</c2> <c1>weren't</c1> <c4>work</c4>ing"] },
+                    "?": { "text": ["Were you working?", ""], "html": ["<c1>Was</c1> <c2>I/He/She/It</c2> <c4>work</c4>ing?", "<c1>Were</c1> <c2>We/You/They</c2> <c4>work</c4>ing?"] },
+                    "?-": { "text": ["Weren't you working?", ""], "html": ["<c1>Wasn't (Was not)</c1> <c2>I/He/She/It</c2> <c4>work</c4>ing?", "<c1>Weren't (Were not)</c1> <c2>We/You/They</c2> <c4>work</c4>ing?"] }
+                },
+                "future": {
+                    "+": { "text": ["I will be working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>will be</c1> <c4>work</c4>ing"] },
+                    "-": { "text": ["I won't be working", "I will not be working"], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not) be</c1> <c4>work</c4>ing"] },
+                    "?": { "text": ["Will you be working?", ""], "html": ["<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>be</c1> <c4>work</c4>ing?"] },
+                    "?-": { "text": ["Won't you be working?", "Will not you be working?"], "html": ["<c1>Won't (Will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>be</c1> <c4>work</c4>ing?"] }
+                }
             },
-            "future": {
-                "+": {"text": ["I will work", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>will</c1> <c4>work</c4>"]},
-                "-": {"text": ["I won't work", "I will not work"], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not)</c1> <c4>work</c4>"]},
-                "?": {"text": ["Will you work?", ""], "html": ["<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c4>work</c4>?", ""]},
-                "?-": {"text": ["Won't you work?", "Will not you work?"], "html": ["<c1>Won't (Will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c4>work</c4>?"]}
-            }
-        },
-        "continuous": {
-            "present": {
-                "+": {"text": ["I am working", ""], "html": ["<c2>I</c2> <c1>am</c1> <c4>work</c4>ing", "<c2>You</c2> <c1>are</c1> <c4>work</c4>ing", "<c2>It</c2> <c1>is</c1> <c4>work</c4>ing"]},
-                "-": {"text": ["I am not working", ""], "html": ["<c2>I</c2> <c1>am not</c1> <c4>work</c4>ing", "<c2>You</c2> <c1>are not</c1> <c4>work</c4>ing", "<c2>It</c2> <c1>is not</c1> <c4>work</c4>ing"]},
-                "?": {"text": ["Are you working?", ""], "html": ["<c1>Am</c1> <c2>I</c2> <c4>work</c4>ing?", "<c1>Are</c1> <c2>you</c2> <c4>work</c4>ing?", "<c1>Is</c1> <c2>it</c2> <c4>work</c4>ing?"]},
-                "?-": {"text": ["Aren't you working?", "Are not you working?"], "html": ["<c1>Am</c1> <c2>I not</c2> <c4>work</c4>ing?", "<c1>Aren't (Are not)</c1> <c2>you</c2> <c4>work</c4>ing?", "<c1>Isn't (Is not)</c1> <c2>it</c2> <c4>work</c4>ing?"]}
+            "perfect": {
+                "present": {
+                    "+": {
+                        "text": ["I have worked", ""], "html": [
+                            "<c2>I/We/You/They</c2> <c1>have</c1> <c4>work</c4>ed",
+                            "<c2>He/She/It</c2> <c1>has</c1> <c4>work</c4>ed",
+                            "<c2>I/We/You/They</c2> <c1>have</c1> <c4>gone (v3)</c4>",
+                            "<c2>He/She/It</c2> <c1>has</c1> <c4>gone (v3)</c4>"
+                        ]
+                    },
+                    "-": {
+                        "text": ["I haven't worked", ""], "html": [
+                            "<c2>I/We/You/They</c2> <c1>haven't (have not)</c1> <c4>work</c4>ed",
+                            "<c2>He/She/It</c2> <c1>hasn't (has not)</c1> <c4>work</c4>ed",
+                            "<c2>I/We/You/They</c2> <c1>haven't (have not)</c1> <c4>gone (v3)</c4>",
+                            "<c2>He/She/It</c2> <c1>hasn't (has not)</c1> <c4>gone (v3)</c4>"
+                        ]
+                    },
+                    "?": {
+                        "text": ["Have you worked?", ""], "html": [
+                            "<c1>Have</c1> <c2>I/We/You/They</c2> <c4>work</c4>ed?",
+                            "<c1>Has</c1> <c2>He/She/It</c2> <c4>work</c4>ed?",
+                            "<c1>Have</c1> <c2>I/We/You/They</c2> <c4>gone (v3)</c4>?",
+                            "<c1>Has</c1> <c2>He/She/It</c2> <c4>gone (v3)</c4>?"
+                        ]
+                    },
+                    "?-": {
+                        "text": ["Haven't you worked?", ""], "html": [
+                            "<c1>Haven't (Have not)</c1> <c2>I/We/You/They</c2> <c4>work</c4>ed?",
+                            "<c1>Hasn't (Has not)</c1> <c2>He/She/It</c2> <c4>work</c4>ed?",
+                            "<c1>Haven't (Have not)</c1> <c2>I/We/You/They</c2> <c4>gone (v3)</c4>?",
+                            "<c1>Hasn't (Has not)</c1> <c2>He/She/It</c2> <c4>gone (v3)</c4>?"
+                        ]
+                    }
+                },
+                "past": {
+                    "+": {
+                        "text": ["I had worked", ""], "html": [
+                            "<c2>I/We/You/They/He/She/It</c2> <c1>had</c1> <c4>work</c4>ed",
+                            "<c2>I/We/You/They/He/She/It</c2> <c1>had</c1> <c4>gone (v3)</c4>"
+                        ]
+                    },
+                    "-": {
+                        "text": ["I hadn't worked", ""], "html": [
+                            "<c2>I/We/You/They/He/She/It</c2> <c1>hadn't (had not)</c1> <c4>work</c4>ed",
+                            "<c2>I/We/You/They/He/She/It</c2> <c1>hadn't (had not)</c1> <c4>gone (v3)</c4>"
+                        ]
+                    },
+                    "?": {
+                        "text": ["Had you worked?", ""], "html": [
+                            "<c1>Had</c1> <c2>I/We/You/They/He/She/It</c2> <c4>work</c4>ed?",
+                            "<c1>Had</c1> <c2>I/We/You/They/He/She/It</c2>  <c4>gone (v3)</c4>?"
+                        ]
+                    },
+                    "?-": {
+                        "text": ["Hadn't you worked?", ""], "html": [
+                            "<c1>Hadn't (Had not)</c1> <c2>I/We/You/They/He/She/It</c2> <c4>work</c4>ed?",
+                            "<c1>Hadn't (Had not)</c1> <c2>I/We/You/They/He/She/It</c2>  <c4>gone (v3)</c4>?"
+                        ]
+                    }
+                },
+                "future": {
+                    "+": {
+                        "text": ["I will have worked", ""], "html": [
+                            "<c2>I/We/You/They/He/She/It</c2> <c1>will have</c1> <c4>work</c4>ed",
+                            "<c2>I/We/You/They/He/She/It</c2> <c1>will have</c1> <c4>gone (v3)</c4>"
+                        ]
+                    },
+                    "-": {
+                        "text": ["I won't have worked", "I will not have worked"], "html": [
+                            "<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not) have</c1> <c4>work</c4>ed",
+                            "<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not) have</c1> <c4>gone (v3)</c4>"
+                        ]
+                    },
+                    "?": {
+                        "text": ["Will you have worked?", ""], "html": [
+                            "<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>work</c4>ed?",
+                            "<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>gone (v3)</c4>?"
+                        ]
+                    },
+                    "?-": {
+                        "text": ["Won't you have worked?", "Will not you have worked?"], "html": [
+                            "<c1>Won't (will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>work</c4>ed?",
+                            "<c1>Won't (will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>gone (v3)</c4>?"
+                        ]
+                    }
+                }
             },
-            "past": {
-                "+": {"text": ["I was working", ""], "html": ["<c2>I/He/She/It</c2> <c1>was</c1> <c4>work</c4>ing", "<c2>We/You/They</c2> <c1>where</c1> <c4>work</c4>ing"]},
-                "-": {"text": ["I wasn't working", ""], "html": ["<c2>I/He/She/It</c2> <c1>wasn't</c1> <c4>work</c4>ing", "<c2>We/You/They</c2> <c1>weren't</c1> <c4>work</c4>ing"]},
-                "?": {"text": ["Were you working?", ""], "html": ["<c1>Was</c1> <c2>I/He/She/It</c2> <c4>work</c4>ing?", "<c1>Were</c1> <c2>We/You/They</c2> <c4>work</c4>ing?"]},
-                "?-": {"text": ["Weren't you working?", ""], "html": ["<c1>Wasn't (Was not)</c1> <c2>I/He/She/It</c2> <c4>work</c4>ing?", "<c1>Weren't (Were not)</c1> <c2>We/You/They</c2> <c4>work</c4>ing?"]}
+            "perfect_continuous": {
+                "present": {
+                    "+": {
+                        "text": ["I have been working", ""], "html": [
+                            "<c2>I/We/You/They</c2> <c1>have been</c1> <c4>work</c4>ing",
+                            "<c2>He/She/It</c2> <c1>has been</c1> <c4>work</c4>ing"
+                        ]
+                    },
+                    "-": {
+                        "text": ["I haven't been working", ""], "html": [
+                            "<c2>I/We/You/They</c2> <c1>haven't (have not) been</c1> <c4>work</c4>ing",
+                            "<c2>He/She/It</c2> <c1>hasn't (has not) been</c1> <c4>work</c4>ing"
+                        ]
+                    },
+                    "?": {
+                        "text": ["Have you been working?", ""], "html": [
+                            "<c1>Have</c1> <c2>I/We/You/They</c2> <c1>been</c1> <c4>work</c4>ing?",
+                            "<c1>Has</c1> <c2>He/She/It</c2> <c1>been</c1> <c4>work</c4>ing?"
+                        ]
+                    },
+                    "?-": {
+                        "text": ["Haven't you been working?", ""], "html": [
+                            "<c1>Haven't (Have not)</c1> <c2>I/We/You/They</c2> <c1>been</c1> <c4>work</c4>ing?",
+                            "<c1>Hasn't (Has not)</c1> <c2>He/She/It</c2> <c1>been</c1> <c4>work</c4>ing?"
+                        ]
+                    }
+                },
+                "past": {
+                    "+": { "text": ["I had been working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>had been</c1> <c4>work</c4>ing"] },
+                    "-": { "text": ["I hadn't been working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>hadn't (had not) been</c1> <c4>work</c4>ing"] },
+                    "?": { "text": ["Had you been working?", ""], "html": ["<c1>Had</c1> <c2>I/We/You/They/He/She/It</c2> <c1>been</c1> <c4>work</c4>ing?"] },
+                    "?-": { "text": ["Hadn't you been working?", ""], "html": ["<c1>Hadn't (Had not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>been</c1> <c4>work</c4>ing?"] }
+                },
+                "future": {
+                    "+": { "text": ["I will have been working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>will have been</c1> <c4>work</c4>ing"] },
+                    "-": { "text": ["I won't have been working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not) have been</c1> <c4>work</c4>ing"] },
+                    "?": { "text": ["Will you have been working?", ""], "html": ["<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have been</c1> <c4>work</c4>ing?"] },
+                    "?-": { "text": ["Won't you have been working?", "Will not you have been working?"], "html": ["<c1>Won't (Will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have been</c1> <c4>work</c4>ing?"] }
+                }
             },
-            "future": {
-                "+": {"text": ["I will be working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>will be</c1> <c4>work</c4>ing"]},
-                "-": {"text": ["I won't be working", "I will not be working"], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not) be</c1> <c4>work</c4>ing"]},
-                "?": {"text": ["Will you be working?", ""], "html": ["<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>be</c1> <c4>work</c4>ing?"]},
-                "?-": {"text": ["Won't you be working?", "Will not you be working?"], "html": ["<c1>Won't (Will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>be</c1> <c4>work</c4>ing?"]}
-            }
-        },
-        "perfect": {
-            "present": {
-                "+": {"text": ["I have worked", ""], "html": [
-                        "<c2>I/We/You/They</c2> <c1>have</c1> <c4>work</c4>ed",
-                        "<c2>He/She/It</c2> <c1>has</c1> <c4>work</c4>ed",
-                        "<c2>I/We/You/They</c2> <c1>have</c1> <c4>gone (v3)</c4>",
-                        "<c2>He/She/It</c2> <c1>has</c1> <c4>gone (v3)</c4>"
-                    ]},
-                "-": {"text": ["I haven't worked", ""], "html": [
-                        "<c2>I/We/You/They</c2> <c1>haven't (have not)</c1> <c4>work</c4>ed",
-                        "<c2>He/She/It</c2> <c1>hasn't (has not)</c1> <c4>work</c4>ed",
-                        "<c2>I/We/You/They</c2> <c1>haven't (have not)</c1> <c4>gone (v3)</c4>",
-                        "<c2>He/She/It</c2> <c1>hasn't (has not)</c1> <c4>gone (v3)</c4>"
-                    ]},
-                "?": {"text": ["Have you worked?", ""], "html": [
-                        "<c1>Have</c1> <c2>I/We/You/They</c2> <c4>work</c4>ed?",
-                        "<c1>Has</c1> <c2>He/She/It</c2> <c4>work</c4>ed?",
-                        "<c1>Have</c1> <c2>I/We/You/They</c2> <c4>gone (v3)</c4>?",
-                        "<c1>Has</c1> <c2>He/She/It</c2> <c4>gone (v3)</c4>?"
-                    ]},
-                "?-": {"text": ["Haven't you worked?", ""], "html": [
-                        "<c1>Haven't (Have not)</c1> <c2>I/We/You/They</c2> <c4>work</c4>ed?",
-                        "<c1>Hasn't (Has not)</c1> <c2>He/She/It</c2> <c4>work</c4>ed?",
-                        "<c1>Haven't (Have not)</c1> <c2>I/We/You/They</c2> <c4>gone (v3)</c4>?",
-                        "<c1>Hasn't (Has not)</c1> <c2>He/She/It</c2> <c4>gone (v3)</c4>?"
-                    ]}
-            },
-            "past": {
-                "+": {"text": ["I had worked", ""], "html": [
-                        "<c2>I/We/You/They/He/She/It</c2> <c1>had</c1> <c4>work</c4>ed",
-                        "<c2>I/We/You/They/He/She/It</c2> <c1>had</c1> <c4>gone (v3)</c4>"
-                    ]},
-                "-": {"text": ["I hadn't worked", ""], "html": [
-                        "<c2>I/We/You/They/He/She/It</c2> <c1>hadn't (had not)</c1> <c4>work</c4>ed",
-                        "<c2>I/We/You/They/He/She/It</c2> <c1>hadn't (had not)</c1> <c4>gone (v3)</c4>"
-                    ]},
-                "?": {"text": ["Had you worked?", ""], "html": [
-                        "<c1>Had</c1> <c2>I/We/You/They/He/She/It</c2> <c4>work</c4>ed?",
-                        "<c1>Had</c1> <c2>I/We/You/They/He/She/It</c2>  <c4>gone (v3)</c4>?"
-                    ]},
-                "?-": {"text": ["Hadn't you worked?", ""], "html": [
-                        "<c1>Hadn't (Had not)</c1> <c2>I/We/You/They/He/She/It</c2> <c4>work</c4>ed?",
-                        "<c1>Hadn't (Had not)</c1> <c2>I/We/You/They/He/She/It</c2>  <c4>gone (v3)</c4>?"
-                    ]}
-            },
-            "future": {
-                "+": {"text": ["I will have worked", ""], "html": [
-                        "<c2>I/We/You/They/He/She/It</c2> <c1>will have</c1> <c4>work</c4>ed",
-                        "<c2>I/We/You/They/He/She/It</c2> <c1>will have</c1> <c4>gone (v3)</c4>"
-                    ]},
-                "-": {"text": ["I won't have worked", "I will not have worked"], "html": [
-                        "<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not) have</c1> <c4>work</c4>ed",
-                        "<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not) have</c1> <c4>gone (v3)</c4>"
-                    ]},
-                "?": {"text": ["Will you have worked?", ""], "html": [
-                        "<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>work</c4>ed?",
-                        "<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>gone (v3)</c4>?"
-                    ]},
-                "?-": {"text": ["Won't you have worked?", "Will not you have worked?"], "html": [
-                        "<c1>Won't (will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>work</c4>ed?",
-                        "<c1>Won't (will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have</c1> <c4>gone (v3)</c4>?"
-                    ]}
-            }
-        },
-        "perfect_continuous": {
-            "present": {
-                "+": {"text": ["I have been working", ""], "html": [
-                        "<c2>I/We/You/They</c2> <c1>have been</c1> <c4>work</c4>ing",
-                        "<c2>He/She/It</c2> <c1>has been</c1> <c4>work</c4>ing"
-                    ]},
-                "-": {"text": ["I haven't been working", ""], "html": [
-                        "<c2>I/We/You/They</c2> <c1>haven't (have not) been</c1> <c4>work</c4>ing",
-                        "<c2>He/She/It</c2> <c1>hasn't (has not) been</c1> <c4>work</c4>ing"
-                    ]},
-                "?": {"text": ["Have you been working?", ""], "html": [
-                        "<c1>Have</c1> <c2>I/We/You/They</c2> <c1>been</c1> <c4>work</c4>ing?",
-                        "<c1>Has</c1> <c2>He/She/It</c2> <c1>been</c1> <c4>work</c4>ing?"
-                    ]},
-                "?-": {"text": ["Haven't you been working?", ""], "html": [
-                        "<c1>Haven't (Have not)</c1> <c2>I/We/You/They</c2> <c1>been</c1> <c4>work</c4>ing?",
-                        "<c1>Hasn't (Has not)</c1> <c2>He/She/It</c2> <c1>been</c1> <c4>work</c4>ing?"
-                    ]}
-            },
-            "past": {
-                "+": {"text": ["I had been working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>had been</c1> <c4>work</c4>ing"]},
-                "-": {"text": ["I hadn't been working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>hadn't (had not) been</c1> <c4>work</c4>ing"]},
-                "?": {"text": ["Had you been working?", ""], "html": ["<c1>Had</c1> <c2>I/We/You/They/He/She/It</c2> <c1>been</c1> <c4>work</c4>ing?"]},
-                "?-": {"text": ["Hadn't you been working?", ""], "html": ["<c1>Hadn't (Had not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>been</c1> <c4>work</c4>ing?"]}
-            },
-            "future": {
-                "+": {"text": ["I will have been working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>will have been</c1> <c4>work</c4>ing"]},
-                "-": {"text": ["I won't have been working", ""], "html": ["<c2>I/We/You/They/He/She/It</c2> <c1>won't (will not) have been</c1> <c4>work</c4>ing"]},
-                "?": {"text": ["Will you have been working?", ""], "html": ["<c1>Will</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have been</c1> <c4>work</c4>ing?"]},
-                "?-": {"text": ["Won't you have been working?", "Will not you have been working?"], "html": ["<c1>Won't (Will not)</c1> <c2>I/We/You/They/He/She/It</c2> <c1>have been</c1> <c4>work</c4>ing?"]}
-            }
-        },
-    };
-    function makeTenseTable(tense_table) {
-        let tbody = tense_table.querySelector('tbody');
-        let ppf = ["past", "present","future"];
-        let htm = "<tr><td  class='thick_border_right thick_border_left thick_border_bottom thick_border_top'></td>";
-        ppf.forEach((a, i)=>{
-            htm += "<td colspan='2'  class='thick_border_right thick_border_left thick_border_top thick_border_bottom'>" + (i + 1) + ". " + a +  "</td>";
-        });
-        htm += "</tr>";
-        ["simple","continuous", "perfect", "perfect_continuous"].forEach((scp, i)=>{
-            htm += "<tr><td rowspan='5'  class='thick_border_right thick_border_left thick_border_bottom'>" + scp + "</td>";
-            ppf.forEach((a, j)=>{
-                htm += "<td colspan='2' style='text-align: center'  class='thick_border_right'><c5>" + (j + 1) + "." + (i + 1) + ". " + a + " " + scp + "</c5></td>";
+        };
+        function makeTenseTable(tense_table) {
+            let tbody = tense_table.querySelector('tbody');
+            let ppf = ["past", "present", "future"];
+            let htm = "<tr><td  class='thick_border_right thick_border_left thick_border_bottom thick_border_top'></td>";
+            ppf.forEach((a, i) => {
+                htm += "<td colspan='2'  class='thick_border_right thick_border_left thick_border_top thick_border_bottom'>" + (i + 1) + ". " + a + "</td>";
             });
             htm += "</tr>";
-
-            ["+", "-", "?", "?-"].forEach((pm)=>{
-                htm += "<tr>";
-                ppf.forEach((a, j)=>{
-                    let cls = (pm === "?-") ? "thick_border_bottom" : "";
-                    let textOrHTML = tenses[scp][a][pm]["html"] ? tenses[scp][a][pm]["html"] : tenses[scp][a][pm]["text"];
-                    htm += "<td style='text-align: center' class='" + cls + "'>" + pm + "</td><td class='thick_border_right " + cls + "'>" + textOrHTML.join("<br>") + "</td>";
+            ["simple", "continuous", "perfect", "perfect_continuous"].forEach((scp, i) => {
+                htm += "<tr><td rowspan='5'  class='thick_border_right thick_border_left thick_border_bottom'>" + scp + "</td>";
+                ppf.forEach((a, j) => {
+                    htm += "<td colspan='2' style='text-align: center'  class='thick_border_right'><c5>" + (j + 1) + "." + (i + 1) + ". " + a + " " + scp + "</c5></td>";
                 });
                 htm += "</tr>";
-            });
 
-        });
-        tbody.innerHTML = htm;
-    }
-    
-    function makePronounsTable(pronouns_table) {
-        let tbody = pronouns_table.querySelector('tbody');
-        let arr = pronouns.split(/\s{2,}/ig);
-        // console.log(arr);
-        let htm = "";
-        let j = 0;
-        arr.forEach((a, i)=>{
-            if(a === ""){
+                ["+", "-", "?", "?-"].forEach((pm) => {
+                    htm += "<tr>";
+                    ppf.forEach((a, j) => {
+                        let cls = (pm === "?-") ? "thick_border_bottom" : "";
+                        let textOrHTML = tenses[scp][a][pm]["html"] ? tenses[scp][a][pm]["html"] : tenses[scp][a][pm]["text"];
+                        htm += "<td style='text-align: center' class='" + cls + "'>" + pm + "</td><td class='thick_border_right " + cls + "'>" + textOrHTML.join("<br>") + "</td>";
+                    });
+                    htm += "</tr>";
+                });
+
+            });
+            tbody.innerHTML = htm;
+        }
+
+        function makePronounsTable(pronouns_table) {
+            let tbody = pronouns_table.querySelector('tbody');
+            let arr = pronouns.split(/\s{2,}/ig);
+            // console.log(arr);
+            let htm = "";
+            let j = 0;
+            arr.forEach((a, i) => {
+                if (a === "") {
+                    return 0;
+                }
+                j++;
+                if (j === 1) {
+                    htm += "<tr>";
+                }
+                let b = a.split(" - ");
+                htm += "<td>" + b[0] + " - " + "<c2>" + b[1] + "</c2>" + "</td>";
+                if (j === 5) {
+                    htm += "</tr>";
+                    j = 0;
+                }
+            });
+            tbody.innerHTML = htm;
+        }
+
+        function makeMyWorlds(content) {
+            let myEnglishArr = my_english.split("\n");
+            //console.log(myEnglishArr);
+            let htm = '';
+            myEnglishArr.forEach((myEnglish, index) => {
+                if (index === 0) {
+                    return;
+                }
+                let myEnglishRow = myEnglish;
+                if (myEnglish.includes('--')) {
+                    myEnglishRow = myEnglish.split('--');
+                    if (myEnglishRow.length === 2) {
+                        myEnglishRow[0] = '<span style="display: inline-block;min-width: 120px;">' + myEnglishRow[0].trim() + '</span>';
+                        myEnglishRow[1] = '<c2 style="min-width: 120px;">' + myEnglishRow[1].trim() + '</c2>';
+                    } else if (myEnglishRow.length > 2) {
+                        myEnglishRow[0] = '<span style="display: inline-block;min-width: 120px;">' + myEnglishRow[0].trim() + '</span>';
+                        myEnglishRow[1] = '<c1 style="min-width: 120px;">' + myEnglishRow[1].trim() + '</c1>';
+                        myEnglishRow[2] = '<c2 style="min-width: 120px;">' + myEnglishRow[2].trim() + '</c2>';
+                    }
+
+                    myEnglishRow = myEnglishRow.join(' ');
+                }
+                htm += '<div><c1 style="width: 45px;text-align: end;margin-right: 10px;">' + index + '</c1>' + myEnglishRow + '</div>';
+            });
+            content.innerHTML = htm;
+        }
+
+        function f1() {
+            for (let i = 0; i < hy_1_5000.length - 1; i++) {
+                let a1 = hy_1_5000[i][0];
+                if (Array.isArray(a1)) {
+                    a1 = a1[0];
+                }
+                for (let j = i + 1; j < hy_1_5000.length; j++) {
+                    let a2 = hy_1_5000[j][0];
+                    if (Array.isArray(a2)) {
+                        a2 = a2[0];
+                    }
+                    if (a1.toLowerCase() === a2.toLowerCase()) {
+                        console.log(a1);
+                        // break;
+                    }
+                }
+            }
+        }
+
+
+
+
+        let en_ru = [];
+        let knownCount = 0;
+        hy_1_5000.forEach((item) => {
+            if (item.length > 3 && item[3] === 1) {
+                knownCount++;
                 return 0;
             }
-            j++;
-            if(j === 1){
-                htm += "<tr>";
-            }
-            let b = a.split(" - ");
-            htm += "<td>" + b[0] + " - " + "<c2>" +  b[1] + "</c2>" + "</td>";
-            if(j === 5){
-                htm += "</tr>";
-                j = 0;
-            }
+            let newItem = { "en": item[0], "_": item[1], "hy": "", "ru": item[2] };
+            // if(item[0] in irregular_verbs_obj){
+            //     newItem["en"] = irregular_verbs_obj[item[0]]["en"];
+            //     newItem["_"] = irregular_verbs_obj[item[0]]["_"];
+            // }
+            en_ru.push(newItem);
         });
-        tbody.innerHTML = htm;
-    }
-    
-    function makeMyWorlds(content) {
-        let myEnglishArr = my_english.split("\n");
-        console.log(myEnglishArr);
-        let htm = '';
-        myEnglishArr.forEach((myEnglish, index)=>{
-            if(index === 0){
-                return;
-            }
-            let myEnglishRow = myEnglish;
-            if(myEnglish.includes('--')){
-                myEnglishRow = myEnglish.split('--');
-                if(myEnglishRow.length === 2){
-                    myEnglishRow[1] = '<c2>' + myEnglishRow[1].trim() + '</c2>';
-                }else if(myEnglishRow.length > 2){
-                    myEnglishRow[1] = '<c1>' + myEnglishRow[1].trim() + '</c1>';
-                    myEnglishRow[2] = '<c2>' + myEnglishRow[2].trim() + '</c2>';
-                }
+        // console.log("knownCount=", knownCount);
 
-                myEnglishRow = myEnglishRow.join(' ');
-            }
-            htm += '<div><c1 style="width: 45px;text-align: end;margin-right: 10px;">' + index + '</c1>' + myEnglishRow + '</div>';
-        });
-        content.innerHTML = htm;
-    }
+        window.addEventListener('load', function () {
+            makeMyWorlds(document.querySelector('.content-4'));
+            //console.log(my_english);
+            let headerButtons = document.querySelectorAll("header .header_btn");
+            let content_number = localStorage.getItem("content_number");
 
-    function f1() {
-        for (let i = 0; i < hy_1_5000.length - 1; i++){
-            let a1 = hy_1_5000[i][0];
-            if(Array.isArray(a1)){
-                a1 = a1[0];
-            }
-            for (let j = i + 1; j < hy_1_5000.length; j++){
-                let a2 = hy_1_5000[j][0];
-                if(Array.isArray(a2)){
-                    a2 = a2[0];
-                }
-                if(a1.toLowerCase() === a2.toLowerCase()){
-                    console.log(a1);
-                    // break;
-                }
-            }
-        }
-    }
-
-
-
-
-    let en_ru = [];
-    let knownCount = 0;
-    hy_1_5000.forEach((item)=>{
-		if(item.length > 3 && item[3] === 1){
-            knownCount ++;
-			return 0;
-		}
-        let newItem = {"en": item[0], "_": item[1], "hy": "", "ru": item[2]};
-        // if(item[0] in irregular_verbs_obj){
-        //     newItem["en"] = irregular_verbs_obj[item[0]]["en"];
-        //     newItem["_"] = irregular_verbs_obj[item[0]]["_"];
-        // }
-        en_ru.push(newItem);
-    });
-    // console.log("knownCount=", knownCount);
-
-    window.addEventListener('load', function () {
-        makeMyWorlds(document.querySelector('.content-4'));
-        //console.log(my_english);
-        let headerButtons = document.querySelectorAll("header .header_btn");
-        let content_number = localStorage.getItem("content_number");
-
-        headerButtons.forEach((headerButton, i)=>{
-            let i1 = i + 1;
-            headerButton.addEventListener("click", (ev)=>{
-                headerButtonClick(headerButton, i1);
-            });
-            if(parseInt(content_number) === i1){
-                headerButtonClick(headerButton, i1);
-            }
-        });
-        function headerButtonClick(headerButton, i1) {
-            headerButtons.forEach((_headerButton)=>{
-                _headerButton.style.borderBottomColor = "var(--c)";
-            });
-            headerButton.style.borderBottomColor = "var(--bg)";
-            for(let j = 1; j <= headerButtons.length; j++){
-                document.querySelectorAll(".content-" + j).forEach((content)=>{
-                    content.classList.add("display_none");
+            headerButtons.forEach((headerButton, i) => {
+                let i1 = i + 1;
+                headerButton.addEventListener("click", (ev) => {
+                    headerButtonClick(headerButton, i1);
                 });
-            }
-            document.querySelectorAll(".content-" + i1).forEach((content)=>{
-                content.classList.remove("display_none");
+                if (parseInt(content_number) === i1) {
+                    headerButtonClick(headerButton, i1);
+                }
             });
-            localStorage.setItem('content_number', i1.toString());
-        }
+            function headerButtonClick(headerButton, i1) {
+                headerButtons.forEach((_headerButton) => {
+                    _headerButton.style.borderBottomColor = "var(--c)";
+                });
+                headerButton.style.borderBottomColor = "var(--bg)";
+                for (let j = 1; j <= headerButtons.length; j++) {
+                    document.querySelectorAll(".content-" + j).forEach((content) => {
+                        content.classList.add("display_none");
+                    });
+                }
+                document.querySelectorAll(".content-" + i1).forEach((content) => {
+                    content.classList.remove("display_none");
+                });
+                localStorage.setItem('content_number', i1.toString());
+            }
 
 
 
-        makeTenseTable(document.getElementById('tense_table'));
-        makePronounsTable(document.getElementById('pronouns_table'));
-        // let ens = [];
+            makeTenseTable(document.getElementById('tense_table'));
+            makePronounsTable(document.getElementById('pronouns_table'));
+            // let ens = [];
 
-        let tbody = document.querySelector('#test_table.table tbody');
-        let trs = '';
-        en_ru.forEach((tr, index) => {
-            // ens.push(tr.en);
-            let s = "_" in tr ? "_" : "t";
-            let en_tr = s in tr
-                ? Array.isArray(tr[s]) ? tr[s].join("<br>") : tr[s]
-                : "";
-            let tr_en = "en" in tr
-                ? Array.isArray(tr["en"]) ? tr["en"].join("<br>") : tr["en"]
-                : "";
-            let tr_ru = "ru" in tr
-                ? Array.isArray(tr["ru"]) ? tr["ru"].join("<br>") : tr["ru"]
-                : "";
-            let tr_hy = "hy" in tr
-                ? Array.isArray(tr["hy"]) ? tr["hy"].join("<br>") : tr["hy"]
-                : "";
-            trs += '<tr class="mtr" id="mtrc' + index + '">'
-                + '<td>' + (index + 1) + '</td>'
-                + '<td>' + tr_en + '</td>'
-                + '<td>' + en_tr + '</td>'
-                + '<td>' + '<span class="hy_tr" style="color: var(--c3)">' + tr_hy + '</span>' + tr_ru + '</td>'
-                // + '<td>' + tr_hy + '</td>'
-                + '</tr>';
-        });
-        tbody.innerHTML = trs;
+            let tbody = document.querySelector('#test_table.table tbody');
+            let trs = '';
+            en_ru.forEach((tr, index) => {
+                // ens.push(tr.en);
+                let s = "_" in tr ? "_" : "t";
+                let en_tr = s in tr
+                    ? Array.isArray(tr[s]) ? tr[s].join("<br>") : tr[s]
+                    : "";
+                let tr_en = "en" in tr
+                    ? Array.isArray(tr["en"]) ? tr["en"].join("<br>") : tr["en"]
+                    : "";
+                let tr_ru = "ru" in tr
+                    ? Array.isArray(tr["ru"]) ? tr["ru"].join("<br>") : tr["ru"]
+                    : "";
+                let tr_hy = "hy" in tr
+                    ? Array.isArray(tr["hy"]) ? tr["hy"].join("<br>") : tr["hy"]
+                    : "";
+                trs += '<tr class="mtr" id="mtrc' + index + '">'
+                    + '<td>' + (index + 1) + '</td>'
+                    + '<td>' + tr_en + '</td>'
+                    + '<td>' + en_tr + '</td>'
+                    + '<td>' + '<span class="hy_tr" style="color: var(--c3)">' + tr_hy + '</span>' + tr_ru + '</td>'
+                    // + '<td>' + tr_hy + '</td>'
+                    + '</tr>';
+            });
+            tbody.innerHTML = trs;
 
-        let mtr_last_i = document.querySelectorAll('.mtr').length - 1;
-        let mtrc = localStorage.getItem("mtrc");
-        let prev_tr = document.getElementById('mtrc' + mtrc);
-        if(mtrc !== null && prev_tr){
-            prev_tr.classList.add('mtr_c');
-        }
+            let mtr_last_i = document.querySelectorAll('.mtr').length - 1;
+            let mtrc = localStorage.getItem("mtrc");
+            let prev_tr = document.getElementById('mtrc' + mtrc);
+            if (mtrc !== null && prev_tr) {
+                prev_tr.classList.add('mtr_c');
+            }
 
-        document.querySelectorAll('.mtr').forEach((tr, i)=>{
-            tr.querySelector('td:first-of-type').addEventListener('click', (e)=>{
-                if(prev_tr){
+            document.querySelectorAll('.mtr').forEach((tr, i) => {
+                tr.querySelector('td:first-of-type').addEventListener('click', (e) => {
+                    if (prev_tr) {
+                        prev_tr.classList.remove('mtr_c');
+                    }
+                    tr.classList.add('mtr_c');
+                    prev_tr = tr;
+                    localStorage.setItem('mtrc', i.toString());
+                });
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                }
+                // console.log(e.code);
+                if (mtr_last_i < 0) {
+                    return;
+                }
+                let prev_i = -1, prev_top = 0;
+                if (prev_tr) {
+                    let prev_id = prev_tr.getAttribute("id");
+                    prev_i = parseInt(prev_id.slice(4));
+                    prev_top = prev_tr.getBoundingClientRect().top;
+                }
+                let next_i = prev_i;
+                if (e.code === "ArrowDown") {
+                    next_i++;
+                } else if (e.code === "ArrowUp") {
+                    next_i--;
+                } else {
+                    return;
+                }
+                next_i = next_i < 0 ? 0 : next_i;
+                next_i = next_i > mtr_last_i ? mtr_last_i : next_i;
+                if (prev_tr) {
                     prev_tr.classList.remove('mtr_c');
                 }
-                tr.classList.add('mtr_c');
-                prev_tr = tr;
-                localStorage.setItem('mtrc', i.toString());
+                prev_tr = document.getElementById('mtrc' + next_i);
+                prev_tr.classList.add('mtr_c');
+                let top = prev_tr.getBoundingClientRect().top;
+                let bottom = prev_tr.getBoundingClientRect().bottom;
+                let scrollY = window.scrollY;
+                let wsh = window.innerHeight;
+                localStorage.setItem('mtrc', next_i.toString());
+                // window.scrollTo(0, top - wsh * 0.5 + scrollY);
+                let scrollBy = top - prev_top;
+                if (top < 0) {
+                    scrollBy = top;
+                } else if (top > wsh) {
+                    scrollBy = bottom - wsh;
+                }
+                window.scrollBy(0, scrollBy);
+                // setTimeout(()=>{
+                //     window.scrollTo(0, top - wsh * 0.5 + scrollY);
+                // }, 200);
             });
-        });
-        document.addEventListener('keydown', (e)=>{
-            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-                e.preventDefault();
-            }
-            // console.log(e.code);
-            if(mtr_last_i < 0){
-                return;
-            }
-            let prev_i = -1, prev_top = 0;
-            if(prev_tr){
-                let prev_id = prev_tr.getAttribute("id");
-                prev_i = parseInt(prev_id.slice(4));
-                prev_top = prev_tr.getBoundingClientRect().top;
-            }
-            let next_i = prev_i;
-            if(e.code === "ArrowDown"){
-                next_i++;
-            }else if(e.code === "ArrowUp"){
-                next_i--;
-            }else{
-                return;
-            }
-            next_i = next_i < 0 ? 0 : next_i;
-            next_i = next_i > mtr_last_i ? mtr_last_i : next_i;
-            if(prev_tr){
-                prev_tr.classList.remove('mtr_c');
-            }
-            prev_tr = document.getElementById('mtrc' + next_i);
-            prev_tr.classList.add('mtr_c');
-            let top = prev_tr.getBoundingClientRect().top;
-            let bottom = prev_tr.getBoundingClientRect().bottom;
-            let scrollY = window.scrollY;
-            let wsh = window.innerHeight;
-            localStorage.setItem('mtrc', next_i.toString());
-            // window.scrollTo(0, top - wsh * 0.5 + scrollY);
-            let scrollBy = top - prev_top;
-            if(top < 0){
-                scrollBy = top;
-            }else if(top > wsh){
-                scrollBy = bottom - wsh;
-            }
-            window.scrollBy(0, scrollBy);
-            // setTimeout(()=>{
-            //     window.scrollTo(0, top - wsh * 0.5 + scrollY);
-            // }, 200);
-        });
-        // console.log(JSON.stringify(ens));
-        //----------------------------------------------------------------------------------------------
-        let training = document.getElementById('training');
-        let training_body = document.getElementById('training_body');
-        let word = document.getElementById('word');
-        let word_label = document.getElementById('word_label');
-        let variants = document.getElementById('variants');
-        let dont_know = document.getElementById('dont_know');
-        let info = document.getElementById('info');
-        //----variables------------------------------------------------
-        let trueVariant = -1;
-        let trueVariantObj = {en: "", ru: "", _: ""};
-        let forgets = [];
+            // console.log(JSON.stringify(ens));
+            //----------------------------------------------------------------------------------------------
+            let training = document.getElementById('training');
+            let training_body = document.getElementById('training_body');
+            let word = document.getElementById('word');
+            let word_label = document.getElementById('word_label');
+            let variants = document.getElementById('variants');
+            let dont_know = document.getElementById('dont_know');
+            let info = document.getElementById('info');
+            //----variables------------------------------------------------
+            let trueVariant = -1;
+            let trueVariantObj = { en: "", ru: "", _: "" };
+            let forgets = [];
 
-        training.addEventListener('input', () => {
-            if (training.checked) {
-                tbody.style.display = 'none';
-                training_body.style.display = 'block';
-                generateVariants();
-            } else {
-                tbody.style.display = 'table-row-group';
-                training_body.style.display = 'none';
-            }
-        });
-
-        dont_know.addEventListener('click', () => {
-            forgets.push(trueVariantObj);
-            en_ru.push(trueVariantObj);
-            addToInfo();
-            generateVariants();
-        });
-        variants.addEventListener('input', () => {
-            let val = variants.value;
-            if (val) {
-                if (parseInt(val) === trueVariant) {
-                    word_label.style.borderColor = '#0f0';
-                    setTimeout(() => {
-                        generateVariants();
-                    }, 1000);
+            training.addEventListener('input', () => {
+                if (training.checked) {
+                    tbody.style.display = 'none';
+                    training_body.style.display = 'block';
+                    generateVariants();
                 } else {
-                    word_label.style.borderColor = '#f05';
-                    forgets.push(trueVariantObj);
-                    en_ru.push(trueVariantObj);
+                    tbody.style.display = 'table-row-group';
+                    training_body.style.display = 'none';
                 }
+            });
+
+            dont_know.addEventListener('click', () => {
+                forgets.push(trueVariantObj);
+                en_ru.push(trueVariantObj);
                 addToInfo();
-            }
-        });
-
-        function addToInfo() {
-            let htm = en_ru.length.toString();
-            forgets.forEach((f) => {
-                htm += '<div style="display: flex">'
-                    + '<div class="info-items" style="flex: 1;white-space: nowrap;">' + f.en + '</div>'
-                    + '<div class="info-items" style="flex: 1;white-space: nowrap; color: var(--c1)">' + (f._ ?? f.t) + '</div>'
-                    + '<div class="info-items" style="flex: 1;white-space: nowrap; color: var(--c2)">' + (f.hy ? '<span style="color: var(--c3);margin-right: 10px;">' + f.hy + '</span>' : '') + f.ru + '</div>'
-                    + '</div>';
+                generateVariants();
             });
-            info.innerHTML = htm;
-        }
-
-        function generateVariants() {
-            word_label.style.borderColor = 'var(--bd)';
-            let variantsCount = Math.min(5, en_ru.length);
-            let n = Math.floor(Math.random() * en_ru.length);
-            trueVariant = n;
-            trueVariantObj = en_ru[n];
-            let myWord = en_ru[n].en;
-            let transcription = en_ru[n]._ ?? en_ru[n].t;
-            let translated = (en_ru[n].hy ? en_ru[n].hy + ", " : "") + en_ru[n].ru;
-            word.innerHTML = myWord + '<span style="margin-left: 10px;color: green">' + transcription + '</span>';
-            // variants.innerHTML = '<option value=""></option>';
-            variants.innerHTML = '';
-
-            let ns = [];
-            ns.length = en_ru.length;
-            ns.fill(0);
-            ns.forEach((v, index) => {
-                ns[index] = index;
-            });
-            let last_n = ns.length - 1;
-            let r = ns[last_n];
-            ns[last_n] = ns[n];
-            ns[n] = r;
-            last_n--;
-            let items = [];
-            items.push('<option value="' + n + '">' + translated + '</option>');
-            for (let i = 0; i < variantsCount - 1; i++) {
-                let n1 = Math.floor(Math.random() * (last_n + 1));
-                let translated1 = (en_ru[ns[n1]].hy ? en_ru[ns[n1]].hy + ", " : "") + en_ru[ns[n1]].ru;
-                items.push('<option value="' + n1 + '">' + translated1 + '</option>');
-                r = ns[last_n];
-                ns[last_n] = ns[n1];
-                ns[n1] = r;
-                last_n--;
-            }
-            let r_item_n = Math.floor(Math.random() * variantsCount);
-            let r_item = items[r_item_n];
-            items[r_item_n] = items[0];
-            items[0] = r_item;
-            variants.innerHTML += items.join('');
-            en_ru.splice(n, 1);
-            // variants.focus();
-            // console.log(en_ru);
-        }
-
-
-    });
-
-    function downloadTextFile() {
-        const content = "Это содержимое файла\nВторая строка";
-        const blob = new Blob([content], {type: 'text/plain'});
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'example.txt';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }
-
-    // fetch('english_2.js')
-    //     // .then(response => response.json())
-    //     .then(response => response.text())
-    //     .then(data => {
-    //         console.log(data);
-    //         // работаем с данными
-    //     })
-    //     .catch(error => console.error('Ошибка:', error));
-
-//https://wooordhunt.ru/dic/list/en_ru/ne
-    function f() {
-        let doubleKey = document.querySelectorAll('div#content>div>b')[1].innerText;
-        let txt = "\"" + doubleKey + "\": [\n";
-        let arr_txt = [];
-        document.querySelectorAll('div#content p').forEach((p)=>{
-            let a_text = p.querySelector('a').innerText;
-            let p_text = "";
-            for (let node of p.childNodes) {
-                if (node.nodeType === Node.TEXT_NODE) {
-                    p_text += node.textContent.trim();
+            variants.addEventListener('input', () => {
+                let val = variants.value;
+                if (val) {
+                    if (parseInt(val) === trueVariant) {
+                        word_label.style.borderColor = '#0f0';
+                        setTimeout(() => {
+                            generateVariants();
+                        }, 1000);
+                    } else {
+                        word_label.style.borderColor = '#f05';
+                        forgets.push(trueVariantObj);
+                        en_ru.push(trueVariantObj);
+                    }
+                    addToInfo();
                 }
+            });
+
+            function addToInfo() {
+                let htm = en_ru.length.toString();
+                forgets.forEach((f) => {
+                    htm += '<div style="display: flex">'
+                        + '<div class="info-items" style="flex: 1;white-space: nowrap;">' + f.en + '</div>'
+                        + '<div class="info-items" style="flex: 1;white-space: nowrap; color: var(--c1)">' + (f._ ?? f.t) + '</div>'
+                        + '<div class="info-items" style="flex: 1;white-space: nowrap; color: var(--c2)">' + (f.hy ? '<span style="color: var(--c3);margin-right: 10px;">' + f.hy + '</span>' : '') + f.ru + '</div>'
+                        + '</div>';
+                });
+                info.innerHTML = htm;
             }
-            let arr_p_text = p_text.split('—');
-            let transcription = arr_p_text[0].trim();
-            let translation = arr_p_text[1].replace(/\\/ig, '').replace(/"/ig, '\\"').trim();
-            arr_txt.push("[\"" + a_text + "\", \"" + transcription + "\", \"" + translation + "\"]");
+
+            function generateVariants() {
+                word_label.style.borderColor = 'var(--bd)';
+                let variantsCount = Math.min(5, en_ru.length);
+                let n = Math.floor(Math.random() * en_ru.length);
+                trueVariant = n;
+                trueVariantObj = en_ru[n];
+                let myWord = en_ru[n].en;
+                let transcription = en_ru[n]._ ?? en_ru[n].t;
+                let translated = (en_ru[n].hy ? en_ru[n].hy + ", " : "") + en_ru[n].ru;
+                word.innerHTML = myWord + '<span style="margin-left: 10px;color: green">' + transcription + '</span>';
+                // variants.innerHTML = '<option value=""></option>';
+                variants.innerHTML = '';
+
+                let ns = [];
+                ns.length = en_ru.length;
+                ns.fill(0);
+                ns.forEach((v, index) => {
+                    ns[index] = index;
+                });
+                let last_n = ns.length - 1;
+                let r = ns[last_n];
+                ns[last_n] = ns[n];
+                ns[n] = r;
+                last_n--;
+                let items = [];
+                items.push('<option value="' + n + '">' + translated + '</option>');
+                for (let i = 0; i < variantsCount - 1; i++) {
+                    let n1 = Math.floor(Math.random() * (last_n + 1));
+                    let translated1 = (en_ru[ns[n1]].hy ? en_ru[ns[n1]].hy + ", " : "") + en_ru[ns[n1]].ru;
+                    items.push('<option value="' + n1 + '">' + translated1 + '</option>');
+                    r = ns[last_n];
+                    ns[last_n] = ns[n1];
+                    ns[n1] = r;
+                    last_n--;
+                }
+                let r_item_n = Math.floor(Math.random() * variantsCount);
+                let r_item = items[r_item_n];
+                items[r_item_n] = items[0];
+                items[0] = r_item;
+                variants.innerHTML += items.join('');
+                en_ru.splice(n, 1);
+                // variants.focus();
+                // console.log(en_ru);
+            }
+
+
+            document.getElementById('open_file_btn').addEventListener('click', () => {
+                openTextFile().then(text => {
+                    console.log(text);
+                }).catch(err => {
+                    console.error(err);
+                });
+            });
+
         });
-        txt += arr_txt.join(',\n');
-        txt += "\n],";
-        //navigator.clipboard.writeText("txt");
-        console.log(txt);
-    }
+
+        function downloadTextFile() {
+            const content = "Это содержимое файла\nВторая строка";
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'example.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function openTextFile() {
+            return new Promise((resolve, reject) => {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.txt,text/plain';
+                input.style.display = 'none';
+                document.body.appendChild(input);
+
+                input.addEventListener('change', () => {
+                    const file = input.files[0];
+                    if (!file) {
+                        document.body.removeChild(input);
+                        reject(new Error('Файл не выбран'));
+                        return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        document.body.removeChild(input);
+                        resolve(reader.result);
+                    };
+                    reader.onerror = () => {
+                        document.body.removeChild(input);
+                        reject(reader.error);
+                    };
+                    reader.readAsText(file, 'UTF-8');
+                });
+
+                input.click();
+            });
+        }
+
+        // fetch('english_2.js')
+        //     // .then(response => response.json())
+        //     .then(response => response.text())
+        //     .then(data => {
+        //         console.log(data);
+        //         // работаем с данными
+        //     })
+        //     .catch(error => console.error('Ошибка:', error));
+
+        //https://wooordhunt.ru/dic/list/en_ru/ne
+        function f() {
+            let doubleKey = document.querySelectorAll('div#content>div>b')[1].innerText;
+            let txt = "\"" + doubleKey + "\": [\n";
+            let arr_txt = [];
+            document.querySelectorAll('div#content p').forEach((p) => {
+                let a_text = p.querySelector('a').innerText;
+                let p_text = "";
+                for (let node of p.childNodes) {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        p_text += node.textContent.trim();
+                    }
+                }
+                let arr_p_text = p_text.split('—');
+                let transcription = arr_p_text[0].trim();
+                let translation = arr_p_text[1].replace(/\\/ig, '').replace(/"/ig, '\\"').trim();
+                arr_txt.push("[\"" + a_text + "\", \"" + transcription + "\", \"" + translation + "\"]");
+            });
+            txt += arr_txt.join(',\n');
+            txt += "\n],";
+            //navigator.clipboard.writeText("txt");
+            console.log(txt);
+        }
 
 
 
-</script>
+    </script>
 </body>
+
 </html>
