@@ -66,13 +66,38 @@
             background-color: var(--bg);
             color: var(--c);
             border: 1px solid var(--bd1);
-            padding: 6px 15px;
+            padding: 6px 30px 6px 15px;
             font-size: 15px;
             font-family: Consolas, sans-serif;
             outline: none;
             width: 280px;
             border-radius: 4px;
             transition: border-color 0.15s ease-in-out;
+        }
+
+        .search-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .clear-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--bd1);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0;
+            display: none;
+            transition: color 0.15s ease;
+            line-height: 1;
+        }
+
+        .clear-btn:hover {
+            color: var(--c4);
         }
 
         #search:focus {
@@ -117,6 +142,14 @@
         .pagination button:disabled {
             opacity: 0.3;
             cursor: default;
+        }
+
+        .pagination span {
+            color: var(--c);
+            padding: 5px 10px;
+            font-family: Consolas, sans-serif;
+            font-size: 14px;
+            user-select: none;
         }
 
         .table {
@@ -179,7 +212,10 @@
     <h1>700 Most Common English Words</h1>
 
     <div class="controls">
-        <input type="text" id="search" placeholder="Search / Որոնել...">
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search / Որոնել...">
+            <button id="clear_btn" class="clear-btn" type="button" title="Clear search / Ջնջել որոնումը">✕</button>
+        </div>
         <span id="count"></span>
         <div class="pagination" id="pagination"></div>
     </div>
@@ -203,6 +239,7 @@
         const ITEMS_PER_PAGE = 100;
         let currentPage = 1;
         let filteredWords = [];
+
 
         // Manual fixes for transcription typos or formatting issues in the database
         const TRANSCRIPTION_FIXES = {
@@ -232,7 +269,7 @@
         };
 
         // Standardize words from the loaded en_hy_0_2000 database
-        const wordsList = en_hy_0_2000.slice(0, 1500).map((w, index) => {
+        const wordsList = en_hy_0_2000.slice(0, 2000).map((w, index) => {
             let transcription = w.t || "";
             if (TRANSCRIPTION_FIXES[w.en]) {
                 transcription = TRANSCRIPTION_FIXES[w.en];
@@ -242,10 +279,12 @@
                 en: w.en,
                 t: transcription ? '/' + transcription + '/' : '',
                 hy: w.hy || ''
-            };
+            }
         });
 
+
         const searchInput = document.getElementById('search');
+        const clearBtn = document.getElementById('clear_btn');
         const countSpan = document.getElementById('count');
         const paginationDiv = document.getElementById('pagination');
         const tbody = document.getElementById('tbody');
@@ -260,18 +299,21 @@
         }
 
         function filterWords() {
-            const query = searchInput.value.toLowerCase().trim();
+            const query = searchInput.value.toLowerCase().trim()
             if (!query) {
-                filteredWords = [...wordsList];
+                filteredWords = [...wordsList]
             } else {
                 filteredWords = wordsList.filter(w => {
                     return w.en.toLowerCase().includes(query) ||
-                        w.hy.toLowerCase().includes(query);
-                });
+                        w.hy.toLowerCase().includes(query)
+                })
             }
-            currentPage = 1;
-            renderTable();
-            renderPagination();
+            if (clearBtn) {
+                clearBtn.style.display = query ? 'block' : 'none'
+            }
+            currentPage = 1
+            renderTable()
+            renderPagination()
         }
 
         function renderTable() {
@@ -316,60 +358,110 @@
         }
 
         function renderPagination() {
-            paginationDiv.innerHTML = '';
-            const totalPages = Math.ceil(filteredWords.length / ITEMS_PER_PAGE);
+            paginationDiv.innerHTML = ''
+            const totalPages = Math.ceil(
+                filteredWords.length / ITEMS_PER_PAGE
+            )
 
-            if (totalPages <= 1) return;
+            if (totalPages <= 1) {
+                return
+            }
 
             // Prev Button
-            const prevBtn = document.createElement('button');
-            prevBtn.textContent = '◀';
-            prevBtn.disabled = currentPage === 1;
+            const prevBtn = document.createElement('button')
+            prevBtn.textContent = '‹'
+            prevBtn.disabled = currentPage === 1
             prevBtn.addEventListener('click', () => {
                 if (currentPage > 1) {
-                    currentPage--;
-                    renderTable();
-                    renderPagination();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    currentPage--
+                    renderTable()
+                    renderPagination()
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    })
                 }
-            });
+            })
             paginationDiv.appendChild(prevBtn);
 
-            // Page Buttons
-            for (let i = 1; i <= totalPages; i++) {
-                const btn = document.createElement('button');
-                btn.textContent = i;
-                if (i === currentPage) {
-                    btn.classList.add('active');
+            // Determine page numbers to display
+            const pages = new Set()
+            pages.add(1)
+            if (totalPages >= 2) {
+                pages.add(2)
+            }
+            if (totalPages >= 1) {
+                pages.add(totalPages)
+            }
+            if (totalPages >= 2) {
+                pages.add(totalPages - 1)
+            }
+
+            const startRange = Math.max(1, currentPage - 3)
+            const endRange = Math.min(totalPages, currentPage + 3)
+            for (let i = startRange; i <= endRange; i++) {
+                pages.add(i)
+            }
+
+            const sortedPages = Array.from(pages).sort((a, b) => a - b)
+
+            let prevPage = 0
+            for (const page of sortedPages) {
+                if (prevPage !== 0) {
+                    if (page - prevPage > 1) {
+                        const dots = document.createElement('span');
+                        dots.textContent = '...';
+                        paginationDiv.appendChild(dots);
+                    }
+                }
+
+                const btn = document.createElement('button')
+                btn.textContent = page
+                if (page === currentPage) {
+                    btn.classList.add('active')
                 }
                 btn.addEventListener('click', () => {
-                    currentPage = i;
-                    renderTable();
-                    renderPagination();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-                paginationDiv.appendChild(btn);
+                    currentPage = page
+                    renderTable()
+                    renderPagination()
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    })
+                })
+                paginationDiv.appendChild(btn)
+                prevPage = page
             }
 
             // Next Button
-            const nextBtn = document.createElement('button');
-            nextBtn.textContent = '▶';
-            nextBtn.disabled = currentPage === totalPages;
+            const nextBtn = document.createElement('button')
+            nextBtn.textContent = '›'
+            nextBtn.disabled = currentPage === totalPages
             nextBtn.addEventListener('click', () => {
                 if (currentPage < totalPages) {
-                    currentPage++;
-                    renderTable();
-                    renderPagination();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    currentPage++
+                    renderTable()
+                    renderPagination()
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    })
                 }
-            });
-            paginationDiv.appendChild(nextBtn);
+            })
+            paginationDiv.appendChild(nextBtn)
         }
 
-        searchInput.addEventListener('input', filterWords);
+        searchInput.addEventListener('input', filterWords)
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+                searchInput.value = ''
+                filterWords()
+                searchInput.focus()
+            })
+        }
 
         // Initial render
-        filterWords();
+        filterWords()
     </script>
 </body>
 
