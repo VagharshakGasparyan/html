@@ -209,7 +209,7 @@
 </head>
 
 <body>
-    <h1>700 Most Common English Words</h1>
+    <h1>Oxfords 3000 Words</h1>
 
     <div class="controls">
         <div class="search-container">
@@ -227,6 +227,7 @@
                 <th>English</th>
                 <th>Transcription</th>
                 <th>Հայերեն</th>
+                <th>Level</th>
             </tr>
         </thead>
         <tbody id="tbody"></tbody>
@@ -234,51 +235,28 @@
 
     <div style="height: 10vh"></div>
 
-    <script src="en_hy_0_2000.js"></script>
+    <script src="The_Oxford_3000.js"></script>
     <script>
         const ITEMS_PER_PAGE = 100;
         let currentPage = 1;
         let filteredWords = [];
-
-
-        // Manual fixes for transcription typos or formatting issues in the database
-        const TRANSCRIPTION_FIXES = {
-            "them": "ðem",
-            "foot": "fʊt",
-            "us": "ʌs",
-            "use": "juːz",
-            "live": "lɪv",
-            "catch": "kætʃ",
-            "wind": "wɪnd",
-            "an": "ən",
-            "coach": "koʊtʃ",
-            "Aslan": "ˈæzlæn",
-            "HMI": "ˌeɪtʃ em ˈaɪ",
-            "Linest": "laɪnst",
-            "Andrew": "ˈændruː",
-            "Edmund": "ˈedmənd",
-            "John": "dʒɒn",
-            "Moscow": "ˈmɒskəʊ",
-            "Narnia": "ˈnɑːniə",
-            "Oh": "əʊ",
-            "beaver": "ˈbiːvər",
-            "dim": "dɪm",
-            "loop": "luːp",
-            "tope": "toʊp",
-            "route": "ruːt"
-        };
-
+        //pre-sort
+        const levelOrder = ["A1", "A2", "B1", "B2", "C1", "C2"];
+        const levelWeights = { "A1": 1, "A2": 2, "B1": 3, "B2": 4, "C1": 5, "C2": 6 };
+        oxford_3000.sort((a, b)=>{
+            // return levelOrder.indexOf(a.level) - levelOrder.indexOf(b.level);
+            return levelWeights[a.level] - levelWeights[b.level];
+        });
         // Standardize words from the loaded en_hy_0_2000 database
-        const wordsList = en_hy_0_2000.slice(0, 2000).map((w, index) => {
+        const wordsList = oxford_3000.map((w, index) => {
             let transcription = w.t || "";
-            if (TRANSCRIPTION_FIXES[w.en]) {
-                transcription = TRANSCRIPTION_FIXES[w.en];
-            }
+
             return {
                 index: index + 1,
-                en: w.en,
-                t: transcription ? '/' + transcription + '/' : '',
-                hy: w.hy || ''
+                en: w.w,
+                t: transcription ? transcription : '',
+                hy: w.hy || '',
+                l: w.level || "A0"
             }
         });
 
@@ -301,7 +279,7 @@
         function filterWords() {
             const query = searchInput.value.toLowerCase().trim()
             if (!query) {
-                filteredWords = [...wordsList]
+                filteredWords = [...wordsList];
             } else {
                 filteredWords = wordsList.filter(w => {
                     return w.en.toLowerCase().includes(query) ||
@@ -346,10 +324,14 @@
                 const tdHy = document.createElement('td');
                 tdHy.textContent = w.hy;
 
+                const tdL = document.createElement('td');
+                tdL.textContent = w.l;
+
                 tr.appendChild(tdIndex);
                 tr.appendChild(tdEn);
                 tr.appendChild(tdT);
                 tr.appendChild(tdHy);
+                tr.appendChild(tdL);
 
                 tbody.appendChild(tr);
             });
@@ -358,24 +340,24 @@
         }
 
         function renderPagination() {
-            paginationDiv.innerHTML = ''
+            paginationDiv.innerHTML = '';
             const totalPages = Math.ceil(
                 filteredWords.length / ITEMS_PER_PAGE
             )
 
             if (totalPages <= 1) {
-                return
+                return;
             }
 
             // Prev Button
             const prevBtn = document.createElement('button')
-            prevBtn.textContent = '‹'
-            prevBtn.disabled = currentPage === 1
+            prevBtn.textContent = '‹';
+            prevBtn.disabled = currentPage === 1;
             prevBtn.addEventListener('click', () => {
                 if (currentPage > 1) {
                     currentPage--
-                    renderTable()
-                    renderPagination()
+                    renderTable();
+                    renderPagination();
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth',
@@ -385,27 +367,27 @@
             paginationDiv.appendChild(prevBtn);
 
             // Determine page numbers to display
-            const pages = new Set()
-            pages.add(1)
+            const pages = new Set();
+            pages.add(1);
             if (totalPages >= 2) {
-                pages.add(2)
+                pages.add(2);
             }
             if (totalPages >= 1) {
-                pages.add(totalPages)
+                pages.add(totalPages);
             }
             if (totalPages >= 2) {
-                pages.add(totalPages - 1)
+                pages.add(totalPages - 1);
             }
 
-            const startRange = Math.max(1, currentPage - 3)
-            const endRange = Math.min(totalPages, currentPage + 3)
+            const startRange = Math.max(1, currentPage - 3);
+            const endRange = Math.min(totalPages, currentPage + 3);
             for (let i = startRange; i <= endRange; i++) {
-                pages.add(i)
+                pages.add(i);
             }
 
-            const sortedPages = Array.from(pages).sort((a, b) => a - b)
+            const sortedPages = Array.from(pages).sort((a, b) => a - b);
 
-            let prevPage = 0
+            let prevPage = 0;
             for (const page of sortedPages) {
                 if (prevPage !== 0) {
                     if (page - prevPage > 1) {
@@ -415,53 +397,53 @@
                     }
                 }
 
-                const btn = document.createElement('button')
-                btn.textContent = page
+                const btn = document.createElement('button');
+                btn.textContent = page;
                 if (page === currentPage) {
-                    btn.classList.add('active')
+                    btn.classList.add('active');
                 }
                 btn.addEventListener('click', () => {
-                    currentPage = page
-                    renderTable()
-                    renderPagination()
+                    currentPage = page;
+                    renderTable();
+                    renderPagination();
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth',
                     })
                 })
-                paginationDiv.appendChild(btn)
-                prevPage = page
+                paginationDiv.appendChild(btn);
+                prevPage = page;
             }
 
             // Next Button
-            const nextBtn = document.createElement('button')
-            nextBtn.textContent = '›'
-            nextBtn.disabled = currentPage === totalPages
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = '›';
+            nextBtn.disabled = currentPage === totalPages;
             nextBtn.addEventListener('click', () => {
                 if (currentPage < totalPages) {
-                    currentPage++
-                    renderTable()
-                    renderPagination()
+                    currentPage++;
+                    renderTable();
+                    renderPagination();
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth',
                     })
                 }
             })
-            paginationDiv.appendChild(nextBtn)
+            paginationDiv.appendChild(nextBtn);
         }
 
         searchInput.addEventListener('input', filterWords)
         if (clearBtn) {
             clearBtn.addEventListener('click', () => {
-                searchInput.value = ''
-                filterWords()
-                searchInput.focus()
+                searchInput.value = '';
+                filterWords();
+                searchInput.focus();
             })
         }
 
         // Initial render
-        filterWords()
+        filterWords();
     </script>
 </body>
 
