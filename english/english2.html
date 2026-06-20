@@ -237,6 +237,14 @@
 
     <script src="The_Oxford_3000.js"></script>
     <script>
+        const PAGINATION_ITEMS = [2, 5, 2];
+        const PAGINATION_PAGES = (()=>{
+            let sum = 0;
+            PAGINATION_ITEMS.forEach((item, index) => {
+                sum += item;
+            });
+            return sum;
+        })();
         const ITEMS_PER_PAGE = 100;
         let currentPage = 1;
         let filteredWords = [];
@@ -287,11 +295,11 @@
                 })
             }
             if (clearBtn) {
-                clearBtn.style.display = query ? 'block' : 'none'
+                clearBtn.style.display = query ? 'block' : 'none';
             }
-            currentPage = 1
-            renderTable()
-            renderPagination()
+            currentPage = 1;
+            renderTable();
+            renderPagination();
         }
 
         function renderTable() {
@@ -302,7 +310,7 @@
             tbody.innerHTML = '';
 
             if (pageItems.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 25px; color: var(--c4); font-size: 15px;">No words found / Բառեր չեն գտնվել</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 25px; color: var(--c4); font-size: 15px;">No words found / Բառեր չեն գտնվել</td></tr>`;
                 countSpan.textContent = `Found: 0 words`;
                 return;
             }
@@ -343,79 +351,18 @@
             paginationDiv.innerHTML = '';
             const totalPages = Math.ceil(
                 filteredWords.length / ITEMS_PER_PAGE
-            )
-
-            if (totalPages <= 1) {
-                return;
-            }
-
-            // Prev Button
-            const prevBtn = document.createElement('button')
+            );
+            const prevBtn = document.createElement('button');
             prevBtn.textContent = '‹';
             prevBtn.disabled = currentPage === 1;
             prevBtn.addEventListener('click', () => {
                 if (currentPage > 1) {
-                    currentPage--
+                    currentPage--;
                     renderTable();
                     renderPagination();
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth',
-                    })
+                    window.scrollTo({top: 0, behavior: 'smooth'});
                 }
             })
-            paginationDiv.appendChild(prevBtn);
-
-            // Determine page numbers to display
-            const pages = new Set();
-            pages.add(1);
-            if (totalPages >= 2) {
-                pages.add(2);
-            }
-            if (totalPages >= 1) {
-                pages.add(totalPages);
-            }
-            if (totalPages >= 2) {
-                pages.add(totalPages - 1);
-            }
-
-            const startRange = Math.max(1, currentPage - 3);
-            const endRange = Math.min(totalPages, currentPage + 3);
-            for (let i = startRange; i <= endRange; i++) {
-                pages.add(i);
-            }
-
-            const sortedPages = Array.from(pages).sort((a, b) => a - b);
-
-            let prevPage = 0;
-            for (const page of sortedPages) {
-                if (prevPage !== 0) {
-                    if (page - prevPage > 1) {
-                        const dots = document.createElement('span');
-                        dots.textContent = '...';
-                        paginationDiv.appendChild(dots);
-                    }
-                }
-
-                const btn = document.createElement('button');
-                btn.textContent = page;
-                if (page === currentPage) {
-                    btn.classList.add('active');
-                }
-                btn.addEventListener('click', () => {
-                    currentPage = page;
-                    renderTable();
-                    renderPagination();
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth',
-                    })
-                })
-                paginationDiv.appendChild(btn);
-                prevPage = page;
-            }
-
-            // Next Button
             const nextBtn = document.createElement('button');
             nextBtn.textContent = '›';
             nextBtn.disabled = currentPage === totalPages;
@@ -424,12 +371,89 @@
                     currentPage++;
                     renderTable();
                     renderPagination();
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth',
-                    })
+                    window.scrollTo({top: 0, behavior: 'smooth'});
                 }
             })
+
+
+            if (totalPages <= 1) {
+                return;
+            }else if(totalPages <= PAGINATION_PAGES + 2) {
+                paginationDiv.appendChild(prevBtn);
+                for(let i = 1; i <= totalPages; i++) {
+                    const btn = document.createElement('button');
+                    btn.textContent = i.toString();
+                    if(currentPage === i){
+                        btn.classList.add('active');
+                    }
+                    btn.addEventListener('click', () => {
+                        currentPage = i;
+                        renderTable();
+                        renderPagination();
+                        window.scrollTo({top: 0, behavior: 'smooth'});
+                    })
+                    paginationDiv.appendChild(btn);
+                }
+                paginationDiv.appendChild(nextBtn);
+                return;
+            }
+
+            let buttons = [];
+            paginationDiv.appendChild(prevBtn);
+            let i1 = 1;
+            let i2 = PAGINATION_ITEMS[0];
+            for(let i = i1; i <= i2; i++) {
+                buttons.push(i.toString());
+            }
+
+            let startI = currentPage - Math.floor((PAGINATION_ITEMS[1] - 1) / 2);
+            let endI = startI + PAGINATION_ITEMS[1] - 1;
+            if(startI <= i2 + 2){
+                buttons.push((i2 + 1).toString());
+                startI = i2 + 2;
+                endI = startI + PAGINATION_ITEMS[1] - 1;
+            }else{
+                buttons.push('...');
+            }
+
+            let j1 = totalPages - PAGINATION_ITEMS[2] + 1;
+            let j2 = totalPages;
+
+            if(endI > j1 - 2){
+                endI = j1 - 2;
+                startI = endI - PAGINATION_ITEMS[1] + 1;
+            }
+
+            for(let i = startI; i <= endI; i++) {
+                buttons.push(i.toString());
+            }
+
+            if(endI < j1 - 2){
+                buttons.push('...');
+            }else if(j1 - 1 >= i2 + 2){
+                buttons.push((j1 - 1).toString());
+
+            }
+
+            for(let i = j1; i <= j2; i++) {
+                buttons.push(i.toString());
+            }
+
+            buttons.forEach((button) => {
+                const btn = document.createElement('button');
+                btn.textContent = button;
+                if(button === currentPage.toString()){
+                    btn.classList.add('active');
+                }
+                btn.addEventListener('click', () => {
+                    currentPage = parseInt(button);
+                    renderTable();
+                    renderPagination();
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                })
+                paginationDiv.appendChild(btn);
+            });
+
             paginationDiv.appendChild(nextBtn);
         }
 
