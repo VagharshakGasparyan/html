@@ -822,10 +822,10 @@
                 if (myEnglish.includes('--')) {
                     myEnglishRow = myEnglish.split('--');
                     if (myEnglishRow.length === 2) {
-                        myEnglishRow[0] = '<span style="display: inline-block;min-width: 120px;">' + myEnglishRow[0].trim() + '</span>';
+                        myEnglishRow[0] = '<span style="display: inline-block;min-width: 120px;" onclick="speakWord(\'' + myEnglishRow[0].trim().replace(/'/ig, "\\'") + '\')">' + myEnglishRow[0].trim() + '</span>';
                         myEnglishRow[1] = '<c2 style="min-width: 120px;">' + myEnglishRow[1].trim() + '</c2>';
                     } else if (myEnglishRow.length > 2) {
-                        myEnglishRow[0] = '<span style="display: inline-block;min-width: 120px;">' + myEnglishRow[0].trim() + '</span>';
+                        myEnglishRow[0] = '<span style="display: inline-block;min-width: 120px;" onclick="speakWord(\'' + myEnglishRow[0].trim().replace(/'/ig, "\\'") + '\')">' + myEnglishRow[0].trim() + '</span>';
                         myEnglishRow[1] = '<c1 style="min-width: 120px;">' + myEnglishRow[1].trim() + '</c1>';
                         myEnglishRow[2] = '<c2 style="min-width: 120px;">' + myEnglishRow[2].trim() + '</c2>';
                     }
@@ -1204,6 +1204,15 @@
             txt += "\n],";
             //navigator.clipboard.writeText("txt");
             console.log(txt);
+        }
+
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                window.speechSynthesis.speak(utterance);
+            }
         }
 
 
