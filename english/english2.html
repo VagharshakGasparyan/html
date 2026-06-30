@@ -235,7 +235,8 @@
 
     <div style="height: 10vh"></div>
 
-    <script src="The_Oxford_3000.js"></script>
+    <script src="oxford3000c.js"></script>
+
     <script>
         const PAGINATION_ITEMS = [2, 5, 2];
         const PAGINATION_PAGES = (()=>{
@@ -251,12 +252,13 @@
         //pre-sort
         const levelOrder = ["A1", "A2", "B1", "B2", "C1", "C2"];
         const levelWeights = { "A1": 1, "A2": 2, "B1": 3, "B2": 4, "C1": 5, "C2": 6 };
-        oxford_3000.sort((a, b)=>{
+        oxford3000c.sort((a, b)=>{
             // return levelOrder.indexOf(a.level) - levelOrder.indexOf(b.level);
-            return levelWeights[a.level] - levelWeights[b.level];
+            // return levelWeights[a.level] - levelWeights[b.level];
+            return b.f - a.f;
         });
         // Standardize words from the loaded en_hy_0_2000 database
-        const wordsList = oxford_3000.map((w, index) => {
+        const wordsList = oxford3000c.map((w, index) => {
             let transcription = w.t || "";
 
             return {
@@ -264,7 +266,8 @@
                 en: w.w,
                 t: transcription ? transcription : '',
                 hy: w.hy || '',
-                l: w.level || "A0"
+                l: w.level || "A0",
+                f: w.f || 0
             }
         });
 
@@ -333,7 +336,7 @@
                 tdHy.textContent = w.hy;
 
                 const tdL = document.createElement('td');
-                tdL.textContent = w.l;
+                tdL.textContent = w.l + "(" + w.f + ")";
 
                 tr.appendChild(tdIndex);
                 tr.appendChild(tdEn);
