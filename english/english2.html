@@ -38,7 +38,29 @@
             margin: 0;
             padding: 10px;
         }
+        c1 {
+            color: var(--c1);
+        }
 
+        c2 {
+            color: var(--c2);
+        }
+
+        c3 {
+            color: var(--c3);
+        }
+
+        c4 {
+            color: var(--c4);
+        }
+
+        c5 {
+            color: var(--c5);
+        }
+
+        c1, c2, c3, c4, c5 {
+            display: inline-block;
+        }
         h1 {
             text-align: center;
             color: var(--c5);
@@ -227,7 +249,7 @@
                 <th>English</th>
                 <th>Transcription</th>
                 <th>Հայերեն</th>
-                <th>Level</th>
+                <th>Level/frequency</th>
             </tr>
         </thead>
         <tbody id="tbody"></tbody>
@@ -256,6 +278,9 @@
             // return levelOrder.indexOf(a.level) - levelOrder.indexOf(b.level);
             // return levelWeights[a.level] - levelWeights[b.level];
             return b.f - a.f;
+        });
+        oxford3000c.sort((a, b)=>{
+            return levelWeights[a.level] - levelWeights[b.level];
         });
         // Standardize words from the loaded en_hy_0_2000 database
         const wordsList = oxford3000c.map((w, index) => {
@@ -288,14 +313,21 @@
         }
 
         function filterWords() {
-            const query = searchInput.value.toLowerCase().trim()
+            const query = searchInput.value.toLowerCase().trim();
             if (!query) {
                 filteredWords = [...wordsList];
             } else {
+                let arrQuery = query.split(/\s+/ig);
                 filteredWords = wordsList.filter(w => {
+                    let tf = false;
+                    if(arrQuery.length > 0) {
+                        arrQuery.forEach(q => {
+                            tf = tf || w.en.toLowerCase().includes(q) || w.hy.toLowerCase().includes(q);
+                        });
+                    }
                     return w.en.toLowerCase().includes(query) ||
-                        w.hy.toLowerCase().includes(query)
-                })
+                        w.hy.toLowerCase().includes(query) || tf;
+                });
             }
             if (clearBtn) {
                 clearBtn.style.display = query ? 'block' : 'none';
@@ -336,7 +368,7 @@
                 tdHy.textContent = w.hy;
 
                 const tdL = document.createElement('td');
-                tdL.textContent = w.l + "(" + w.f + ")";
+                tdL.innerHTML = w.l + "<c3>&nbsp;" + w.f + "</c3>";
 
                 tr.appendChild(tdIndex);
                 tr.appendChild(tdEn);
